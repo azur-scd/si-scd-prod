@@ -1,0 +1,27 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+.ts-button {
+    display:none;
+    }
+    .modal-dialog.modal-1000 {
+width: 80%;
+}
+[id^="gridContainer"] {
+    margin-left: 10px;
+  }
+/*temporaire selectbox year in dashboard docelec*/
+#selectbox {
+    float: right;
+}
+
+.action {
+    width: 270px;
+    margin-top: 20px;
+}
+
+.label {
+    padding-top: 9px;
+}
+/*temporaire pie chart in dashboard docelec*/
+#pieChart * {
+    margin: 0 auto;
+}

@@ -1,0 +1,559 @@
+$(function(){
+    var urlBdd = "./api/bdds"
+    var urlGestion = "./api/bdds_gestion"
+
+    var storeGestion = new DevExpress.data.CustomStore({
+        key: "id",
+        load: function () {
+           return getItems(urlGestion)					
+                },
+        update: function(key, values) {
+			return updateItems(urlGestion,key,values);
+        },
+        insert: function(values) {
+            return createItems(urlGestion,values);
+        },  
+        remove: function(key) {
+            return deleteItems(urlGestion,key);
+        }      
+    });
+
+    var isNextBudgete = function(etat) {
+        return etat && ["2-budgete", "4-facture","3-estime"].indexOf(etat.trim()) >= 0;
+      };
+    var isNextEstime = function(etat) {
+        return etat && ["1-prev", "4-facture","3-estime"].indexOf(etat.trim()) >= 0;
+      };
+    var isNextFacture = function(etat) {
+        return etat && ["1-prev", "4-facture","3-estime"].indexOf(etat.trim()) >= 0;
+     };
+    var isNextEstime2Facture = function(etat) {
+        return etat && ["1-prev", "4-facture","2-budgete"].indexOf(etat.trim()) >= 0;
+       };
+
+       $("#selectbox").dxSelectBox({
+        dataSource: years,
+        value: 2020,
+        valueExpr: "cle",
+        displayExpr: "valeur",
+        onValueChanged: function(data) {
+            dataGrid.filter(["annee", "=", data.value]);
+        }
+    });
+    var dataGrid = $("#gridContainerGestion").dxDataGrid({
+        dataSource: storeGestion,
+       // repaintChangesOnly: true,
+        showBorders: true,
+        columnMaxWidth: 200,
+        allowColumnResizing: true,
+        columnHidingEnabled: true,
+        focusedRowEnabled: true,
+        allowColumnReordering: true,
+        selection: {
+            mode: "multiple"
+        },
+        "export": {
+           enabled: true,
+           fileName: "Bdds_gestion"
+         },
+         filterPanel: { visible: true },
+         //filterValue: [["annee", "=", 2020]],
+         columnChooser: {
+         enabled: true,
+         mode:"select"
+        },
+        sorting: {
+            mode: "multiple"
+        },
+        headerFilter: {
+            visible: true
+        },
+        filterRow: {
+            visible: true,
+            applyFilter: "auto"
+        },
+        searchPanel: {
+            visible: true
+        },
+        groupPanel: { visible: false },
+        grouping: {
+            autoExpandAll: false
+        },
+       editing: {
+        mode: "popup",
+        popup: {
+            title: "Calculs des montants",
+            showTitle: true,
+            width: 1100,
+            height: 600,
+            /*position: {
+                my: "top",
+                at: "top",
+                of: window
+            },*/
+        },
+        form: {
+            items: [
+                {
+                    itemType: "group",
+                    items: ["bdd_id","annee","etat","compte_recherche"]
+                },
+                {
+                    itemType: "group",
+                    colCount: 2,
+                    items: ["montant_initial", "devise","taux_change","montant_ht"]
+                },{
+                itemType: "group",
+                caption: "TVA",
+                colCount: 2,
+                colSpan: 2,
+                items: ["taux_tva1", "part_tva1", "taux_tva2","part_tva2"]
+            }, {
+                itemType: "group",
+                caption: "Frais de gestion",
+                colCount: 2,
+                colSpan: 2,
+                items: ["montant_frais_gestion","taux_tva_frais_gestion"]
+            },
+            {
+                itemType: "group",
+                caption: "Récup TVA",
+                items: ["taux_recup_tva"]
+            },
+            {
+                itemType: "group",
+                caption: "Total",
+                items: ["montant_ttc","reliquat"]
+            },
+            {
+                itemType: "group",
+                caption: "Notes",
+                items: [{
+                    dataField: "commentaire",
+                    editorType: "dxTextArea",
+                    editorOptions: {
+                        height: 100
+                    }
+                }]
+            },
+            {
+                itemType: "group",
+                caption: "Périmètre",
+                colCount: 2,
+                colSpan: 2,
+                items: ["perimetre","surcout_uca"]
+            },
+        ]
+        },
+        allowUpdating: true,
+        allowDeleting: true,
+        allowAdding: true,
+        useIcons: true
+         },
+        columns: [
+            {
+                type: "buttons",
+                caption: "Editer",
+                width: 100,
+                buttons: ["edit","delete"],
+                useIcons: true
+                },
+                {
+                    dataField: "pole",
+                    caption: "Pole",
+                    groupIndex: 1,
+                    editorOptions: {
+                        disabled: true
+                    }
+                },
+              {
+                dataField: "etat",
+                caption: "Etat",
+                validationRules: [{
+                    type: "required",
+                    message: "Champ obligatoire"
+                }],
+                lookup: {
+                 dataSource: etatState,
+                 displayExpr: "valeur",
+                 valueExpr: "cle"
+                },
+                sortOrder: "asc"
+            },
+              {
+                type: "buttons",
+                caption: "Actions",
+                width: 250,
+                buttons: [{
+                    hint: "Etape suivante : créer Budgété",
+                    icon: "./img/button_budgete.png",
+                    //text: "Créer Budgété",
+                    visible: function(e) {
+                        return !e.row.isEditing && !isNextBudgete(e.row.data.etat);
+                    },
+                    onClick: function(e) {
+                        var clonedItem =  $.extend({}, e.row.data, {etat: "2-budgete"},{id:""});
+                        var filtered = _.pick(clonedItem, function (v) { return v !== '' && v !== null; });
+                        console.log(filtered)
+                        createItems(urlGestion,filtered)
+                        e.component.refresh(true);
+                    }
+                },
+                {
+                    hint: "Etape suivante : créer Estimé",
+                    icon: "./img/button_estime.png",
+                    //text: "Créer Estimé",
+                    visible: function(e) {
+                        return !e.row.isEditing && !isNextEstime(e.row.data.etat);
+                    },
+                    onClick: function(e) {
+                        var clonedItem =  $.extend({}, e.row.data, {etat: "3-estime"},{id:""});
+                        var filtered = _.pick(clonedItem, function (v) { return v !== '' && v !== null; });
+                        console.log(filtered)
+                        createItems(urlGestion,filtered)
+                        e.component.refresh(true);
+                    }
+                },
+                {
+                    hint: "Etape suivante : créer Facturé",
+                    icon: "./img/button_facture.png",
+                    //text: "Créer Facturé",
+                    visible: function(e) {
+                        return !e.row.isEditing && !isNextFacture(e.row.data.etat);
+                    },
+                    onClick: function(e) {
+                        var clonedItem =  $.extend({}, e.row.data, {etat: "4-facture"},{id:""});
+                        var filtered = _.pick(clonedItem, function (v) { return v !== '' && v !== null; });
+                        console.log(filtered)
+                        createItems(urlGestion,filtered)
+                        e.component.refresh(true);
+                    }
+                },
+                {
+                    hint: "Etape suivante : créer Facturé",
+                    icon: "./img/button_facture.png",
+                    //text: "Créer Facturé",
+                    visible: function(e) {
+                        return !e.row.isEditing && !isNextEstime2Facture(e.row.data.etat);
+                    },
+                    onClick: function(e) {
+                        var clonedItem =  $.extend({}, e.row.data, {etat: "4-facture"},{id:""});
+                        var filtered = _.pick(clonedItem, function (v) { return v !== '' && v !== null; });
+                        console.log(filtered)
+                        createItems(urlGestion,filtered)
+                        deleteItems(urlGestion,e.row.data.id)
+                        e.component.refresh(true);
+                    }
+                }
+               ]
+            },
+            {
+                dataField: "bdd_id",
+                caption: "Ressource",
+                groupIndex: 2,
+                editorOptions: {
+                    disabled: true
+                },
+                lookup: 
+                   {
+                     dataSource: new DevExpress.data.CustomStore({
+                     key: "id",
+                     loadMode: "raw",
+                     load: function() {
+                        return getItems(urlBdd)
+                     }
+                 }),
+                valueExpr: "id",
+                displayExpr: "bdd"
+            }
+            }, 	
+            {
+                dataField: "annee",
+                caption: "Année",
+                visible: false
+            },	
+            {
+                dataField: "compte_recherche",
+                caption: "Compte Recherche",
+                visible: false,
+                lookup: {
+                    dataSource: binaryState,
+                    displayExpr: "valeur",
+                    valueExpr: "cle"
+                 }
+            },	
+            {
+                dataField: "devise",
+                caption: "Devise",
+                visible:false,
+                lookup: {
+                 dataSource: deviseState,
+                 displayExpr: "valeur",
+                 valueExpr: "cle"
+              }
+            },
+            {
+                dataField: "montant_initial",
+                caption: "Montant initial",
+                dataType: 'number',
+                visible: false,
+                setCellValue: function(newData, value, currentRowData) {
+                    newData.montant_initial = value;
+                    newData.montant_ht = currentRowData.taux_change * value;
+                    //newData.part_tva1 = currentRowData.taux_change * value;
+                }
+            },
+            {
+                dataField: "taux_change",
+                caption: "Taux de change",
+                dataType: 'number',
+                visible: false,
+                setCellValue: function(newData, value, currentRowData) {
+                    newData.taux_change = value;
+                    newData.montant_ht = currentRowData.montant_initial * value;
+                    //newData.part_tva1 = currentRowData.montant_initial * value;
+                }
+            },
+            {
+                dataField: "montant_ht",
+                caption: "Montant HT",
+                dataType: 'number',
+                width: 150,
+                setCellValue: function(newData, value) {
+                    this.defaultSetCellValue(newData, value);
+                }
+            },
+            {
+                dataField: "part_tva1",
+                caption: "Montant HT au taux TVA 1",
+                dataType: 'number',
+                visible: false,
+                 setCellValue: function(newData, value, currentRowData) {
+                    newData.part_tva1 = value;
+                    var total_montant_tva = (currentRowData.taux_tva1/100 * value)+(currentRowData.taux_tva2/100 * currentRowData.part_tva2)
+                    var ttc_horsrecup_horsgestion = (value + (currentRowData.taux_tva1/100 * value)) + 
+                                         (currentRowData.part_tva2+(currentRowData.taux_tva2/100 * currentRowData.part_tva2));
+                    var total_frais_gestion = currentRowData.montant_frais_gestion + (currentRowData.montant_frais_gestion * currentRowData.taux_tva_frais_gestion/100)                     
+                    var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
+                    newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
+                    if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
+                        return getItems('/api/bdds_all_gestion/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
+                            newData.reliquat = newData.montant_ttc - result[0].montant_ttc
+                          });
+                        }
+                    }
+            },
+            {
+                dataField: "taux_tva1",
+                caption: "Taux de TVA 1",
+                dataType: 'number',
+                visible: false,
+                setCellValue: function(newData, value, currentRowData) {
+                    newData.taux_tva1 = value;
+                    var total_montant_tva = (value/100 * currentRowData.part_tva1)+(currentRowData.taux_tva2/100 * currentRowData.part_tva2)
+                    var ttc_horsrecup_horsgestion = (currentRowData.part_tva1 + (value/100 * currentRowData.part_tva1)) + 
+                                         (currentRowData.part_tva2+(currentRowData.taux_tva2/100 * currentRowData.part_tva2));
+                    var total_frais_gestion = currentRowData.montant_frais_gestion + (currentRowData.montant_frais_gestion * currentRowData.taux_tva_frais_gestion/100)                     
+                    var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
+                    newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
+                    if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
+                        return getItems('/api/bdds_all_gestion/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
+                            newData.reliquat = newData.montant_ttc - result[0].montant_ttc
+                          });
+                        }
+                }
+            },
+            {
+                dataField: "part_tva2",
+                caption: "Montant HT au taux TVA 2",
+                dataType: 'number',
+                visible: false,
+                setCellValue: function(newData, value, currentRowData) {
+                    newData.part_tva2 = value;
+                    var total_montant_tva = (currentRowData.taux_tva2/100 * value)+(currentRowData.taux_tva1/100 * currentRowData.part_tva1)
+                    var ttc_horsrecup_horsgestion = (value + (currentRowData.taux_tva2/100 * value)) + 
+                                         (currentRowData.part_tva1+(currentRowData.taux_tva1/100 * currentRowData.part_tva1));
+                    var total_frais_gestion = currentRowData.montant_frais_gestion + (currentRowData.montant_frais_gestion * currentRowData.taux_tva_frais_gestion/100)                     
+                    var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
+                    newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
+                    if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
+                        return getItems('/api/bdds_all_gestion/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
+                            newData.reliquat = newData.montant_ttc - result[0].montant_ttc
+                          });
+                        }
+                }
+            },
+            {
+                dataField: "taux_tva2",
+                caption: "Taux de TVA 2",
+                dataType: 'number',
+                visible: false,
+                setCellValue: function(newData, value, currentRowData) {
+                    newData.taux_tva2 = value;
+                    var total_montant_tva = (value/100 * currentRowData.part_tva2)+(currentRowData.taux_tva1/100 * currentRowData.part_tva1)
+                    var ttc_horsrecup_horsgestion = (currentRowData.part_tva2 + (value/100 * currentRowData.part_tva2)) + 
+                                         (currentRowData.part_tva1+(currentRowData.taux_tva1/100 * currentRowData.part_tva1));
+                    var total_frais_gestion = currentRowData.montant_frais_gestion + (currentRowData.montant_frais_gestion * currentRowData.taux_tva_frais_gestion/100)                     
+                    var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
+                    newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
+                    if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
+                        return getItems('/api/bdds_all_gestion/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
+                            newData.reliquat = newData.montant_ttc - result[0].montant_ttc
+                          });
+                        }
+                }
+            },
+            {
+                dataField: "montant_frais_gestion",
+                caption: "Frais de gestion (montant)",
+                dataType: 'number',
+                visible: false,
+                setCellValue: function(newData, value, currentRowData) {
+                    newData.montant_frais_gestion = value;
+                    var total_montant_tva = (currentRowData.taux_tva2/100 * currentRowData.part_tva2)+(currentRowData.taux_tva1/100 * currentRowData.part_tva1)
+                    var ttc_horsrecup_horsgestion = (currentRowData.part_tva2 + (currentRowData.taux_tva2/100 * currentRowData.part_tva2)) + 
+                                         (currentRowData.part_tva1+(currentRowData.taux_tva1/100 * currentRowData.part_tva1));
+                    var total_frais_gestion = value + (value * currentRowData.taux_tva_frais_gestion/100)                                         
+                    console.log(total_frais_gestion)
+                    var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
+                    newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
+                    if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
+                        return getItems('/api/bdds_all_gestion/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
+                            newData.reliquat = newData.montant_ttc - result[0].montant_ttc
+                          });
+                        }
+                }
+            },
+            {
+                dataField: "taux_tva_frais_gestion",
+                caption: "Taux de TVA sur les frais de gestion",
+                dataType: 'number',
+                visible: false,
+                setCellValue: function(newData, value, currentRowData) {
+                    newData.taux_tva_frais_gestion = value;
+                    var total_montant_tva = (currentRowData.taux_tva2/100 * currentRowData.part_tva2)+(currentRowData.taux_tva1/100 * currentRowData.part_tva1)
+                    var ttc_horsrecup_horsgestion = (currentRowData.part_tva2 + (currentRowData.taux_tva2/100 * currentRowData.part_tva2)) + 
+                                         (currentRowData.part_tva1+(currentRowData.taux_tva1/100 * currentRowData.part_tva1));
+                    var total_frais_gestion = currentRowData.montant_frais_gestion + (currentRowData.montant_frais_gestion * value/100)                                        
+                    console.log(total_frais_gestion)
+                    var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
+                    newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
+                    if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
+                        return getItems('/api/bdds_all_gestion/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
+                            newData.reliquat = newData.montant_ttc - result[0].montant_ttc
+                          });
+                        }
+                }
+            },
+            {
+                dataField: "taux_recup_tva",
+                caption: "Taux de Récup TVA",
+                dataType: 'number',
+                visible: false,
+                setCellValue: function(newData, value, currentRowData) {
+                    newData.taux_recup_tva = value;
+                    var total_montant_tva = (currentRowData.taux_tva2/100 * currentRowData.part_tva2)+(currentRowData.taux_tva1/100 * currentRowData.part_tva1)
+                    var ttc_horsrecup_horsgestion = (currentRowData.part_tva2 + (currentRowData.taux_tva2/100 * currentRowData.part_tva2)) + 
+                                         (currentRowData.part_tva1+(currentRowData.taux_tva1/100 * currentRowData.part_tva1));
+                    var total_frais_gestion = currentRowData.montant_frais_gestion + (currentRowData.montant_frais_gestion * currentRowData.taux_tva_frais_gestion/100)                                         
+                    var montant_recup = total_montant_tva*value/100                     
+                    newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
+                    if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
+                    return getItems('/api/bdds_all_gestion/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
+                        newData.reliquat = newData.montant_ttc - result[0].montant_ttc
+                      });
+                    }
+                }
+            },
+            {
+                dataField: "montant_ttc",
+                caption: "Montant TTC",
+                dataType: 'number',
+                width: 150,
+                setCellValue: function(currentRowData,newData, value) {                
+                    this.defaultSetCellValue(newData, value);
+                }
+            },
+            {
+                dataField: "reliquat",
+                caption: "Reliquat",
+                dataType: 'number',
+                setCellValue: function(newData, value) {
+                    this.defaultSetCellValue(newData, value);
+                }
+            },
+            {
+                dataField: "commentaire",
+                caption: "Commentaire",
+                visible: false
+            },
+            {
+                dataField: "perimetre",
+                caption: "Périmètre abonnement",
+                visible: false,
+                editorOptions: {
+                    disabled: true
+                }
+            },		
+            {
+                dataField: "surcout_uca",
+                caption: "Surcoût UCA-EC",
+                visible: false
+            },		
+            {
+               dataField: "createdAt",
+               caption: "Crée le",
+               visible: false,
+             },
+           {
+              dataField: "updatedAt",
+              caption: "Modifié le"
+          }
+],
+selectedRowKeys: [],
+        onSelectionChanged: function(e) {
+            e.component.refresh(true);
+        },
+summary: {
+    recalculateWhileEditing: true,
+   /* groupItems: [{
+        column: "bdd_id",
+        column: "montant_ttc",
+        summaryType: "sum",
+        displayFormat: "{0} Ressources",
+                }],*/
+     totalItems: [{
+          name: "SelectedRowsSummary",
+          showInColumn: "montant_ht",
+           displayFormat: "Simulation compte recherche: {0}",
+           summaryType: "custom"
+        }
+            ],
+            calculateCustomSummary: function (options) {
+                if (options.name === "SelectedRowsSummary") {
+                    if (options.summaryProcess === "start") {
+                        options.totalValue = 0;
+                    }
+                    if (options.summaryProcess === "calculate") {
+                        if (options.component.isRowSelected(options.value.id)) {
+                            options.totalValue = options.totalValue + options.value.montant_ttc;
+                        }
+                    }
+                }
+            }            
+},
+onCellPrepared: function(e) {
+    if(e.rowType === "data") {	
+            if(e.data.etat === "2-budgete"){
+            e.cellElement.css({ "background-color": "#C9ECD7", "font-weight": "bold" });
+            }
+        }
+    },
+	onEditingStart: function(e) {
+        console.log(e.data)
+       // var dataGrid = e.component
+        //dataGrid.cellValue(e.key, "montant_ht", 500)
+        
+    } 
+    }).dxDataGrid("instance");
+})

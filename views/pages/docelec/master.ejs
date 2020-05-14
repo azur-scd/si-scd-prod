@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <%- include ('../../partials/head'); -%> 
+ <%- include ('../../partials/head-devextreme'); -%> 
+</head>
+<body>
+
+  <div class="page-container">
+    <%- include ('../../partials/sidebar') -%>
+    <div class="page-content">
+      <%- include ('../../partials/navbar') -%>
+      <div class="page-content-wrap"> 
+        <div class="page-title">                    
+          <h2><%= page %></h2>								
+      </div>  
+      <div class="row">
+        <!-- start panel info -->
+         <div class="col-md-3 panel-group accordion accordion-dc">
+                               <div class="panel panel-info">
+                                   <div class="panel-heading">
+                                       <h4 class="panel-title">
+                                           <a href="#panelTextInfo">
+                                               Consignes de saisie (cliquer pour déplier)
+                                           </a>
+                                       </h4>
+                                   </div>                                
+                                   <div class="panel-body" id="panelTextInfo">
+                                       <ul>
+                                       <li><strong>[En cours]</strong> : ...</li>
+                                   </ul>
+                                   </div>                                
+                               </div>
+                 </div>
+          <!-- end panel info -->
+        </div>
+      <nav class="nav nav-tabs">
+        <a class="nav-item nav-link active" href="#resources" data-toggle="tab">Ressources</a>
+        <a class="nav-item nav-link" href="#gc" data-toggle="tab">GC</a>
+        <a class="nav-item nav-link" href="#reports" data-toggle="tab">Rapports stats</a>
+      </nav>
+      <div class="tab-content">
+        <div class="tab-pane active" id="resources">
+         <div class="row">
+          <h4>Ressources</h4>
+          <div id="gridContainerBdd">
+            <div id='gcTemplate'></div>
+          </div>
+        </div>
+        </div>
+        <div class="tab-pane" id="gc">
+          <div class="row">
+          <h4>Groupements de commandes</h4>
+          <div id="gridContainerGC"></div>
+        </div>
+        </div>
+        <div class="tab-pane" id="reports"> 
+          <div class="row">
+          <h4>Rapports statistiques</h4>
+          <div id="gridContainerReports"></div>
+         </div>
+        </div>
+   </div>
+  </div>
+</div>
+</div>
+
+</body>
+<%- include ('../../partials/script') -%>
+<%- include ('../../partials/scripts-devextreme') -%>
+<script src="./javascripts/docelec/master.js"></script>
+</html>
