@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     );
   
     StatReport.associate = (models) => {
-      StatReport.hasMany(models.Bdd,{foreignKey: 'stats_reports_id'});
+      StatReport.hasMany(models.Bdd,{foreignKey: 'pref_stats_reports_id'});
       StatReport.hasMany(models.BddStat,{foreignKey: 'stats_reports_id'});
     };
   

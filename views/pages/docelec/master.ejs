@@ -34,32 +34,38 @@
                  </div>
           <!-- end panel info -->
         </div>
-      <nav class="nav nav-tabs">
-        <a class="nav-item nav-link active" href="#resources" data-toggle="tab">Ressources</a>
-        <a class="nav-item nav-link" href="#gc" data-toggle="tab">GC</a>
-        <a class="nav-item nav-link" href="#reports" data-toggle="tab">Rapports stats</a>
-      </nav>
-      <div class="tab-content">
-        <div class="tab-pane active" id="resources">
-         <div class="row">
-          <h4>Ressources</h4>
-          <div id="gridContainerBdd">
-            <div id='gcTemplate'></div>
-          </div>
-        </div>
-        </div>
-        <div class="tab-pane" id="gc">
-          <div class="row">
-          <h4>Groupements de commandes</h4>
-          <div id="gridContainerGC"></div>
-        </div>
-        </div>
-        <div class="tab-pane" id="reports"> 
-          <div class="row">
-          <h4>Rapports statistiques</h4>
-          <div id="gridContainerReports"></div>
-         </div>
-        </div>
+        <div class="row"> 
+<div class="form-horizontal validate">                                                            
+           <div class="panel panel-default tabs">                            
+               <ul class="nav nav-tabs" role="tablist">
+                   <li class="active"><a href="#tab-bdd" role="tab" data-toggle="tab">Ressources</a></li>
+                   <li><a href="#tab-gc" role="tab" data-toggle="tab">Groupements de commandes</a></li>
+                   <li><a href="#tab-reports" role="tab" data-toggle="tab">Rapports statistiques</a></li>
+               </ul>
+            <div class="panel-body tab-content">
+              <div class="tab-pane active" id="tab-bdd">
+                <div class="row">
+                 <h4>Ressources</h4>
+                 <div id="gridContainerBdd">
+                   <div id='gcTemplate'></div>
+                 </div>
+               </div>
+               </div>
+               <div class="tab-pane" id="tab-gc">
+                <div class="row">
+                <h4>Groupements de commandes</h4>
+                <div id="gridContainerGC"></div>
+              </div>
+              </div>
+              <div class="tab-pane" id="tab-reports"> 
+                <div class="row">
+                <h4>Rapports statistiques</h4>
+                <div id="gridContainerReports"></div>
+               </div>
+              </div>
+            </div>
+           </div>                                
+       </div>
    </div>
   </div>
 </div>

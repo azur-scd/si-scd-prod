@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         perimetre: DataTypes.STRING,
         achat_perenne: DataTypes.INTEGER,
-        stats_reports_id:{
+        pref_stats_reports_id:{
           type: DataTypes.INTEGER,
           references: 'stats_reports',
           referencesKey: 'id'
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
      Bdd.hasOne(models.BddSignalement,{foreignKey: 'bdd_id'});
      Bdd.hasMany(models.BddGestion,{foreignKey: 'bdd_id'});
      Bdd.hasMany(models.BddStat,{foreignKey: 'bdd_id'});
-     Bdd.belongsTo(models.StatReport,{foreignKey: 'stats_reports_id'});
+     Bdd.belongsTo(models.StatReport,{foreignKey: 'pref_stats_reports_id'});
      Bdd.belongsTo(models.Gc,{foreignKey: 'gc_id'});
     };
   

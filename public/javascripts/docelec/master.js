@@ -129,7 +129,7 @@ $(function(){
                 caption: "Statistiques",
                 colCount: 2,
                 colSpan: 2,
-                items: ["stats_get_mode", "stats_url_sushi","stats_reports_id","stats_url_admin","stats_login","stats_mdp","stats_mail"]
+                items: ["stats_get_mode", "stats_url_sushi","pref_stats_reports_id","stats_url_admin","stats_login","stats_mdp","stats_mail"]
             },
             {
                 itemType: "group",
@@ -248,7 +248,7 @@ $(function(){
         }
     }, 
     {
-        dataField: "stats_reports_id",
+        dataField: "pref_stats_reports_id",
         caption: "Rapport stat (visu par défaut)",
         alignment: "left",
         lookup: 
