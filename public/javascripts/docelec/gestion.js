@@ -251,9 +251,6 @@ $(function(){
                 dataField: "bdd_id",
                 caption: "Ressource",
                 groupIndex: 2,
-                editorOptions: {
-                    disabled: true
-                },
                 lookup: 
                    {
                      dataSource: new DevExpress.data.CustomStore({
