@@ -14,8 +14,8 @@
         <div class="page-title">                    
           <h2><%= page %></h2>								
       </div>  
-      <div class="row">
         <!-- start panel info -->
+      <div class="row">
          <div class="col-md-3 panel-group accordion accordion-dc">
                                <div class="panel panel-info">
                                    <div class="panel-heading">
@@ -32,25 +32,83 @@
                                    </div>                                
                                </div>
                  </div>
-          <!-- end panel info -->
         </div>
-            <div class="row">
-              <div class="action">
-                <div id="selectbox"></div>
-                <div class="label">Choisir une année :</div>
-            </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div id="barChart"></div>
-              </div>
-              <div class="col-md-6">
-                <div id="pieChart"></div>
-              </div>
-              </div>
-              <div class="row">
-                <div id="groupBarChart"></div>
-              </div>
+         <!-- end panel info -->
+          <!-- start date select -->
+        <div class="row">
+          <div class="col-md-3">
+            <div id="selectYear"></div>
+            <input type="hidden" id="year" />
+          </div>
+          <div class="col-md-3">
+            <button type="button" id="submit_year" class="btn btn-info">Valider</button>
+          </div>
+        </div>
+         <!-- end date select -->
+          <!-- start tabs -->
+        <div class="row">                            
+              <div class="panel panel-default tabs">                            
+                  <ul class="nav nav-tabs" role="tablist">
+                      <li class="active"><a href="#tab-general" role="tab" data-toggle="tab">Général</a></li>
+                      <li><a href="#tab-reliquat" role="tab" data-toggle="tab">Reliquat</a></li>
+                      <li><a href="#tab-oa" role="tab" data-toggle="tab">OA</a></li>
+                      <li><a href="#tab-uca" role="tab" data-toggle="tab">Extension périmètre</a></li>
+                  </ul>                            
+                  <div class="panel-body tab-content">
+                      <div class="tab-pane active" id="tab-general">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="col-md-4" id="generalSCD"></div>
+                            <div class="col-md-4" id="generalSTM"></div>
+                            <div class="col-md-4" id="generalSHS"></div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12" id="generalResSTM">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12" id="generalResSHS">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="tab-reliquat">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <div class="widget widget-danger">
+                                <div class="widget-title">Reliquat SCD</div>
+                                <div class="widget-int" id="totalReliquatSCD"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="widget widget-danger">
+                              <div class="widget-title">Reliquat STM</div>
+                              <div class="widget-int" id="totalReliquatSTM"></div>
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="widget widget-danger">
+                            <div class="widget-title">Reliquat SHS</div>
+                            <div class="widget-int" id="totalReliquatSHS"></div>
+                        </div>
+                    </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12" id="reliquatStackedBar">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="tab-oa">
+                          <p>Vestibulum cursus augue sed leo tempor, at aliquam orci dictum. Sed mattis metus id velit aliquet, et interdum nulla porta. Etiam euismod pellentesque purus, in fermentum eros venenatis ut. Praesent vitae nibh ac augue gravida lacinia non a ipsum. Aenean vestibulum eu turpis eu posuere. Sed eget lacus lacinia, mollis urna et, interdum dui. Donec sed diam ut metus imperdiet malesuada. Maecenas tincidunt ultricies ipsum, lobortis pretium dolor sodales ut. Donec nec fringilla nulla. In mattis sapien lorem, nec tincidunt elit scelerisque tempus.</p>
+                      </div>
+                      <div class="tab-pane" id="tab-uca">
+                          <p>In mattis sapien lorem, nec tincidunt elit scelerisque tempus. Quisque nisl nisl, venenatis eget dignissim et, adipiscing eu tellus. Sed nulla massa, luctus id orci sed, elementum consequat est. Proin dictum odio quis diam gravida facilisis. Sed pharetra dolor a tempor tristique. Sed semper sed urna ac dignissim. Aenean fermentum leo at posuere mattis. Etiam vitae quam in magna viverra dictum. Curabitur feugiat ligula in dui luctus, sed aliquet neque posuere.</p>
+                      </div>
+                  </div>
+              </div>                                                                          
+         
+        </div>
+         <!-- end tabs -->
             </div>
           </div>
       </div>
@@ -58,5 +116,11 @@
 </body>
 <%- include ('../../partials/script') -%>
 <%- include ('../../partials/scripts-devextreme') -%>
+<%- include ('../../partials/scripts-amcharts') -%>
 <script src="./javascripts/docelec/dashboard_gestion.js"></script>
+<script src="./javascripts/dxchartComponents/stackedBar.js"></script>
+<script src="./javascripts/dxchartComponents/groupedBar.js"></script>
+<script src="./javascripts/amchartComponents/clusteredBar.js"></script>
+<script src="./javascripts/amchartComponents/pyramid.js"></script>
+<script src="./javascripts/amchartComponents/Pie.js"></script>
 </html>

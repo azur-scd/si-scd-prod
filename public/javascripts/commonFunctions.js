@@ -41,25 +41,35 @@ function getGroupSum(data,labelField,aggField) {
 
 function getGroupCount(data,aggField) {
     var agg = _.countBy(data,aggField)
-    console.log(object2array(agg))
+   // console.log(object2array(agg))
 	return object2array(agg)
 }
 
-function groupBy(data){
-    var agg = _.groupBy(data,"bdd_id");
+function groupBy(data,groupKey){
+    var agg = _.groupBy(data,groupKey);
+   /* var agg = _(data).groupBy(function (o) { 
+        return o.bdd_id;
+      })*/
     var arr = []
     Object.keys(agg).forEach(function(key){
-        var obj = {}
-        getItems('/api/bdds/'+key).done(function(result) {
+       /*Unused because of async data arrival after page has been loaded
+        var obj = {};
+        getItems(urlBdd+"/"+key).done(function(result) {
             obj["bdd_id"] = key;
             obj["bdd"] = result.bdd;
             obj["pole"] = result.pole_gestion;
-          });
+            obj["soutien_oa"] = result.soutien_oa;
+          });*/
         var value = _.reduce(agg[key], function(memo,item) {
             memo[item.etat] = (memo[item.etat] || 0) + item.montant_ttc;
+            memo["reliquat"] = item.reliquat;
+            memo["bdd_id"] = item.bdd_id;
+            memo["bdd"] = item.bdd;
+            memo["pole"] = item.pole;
             return memo;
         }, {})
-        arr.push(Object.assign(obj,value))  
+         arr.push(value)
+        //arr.push(Object.assign(obj,value))  
     });
         return arr;
 }

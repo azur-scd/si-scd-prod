@@ -1,11 +1,9 @@
 $(function(){
-    var urlBdd = "./api/bdds"
-    var urlGestion = "./api/bdds_gestion"
 
     var storeGestion = new DevExpress.data.CustomStore({
         key: "id",
         load: function () {
-           return getItems(urlGestion)					
+           return getItems(urlGestionCustom)					
                 },
         update: function(key, values) {
 			return updateItems(urlGestion,key,values);
@@ -334,7 +332,7 @@ $(function(){
                     var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
                     newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
-                        return getItems('/api/bdds_all_gestion/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
+                        return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
                             newData.reliquat = newData.montant_ttc - result[0].montant_ttc
                           });
                         }
@@ -354,7 +352,7 @@ $(function(){
                     var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
                     newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
-                        return getItems('/api/bdds_all_gestion/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
+                        return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
                             newData.reliquat = newData.montant_ttc - result[0].montant_ttc
                           });
                         }
@@ -374,7 +372,7 @@ $(function(){
                     var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
                     newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
-                        return getItems('/api/bdds_all_gestion/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
+                        return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
                             newData.reliquat = newData.montant_ttc - result[0].montant_ttc
                           });
                         }
@@ -394,7 +392,7 @@ $(function(){
                     var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
                     newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
-                        return getItems('/api/bdds_all_gestion/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
+                        return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
                             newData.reliquat = newData.montant_ttc - result[0].montant_ttc
                           });
                         }
@@ -415,7 +413,7 @@ $(function(){
                     var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
                     newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
-                        return getItems('/api/bdds_all_gestion/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
+                        return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
                             newData.reliquat = newData.montant_ttc - result[0].montant_ttc
                           });
                         }
@@ -436,7 +434,7 @@ $(function(){
                     var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
                     newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
-                        return getItems('/api/bdds_all_gestion/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
+                        return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
                             newData.reliquat = newData.montant_ttc - result[0].montant_ttc
                           });
                         }
@@ -456,7 +454,7 @@ $(function(){
                     var montant_recup = total_montant_tva*value/100                     
                     newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
-                    return getItems('/api/bdds_all_gestion/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
+                    return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
                         newData.reliquat = newData.montant_ttc - result[0].montant_ttc
                       });
                     }
@@ -467,8 +465,8 @@ $(function(){
                 caption: "Montant TTC",
                 dataType: 'number',
                 width: 150,
-                setCellValue: function(currentRowData,newData, value) {                
-                    this.defaultSetCellValue(newData, value);
+                setCellValue: function(currentRowData,newData, value) {      
+                    this.defaultSetCellValue(newData, value);                 
                 }
             },
             {
@@ -547,10 +545,16 @@ onCellPrepared: function(e) {
         }
     },
 	onEditingStart: function(e) {
-        console.log(e.data)
+        //console.log(e.data)
        // var dataGrid = e.component
         //dataGrid.cellValue(e.key, "montant_ht", 500)
         
     } 
     }).dxDataGrid("instance");
+
+   /*if(!$('.dx-form').length) {
+      alert('not opened');
+   }*/
+
+
 })

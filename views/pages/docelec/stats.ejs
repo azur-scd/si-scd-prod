@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <%- include ('../../partials/head'); -%> 
+ <%- include ('../../partials/head-devextreme'); -%> 
+</head>
+<body>
+
+  <div class="page-container">
+    <%- include ('../../partials/sidebar') -%>
+    <div class="page-content">
+      <%- include ('../../partials/navbar') -%>
+      <div class="page-content-wrap">   
+        <div class="page-title">                    
+          <h2><%= page %></h2>								
+      </div>  
+      <div class="row">
+        <!-- start panel info -->
+         <div class="col-md-3 panel-group accordion accordion-dc">
+                               <div class="panel panel-info">
+                                   <div class="panel-heading">
+                                       <h4 class="panel-title">
+                                           <a href="#panelTextInfo">
+                                               Consignes de saisie (cliquer pour déplier)
+                                           </a>
+                                       </h4>
+                                   </div>                                
+                                   <div class="panel-body" id="panelTextInfo">
+                                       <ul>
+                                       <li><strong>[En cours]</strong> : ...</li>
+                                   </ul>
+                                   </div>                                
+                               </div>
+                 </div>
+          <!-- end panel info -->
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+          <div class="action">
+            <div id="selectbox-years"></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="action">
+          <div id="selectbox-bdd"></div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="action">
+        <div id="selectbox-reports"></div>
+    </div>
+  </div>
+        </div>
+      <div class="row">
+        <div clas="col-md-6">
+          <h4>Données mensuelles</h4>
+        <div id="form"></div>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+
+</body>
+<%- include ('../../partials/script') -%>
+<%- include ('../../partials/scripts-devextreme') -%>
+<script src="./javascripts/docelec/stats.js"></script>
+</html>

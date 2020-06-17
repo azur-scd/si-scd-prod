@@ -59,42 +59,42 @@ app.route('/api/bdds/:bddId/delete')
 
  /*----- BDDS SIGNALEMENT-----*/
 //get all
-app.route('/api/bdds_all_signalement')
+app.route('/api/signalement')
 .get(bddSignalementController.list) 
 //join for list
-app.route('/api/bdds_signalement')
+app.route('/api/signalement_custom')
 .get(bddSignalementController.listForSignalement); 
 //get by id  
-app.route('/api/bdds_signalement/:id')
+app.route('/api/signalement/:id')
 .get(bddSignalementController.findById);
 //get by bdd id  
-app.route('/api/bdds_signalement/bddid/:bddId')
+app.route('/api/signalement/bddid/:bddId')
 .get(bddSignalementController.findByBddId);
 //update
-app.route('/api/bdds_signalement/:id/update')
+app.route('/api/signalement/:id/update')
 .put(bddSignalementController.update);
 
  /*----- BDDS GESTION-----*/
  //get all
-app.route('/api/bdds_all_gestion')
+app.route('/api/gestion')
 .get(bddGestionController.list) 
 //join for list
- app.route('/api/bdds_gestion')
+ app.route('/api/gestion_custom')
  .get(bddGestionController.listForGestion);
 //get by id  
-app.route('/api/bdds_gestion/:id')
+app.route('/api/gestion/:id')
 .get(bddGestionController.findById);
 //get by bdd id  
-app.route('/api/bdds_gestion/bddid/:bddId')
+app.route('/api/gestion/bddid/:bddId')
 .get(bddGestionController.findByBddId);
 //update
-app.route('/api/bdds_gestion/:id/update')
+app.route('/api/gestion/:id/update')
 .put(bddGestionController.update);
 //create  
-app.route('/api/bdds_gestion/create')
+app.route('/api/gestion/create')
 .post(bddGestionController.create);
  //delete
- app.route('/api/bdds_gestion/:id/delete')
+ app.route('/api/gestion/:id/delete')
  .delete(bddGestionController.delete);
 
   /*----- GC-----*/
@@ -135,6 +135,9 @@ app.route('/api/stats_reports/:statReportId/delete')
  //get all
 app.route('/api/bdds_all_stats')
 .get(bddStatController.list) 
+//join for list
+app.route('/api/bdds_stats')
+.get(bddStatController.listForStat);
 //get by id  
 app.route('/api/bdds_stats/:id')
 .get(bddStatController.findById);

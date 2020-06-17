@@ -1,7 +1,5 @@
 $(function(){
-    var urlBdd = "./api/bdds"
-    var urlGC = "./api/gcs"
-    var urlStatsReports = "./api/stats_reports"
+
    var storeBdd = new DevExpress.data.CustomStore({
         key: "id",
         load: function () {
@@ -104,7 +102,7 @@ $(function(){
             title: "Configuration de la ressource",
             showTitle: true,
             width: 1100,
-            height: 500,
+            height: 600,
            /* position: {
                 my: "top",
                 at: "top",
@@ -372,7 +370,7 @@ $(function(){
                  columns: [
                     {
                         type: "buttons",
-                        caption: "Actions",
+                        caption: "Editer",
                         buttons: ["edit", "delete"]
                     },
                     {

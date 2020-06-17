@@ -24,19 +24,6 @@ app.set('view engine', 'ejs');
 // set path for static assets
 app.use(express.static(path.join(__dirname, 'public')));
 
-// routes
-/*app.get('/', function(req, res, next) {
-    res.render('index', {page:'Home', menuId:'home'});
-  });
-  
-app.get('/about', function(req, res, next) {
-    res.render('about', {page:'About Us', menuId:'about'});
-  });
-  
-app.get('/signalement', function(req, res, next) {
-    res.render('pages/docelec/signalement', {page:'Contact Us', menuId:'contact'});
-  });*/
-
   var routes_api = require('./api/routes/routes'); 
   routes_api(app);
 

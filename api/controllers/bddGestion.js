@@ -61,22 +61,32 @@ exports.delete = function(req, res) {
 
  //join pour gestion
 exports.listForGestion = function(req, res) {
-    BddGestion.findAll({
-      include: [{
-        model: Bdd,
-        attributes: ['id', 'bdd', 'pole_gestion','perimetre'],
-        where: {
-        gestion: 1
-      }
-    }]
-    }).then(rows => {
+  var q;
+  if(req.query) {q = {where : req.query, include: [{
+    model: Bdd,
+    attributes: ['id', 'bdd', 'pole_gestion','perimetre','soutien_oa'],
+    where: {
+    gestion: 1
+  }
+}]}}
+else {q={include: [{
+  model: Bdd,
+  attributes: ['id', 'bdd', 'pole_gestion','perimetre','soutien_oa'],
+  where: {
+  gestion: 1
+}
+}]}}
+    BddGestion.findAll(
+      q
+    ).then(rows => {
       //res.json(rows)
       const resObj = rows.map(row => {return {
                                               "id":row.id,
                                               "bdd_id":row.bdd_id,
-                                              //"bdd":row.Bdd.bdd,
+                                              "bdd":row.Bdd.bdd,
                                               "pole":row.Bdd.pole_gestion,
                                               "perimetre":row.Bdd.perimetre,
+                                              "soutien_oa":row.Bdd.soutien_oa,
                                               "etat":row.etat,
                                               "annee":row.annee,
                                               "montant_initial":row.montant_initial,

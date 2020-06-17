@@ -13,7 +13,9 @@ app.get('/signalement', function(req, res, next) {
 app.get('/gestion', function(req, res, next) {
     res.render('pages/docelec/gestion', {page:'Docelec : Gestion (Exécution et prévision)', menuId:'gestion'});
   }); 
-  
+app.get('/stats', function(req, res, next) {
+    res.render('pages/docelec/stats', {page:"Docelec : Statistiques d'usage", menuId:'statistiques'});
+  }); 
 app.get('/dashboard-gestion', function(req, res, next) {
     res.render('pages/docelec/dashboard_gestion', {page:'Docelec : Dashboard Suivi Gestion', menuId:'dashboard gestion'});
   });

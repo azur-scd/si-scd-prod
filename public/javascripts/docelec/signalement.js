@@ -1,15 +1,20 @@
 $(function(){
-    var urlSignalementBdd = "./api/bdds_signalement"
-    var urlBdd = "./api/bdds"
+
    var store = new DevExpress.data.CustomStore({
         key: "id",
         load: function () {
-           return getItems(urlSignalementBdd)					
+           return getItems(urlSignalementCustom)					
                 },
         update: function(key, values) {
 			console.log(values);
-			return updateItems(urlSignalementBdd,key,values);
-		}        
+			return updateItems(urlSignalement,key,values);
+        }  ,
+        insert: function(values) {
+            return createItems(urlSignalement,values);
+        },  
+        remove: function(key) {
+            return deleteItems(urlSignalement,key);
+        }       
     });
     $("#gridContainerSignalement").dxDataGrid({
         dataSource: store,
@@ -64,6 +69,8 @@ $(function(){
                 height: 600
             },
             allowUpdating: true,
+            allowAdding: true,
+            allowDeleting: true,
             useIcons: true
              },
         columns: [
@@ -71,14 +78,11 @@ $(function(){
             type: "buttons",
             caption: "Editer",
             width: 110,
-            buttons: ["edit"]
+            buttons: ["edit", "delete"]
             },
     {
         dataField: "bdd_id",
         caption: "Ressource",
-        editorOptions: {
-            disabled: true
-        },
         lookup: 
         {
             dataSource: new DevExpress.data.CustomStore({

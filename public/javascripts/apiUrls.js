@@ -1,0 +1,7 @@
+var urlBdd = "./api/bdds"
+var urlGestion = "./api/gestion"
+var urlGestionCustom = "./api/gestion_custom"
+var urlSignalement = "./api/signalement"
+var urlSignalementCustom = "./api/signalement_custom"
+var urlGC = "./api/gcs"
+var urlStatsReports = "./api/stats_reports"

@@ -1,181 +1,129 @@
 $(function(){
-    var urlBdd = "./api/bdds"
-    var urlGestion = "./api/bdds_gestion"
-    var store = new DevExpress.data.CustomStore({
-        loadMode: "raw",
-        load: function() {
-            return $.getJSON(urlGestion);
-        }
-    });
-    var barDataSource = new DevExpress.data.DataSource({
-        store:store,
-        filter: ["annee", "=", 2020],
-        postProcess: function(results) {
-            return getGroupSum(results,"etat","montant_ttc");
-        }
-    });
 
-    var pieDataSource = new DevExpress.data.DataSource({
-        store:store,
-        filter: [["annee", "=", 2020],"and", [
-            [ "etat", "notcontains", "1" ],
-            "and", 
-            [ "etat", "notcontains", "2" ]
-        ]],
-        postProcess: function(results) {
-            return getGroupCount(results,"etat");
-        }
-    });
-    
-    var groupBarDataSource = new DevExpress.data.DataSource({
-        store:store,
-        filter: ["annee", "=", 2020],
-        postProcess: function(results) {
-            console.log(groupBy(results))
-            return groupBy(results);
-        }
-    });
+    $("#selectYear").dxSelectBox({
+      width: 150,
+      dataSource: years,
+      valueExpr: "cle",
+      displayExpr: "valeur",
+      onValueChanged: function(data) {
+          return $("#year").val(data.value)
+      }
+  })
 
-    var barChartOptions = {
-        dataSource: barDataSource,
-        palette: "soft",
-        title: {
-            text: "Montants TTC"
-        },
-        size: {
-            width: 500,
-            height: 420
-        },
-        commonPaneSettings: {
-            border: {
-                visible: true,
-                width: 2,
-                top: false,
-                right: false
-            }
-        },
-        "export": {
-            enabled: true
-        },
-        tooltip: {
-            enabled: true,
-            customizeTooltip: function (arg) {
-                return {
-                    text: arg.valueText + "euros"
-                };
-            }
-        },
-        commonSeriesSettings: {
-            type: "bar",
-            valueField: "value",
-            argumentField: "key",
-            ignoreEmptyPoints: true
-        },
-        seriesTemplate: {
-            nameField: "key"
-        }
-    };
-    
-    var pieChartOptions = {
-        palette: "bright",
-        dataSource: pieDataSource,
-        title: { 
-            text: "Nombre de ressources",
-            subtitle: {
-                text: "Estimé vs facturé"
-            }
-        },
-        size: {
-            width: 500,
-            height: 420
-        },
-        legend: {
-            visible: false
-        },
-        animation: {
-            enabled: true
-        },
-        resolveLabelOverlapping: "shift",
-        "export": {
-            enabled: true
-        },
-        series: [{
-            argumentField: "key",
-            valueField: "value",
-            label: {
-                visible: true,
-                connector: {
-                    visible: true,
-                    width: 0.5
-                },
-                customizeText: function(arg) {
-                    return arg.argumentText + " : "+ arg.valueText + " (" + arg.percentText + ")";
-                }
-            }
-        }]
-    }
+  $("#submit_year").click(function(){
+    $("div[id^='general']").empty()
+    var storeSuiviMontantSCD = []
+    var storeSuiviMontantSTM = []
+    var storeSuiviMontantSHS = []
+    var data = []; var dataSTM = []; var dataSHS = []
+    getItems(urlGestionCustom+"/?annee="+$("#year").val()).done(function(results){
+      //data general et par pole
+      data = groupBy(results,"bdd_id")
+      console.log(data)
+      //getPyramid("barSCD",data)
+    // getPie("pieSCD","bdd",data)
+      dataSTM = data.filter(function(d){
+        return d.pole == "STM"
+      })
+      dataSHS = data.filter(function(d){
+        return d.pole == "SHS"
+      })
+      var series = [
+        { valueField: "2-budgete", name: "Budgété" },
+        { valueField: "3-estime", name: "Estimé" },
+        { valueField: "4-facture", name: "Facturé" }
+    ]
+     //data pour visus montants consolidés    
+storeSuiviMontantSCD.push({"state":"Budget initial","2-budgete":getMontant(data).totalBudgetInitial},
+                             {"state":"Budget exécuté","2-budgete":getMontant(data).totalBudgeteOnly,"3-estime":getMontant(data).totalEstimeOnly,"4-facture":getMontant(data).totalFactureOnly})
+storeSuiviMontantSTM.push({"state":"Budget initial","2-budgete":getMontant(dataSTM).totalBudgetInitial},
+                             {"state":"Budget exécuté","2-budgete":getMontant(dataSTM).totalBudgeteOnly,"3-estime":getMontant(dataSTM).totalEstimeOnly,"4-facture":getMontant(dataSTM).totalFactureOnly})                             
+storeSuiviMontantSHS.push({"state":"Budget initial","2-budgete":getMontant(dataSHS).totalBudgetInitial},
+                             {"state":"Budget exécuté","2-budgete":getMontant(dataSHS).totalBudgeteOnly,"3-estime":getMontant(dataSHS).totalEstimeOnly,"4-facture":getMontant(dataSHS).totalFactureOnly})    
+//general SCD   
+$("#generalSCD").append("<div id='dxStackedBarSCD' style='height: 340px;width: 340px;'></div>")
+getStackedBar("dxStackedBarSCD",storeSuiviMontantSCD,"state",series,"Suivi SCD")  
+//general STM
+$("#generalSTM").append("<div id='dxStackedBarSTM' style='height: 340px;width: 340px;'></div>")
+getStackedBar("dxStackedBarSTM",storeSuiviMontantSTM,"state",series,"Suivi STM")                                                 
+//general SHS
+$("#generalSHS").append("<div id='dxStackedBarSHS' style='height: 340px;width: 340px;'></div>")
+getStackedBar("dxStackedBarSHS",storeSuiviMontantSHS,"state",series,"Suivi SHS")
+//detail ressources STM
+$("#generalResSTM").append("<div id='dxGroupedBarSTM'></div>")
+getGroupedBar("dxGroupedBarSTM",dataSTM,"bdd",series,"Détail par ressource STM")
+//detail ressources SHS
+$("#generalResSHS").append("<div id='dxGroupedBarSHS'></div>")
+getGroupedBar("dxGroupedBarSHS",dataSHS,"bdd",series,"Détail par ressource SHS")
 
-    var groupBarChartOptions = {
-        dataSource: groupBarDataSource,
-        commonSeriesSettings: {
-            argumentField: "bdd",
-            type: "bar",
-            size: {
-                width: 1200
-                //height: 420
-            },
-            hoverMode: "allArgumentPoints",
-            selectionMode: "allArgumentPoints",
-            label: {
-                visible: true,
-                format: {
-                    type: "fixedPoint",
-                    precision: 0
-                }
-            }
-        },
-        series: [
-            { valueField: "1-prev", name: "Prévisionnel" }
-        ],
-        title: "Synthèse par ressource",
-        legend: {
-            verticalAlignment: "bottom",
-            horizontalAlignment: "center"
-        },
-        "export": {
-            enabled: true
-        },
-        onPointClick: function (e) {
-            e.target.select();
-        }
-    }
-    $("#barChart").dxChart(barChartOptions);
-    $("#pieChart").dxPieChart(pieChartOptions);
-    $("#groupBarChart").dxChart(groupBarChartOptions);
+//data pour visus reliquat
+var storeReliquat = []
+storeReliquat.push({"state":"SCD","2-budgete":getReliquat(data).budgeteReliquat,"3-estime":getReliquat(data).estimeReliquat,"4-facture":getReliquat(data).factureReliquat},
+                   {"state":"STM","2-budgete":getReliquat(dataSTM).budgeteReliquat,"3-estime":getReliquat(dataSTM).estimeReliquat,"4-facture":getReliquat(dataSTM).factureReliquat},
+                   {"state":"SHS","2-budgete":getReliquat(dataSHS).budgeteReliquat,"3-estime":getReliquat(dataSHS).estimeReliquat,"4-facture":getReliquat(dataSHS).factureReliquat})
+$("#totalReliquatSCD").append(getReliquat(data).totalReliquat)
+$("#totalReliquatSTM").append(getReliquat(dataSTM).totalReliquat)
+$("#totalReliquatSHS").append(getReliquat(dataSHS).totalReliquat)
+$("#reliquatStackedBar").append("<div id='dxReliquatStackedBar'></div>")
+getStackedBar("dxReliquatStackedBar",storeReliquat,"state",series,"Ventilation reliquat") 
+    })
+  })
 
-    $("#selectbox").dxSelectBox({
-        width: 150,
-        items: years,
-        value: 2020,
-        valueExpr: "cle",
-        displayExpr: "valeur",
-        onValueChanged: function(data) {
-            barDataSource.filter(["annee", "=", data.value]);barDataSource.load();
-            pieDataSource.filter(["annee", "=", data.value]);pieDataSource.load();
-            groupBarDataSource.filter(["annee", "=", data.value]);groupBarDataSource.load();
-        }
-    });
-  /*function getGroupCount(data) {
-    var agg = _.reduce(data, function(memo,item) {
-        memo[item.etat] = (memo[item.etat] || 0) + item.montant_ttc;
-        return memo;
-    }, {})
-    var barData = []
-    Object.keys(agg).forEach(function(key){
-    var value = agg[key];
-    barData.push({"etat":key,'sum':value})});
-    console.log(barData)
-    return barData;
-    }*/
+  function getMontant(data){
+    var totalBudgetInitial = data.reduce(
+      (acc, v) => acc+ v["2-budgete"]
+      , 0
+  );
+  var totalBudgeteOnly = data.filter(function(d){
+    return !d["3-estime"] && !d["4-facture"]
+  })
+  .reduce(
+    (acc, v) => acc+ v["2-budgete"]
+    , 0
+);
+var totalEstimeOnly = data.filter(function(d){
+  return d["3-estime"] && !d["4-facture"]
+})
+.reduce(
+  (acc, v) => acc+ v["3-estime"]
+  , 0
+);
+var totalFactureOnly = data.filter(function(d){
+return !d["3-estime"] && d["4-facture"]
+})
+.reduce(
+(acc, v) => acc+ v["4-facture"]
+, 0
+);
+return {totalBudgetInitial,totalBudgeteOnly,totalEstimeOnly,totalFactureOnly}
+    }   
 
+function getReliquat(data){
+  var totalReliquat = data.reduce(
+    (acc, v) => acc+ v["reliquat"]
+    , 0
+);
+var budgeteReliquat = data.filter(function(d){
+  return !d["3-estime"] && !d["4-facture"]
+})
+.reduce(
+  (acc, v) => acc+ v["reliquat"]
+  , 0
+);
+var estimeReliquat = data.filter(function(d){
+  return d["3-estime"] && !d["4-facture"]
+})
+.reduce(
+  (acc, v) => acc+ v["reliquat"]
+  , 0
+);
+var factureReliquat = data.filter(function(d){
+  return !d["3-estime"] && d["4-facture"]
+})
+.reduce(
+  (acc, v) => acc+ v["reliquat"]
+  , 0
+);
+return {totalReliquat,budgeteReliquat,estimeReliquat,factureReliquat}  
+}  
 })
