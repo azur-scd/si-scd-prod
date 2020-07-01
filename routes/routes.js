@@ -27,7 +27,7 @@ app.get('/logout', function(req, res) {
   });
 
   app.get('/cas_login', 
-  passport.authenticate('cas-signin', { failureRedirect: '/error' }),
+  passport.authenticate('cas-signin', { failureRedirect: './error' }),
   function (err, user, info) {
     if (err) {
       return next(err);
@@ -35,7 +35,7 @@ app.get('/logout', function(req, res) {
   
     if (!user) {
       req.session.messages = info.message;
-      return res.redirect('/error');
+      return res.redirect('./error');
     }
   
     req.logIn(user, function (err) {
@@ -44,7 +44,7 @@ app.get('/logout', function(req, res) {
       }
       console.log(user)
       req.session.messages = '';
-      return res.redirect('/');
+      return res.redirect('./');
     });
   });  
 
