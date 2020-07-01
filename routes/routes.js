@@ -15,38 +15,19 @@ module.exports = function(app) {
   });
 
   app.post('/login', 
-  passport.authenticate('local-signin', { failureRedirect: '/login' }),
+  passport.authenticate('local-signin', { failureRedirect: './login' }),
   function(req, res) {
     console.log(req.user)
     res.redirect('/');
   });
-  /*app.post('/login', function (req, res){
-    passport.authenticate('local-signin', {session: false},
-    function (err, user, info) {
-    if (err || !user) {
-      console.log("Error", info);
-      return res.status(400).send(info);
-      //return res.redirect('/login');
-  }  
-  req.logIn(user, function(err) {
-      if (err) {
-         //return next(err);
-        return res.status(404).send("Username or password incorrect");
-      }
-      //res.status(200).json(user); 
-      console.log('Logged In: ' + req.user.username); 
-      return res.redirect("/admin/docelec/master")
-  }) 
-})(req, res)});*/
-
 
 app.get('/logout', function(req, res) {
   req.logout();
-  res.redirect('/login');
+  res.redirect('./login');
   });
 
   app.get('/cas_login', 
-  passport.authenticate('cas-signin', { failureRedirect: '/error' }),
+  passport.authenticate('cas-signin', { failureRedirect: './error' }),
   function (err, user, info) {
     if (err) {
       return next(err);
@@ -90,7 +71,7 @@ app.get('/admin/docelec/dashboard-gestion', isLoggedIn,function(req, res, next) 
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
-    res.redirect('/login');    
+    res.redirect('./login');    
 }
 
 }
