@@ -15,19 +15,19 @@ module.exports = function(app) {
   });
 
   app.post('/login', 
-  passport.authenticate('local-signin', { failureRedirect: '/login' }),
+  passport.authenticate('local-signin', { failureRedirect: './login' }),
   function(req, res) {
     console.log(req.user)
-    res.redirect('/');
+    res.redirect('./');
   });
 
 app.get('/logout', function(req, res) {
   req.logout();
-  res.redirect('/login');
+  res.redirect('./login');
   });
 
   app.get('/cas_login', 
-  passport.authenticate('cas-signin', { failureRedirect: '/error' }),
+  passport.authenticate('cas-signin', { failureRedirect: './error' }),
   function (err, user, info) {
     if (err) {
       return next(err);
@@ -35,7 +35,7 @@ app.get('/logout', function(req, res) {
   
     if (!user) {
       req.session.messages = info.message;
-      return res.redirect('/');
+      return res.redirect('./');
     }
   
     req.logIn(user, function (err) {
@@ -44,7 +44,7 @@ app.get('/logout', function(req, res) {
       }
       console.log(user)
       req.session.messages = '';
-      return res.redirect('/');
+      return res.redirect('./');
     });
   });  
 
@@ -71,7 +71,7 @@ app.get('/admin/docelec/dashboard-gestion', isLoggedIn,function(req, res, next) 
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
-    res.redirect('/login');    
+    res.redirect('./login');    
 }
 
 }
