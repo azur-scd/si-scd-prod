@@ -32,7 +32,7 @@ function getStackedBar(div,store,argument,series,titleString){
             location: "edge",
             customizeTooltip: function (arg) {
                 return {
-                    text: arg.seriesName + " : " + Math.round(arg.valueText).toLocaleString()
+                    text: arg.seriesName + " : " + Math.round(arg.valueText).toLocaleString() + " (" + arg.percentText + ")"
                 };
             }
         }

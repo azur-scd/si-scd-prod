@@ -12,8 +12,12 @@
       <%- include ('../../partials/navbar') -%>
       <div class="page-content-wrap"> 
         <div class="page-title">                    
-          <h2><%= page %></h2>								
-      </div>  
+          <h2><%= page %></h2>
+          <!--<% if (user.role != 'admin') { %>
+          <p>no access</p>	
+          <% } %>  -->
+          <span class="label label-info label-form pull-right">Utilisateur <strong><%= user.username %></strong> (connecté en <strong><%= user.groupe %>)</strong></span>       							
+      </div> 
       <div class="row">
         <!-- start panel info -->
          <div class="col-md-3 panel-group accordion accordion-dc">
@@ -74,5 +78,5 @@
 </body>
 <%- include ('../../partials/script') -%>
 <%- include ('../../partials/scripts-devextreme') -%>
-<script src="./javascripts/docelec/master.js"></script>
+<script src="/javascripts/docelec/master.js"></script>
 </html>

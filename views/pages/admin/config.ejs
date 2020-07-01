@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <%- include ('../../partials/head'); -%> 
+ <%- include ('../../partials/head-devextreme'); -%> 
+</head>
+<body>
+
+  <div class="page-container">
+    <%- include ('../../partials/sidebar') -%>
+    <div class="page-content">
+      <%- include ('../../partials/navbar') -%>
+      <div class="page-content-wrap"> 
+        <div class="page-title">                    
+          <h2><%= page %></h2>
+          <!--<% if (user.role != 'admin') { %>
+          <p>no access</p>	
+          <% } %>  -->
+          <span class="label label-info label-form pull-right">Utilisateur <strong><%= user.username %></strong> (connecté en <strong><%= user.groupe %>)</strong></span>       							
+      </div> 
+
+        <div class="row"> 
+<div class="form-horizontal validate">                                                            
+           <div class="panel panel-default tabs">                            
+               <ul class="nav nav-tabs" role="tablist">
+                   <li class="active"><a href="#tab-users" role="tab" data-toggle="tab">Utilisateurs</a></li>
+                   <li><a href="#tab-bu" role="tab" data-toggle="tab">BU (sites)</a></li>
+               </ul>
+            <div class="panel-body tab-content">
+              <div class="tab-pane active" id="tab-users">
+                <div class="row">
+                 <h4>Comptes utilisateurs</h4>
+                 <div id="gridContainerUsers">
+                 </div>
+               </div>
+               </div>
+               <div class="tab-pane" id="tab-bu">
+                <div class="row">
+                <h4>BU (sites)</h4>
+                <div id="gridContainerBU"></div>
+              </div>
+              </div>
+            </div>
+           </div>                                
+       </div>
+   </div>
+  </div>
+</div>
+</div>
+
+</body>
+<%- include ('../../partials/script') -%>
+<%- include ('../../partials/scripts-devextreme') -%>
+<script src="/javascripts/admin/config.js"></script>
+</html>

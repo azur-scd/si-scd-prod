@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     );
   
     Bu.associate = (models) => {
-      //Bu.hasMany(models.horaire);
+      Bu.hasMany(models.User,{foreignKey: 'bu_id'});
     };
   
     return Bu;

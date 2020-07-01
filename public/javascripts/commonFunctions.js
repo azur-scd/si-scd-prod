@@ -32,11 +32,6 @@ function getGroupSum(data,labelField,aggField) {
         return memo;
     }, {})
     return object2array(agg)
-    /*var barData = []
-    Object.keys(agg).forEach(function(key){
-    var value = agg[key];
-    barData.push({labelField:key,'sum':value})});
-    return barData;*/
     }
 
 function getGroupCount(data,aggField) {
@@ -66,10 +61,66 @@ function groupBy(data,groupKey){
             memo["bdd_id"] = item.bdd_id;
             memo["bdd"] = item.bdd;
             memo["pole"] = item.pole;
+            memo["soutien_oa"] = item.soutien_oa;
+            memo["surcout_uca"] = item.surcout_uca;
             return memo;
         }, {})
          arr.push(value)
         //arr.push(Object.assign(obj,value))  
     });
         return arr;
+}
+
+function budgetSuiviSumAndCount(data){
+    var budgeteInitial = data.reduce(
+        (acc, v) => acc+ v["2-budgete"]
+        , 0
+    );
+
+    var totalReliquat = data.reduce(
+        (acc, v) => acc+ v["reliquat"]
+        , 0
+    );
+  
+    var budgeteOnly = data.filter(function(d){
+      return d["2-budgete"] && !d["3-estime"] && !d["4-facture"]
+    })
+    var budgeteOnlyCount = budgeteOnly.length
+    var budgeteOnlySum = budgeteOnly.reduce(
+      (acc, v) => acc+ v["2-budgete"]
+      , 0
+  );
+   var budgeteOnlyReliquat = budgeteOnly.reduce(
+    (acc, v) => acc+ v["reliquat"]
+    , 0
+  );
+  
+  var estimeOnly = data.filter(function(d){
+    return d["3-estime"] && !d["4-facture"]
+  })
+  var estimeOnlyCount = estimeOnly.length
+  var estimeOnlySum = estimeOnly.reduce(
+    (acc, v) => acc+ v["3-estime"]
+    , 0
+  );
+  var estimeOnlyReliquat = estimeOnly.reduce(
+    (acc, v) => acc+ v["reliquat"]
+    , 0
+  );
+  var factureOnly = data.filter(function(d){
+  return !d["3-estime"] && d["4-facture"]
+  })
+  var factureOnlyCount = factureOnly.length
+  var factureOnlySum = factureOnly.reduce(
+  (acc, v) => acc+ v["4-facture"]
+  , 0
+  );
+  var factureOnlyReliquat = factureOnly.reduce(
+    (acc, v) => acc+ v["reliquat"]
+    , 0
+  );
+  return {budgeteInitial, totalReliquat,
+          budgeteOnlySum,budgeteOnlyCount, budgeteOnlyReliquat,
+          estimeOnlySum,estimeOnlyCount, estimeOnlyReliquat,
+          factureOnlySum,factureOnlyCount, factureOnlyReliquat}
 }

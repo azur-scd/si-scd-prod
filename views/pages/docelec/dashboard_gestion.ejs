@@ -36,12 +36,17 @@
          <!-- end panel info -->
           <!-- start date select -->
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-4">
+            <div class="dx-fieldset">
+              <div class="dx-field">
+                  <div class="dx-field-label">Année d'exercice</div>
+                  <div class="dx-field-value">
             <div id="selectYear"></div>
-            <input type="hidden" id="year" />
           </div>
-          <div class="col-md-3">
-            <button type="button" id="submit_year" class="btn btn-info">Valider</button>
+          </div>
+            </div>
+          </div>
+          <div class="col-md-8" id="noData">
           </div>
         </div>
          <!-- end date select -->
@@ -64,6 +69,13 @@
                           </div>
                         </div>
                         <div class="row">
+                          <div class="col-md-12">
+                            <div class="col-md-4" id="generalCountSCD"></div>
+                            <div class="col-md-4" id="generalCountSTM"></div>
+                            <div class="col-md-4" id="generalCountSHS"></div>
+                          </div>
+                        </div>
+                        <div class="row">
                           <div class="col-md-12" id="generalResSTM">
                           </div>
                         </div>
@@ -77,19 +89,19 @@
                           <div class="col-md-3">
                             <div class="widget widget-danger">
                                 <div class="widget-title">Reliquat SCD</div>
-                                <div class="widget-int" id="totalReliquatSCD"></div>
+                                <div class="widget-int" id="reliquatTotalSCD"></div>
                             </div>
                         </div>
                         <div class="col-md-3">
                           <div class="widget widget-danger">
                               <div class="widget-title">Reliquat STM</div>
-                              <div class="widget-int" id="totalReliquatSTM"></div>
+                              <div class="widget-int" id="reliquatTotalSTM"></div>
                           </div>
                       </div>
                       <div class="col-md-3">
                         <div class="widget widget-danger">
                             <div class="widget-title">Reliquat SHS</div>
-                            <div class="widget-int" id="totalReliquatSHS"></div>
+                            <div class="widget-int" id="reliquatTotalSHS"></div>
                         </div>
                     </div>
                         </div>
@@ -97,9 +109,15 @@
                           <div class="col-md-12" id="reliquatStackedBar">
                           </div>
                         </div>
+                        <div class="row">
+                          <div class="col-md-6" id="reliquatRotatedBarSTM"></div>
+                          <div class="col-md-6" id="reliquatRotatedBarSHS"></div>
+                          </div>                 
                       </div>
                       <div class="tab-pane" id="tab-oa">
+                        <div class="row">
                           <p>Vestibulum cursus augue sed leo tempor, at aliquam orci dictum. Sed mattis metus id velit aliquet, et interdum nulla porta. Etiam euismod pellentesque purus, in fermentum eros venenatis ut. Praesent vitae nibh ac augue gravida lacinia non a ipsum. Aenean vestibulum eu turpis eu posuere. Sed eget lacus lacinia, mollis urna et, interdum dui. Donec sed diam ut metus imperdiet malesuada. Maecenas tincidunt ultricies ipsum, lobortis pretium dolor sodales ut. Donec nec fringilla nulla. In mattis sapien lorem, nec tincidunt elit scelerisque tempus.</p>
+                      </div>
                       </div>
                       <div class="tab-pane" id="tab-uca">
                           <p>In mattis sapien lorem, nec tincidunt elit scelerisque tempus. Quisque nisl nisl, venenatis eget dignissim et, adipiscing eu tellus. Sed nulla massa, luctus id orci sed, elementum consequat est. Proin dictum odio quis diam gravida facilisis. Sed pharetra dolor a tempor tristique. Sed semper sed urna ac dignissim. Aenean fermentum leo at posuere mattis. Etiam vitae quam in magna viverra dictum. Curabitur feugiat ligula in dui luctus, sed aliquet neque posuere.</p>
@@ -117,10 +135,9 @@
 <%- include ('../../partials/script') -%>
 <%- include ('../../partials/scripts-devextreme') -%>
 <%- include ('../../partials/scripts-amcharts') -%>
-<script src="./javascripts/docelec/dashboard_gestion.js"></script>
-<script src="./javascripts/dxchartComponents/stackedBar.js"></script>
-<script src="./javascripts/dxchartComponents/groupedBar.js"></script>
-<script src="./javascripts/amchartComponents/clusteredBar.js"></script>
-<script src="./javascripts/amchartComponents/pyramid.js"></script>
-<script src="./javascripts/amchartComponents/Pie.js"></script>
+<script src="/javascripts/docelec/dashboard_gestion.js"></script>
+<script src="/javascripts/dxchartComponents/stackedBar.js"></script>
+<script src="/javascripts/dxchartComponents/groupedBar.js"></script>
+<script src="/javascripts/dxchartComponents/pie.js"></script>
+<script src="/javascripts/dxchartComponents/rotatedBar.js"></script>
 </html>

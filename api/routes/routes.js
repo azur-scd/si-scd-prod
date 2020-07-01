@@ -1,4 +1,5 @@
 const buController = require("../controllers").bu;
+const userController = require("../controllers").user;
 const bddController = require("../controllers").bdd;
 const statReportController = require("../controllers").statReport;
 const bddSignalementController = require("../controllers").bddSignalement;
@@ -23,6 +24,7 @@ module.exports = function(app) {
       .get(function(req, res,next) {
         res.json({ message: 'hooray! welcome to our api!' });   
     });
+
     /*----- BUS-----*/
   //get all
   app.route('/api/bus')
@@ -39,6 +41,26 @@ module.exports = function(app) {
     //delete
   app.route('/api/bus/:buId/delete')
    .delete(buController.delete);
+
+   /*----- USERS-----*/
+  //get all
+  app.route('/api/users')
+  .get(userController.list) 
+//get by id  
+ app.route('/api/users/:userId')
+  .get(userController.findById);
+/*login : signin
+app.route('/api/users/login')
+  .post(userController.login);*/
+//create
+  app.route('/api/users/create')
+  .post(userController.create);
+  //update
+  app.route('/api/users/:userId/update')
+  .put(userController.update); 
+  //delete
+app.route('/api/users/:userId/delete')
+ .delete(userController.delete); 
 
     /*----- BDDS-----*/
   //get all

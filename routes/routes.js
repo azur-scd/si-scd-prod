@@ -1,22 +1,96 @@
+var passport = require("passport");
+const { json } = require("body-parser");
+
 module.exports = function(app) {
   app.get('/', function(req, res, next) {
     res.render('index', {page:'Home', menuId:'home'});
   });
+
+  app.get('/error', function(req, res, next) {
+    res.render('error', {page:'Erreur', menuId:'error',message:"erreur"});
+  });
+
+  app.get('/login', function(req, res, next) {
+    res.render('pages/auth/login', {page:'Login', menuId:'login',mess:''});
+  });
+
+  app.post('/login', 
+  passport.authenticate('local-signin', { failureRedirect: '/login' }),
+  function(req, res) {
+    console.log(req.user)
+    res.redirect('/');
+  });
+  /*app.post('/login', function (req, res){
+    passport.authenticate('local-signin', {session: false},
+    function (err, user, info) {
+    if (err || !user) {
+      console.log("Error", info);
+      return res.status(400).send(info);
+      //return res.redirect('/login');
+  }  
+  req.logIn(user, function(err) {
+      if (err) {
+         //return next(err);
+        return res.status(404).send("Username or password incorrect");
+      }
+      //res.status(200).json(user); 
+      console.log('Logged In: ' + req.user.username); 
+      return res.redirect("/admin/docelec/master")
+  }) 
+})(req, res)});*/
+
+
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/login');
+  });
+
+  app.get('/cas_login', 
+  passport.authenticate('cas-signin', { failureRedirect: '/error' }),
+  function (err, user, info) {
+    if (err) {
+      return next(err);
+    }
   
-app.get('/master', function(req, res, next) {
-    res.render('pages/docelec/master', {page:'Docelec : Configuration', menuId:'master'});
+    if (!user) {
+      req.session.messages = info.message;
+      return res.redirect('/');
+    }
+  
+    req.logIn(user, function (err) {
+      if (err) {
+        return next(err);
+      }
+      console.log(user)
+      req.session.messages = '';
+      return res.redirect('/');
+    });
+  });  
+
+app.get('/admin/docelec/master', isLoggedIn, function(req, res, next) {
+    res.render('pages/docelec/master', {page:'Docelec : Configuration', menuId:'master',user: req.user});
   });
   
-app.get('/signalement', function(req, res, next) {
-    res.render('pages/docelec/signalement', {page:'Docelec : Signalement', menuId:'signalement'});
+app.get('/admin/docelec/signalement', isLoggedIn, function(req, res, next) {
+    res.render('pages/docelec/signalement', {page:'Docelec : Signalement', menuId:'signalement',user: req.user});
   }); 
-app.get('/gestion', function(req, res, next) {
-    res.render('pages/docelec/gestion', {page:'Docelec : Gestion (Exécution et prévision)', menuId:'gestion'});
+app.get('/admin/docelec/gestion', isLoggedIn, function(req, res, next) {
+    res.render('pages/docelec/gestion', {page:'Docelec : Gestion (Exécution et prévision)', menuId:'gestion',user: req.user});
   }); 
-app.get('/stats', function(req, res, next) {
-    res.render('pages/docelec/stats', {page:"Docelec : Statistiques d'usage", menuId:'statistiques'});
+app.get('/admin/docelec/stats', function(req, res, next) {
+    res.render('pages/docelec/stats', {page:"Docelec : Statistiques d'usage", menuId:'statistiques',user: req.user});
   }); 
-app.get('/dashboard-gestion', function(req, res, next) {
-    res.render('pages/docelec/dashboard_gestion', {page:'Docelec : Dashboard Suivi Gestion', menuId:'dashboard gestion'});
+app.get('/admin/docelec/dashboard-gestion', isLoggedIn,function(req, res, next) {
+    res.render('pages/docelec/dashboard_gestion', {page:'Docelec : Dashboard Suivi Gestion', menuId:'dashboard gestion',user: req.user});
+  }); 
+
+  app.get('/admin/config', isLoggedIn,function(req, res, next) {
+    res.render('pages/admin/config', {page:'Admin : Configuration des utilisateurs et des sites', menuId:'admin config',user: req.user});
   });
+  function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    res.redirect('/login');    
+}
+
 }

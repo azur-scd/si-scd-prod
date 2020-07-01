@@ -1,5 +1,5 @@
 var binaryState = [{"cle":0,"valeur":"non"},{"cle":1,"valeur":"oui"}]
-var poleState = [{"cle":"","valeur":""},{"cle":"SHS","valeur":"SHS"},{"cle":"STM","valeur":"STM"}]
+var poleState = [{"cle":"SCD","valeur":"STM"},{"cle":"SHS","valeur":"SHS"},{"cle":"STM","valeur":"STM"}]
 var marcheState = [
                 {"cle":"","valeur":""},
 				{"cle":"GC","valeur":"GC"},
@@ -83,4 +83,8 @@ var etatState = [
 var years = [{"cle":2021,"valeur":2021},
             {"cle":2020,"valeur":2020},
             {"cle":2019,"valeur":2019},
-            {"cle":2018,"valeur":2018}]            
+            {"cle":2018,"valeur":2018}]  
+            
+var userGroups = [{"cle":"admin","valeur":"Admin"},
+                  {"cle":"docelec","valeur":"Docelec"},
+                  {"cle":"horaires","valeur":"Horaires"}]            

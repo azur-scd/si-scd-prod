@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <%- include ('../../partials/head'); -%> 
+</head>
+<body>
+  <div class="page-container">
+    <%- include ('../../partials/sidebar') -%>
+    <div class="page-content">
+      <%- include ('../../partials/navbar') -%>
+      <div class="page-content-wrap">  
+     <!--<div class="row">
+        <form method="post" action="/login">
+            <label for="username">Nom d'utilisateur</label>
+            <input class="text" name="username" id="username" name="username" type="text" />
+            <label for="password">Mot de passe</label>
+            <input name="password" type="password" id="password" name="password"/>
+            <input class="btn" type="submit" id="submit_login" value="Sign In" />
+            </form>
+        </div>-->
+         <% if (mess) { %>
+          <p><%= mess %></p>	
+          <% } %> 
+        <div class="login-container lightmode">       
+          <div class="login-box animated fadeInDown">
+              <!--<div class="login-logo"></div>-->
+              <div class="login-body">
+                  <div class="login-title"><strong>Accès SI Admin</strong></div>
+                  <form method="post" action="/login" class="form-horizontal">
+                  <div class="form-group">
+                      <div class="col-md-12">
+                          <input type="text" name="username" id="username" class="form-control" placeholder="Nom d'utilisateur"/>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="col-md-12">
+                          <input name="password" type="password" id="password" class="form-control" placeholder="Mot de passe"/>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="col-md-6">
+                          <button type="submit" class="btn btn-info btn-block">Se connecter</button>
+                      </div>
+                  </div>
+                  </form>
+              </div>
+              <div class="login-footer">
+                  <div class="pull-left">
+                      2020 SI-SCD
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+  </div>
+</div>
+</div>
+
+</body>
+<%- include ('../../partials/script') -%>
+<!--<script src="/javascripts/auth/login.js"></script>-->
+</html>

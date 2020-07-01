@@ -1,9 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title><%= status %></title>
+ <%- include ('partials/head'); -%> 
 </head>
 <body>
-<h1><%= message %></h1>
+
+  <div class="page-container">
+  <%- include ('partials/sidebar') -%>
+  <div class="page-content">
+    <%- include ('partials/navbar') -%>
+    <div class="page-content-wrap">
+      <div class="page-title">                    
+        <h2><%= page %></h2>
+      </div>
+		<h1><%= message %></h1>
+    </div>
+</div>
+</div>
+
 </body>
+<%- include ('partials/script') -%>
 </html>
