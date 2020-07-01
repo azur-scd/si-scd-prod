@@ -15,7 +15,7 @@ module.exports = function(app) {
   });
 
   app.post('/login', 
-  passport.authenticate('local-signin', { failureRedirect: './login' }),
+  passport.authenticate('local-signin', { failureRedirect: '/login' }),
   function(req, res) {
     console.log(req.user)
     res.redirect('/');
@@ -23,11 +23,11 @@ module.exports = function(app) {
 
 app.get('/logout', function(req, res) {
   req.logout();
-  res.redirect('./login');
+  res.redirect('/login');
   });
 
   app.get('/cas_login', 
-  passport.authenticate('cas-signin', { failureRedirect: './error' }),
+  passport.authenticate('cas-signin', { failureRedirect: '/error' }),
   function (err, user, info) {
     if (err) {
       return next(err);
@@ -71,7 +71,7 @@ app.get('/admin/docelec/dashboard-gestion', isLoggedIn,function(req, res, next) 
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
-    res.redirect('./login');    
+    res.redirect('/login');    
 }
 
 }
