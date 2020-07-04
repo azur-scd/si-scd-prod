@@ -49,24 +49,24 @@ app.get('/logout', function(req, res) {
     });
   });  
 
-app.get('/admin/docelec/master', isLoggedIn, function(req, res, next) {
+app.get('/admin-docelec-master', isLoggedIn, function(req, res, next) {
     res.render('pages/docelec/master', {page:'Docelec : Configuration', menuId:'master',user: req.user});
   });
   
-app.get('/admin/docelec/signalement', isLoggedIn, function(req, res, next) {
+app.get('/admin-docelec-signalement', isLoggedIn, function(req, res, next) {
     res.render('pages/docelec/signalement', {page:'Docelec : Signalement', menuId:'signalement',user: req.user});
   }); 
-app.get('/admin/docelec/gestion', isLoggedIn, function(req, res, next) {
+app.get('/admin-docelec-gestion', isLoggedIn, function(req, res, next) {
     res.render('pages/docelec/gestion', {page:'Docelec : Gestion (Exécution et prévision)', menuId:'gestion',user: req.user});
   }); 
-app.get('/admin/docelec/stats', function(req, res, next) {
+app.get('/admin-docelec-stats', function(req, res, next) {
     res.render('pages/docelec/stats', {page:"Docelec : Statistiques d'usage", menuId:'statistiques',user: req.user});
   }); 
-app.get('/admin/docelec/dashboard-gestion', isLoggedIn,function(req, res, next) {
+app.get('/admin-docelec-dashboardgestion', isLoggedIn,function(req, res, next) {
     res.render('pages/docelec/dashboard_gestion', {page:'Docelec : Dashboard Suivi Gestion', menuId:'dashboard gestion',user: req.user});
   }); 
 
-  app.get('/admin/config', isLoggedIn,function(req, res, next) {
+  app.get('/admin-config', isLoggedIn,function(req, res, next) {
     res.render('pages/admin/config', {page:'Admin : Configuration des utilisateurs et des sites', menuId:'admin config',user: req.user});
   });
   function isLoggedIn(req, res, next) {
