@@ -43,7 +43,7 @@ app.set('view engine', 'ejs');
 //set path for static assets (dev)
 //app.use(express.static('public'));
 //test autre solution
-app.use('/static', express.static('/public'));
+app.use('/static', express.static('public'));
 
 
 var routes_api = require('./api/routes/routes'); 
