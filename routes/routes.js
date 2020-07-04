@@ -18,15 +18,13 @@ module.exports = function(app) {
   passport.authenticate('local-signin', { failureRedirect: './login' }),
   function(req, res) {
     console.log(req.user)
-    //res.redirect('./');
-    res.render('index')
+    res.redirect('./');
   });
 
 
 app.get('/logout', function(req, res) {
   req.logout();
-  //res.redirect('./login');
-  res.render("login")
+  res.redirect('./login');
   });
 
   app.get('/cas_login', 
@@ -38,8 +36,7 @@ app.get('/logout', function(req, res) {
   
     if (!user) {
       req.session.messages = info.message;
-      //return res.redirect('./');
-      res.render('index')
+      return res.redirect('./');
     }
   
     req.logIn(user, function (err) {
@@ -48,8 +45,7 @@ app.get('/logout', function(req, res) {
       }
       console.log(user)
       req.session.messages = '';
-      //return res.redirect('./');
-      res.render('index')
+      return res.redirect('./');
     });
   });  
 
@@ -76,8 +72,7 @@ app.get('/admin/docelec/dashboard-gestion', isLoggedIn,function(req, res, next) 
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
-    //res.redirect('./login');   
-    res.render('login') 
+    res.redirect('./login');   
 }
 
 }
