@@ -18,7 +18,16 @@ module.exports = function(app) {
   passport.authenticate('local-signin', { failureRedirect: './login' }),
   function(req, res) {
     console.log(req.user)
-    res.redirect('./');
+    switch (req.user.groupe) {
+      case 'admin':
+        res.redirect('/admin/config');
+        break;
+      case 'docelec':
+        res.redirect('/admin/docelec/master');
+        break;
+      default:
+        console.log("no default page yet");
+    }
   });
 
 
