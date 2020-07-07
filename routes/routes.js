@@ -44,7 +44,7 @@ app.get('/logout', function(req, res) {
         return next(err);
       }
       console.log(user)
-      req.session.messages = '';
+      //req.session.messages = '';
       return res.redirect('./');
     });
   });  

@@ -13,6 +13,7 @@
       <div class="page-content-wrap"> 
         <div class="page-title">                    
           <h2><%= page %></h2>
+          <span class="label label-info label-form pull-right">Utilisateur <strong><%= user.username %></strong> (connecté en <strong><%= user.groupe %>)</strong></span>       							
           <!--<% if (user.role != 'admin') { %>
           <p>no access</p>	
           <% } %>  -->
@@ -51,5 +52,5 @@
 </body>
 <%- include ('../../partials/script') -%>
 <%- include ('../../partials/scripts-devextreme') -%>
-<script src="/static/javascripts/admin/config.js"></script>
+<script src="./javascripts/admin/config.js"></script>
 </html>

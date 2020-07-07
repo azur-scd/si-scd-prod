@@ -101,6 +101,7 @@ else {q={include: [{
                                               "taux_tva_frais_gestion":row.taux_tva_frais_gestion,
                                               "montant_frais_gestion":row.montant_frais_gestion,
                                               "montant_ttc":row.montant_ttc,
+                                              "last_estime":row.last_estime,
                                               "reliquat": row.reliquat,
                                               "surcout_uca": row.surcout_uca,
                                               "commentaire":row.commentaire,

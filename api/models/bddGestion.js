@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         taux_tva_frais_gestion: DataTypes.FLOAT,
         montant_frais_gestion: DataTypes.FLOAT,
         montant_ttc: DataTypes.FLOAT,
+        last_estime: DataTypes.FLOAT,
         reliquat: DataTypes.FLOAT,
         surcout_uca: DataTypes.FLOAT,
         commentaire: DataTypes.TEXT,

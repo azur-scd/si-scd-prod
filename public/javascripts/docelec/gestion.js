@@ -121,7 +121,7 @@ $(function(){
             {
                 itemType: "group",
                 caption: "Total",
-                items: ["montant_ttc","reliquat"]
+                items: ["montant_ttc","reliquat","last_estime"]
             },
             {
                 itemType: "group",
@@ -199,7 +199,7 @@ $(function(){
                 },
                 {
                     hint: "Etape suivante : créer Estimé",
-                    icon: "./img/button_estime.png",
+                    icon: "/img/button_estime.png",
                     //text: "Créer Estimé",
                     visible: function(e) {
                         return !e.row.isEditing && !isNextEstime(e.row.data.etat);
@@ -235,7 +235,7 @@ $(function(){
                         return !e.row.isEditing && !isNextEstime2Facture(e.row.data.etat);
                     },
                     onClick: function(e) {
-                        var clonedItem =  $.extend({}, e.row.data, {etat: "4-facture"},{id:""});
+                        var clonedItem =  $.extend({}, e.row.data, {etat: "4-facture"},{last_estime:e.row.data.montant_ttc},{id:""});
                         var filtered = _.pick(clonedItem, function (v) { return v !== '' && v !== null; });
                         console.log(filtered)
                         createItems(urlGestion,filtered)
@@ -475,6 +475,14 @@ $(function(){
                 dataType: 'number',
                 setCellValue: function(newData, value) {
                     this.defaultSetCellValue(newData, value);
+                }
+            },
+            {
+                dataField: "last_estime",
+                caption: "Estimé : dernière valeur",
+                visible: false,
+                editorOptions: {
+                    disabled: true
                 }
             },
             {
