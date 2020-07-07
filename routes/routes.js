@@ -20,10 +20,10 @@ module.exports = function(app) {
     console.log(req.user)
     switch (req.user.groupe) {
       case 'admin':
-        res.redirect('/admin/config');
+        res.redirect('./admin-config');
         break;
       case 'docelec':
-        res.redirect('/admin/docelec/master');
+        res.redirect('./admin-docelec-master');
         break;
       default:
         console.log("no default page yet");
