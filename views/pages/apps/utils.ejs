@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<head>    
+    <%- include ('../../partials/head'); -%>                              
+</head>
+<body>
+
+  <div class="page-container">
+    <%- include ('../../partials/sidebar') -%>
+      <div class="page-content">
+        <%- include ('../../partials/navbar') -%>
+          <div class="page-content-wrap">
+            <div class="page-title">                    
+              <h2><%= page %></h2>
+            </div>
+     <!-- Numilog check--> 
+     <div class="row">
+        <div class="col-md-12">
+       <h2>Vérifier les urls d'accès Numilog</h2>
+       </div>
+     <div class="col-md-3 panel-group accordion accordion-dc">
+       <div class="panel panel-info">
+           <div class="panel-heading">
+               <h4 class="panel-title">
+                   <a href="#panelNumilogInfo">
+                       Consignes d'utilisation
+                   </a>
+               </h4>
+           </div>                                
+           <div class="panel-body" id="panelNumilogInfo">
+               
+           </div>                                
+       </div>
+     </div>
+     <div class="col-md-3">
+      <div class="form-group">
+         <label class="col-md-3 col-xs-12 control-label">ISBN</label>
+         <div class="block">
+                   <button class="btn btn-success" id="submitNumilogIsbn"> Valider</button>	
+                   <button type="button" class="btn btn-danger btn-rounded" id="clearNumilog">Effacer tout</button>
+                   </div>
+            <div class="col-md-9">                                            
+               <textarea id="areaNumilog" class="form-control" rows="15" placeholder="Copier-coller une liste d'ISBN papier (1 par ligne).
+Exemple							
+9782806264619
+9782806260376
+9782806264053
+"></textarea>
+             </div>
+          </div> 
+       </div>
+        <div class="col-md-9">
+         <div class="panel-body panel-body-table">
+
+                       <div class="table-responsive">
+                           <table class="table table-bordered table-striped table-actions">
+                               <thead>
+                                   <tr>
+                                       <th width="50">ISBN</th>
+                                       <th width="100">Titre</th>
+                                       <th width="100">Disponibilté</th>
+                                   </tr>
+                               </thead>
+                               <tbody id="resultsNumilog"></tbody>
+                   </table>			
+               </div>				
+           </div>					
+        </div>
+   </div>
+     <!--end Numilog check-->
+     <hr>
+     <!-- isbn in Sudoc check-->
+      <div class="row">
+         <div class="col-md-12">
+       <h2> Vérifier la présence d'ISBN dans le Sudoc</h2>
+       </div>
+     <div class="col-md-3 panel-group accordion accordion-dc">
+       <div class="panel panel-info">
+           <div class="panel-heading">
+               <h4 class="panel-title">
+                   <a href="#panelIsbn2SudocInfo">
+                       Consignes d'utilisation
+                   </a>
+               </h4>
+           </div>                                
+           <div class="panel-body" id="panelIsbn2SudocInfo">
+               <p>Pour chaque ISBN, le web service isbn2ppn est interrogé et les résultats sont classés dans les 3 tableaux ci-dessous selon le nombre de ppn renvoyé par l'API (aucun, un, deux ou plus)
+               
+           </div>                                
+       </div>
+     </div>
+
+     <div class="col-md-3">
+      <div class="form-group">
+         <label class="col-md-3 col-xs-12 control-label">ISBN</label>
+         <div class="block">
+                   <button class="btn btn-success" id="submitIsbn2SudocIsbn"> Valider</button>	
+                   <button type="button" class="btn btn-danger btn-rounded" id="clearIsbn2Sudoc">Effacer tout</button>
+                   </div>
+            <div class="col-md-9">                                            
+               <textarea id="areaIsbn2Sudoc" class="form-control" rows="15" placeholder="Copier-coller une liste d'ISBN papier (1 par ligne).
+Exemple							
+9782806264619
+9782806260376
+9782806264053
+"></textarea>
+             </div>
+          </div> 
+       </div>
+        <div class="col-md-3">
+        <button type="button" class="btn btn-danger">
+           Réponse : O ppn  <span id="count0Isbn" class="badge badge-light">0</span>
+           </button>
+         <div class="panel-body panel-body-table">
+                       <div class="table-responsive">
+                           <table class="table table-bordered table-striped table-actions">
+                               <thead>
+                                   <tr>
+                                       <th width="50">ISBN</th>
+                                   </tr>
+                               </thead>
+                               <tbody id="results0Isbn"></tbody>
+                   </table>			
+               </div>				
+           </div>					
+        </div>
+        <div class="col-md-3">
+         <button type="button" class="btn btn-primary">
+           Réponse : 1 ppn  <span id="count1Isbn" class="badge badge-light">0</span>
+           </button>
+         <div class="panel-body panel-body-table">
+                       <div class="table-responsive">
+                           <table class="table table-bordered table-striped table-actions">
+                               <thead>
+                                   <tr>
+                                       <th width="50">ISBN</th>
+                                       <th width="50">PPN unique</th>
+                                   </tr>
+                               </thead>
+                               <tbody id="results1Isbn"></tbody>
+                   </table>			
+               </div>				
+           </div>					
+        </div>
+        <div class="col-md-3">
+        <button type="button" class="btn btn-warning">
+           Réponse : 2 ppn ou plus  <span id="count2Isbn" class="badge badge-light">0</span>
+           </button>
+         <div class="panel-body panel-body-table">
+                       <div class="table-responsive">
+                           <table class="table table-bordered table-striped table-actions">
+                               <thead>
+                                   <tr>
+                                       <th width="50">ISBN</th>
+                                       <th width="50">PPNs</th>
+                                   </tr>
+                               </thead>
+                               <tbody id="results2Isbn"></tbody>
+                   </table>			
+               </div>				
+           </div>					
+        </div>
+      </div>
+     <!-- end isbn in Sudoc check-->
+<%- include ('../../partials/script') -%>
+<script src="./javascripts/apps/utils.js"></script>
+</body>
+</html>

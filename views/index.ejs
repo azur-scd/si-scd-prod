@@ -4,15 +4,117 @@
  <%- include ('partials/head'); -%> 
 </head>
 <body>
-
   <div class="page-container">
-  <%- include ('partials/sidebar') -%>
-  <div class="page-content">
-    <%- include ('partials/navbar') -%>
-    <div class="page-content-wrap">
-      
+    <div class="row text-center">
+      <h1 style="color:#bec4ca">SI-SCD</h1>
+      <p><a href="/login" target="_blanck" type="button" class="btn btn-info">Se connecter en admin</a></p>
+     </div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+      <div class="panel panel-primary">
+        <div class="panel-heading ui-draggable-handle">
+            <h3 class="panel-title">Horaires des BU</h3>
+        </div>
+        <div class="panel-body">
+            <p><a href="#">Données consolidées et graphiques</a></p>
+            <p><a href="#">Données ESGBU</a></p>
+        </div>                       
     </div>
-</div>
+    </div>
+
+      <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading ui-draggable-handle">
+                <h3 class="panel-title">Statistiques IUB</h3>
+            </div>
+            <div class="panel-body">
+                <p><a href="#">Données consolidées et graphiques</a></p>
+                <p><a href="/public-iub-explore">Exploration interactive</a></p>
+            </div>                           
+        </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="panel panel-primary">
+              <div class="panel-heading ui-draggable-handle">
+                  <h3 class="panel-title">Fréquentation des BU</h3>
+              </div>
+              <div class="panel-body">
+                  <p>[A venir]</p>
+              </div>
+              <div class="panel-footer">
+              </div>                            
+          </div>
+          </div>
+        <div class="col-md-1"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+      <div class="panel panel-primary">
+          <div class="panel-heading ui-draggable-handle">
+              <h3 class="panel-title">Documentation électronique</h3>
+          </div>
+          <div class="panel-body">
+              <p><a href="#">Indicateurs</a></p>
+              <p><a href="#">Données ESGBU</a></p>
+          </div>                       
+      </div>
+    </div>
+
+      <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading ui-draggable-handle">
+                <h3 class="panel-title">Web (site et catalogue)</h3>
+            </div>
+            <div class="panel-body">
+              <p><a href="#">Statistiques Google Analytics</a></p>
+            </div>                           
+        </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="panel panel-primary">
+              <div class="panel-heading ui-draggable-handle text-center">
+                  <h3 class="panel-title">Publications</h3>
+              </div>
+              <div class="panel-body">
+                  <p>[A venir]</p>
+              </div>
+              <div class="panel-footer">
+              </div>                            
+          </div>
+          </div>
+        <div class="col-md-1"></div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+      <div class="panel panel-primary">
+          <div class="panel-heading ui-draggable-handle">
+              <h3 class="panel-title">Applications développées au Sidoc</h3>
+          </div>
+          <div class="panel-footer">
+              <a href="./public-apps-app" button class="btn btn-primary">Voir</a>
+          </div>                            
+      </div>
+    </div>
+
+      <div class="col-md-3">
+      <div class="panel panel-primary">
+          <div class="panel-heading ui-draggable-handle">
+              <h3 class="panel-title">Utilitaires en ligne</h3>
+          </div>
+          <div class="panel-footer">
+             <a href="./public-apps-utils" button class="btn btn-primary">Voir</a>
+          </div>                            
+      </div>
+      </div>
+      <div class="col-md-1"></div>
+  </div>
 </div>
 
 </body>

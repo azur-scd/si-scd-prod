@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<head>    
+    <%- include ('../../partials/head'); -%>                              
+</head>
+<body>
+
+  <div class="page-container">
+    <%- include ('../../partials/sidebar') -%>
+      <div class="page-content">
+        <%- include ('../../partials/navbar') -%>
+          <div class="page-content-wrap">
+            <div class="page-title">                    
+              <h2><%= page %></h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body profile">
+                            <div class="profile-image">
+                                <img src="./img/CheckCB-AdobePhoneGapBuild.png" alt="CheckCB">
+                            </div>
+                            <div class="profile-data">
+                                <div class="profile-data-name">App mobile <strong>CheckCB</strong></div>
+                                <div class="profile-data-title">Scanner des CB d'exemplaires</div>
+                            </div>
+                            <div class="profile-controls">
+                                <a href="#" class="profile-control-left"><span class="fa fa-android"></span></a>
+                                <!--<a href="#" class="profile-control-right"><span class="fa fa-phone"></span></a>-->
+                            </div>
+                        </div>                                
+                        <div class="panel-body">                                    
+                            <div class="contact-info">
+                                <p><strong>Description</strong><br>
+                                <small>Scanner le code-barre d'un document et obtenir toutes les infos de gestion sur l'exemplaire.</small></p>
+                                <p><strong>Installation depuis le Google Play Store (Recommandé)</strong></p>
+                                    <small><a href="https://play.google.com/store/apps/details?id=fr.unice.checkcb&hl=fr" target="_blanck">https://play.google.com/store/apps/details?id=fr.unice.checkcb&hl=fr</a></small>
+                                <p><strong>Installation manuelle</strong></p>
+                                    <p><small>
+                                        <ul>
+                                            <li>Il faut pouvoir lire le QR Code avec le smartphone : 
+                                                <ul>
+                                                    <li>soit en installant une app qui lit les QR Codes</li>
+                                                    <li>soit en utilisant un site web qui permet de le faire en ligne : par exemple <a href="https://www.qrstuff.com/scan" target="_blanck">https://www.qrstuff.com/scan</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>Scanner le QR puis ouvrir dans un navigateur le lien proposé du type https://build.phonegap.com/apps/.../install/...</li>
+                                            <li>Cliquer sur OK Conserver le fichier .apk</li>
+                                            <li>Cliquer sur Ouvrir</li>
+                                            <li>Autoriser la permission : prendre des photos</li>
+                                            <li>Installer</li>
+                                            <li>Ouvrir</li>
+                                        </ul>
+                                    </small><br></p> 
+                                <p><strong>Code source</strong></p>    
+                                <p><small><a href="https://github.com/gegedenice/CheckCB-demo" target="_blanck">https://github.com/gegedenice/CheckCB-demo</a></small></p>
+                                <p><strong>Billet de blog</strong></p>   
+                                 <p><small><a href="https://developers.exlibrisgroup.com/blog/a-mobile-app-for-librarians-to-get-all-the-data-about-items-by-scanning-their-barcodes/" target="_blanck">A mobile app for librarians to get all the data about items by scanning their barcodes</a></small>								
+                                  <i>Ex Libris Tech Blog. 4 mars 2019</i></small></p>									
+                            </div>
+                        </div>                                
+                    </div>                          
+                    
+                </div>
+                <div class="col-md-6">
+                 <div class="panel panel-default">
+                      <div class="panel-body profile">
+                            <div class="profile-image">
+                                <img src="./img/SudocToolkit.png" alt="SudocToolkit">
+                            </div>
+                            <div class="profile-data">
+                                <div class="profile-data-name">Application de bureau <strong>SudocToolkit</strong></div>
+                                <div class="profile-data-title">Interroger les données Sudoc</div>
+                            </div>
+                            <div class="profile-controls">
+                                <a href="#" class="profile-control-left"><span class="fa fa-desktop"></span></a>
+                                <!--<a href="#" class="profile-control-right"><span class="fa fa-phone"></span></a>-->
+                            </div>
+                        </div> 
+                         <div class="panel-body">                                    
+                            <div class="contact-info">
+                                <p><strong>Description</strong><br>
+                                <small>Permet de faire des requêtes sur les données Sudoc via les web services de l'Abes dans une interface graphique.</small></p>
+                                <p><strong>Installation</strong>
+                                 <small>
+                                        <ul>
+                                            <li>Télécharger la dernière version <a href="https://github.com/abes-esr/sudoc-toolkit/releases" target="_blanck">https://github.com/abes-esr/sudoc-toolkit/releases</a></li>
+                                            <li>Dézipper où vous voulez sur votre PC</li>
+                                            <li>Pour lancer l'application : double-cliquer sur SudocToolkit.exe</li>
+                                            <li>Pour créer un raccourci sur le bureau : clic droit sur SudocToolkit.exe -> envoyer vers Bureau</li>
+                                        </ul>
+                                    </small><br>					
+                                </p>
+                                <p><strong>Code source et documentation</strong></p>
+                                 <p><small><a href="https://github.com/abes-esr/sudoc-toolkit" target="_blanck">https://github.com/abes-esr/sudoc-toolkit</a></small></p>
+                                <p><strong>Billet de blog</strong></p>   
+                                 <p><small><a href="https://punktokomo.abes.fr/2019/10/08/sudoctoolkit-une-application-pour-faciliter-lutilisation-des-web-services-de-labes/" target="_blanck">SudocToolkit, une application pour faciliter l’utilisation des web services de l’Abes</a></small>								
+                                  <i>(PUNKTOKOMO Le blog technique de l'Abes. 8 octobre 2019)</i></small></p>
+                            </div>
+                        </div> 
+                 </div>
+                </div>
+              </div>	
+    </div>
+  </div>
+  </div>
+  <%- include ('../../partials/script') -%>
+</body>
+</html>

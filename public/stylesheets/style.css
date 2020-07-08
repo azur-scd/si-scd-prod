@@ -25,3 +25,16 @@ width: 80%;
 #pieChart * {
     margin: 0 auto;
 }
+/*keshif visu*/
+.demoHeader {
+    display:none;
+}
+.logoHost {
+    display:none;
+}
+.showHelpIn {
+    display:none;
+}
+.datasource  {
+    display:none;
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>    
+  <title>SI-SCD | <%= page %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="./stylesheets/bootstrap/bootstrap.min.css">
+  <!-- Joli Theme CSS -->
+  <link rel="stylesheet" href="./stylesheets/theme-black.css">
+  <!-- Our Custom CSS -->
+  <link rel="stylesheet" href="./stylesheets/style.css">
+    <%- include ('../../partials/head_keshif'); -%>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
+    <%- include ('../../partials/script') -%>
+    <%- include ('../../partials/script_keshif') -%>                                
+</head>
+<body>
+
+  <div class="page-container">
+    <%- include ('../../partials/sidebar') -%>
+      <div class="page-content">
+        <%- include ('../../partials/navbar') -%>
+          <div class="page-content-wrap">
+            <div class="page-title">                    
+              <h2><%= page %></h2>
+            </div>
+          <div class="contents">				                   
+            <div id="demo_Browser" style="max-width: 1500px;"></div>               
+    </div>	
+    </div>
+  </div>
+  </div>
+  <script src="./javascripts/iub/explore.js"></script>
+</body>
+</html>

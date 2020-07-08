@@ -2,6 +2,8 @@ var passport = require("passport");
 const { json } = require("body-parser");
 
 module.exports = function(app) {
+                     /*--------  Home page -------*/
+
   app.get('/', function(req, res, next) {
     res.render('index', {page:'Home', menuId:'home'});
   });
@@ -9,6 +11,8 @@ module.exports = function(app) {
   app.get('/error', function(req, res, next) {
     res.render('error', {page:'Erreur', menuId:'error',message:"erreur"});
   });
+
+                      /*--------  authentification -------*/
 
   app.get('/login', function(req, res, next) {
     res.render('pages/auth/login', {page:'Login', menuId:'login',mess:''});
@@ -58,6 +62,8 @@ app.get('/logout', function(req, res) {
     });
   });  
 
+                               /*--------  Admin pages -------*/
+
 app.get('/admin-docelec-master', isLoggedIn, function(req, res, next) {
     res.render('pages/docelec/master', {page:'Docelec : Configuration', menuId:'master',user: req.user});
   });
@@ -74,10 +80,22 @@ app.get('/admin-docelec-stats', function(req, res, next) {
 app.get('/admin-docelec-dashboardgestion', isLoggedIn,function(req, res, next) {
     res.render('pages/docelec/dashboard_gestion', {page:'Docelec : Dashboard Suivi Gestion', menuId:'dashboard gestion',user: req.user});
   }); 
-
   app.get('/admin-config', isLoggedIn,function(req, res, next) {
     res.render('pages/admin/config', {page:'Admin : Configuration des utilisateurs et des sites', menuId:'admin config',user: req.user});
   });
+
+                                      /*--------  Public pages -------*/
+
+ app.get('/public-iub-explore', function(req, res, next) {
+    res.render('pages/iub/explore', {page:'IUB : Exploration', menuId:'iub explore'});
+});
+app.get('/public-apps-app', function(req, res, next) {
+    res.render('pages/apps/app', {page:'Applications', menuId:'applications'});
+  });
+  app.get('/public-apps-utils', function(req, res, next) {
+    res.render('pages/apps/utils', {page:'Utilitaires en ligne', menuId:'utilitaires'});
+  });
+
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();

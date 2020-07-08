@@ -5,19 +5,10 @@
 </head>
 <body>
   <div class="page-container">
-    <%- include ('../../partials/sidebar') -%>
+    <%- include ('../../partials/sidebar_admin') -%>
     <div class="page-content">
-      <%- include ('../../partials/navbar') -%>
+      <%- include ('../../partials/navbar_admin') -%>
       <div class="page-content-wrap">  
-     <!--<div class="row">
-        <form method="post" action="/login">
-            <label for="username">Nom d'utilisateur</label>
-            <input class="text" name="username" id="username" name="username" type="text" />
-            <label for="password">Mot de passe</label>
-            <input name="password" type="password" id="password" name="password"/>
-            <input class="btn" type="submit" id="submit_login" value="Sign In" />
-            </form>
-        </div>-->
          <% if (mess) { %>
           <p><%= mess %></p>	
           <% } %> 
@@ -58,5 +49,6 @@
 
 </body>
 <%- include ('../../partials/script') -%>
+<%- include ('../../partials/script_admin') -%>
 <!--<script src="/javascripts/auth/login.js"></script>-->
 </html>
