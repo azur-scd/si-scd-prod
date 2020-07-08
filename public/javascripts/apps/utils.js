@@ -4,7 +4,7 @@ $("#submitNumilogIsbn").click(function() {
     $("#resultsNumilog").empty();
     var lines = $('textarea#areaNumilog').val().split('\n');
     for(var i = 0;i < lines.length;i++){   
-      $.getJSON("../../../../php/api/ParseNumilogHtml.php", {"isbn":lines[i].trim()}).then(function(data){
+      $.getJSON(parseNumilogHtml, {"isbn":lines[i].trim()}).then(function(data){
       console.log(data);
       if(data.title) {
          $("#resultsNumilog").append("<tr><td>"+data.isbn+"</td><td><strong>"+data.title+"</strong></td><td>"+data.dispo+"</td></tr>")
