@@ -37,7 +37,7 @@ module.exports = function(app) {
 
 app.get('/logout', function(req, res) {
   req.logout();
-  res.redirect('./login');
+  res.redirect('./');
   });
 
   app.get('/cas_login', 
@@ -58,7 +58,7 @@ app.get('/logout', function(req, res) {
       }
       console.log(user)
       //req.session.messages = '';
-      return res.redirect('./');
+      return res.redirect('./admin/docelec/master');
     });
   });  
 
