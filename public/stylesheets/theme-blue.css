@@ -41,6 +41,7 @@ html * {
 html,
 body {
   /*min-height: 100%;*/
+   /*Ajout GG*/
   height: 100%;
   padding: 0px;
   margin: 0px;
@@ -201,6 +202,8 @@ body {
 .page-container .page-content .page-content-wrap {
   float: left;
   width: 100%;
+   /*Ajout GG*/
+   height: 100%;
 }
 .page-container.page-container-wide .page-content {
   margin-left: 50px;
