@@ -49,7 +49,7 @@ app.get('/logout', function(req, res) {
   
     if (!user) {
       req.session.messages = info.message;
-      return res.redirect('./');
+      return res.redirect('./error');
     }
   
     req.logIn(user, function (err) {

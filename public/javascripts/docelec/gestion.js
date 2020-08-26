@@ -199,7 +199,7 @@ $(function(){
                 },
                 {
                     hint: "Etape suivante : créer Estimé",
-                    icon: "/img/button_estime.png",
+                    icon: "./img/button_estime.png",
                     //text: "Créer Estimé",
                     visible: function(e) {
                         return !e.row.isEditing && !isNextEstime(e.row.data.etat);

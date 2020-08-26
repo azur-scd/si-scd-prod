@@ -32,7 +32,7 @@ passport.use('local-signin',new Strategy(
       }, function(login, done) {
         User.findOne({
             where: {
-                login: login
+                username: login
                    }
            }).then(function (user) {
           if (!user) {
