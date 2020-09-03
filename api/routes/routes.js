@@ -28,19 +28,19 @@ module.exports = function(app) {
     /*----- BUS-----*/
   //get all
   app.route('/api/bus')
-    .get(buController.list) 
-  //get by id  
-   app.route('/api/bus/:buId')
-    .get(buController.findById);
-  //create  
-    app.route('/api/bus/create')
-    .post(buController.create);
-    //update
-    app.route('/api/bus/:buId/update')
-    .put(buController.update); 
-    //delete
-  app.route('/api/bus/:buId/delete')
-   .delete(buController.delete);
+  .get(buController.list) 
+//get by id  
+ app.route('/api/bus/:buId')
+  .get(buController.findById);
+//create  
+  app.route('/api/bus/create')
+  .post(buController.create);
+  //update
+  app.route('/api/bus/:buId/update')
+  .put(buController.update); 
+  //delete
+app.route('/api/bus/:buId/delete')
+ .delete(buController.delete);
 
    /*----- USERS-----*/
   //get all
