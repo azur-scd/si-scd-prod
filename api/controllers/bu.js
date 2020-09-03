@@ -38,11 +38,3 @@ exports.findById = function(req, res) {
         }
       }).then( (result) => res.json(result) )
  };
-/*module.exports = {
-    list(res,req){
-      return Bu.findAll().then(rows => {
-        res.json(rows)
-      })
-   
-    }
-}*/
