@@ -1,5 +1,5 @@
 var binaryState = [{"cle":0,"valeur":"non"},{"cle":1,"valeur":"oui"}]
-var poleState = [{"cle":"SCD","valeur":"STM"},{"cle":"SHS","valeur":"SHS"},{"cle":"STM","valeur":"STM"}]
+var poleState = [{"cle":"SCD","valeur":"SCD"},{"cle":"SHS","valeur":"SHS"},{"cle":"STM","valeur":"STM"}]
 var marcheState = [
                 {"cle":"","valeur":""},
 				{"cle":"GC","valeur":"GC"},
