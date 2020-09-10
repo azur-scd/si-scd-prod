@@ -308,7 +308,7 @@ $(function(){
                 setCellValue: function(newData, value, currentRowData) {
                     newData.montant_initial = value;
                     newData.montant_ht = currentRowData.taux_change * value;
-                    //newData.part_tva1 = currentRowData.taux_change * value;
+                    newData.part_tva1 = currentRowData.taux_change * value;
                 }
             },
             {
@@ -356,7 +356,7 @@ $(function(){
                     newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
                         return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
-                            newData.reliquat = newData.montant_ttc - result[0].montant_ttc
+                            newData.reliquat = result[0].montant_ttc - newData.montant_ttc
                           });
                         }
                     }
@@ -386,7 +386,7 @@ $(function(){
                     newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
                         return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
-                            newData.reliquat = newData.montant_ttc - result[0].montant_ttc
+                            newData.reliquat = result[0].montant_ttc - newData.montant_ttc
                           });
                         }
                 }
@@ -416,7 +416,7 @@ $(function(){
                    newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
                         return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
-                            newData.reliquat = newData.montant_ttc - result[0].montant_ttc
+                            newData.reliquat = result[0].montant_ttc - newData.montant_ttc
                           });
                         }
                 }
@@ -446,7 +446,7 @@ $(function(){
                    newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
                         return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
-                            newData.reliquat = newData.montant_ttc - result[0].montant_ttc
+                            newData.reliquat = result[0].montant_ttc - newData.montant_ttc
                           });
                         }
                 }
@@ -476,7 +476,7 @@ $(function(){
                    newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
                         return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
-                            newData.reliquat = newData.montant_ttc - result[0].montant_ttc
+                            newData.reliquat = result[0].montant_ttc - newData.montant_ttc
                           });
                         }
                 }
@@ -506,7 +506,7 @@ $(function(){
                     newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
                         return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
-                            newData.reliquat = newData.montant_ttc - result[0].montant_ttc
+                            newData.reliquat = result[0].montant_ttc - newData.montant_ttc
                           });
                         }
                 }
@@ -536,7 +536,7 @@ $(function(){
                      newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
                     return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
-                        newData.reliquat = newData.montant_ttc - result[0].montant_ttc
+                        newData.reliquat = result[0].montant_ttc - newData.montant_ttc
                       });
                     }
                 }
@@ -545,6 +545,7 @@ $(function(){
                 dataField: "montant_ttc_avant_recup",
                 caption: "Info : Montant TTC avant récup",
                 dataType: 'number',
+                visible: false,
                 editorOptions: {
                     disabled: true
                 },
@@ -556,6 +557,7 @@ $(function(){
                 dataField: "montant_tva_avant_recup",
                 caption: "Info : Montant TVA avant récup",
                 dataType: 'number',
+                visible: false,
                 editorOptions: {
                     disabled: true
                 },
@@ -567,6 +569,7 @@ $(function(){
                 dataField: "montant_tva_apres_recup",
                 caption: "Info : Montant TVA après récup",
                 dataType: 'number',
+                visible: false,
                 editorOptions: {
                     disabled: true
                 },
