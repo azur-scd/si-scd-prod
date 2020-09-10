@@ -89,6 +89,7 @@ else {q={include: [{
                                               "soutien_oa":row.Bdd.soutien_oa,
                                               "etat":row.etat,
                                               "annee":row.annee,
+                                              "compte_recherche": row.compte_recherche,
                                               "montant_initial":row.montant_initial,
                                               "devise":row.devise,
                                               "taux_change":row.taux_change,

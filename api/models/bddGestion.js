@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         etat: DataTypes.STRING,
         annee: DataTypes.STRING,
+        compte_recherche: DataTypes.INTEGER, 
         montant_initial: DataTypes.FLOAT,
         devise: DataTypes.STRING,
         taux_change: DataTypes.FLOAT,
