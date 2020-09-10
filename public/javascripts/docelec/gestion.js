@@ -128,6 +128,11 @@ $(function(){
             },
             {
                 itemType: "group",
+                caption: "Montants intermédiaires (pour vérification)",
+                items: ["montant_ttc_avant_recup","montant_tva_avant_recup","montant_tva_apres_recup"]
+            },
+            {
+                itemType: "group",
                 caption: "Total",
                 items: ["montant_ttc","reliquat","last_estime"]
             },
@@ -314,7 +319,7 @@ $(function(){
                 setCellValue: function(newData, value, currentRowData) {
                     newData.taux_change = value;
                     newData.montant_ht = currentRowData.montant_initial * value;
-                    //newData.part_tva1 = currentRowData.montant_initial * value;
+                    newData.part_tva1 = currentRowData.montant_initial * value;
                 }
             },
             {
@@ -333,11 +338,21 @@ $(function(){
                 visible: false,
                  setCellValue: function(newData, value, currentRowData) {
                     newData.part_tva1 = value;
-                    var total_montant_tva = (currentRowData.taux_tva1/100 * value)+(currentRowData.taux_tva2/100 * currentRowData.part_tva2)
+                    //calcul montant tva "de base"
+                    var montant_tva = (currentRowData.taux_tva1/100 * value)+(currentRowData.taux_tva2/100 * currentRowData.part_tva2)
+                   //calcul ttc intermédiaire
                     var ttc_horsrecup_horsgestion = (value + (currentRowData.taux_tva1/100 * value)) + 
                                          (currentRowData.part_tva2+(currentRowData.taux_tva2/100 * currentRowData.part_tva2));
-                    var total_frais_gestion = currentRowData.montant_frais_gestion + (currentRowData.montant_frais_gestion * currentRowData.taux_tva_frais_gestion/100)                     
-                    var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
+                    var total_frais_gestion = currentRowData.montant_frais_gestion + (currentRowData.montant_frais_gestion * currentRowData.taux_tva_frais_gestion/100) 
+                    //imputation ttc avec all tva mais avant récup
+                    newData.montant_ttc_avant_recup = ttc_horsrecup_horsgestion + total_frais_gestion
+                    //calcul et imputation montants tva avant récup
+                    var total_montant_tva = montant_tva + (currentRowData.montant_frais_gestion * currentRowData.taux_tva_frais_gestion/100)  
+                    newData.montant_tva_avant_recup = total_montant_tva 
+                    //calcul et imputation montants tva apres récup                
+                    var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100  
+                    newData.montant_tva_apres_recup = total_montant_tva - montant_recup
+                    //ttc final
                     newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
                         return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
@@ -353,11 +368,21 @@ $(function(){
                 visible: false,
                 setCellValue: function(newData, value, currentRowData) {
                     newData.taux_tva1 = value;
-                    var total_montant_tva = (value/100 * currentRowData.part_tva1)+(currentRowData.taux_tva2/100 * currentRowData.part_tva2)
+                     //calcul montant tva "de base"
+                    var montant_tva = (value/100 * currentRowData.part_tva1)+(currentRowData.taux_tva2/100 * currentRowData.part_tva2)
+                    //calcul ttc intermédiaire
                     var ttc_horsrecup_horsgestion = (currentRowData.part_tva1 + (value/100 * currentRowData.part_tva1)) + 
                                          (currentRowData.part_tva2+(currentRowData.taux_tva2/100 * currentRowData.part_tva2));
                     var total_frais_gestion = currentRowData.montant_frais_gestion + (currentRowData.montant_frais_gestion * currentRowData.taux_tva_frais_gestion/100)                     
-                    var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
+                    //imputation ttc avec all tva mais avant récup
+                    newData.montant_ttc_avant_recup = ttc_horsrecup_horsgestion + total_frais_gestion
+                     //calcul et imputation montants tva avant récup
+                    var total_montant_tva = montant_tva + (currentRowData.montant_frais_gestion * currentRowData.taux_tva_frais_gestion/100)  
+                    newData.montant_tva_avant_recup = total_montant_tva 
+                    //calcul et imputation montants tva apres récup 
+                    var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100  
+                    newData.montant_tva_apres_recup = total_montant_tva - montant_recup
+                    //ttc final                   
                     newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
                         return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
@@ -373,12 +398,22 @@ $(function(){
                 visible: false,
                 setCellValue: function(newData, value, currentRowData) {
                     newData.part_tva2 = value;
-                    var total_montant_tva = (currentRowData.taux_tva2/100 * value)+(currentRowData.taux_tva1/100 * currentRowData.part_tva1)
+                     //calcul montant tva "de base"
+                    var montant_tva = (currentRowData.taux_tva2/100 * value)+(currentRowData.taux_tva1/100 * currentRowData.part_tva1)
+                   //calcul ttc intermédiaire
                     var ttc_horsrecup_horsgestion = (value + (currentRowData.taux_tva2/100 * value)) + 
                                          (currentRowData.part_tva1+(currentRowData.taux_tva1/100 * currentRowData.part_tva1));
                     var total_frais_gestion = currentRowData.montant_frais_gestion + (currentRowData.montant_frais_gestion * currentRowData.taux_tva_frais_gestion/100)                     
-                    var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
-                    newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
+                    //imputation ttc avec all tva mais avant récup
+                    newData.montant_ttc_avant_recup = ttc_horsrecup_horsgestion + total_frais_gestion
+                   //calcul et imputation montants tva avant récup
+                   var total_montant_tva = montant_tva + (currentRowData.montant_frais_gestion * currentRowData.taux_tva_frais_gestion/100)  
+                   newData.montant_tva_avant_recup = total_montant_tva 
+                   //calcul et imputation montants tva apres récup 
+                   var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100  
+                   newData.montant_tva_apres_recup = total_montant_tva - montant_recup
+                   //ttc final                   
+                   newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
                         return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
                             newData.reliquat = newData.montant_ttc - result[0].montant_ttc
@@ -393,12 +428,22 @@ $(function(){
                 visible: false,
                 setCellValue: function(newData, value, currentRowData) {
                     newData.taux_tva2 = value;
-                    var total_montant_tva = (value/100 * currentRowData.part_tva2)+(currentRowData.taux_tva1/100 * currentRowData.part_tva1)
+                     //calcul montant tva "de base"
+                    var montant_tva = (value/100 * currentRowData.part_tva2)+(currentRowData.taux_tva1/100 * currentRowData.part_tva1)
+                     //calcul ttc intermédiaire
                     var ttc_horsrecup_horsgestion = (currentRowData.part_tva2 + (value/100 * currentRowData.part_tva2)) + 
                                          (currentRowData.part_tva1+(currentRowData.taux_tva1/100 * currentRowData.part_tva1));
                     var total_frais_gestion = currentRowData.montant_frais_gestion + (currentRowData.montant_frais_gestion * currentRowData.taux_tva_frais_gestion/100)                     
-                    var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
-                    newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
+                   //imputation ttc avec all tva mais avant récup
+                   newData.montant_ttc_avant_recup = ttc_horsrecup_horsgestion + total_frais_gestion
+                   //calcul et imputation montants tva avant récup
+                   var total_montant_tva = montant_tva + (currentRowData.montant_frais_gestion * currentRowData.taux_tva_frais_gestion/100)  
+                   newData.montant_tva_avant_recup = total_montant_tva 
+                   //calcul et imputation montants tva apres récup 
+                   var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100  
+                   newData.montant_tva_apres_recup = total_montant_tva - montant_recup
+                   //ttc final                   
+                   newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
                         return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
                             newData.reliquat = newData.montant_ttc - result[0].montant_ttc
@@ -413,13 +458,22 @@ $(function(){
                 visible: false,
                 setCellValue: function(newData, value, currentRowData) {
                     newData.montant_frais_gestion = value;
-                    var total_montant_tva = (currentRowData.taux_tva2/100 * currentRowData.part_tva2)+(currentRowData.taux_tva1/100 * currentRowData.part_tva1)
+                    //calcul montant tva "de base"
+                    var montant_tva = (currentRowData.taux_tva2/100 * currentRowData.part_tva2)+(currentRowData.taux_tva1/100 * currentRowData.part_tva1)
+                    //calcul ttc intermédiaire
                     var ttc_horsrecup_horsgestion = (currentRowData.part_tva2 + (currentRowData.taux_tva2/100 * currentRowData.part_tva2)) + 
                                          (currentRowData.part_tva1+(currentRowData.taux_tva1/100 * currentRowData.part_tva1));
                     var total_frais_gestion = value + (value * currentRowData.taux_tva_frais_gestion/100)                                         
-                    console.log(total_frais_gestion)
-                    var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
-                    newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
+                   //imputation ttc avec all tva mais avant récup
+                   newData.montant_ttc_avant_recup = ttc_horsrecup_horsgestion + total_frais_gestion
+                   //calcul et imputation montants tva avant récup
+                   var total_montant_tva = montant_tva + (value * currentRowData.taux_tva_frais_gestion/100)  
+                   newData.montant_tva_avant_recup = total_montant_tva 
+                   //calcul et imputation montants tva apres récup 
+                   var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100  
+                   newData.montant_tva_apres_recup = total_montant_tva - montant_recup
+                   //ttc final                   
+                   newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
                         return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
                             newData.reliquat = newData.montant_ttc - result[0].montant_ttc
@@ -434,12 +488,21 @@ $(function(){
                 visible: false,
                 setCellValue: function(newData, value, currentRowData) {
                     newData.taux_tva_frais_gestion = value;
-                    var total_montant_tva = (currentRowData.taux_tva2/100 * currentRowData.part_tva2)+(currentRowData.taux_tva1/100 * currentRowData.part_tva1)
+                     //calcul montant tva "de base"
+                    var montant_tva = (currentRowData.taux_tva2/100 * currentRowData.part_tva2)+(currentRowData.taux_tva1/100 * currentRowData.part_tva1)
+                     //calcul ttc intermédiaire
                     var ttc_horsrecup_horsgestion = (currentRowData.part_tva2 + (currentRowData.taux_tva2/100 * currentRowData.part_tva2)) + 
                                          (currentRowData.part_tva1+(currentRowData.taux_tva1/100 * currentRowData.part_tva1));
                     var total_frais_gestion = currentRowData.montant_frais_gestion + (currentRowData.montant_frais_gestion * value/100)                                        
-                    console.log(total_frais_gestion)
-                    var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100                     
+                    //imputation ttc avec all tva mais avant récup
+                    newData.montant_ttc_avant_recup = ttc_horsrecup_horsgestion + total_frais_gestion
+                    //calcul et imputation montants tva avant récup
+                    var total_montant_tva = montant_tva + (currentRowData.montant_frais_gestion * value/100)  
+                    newData.montant_tva_avant_recup = total_montant_tva 
+                    //calcul et imputation montants tva apres récup 
+                    var montant_recup = total_montant_tva*currentRowData.taux_recup_tva/100  
+                    newData.montant_tva_apres_recup = total_montant_tva - montant_recup
+                    //ttc final                   
                     newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
                         return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
@@ -455,17 +518,60 @@ $(function(){
                 visible: false,
                 setCellValue: function(newData, value, currentRowData) {
                     newData.taux_recup_tva = value;
-                    var total_montant_tva = (currentRowData.taux_tva2/100 * currentRowData.part_tva2)+(currentRowData.taux_tva1/100 * currentRowData.part_tva1)
+                     //calcul montant tva "de base"
+                    var montant_tva = (currentRowData.taux_tva2/100 * currentRowData.part_tva2)+(currentRowData.taux_tva1/100 * currentRowData.part_tva1)
+                    //calcul ttc intermédiaire
                     var ttc_horsrecup_horsgestion = (currentRowData.part_tva2 + (currentRowData.taux_tva2/100 * currentRowData.part_tva2)) + 
                                          (currentRowData.part_tva1+(currentRowData.taux_tva1/100 * currentRowData.part_tva1));
                     var total_frais_gestion = currentRowData.montant_frais_gestion + (currentRowData.montant_frais_gestion * currentRowData.taux_tva_frais_gestion/100)                                         
-                    var montant_recup = total_montant_tva*value/100                     
-                    newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
+                     //imputation ttc avec all tva mais avant récup
+                     newData.montant_ttc_avant_recup = ttc_horsrecup_horsgestion + total_frais_gestion
+                     //calcul et imputation montants tva avant récup
+                     var total_montant_tva = montant_tva + (currentRowData.montant_frais_gestion * value/100)  
+                     newData.montant_tva_avant_recup = total_montant_tva 
+                     //calcul et imputation montants tva apres récup 
+                     var montant_recup = total_montant_tva*value/100  
+                     newData.montant_tva_apres_recup = total_montant_tva - montant_recup
+                     //ttc final                   
+                     newData.montant_ttc = ttc_horsrecup_horsgestion + total_frais_gestion - montant_recup 
                     if(currentRowData.etat == "4-facture"  || currentRowData.etat == "3-estime"){  
                     return getItems(urlGestion+'/?bdd_id='+currentRowData.bdd_id+'&annee='+currentRowData.annee+'&etat=2-budgete').done(function(result) {
                         newData.reliquat = newData.montant_ttc - result[0].montant_ttc
                       });
                     }
+                }
+            },
+            {
+                dataField: "montant_ttc_avant_recup",
+                caption: "Info : Montant TTC avant récup",
+                dataType: 'number',
+                editorOptions: {
+                    disabled: true
+                },
+                setCellValue: function(currentRowData,newData, value) {      
+                    this.defaultSetCellValue(newData, value);                 
+                }
+            },
+            {
+                dataField: "montant_tva_avant_recup",
+                caption: "Info : Montant TVA avant récup",
+                dataType: 'number',
+                editorOptions: {
+                    disabled: true
+                },
+                setCellValue: function(currentRowData,newData, value) {      
+                    this.defaultSetCellValue(newData, value);                 
+                }
+            },
+            {
+                dataField: "montant_tva_apres_recup",
+                caption: "Info : Montant TVA après récup",
+                dataType: 'number',
+                editorOptions: {
+                    disabled: true
+                },
+                setCellValue: function(currentRowData,newData, value) {      
+                    this.defaultSetCellValue(newData, value);                 
                 }
             },
             {
