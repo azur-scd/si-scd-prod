@@ -83,6 +83,9 @@ app.get('/admin-docelec-dashboardgestion', isLoggedIn,function(req, res, next) {
   app.get('/admin-config', isLoggedIn,function(req, res, next) {
     res.render('pages/admin/config', {page:'Admin : Configuration des utilisateurs et des sites', menuId:'admin config',user: req.user});
   });
+  app.get('/admin-disc', isLoggedIn,function(req, res, next) {
+    res.render('pages/admin/disc', {page:'Admin : Référentiel des disciplines', menuId:'admin disc',user: req.user});
+  });
 
                                       /*--------  Public pages -------*/
 

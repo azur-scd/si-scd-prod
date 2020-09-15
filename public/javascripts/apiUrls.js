@@ -8,3 +8,4 @@ var urlStatsReports = "./api/stats_reports"
 
 var urlUser = "./api/users"
 var urlBU = "./api/bus"
+var urlDisc = "./api/discs"

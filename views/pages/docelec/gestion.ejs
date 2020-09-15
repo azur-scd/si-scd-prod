@@ -25,22 +25,45 @@
         <% } else {%> 
       <div class="row">
         <!-- start panel info -->
-         <div class="col-md-3 panel-group accordion accordion-dc">
-                               <div class="panel panel-info">
-                                   <div class="panel-heading">
-                                       <h4 class="panel-title">
-                                           <a href="#panelTextInfo">
-                                               Consignes de saisie (cliquer pour déplier)
-                                           </a>
-                                       </h4>
-                                   </div>                                
-                                   <div class="panel-body" id="panelTextInfo">
-                                       <ul>
-                                       <li><strong>[En cours]</strong> : ...</li>
-                                   </ul>
-                                   </div>                                
-                               </div>
+        <div class="col-md-3 panel-group accordion accordion-dc">
+          <div class="panel panel-info">
+              <div class="panel-heading">
+                  <h4 class="panel-title">
+                      <a href="#panelTextInfo">
+                          Générer budget prévisionnel N+1
+                      </a>
+                  </h4>
+              </div>                                
+              <div class="panel-body" id="panelTextInfo">
+               <div class="col-md-3">
+                 <h4>Appliquer un % d'augmentation de</h4>
+                 <div class="col-md-6">
+                   <input type="text" class="form-control" id="prevRate"/>
                  </div>
+               </div>
+                <div class="col-md-5">
+                 <h4>Appliqué à </h4>     
+               <div class="form-group">
+                 <div class="col-md-4">                                    
+                     <label class="check"><input type="radio" class="iradio" name="prevBaseField" value="ht_devise" disabled/> Prix HT en devises</label>
+                 </div>
+                 <div class="col-md-4">                                    
+                     <label class="check"><input type="radio" class="iradio" name="prevBaseField" value="ht_euro" checked="checked"/> Prix HT en Euros</label>
+                 </div>
+             </div>
+             </div>
+             <div class="col-md-2">
+               <h4>De l'année</h4>
+               <div class="col-md-6">
+                 <input type="text" class="form-control" id="refYear"/>
+               </div>
+             </div>
+             <div class="col-md-2">
+               <button class="btn btn-success pull-left" id="submitPrev"> Valider</button>	
+             </div>
+              </div>                               
+          </div>
+</div>
           <!-- end panel info -->
         </div>
         <div class="row">

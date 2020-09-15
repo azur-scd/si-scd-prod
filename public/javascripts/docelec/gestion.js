@@ -677,9 +677,34 @@ onCellPrepared: function(e) {
     } 
     }).dxDataGrid("instance");
 
-   /*if(!$('.dx-form').length) {
-      alert('not opened');
-   }*/
-
-
+//create prev N+1
+ $("#submitPrev").click(function(){
+    createNewPrev($("#prevRate").val(),$("#refYear").val(),$("input[name='prevBaseField']:checked").val())
+})
+function createNewPrev(rate,year){
+    //console.log(rate + ":" + field + ":" + $("#selectbox").dxSelectBox('instance').option('value'))
+     getItems(urlGestion+"?annee="+$("#selectbox").dxSelectBox('instance').option('value')+"&etat=4-facture")
+        .done(function(results) {
+            results.map(function(d) {
+                var obj = {
+                    "bdd_id":d.bdd_id,
+                    "etat": "1-prev",
+                    "annee": parseInt(year) + 1,
+                    "compte_recherche": 0,
+                    "montant_initial" : d.montant_initial + (d.montant_initial*rate/100),
+                    "devise": d.devise,
+                    "taux_change": d.taux_change,
+                    "montant_ht": d.montant_ht + (d.montant_ht*rate/100),
+                    "part_tva1": d.part_tva1 + (d.part_tva1*rate/100),
+                    "taux_tva1": d.taux_tva1,
+                    "part_tva2": d.part_tva2 + (d.part_tva2*rate/100),
+                    "taux_tva2": d.taux_tva2,
+                    "taux_recup_tva": d.taux_recup_tva,
+                    "taux_tva_frais_gestion": d.taux_tva_frais_gestion,
+                    "montant_frais_gestion": d.montant_frais_gestion,
+                    "montant_ttc": d.montant_ttc + (d.montant_ttc*rate/100),
+                }               
+                return createItems(urlGestion,obj)})
+        })
+}
 })
