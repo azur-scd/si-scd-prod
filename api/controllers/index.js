@@ -6,6 +6,7 @@ const bddGestion = require("./bddGestion");
 const bddStat = require("./bddStat");
 const gc = require("./gc");
 const statReport = require("./statReport");
+const disc = require("./disc");
 module.exports = {bu,
                   user,
                   bdd,
@@ -13,4 +14,5 @@ module.exports = {bu,
                   bddGestion,
                   bddStat,
                   gc,
-                  statReport};
+                  statReport,
+                  disc};

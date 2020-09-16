@@ -62,6 +62,23 @@ app.route('/api/users/login')
 app.route('/api/users/:userId/delete')
  .delete(userController.delete); 
 
+ /*----- DISCIPLINES-----*/
+  //get all
+  app.route('/api/discs')
+  .get(discController.list) 
+//get by id  
+ app.route('/api/discs/:discId')
+  .get(discController.findById);
+//create
+  app.route('/api/discs/create')
+  .post(discController.create);
+  //update
+  app.route('/api/discs/:discId/update')
+  .put(discController.update); 
+  //delete
+app.route('/api/discs/:discId/delete')
+ .delete(discController.delete); 
+
     /*----- BDDS-----*/
   //get all
   app.route('/api/bdds')

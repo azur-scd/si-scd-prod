@@ -656,7 +656,7 @@ summary: {
                     }
                     if (options.summaryProcess === "calculate") {
                         if (options.component.isRowSelected(options.value.id)) {
-                            options.totalValue = options.totalValue + options.value.montant_ttc;
+                            options.totalValue = options.totalValue + options.value.montant_ht;
                         }
                     }
                 }

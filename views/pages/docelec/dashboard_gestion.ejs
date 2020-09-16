@@ -15,7 +15,7 @@
           <h2><%= page %></h2>	
           <span class="label label-info label-form pull-right">Utilisateur <strong><%= user.username %></strong> (connecté en <strong><%= user.groupe %>)</strong></span>       														
       </div>  
-      <% if (user.groupe != 'docelec') { %>
+      <% if (user.groupe != 'docelec' || user.groupe != 'admin') { %>
         <div class="row">
           <div class="alert alert-danger text-center" role="alert">
               <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
@@ -65,6 +65,7 @@
                   <ul class="nav nav-tabs" role="tablist">
                       <li class="active"><a href="#tab-general" role="tab" data-toggle="tab">Général</a></li>
                       <li><a href="#tab-reliquat" role="tab" data-toggle="tab">Reliquat</a></li>
+                      <li><a href="#tab-disc" role="tab" data-toggle="tab">Par discipline</a></li>
                       <li><a href="#tab-oa" role="tab" data-toggle="tab">OA</a></li>
                       <li><a href="#tab-uca" role="tab" data-toggle="tab">Extension périmètre</a></li>
                   </ul>                            
@@ -122,6 +123,11 @@
                           <div class="col-md-6" id="reliquatRotatedBarSTM"></div>
                           <div class="col-md-6" id="reliquatRotatedBarSHS"></div>
                           </div>                 
+                      </div>
+                      <div class="tab-pane" id="tab-disc">
+                        <div class="row">
+                          <p>Vestibulum cursus augue sed leo tempor, at aliquam orci dictum. Sed mattis metus id velit aliquet, et interdum nulla porta. Etiam euismod pellentesque purus, in fermentum eros venenatis ut. Praesent vitae nibh ac augue gravida lacinia non a ipsum. Aenean vestibulum eu turpis eu posuere. Sed eget lacus lacinia, mollis urna et, interdum dui. Donec sed diam ut metus imperdiet malesuada. Maecenas tincidunt ultricies ipsum, lobortis pretium dolor sodales ut. Donec nec fringilla nulla. In mattis sapien lorem, nec tincidunt elit scelerisque tempus.</p>
+                      </div>
                       </div>
                       <div class="tab-pane" id="tab-oa">
                         <div class="row">

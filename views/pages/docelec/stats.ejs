@@ -15,7 +15,7 @@
           <h2><%= page %></h2>	
           <span class="label label-info label-form pull-right">Utilisateur <strong><%= user.username %></strong> (connecté en <strong><%= user.groupe %>)</strong></span>       														
       </div>  
-      <%- include ('../../partials/navbar_admin') -%>
+      <%- include ('../../partials/navbar_admin' || user.groupe != 'admin') -%>
       <div class="page-content-wrap">
         <div class="page-title">
           <h2><%= page %></h2>
