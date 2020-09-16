@@ -37,6 +37,17 @@ function getRotatedBar(div,store,argument,valueField1,nameField1,valueField2,nam
             verticalAlignment: "bottom",
             horizontalAlignment: "center",
             margin: { left: 50 }
+        },
+		onPointClick: function(e) {
+            e.target.select();
+        },
+        onLegendClick: function(e) {
+            var series = e.target;
+            if(series.isVisible()) { 
+                series.hide();
+            } else {
+                series.show();
+            }
         }
     });
 }

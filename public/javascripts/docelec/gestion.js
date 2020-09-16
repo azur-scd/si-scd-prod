@@ -35,6 +35,7 @@ $(function(){
         valueExpr: "cle",
         displayExpr: "valeur",
         onValueChanged: function(data) {
+            dataGrid.clearFilter();
             dataGrid.filter(["annee", "=", data.value]);
         }
     });
@@ -47,6 +48,7 @@ $(function(){
         columnHidingEnabled: true,
         focusedRowEnabled: true,
         allowColumnReordering: true,
+		filterValue: ["annee", "=", $("#selectbox").dxSelectBox('instance').option('value')],
         selection: {
             mode: "multiple"
         },

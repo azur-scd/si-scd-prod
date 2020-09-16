@@ -31,6 +31,17 @@ function getPie(div,store,argument,value,titleString){
                     return arg.argumentText + " : " + arg.valueText + " (" + arg.percentText + ")";
                 }
             }
-        }]
+        }],
+		onPointClick: function(e) {
+            e.target.select();
+        },
+        onLegendClick: function(e) {
+            var series = e.target;
+            if(series.isVisible()) { 
+                series.hide();
+            } else {
+                series.show();
+            }
+        }
     });
 }

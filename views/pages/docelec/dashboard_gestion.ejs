@@ -23,26 +23,6 @@
           </div>
           </div>	
         <% } else {%> 
-        <!-- start panel info -->
-      <div class="row">
-         <div class="col-md-3 panel-group accordion accordion-dc">
-                               <div class="panel panel-info">
-                                   <div class="panel-heading">
-                                       <h4 class="panel-title">
-                                           <a href="#panelTextInfo">
-                                               Mode d'emploi (cliquer pour déplier)
-                                           </a>
-                                       </h4>
-                                   </div>                                
-                                   <div class="panel-body" id="panelTextInfo">
-                                       <ul>
-                                       <li><strong>[En cours]</strong> : ...</li>
-                                   </ul>
-                                   </div>                                
-                               </div>
-                 </div>
-        </div>
-         <!-- end panel info -->
           <!-- start date select -->
         <div class="row">
           <div class="col-md-4">
@@ -55,7 +35,17 @@
           </div>
             </div>
           </div>
-          <div class="col-md-8" id="noData">
+          <div class="col-md-4">
+            <div class="dx-fieldset">
+              <div class="dx-field">
+                  <div class="dx-field-label">Choisir</div>
+                  <div class="dx-field-value">
+            <div id="selectStep"></div>
+          </div>
+          </div>
+            </div>
+          </div>
+          <div class="col-md-4" id="noData">
           </div>
         </div>
          <!-- end date select -->

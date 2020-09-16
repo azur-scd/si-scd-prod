@@ -33,8 +33,16 @@ function getGroupedBar(div,store,argument,series,titleString){
                 };
             }
         },
-        onPointClick: function (e) {
+        onPointClick: function(e) {
             e.target.select();
+        },
+        onLegendClick: function(e) {
+            var series = e.target;
+            if(series.isVisible()) { 
+                series.hide();
+            } else {
+                series.show();
+            }
         }
     });
 }
