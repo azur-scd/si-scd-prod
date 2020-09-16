@@ -15,7 +15,7 @@
           <h2><%= page %></h2>	
           <span class="label label-info label-form pull-right">Utilisateur <strong><%= user.username %></strong> (connecté en <strong><%= user.groupe %>)</strong></span>       														
       </div> 
-      <% if (user.groupe != 'docelec' || user.groupe != 'admin') { %>
+      <% if (user.groupe != 'docelec' && user.groupe != 'admin') { %>
         <div class="row">
           <div class="alert alert-danger text-center" role="alert">
               <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>

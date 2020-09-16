@@ -6,6 +6,7 @@ const bddSignalementController = require("../controllers").bddSignalement;
 const bddGestionController = require("../controllers").bddGestion;
 const bddStatController = require("../controllers").bddStat;
 const gcController = require("../controllers").gc;
+const discController = require("../controllers").disc;
 
 /*IMPORTANT : penser à déclarer les exports de controller dans controllers/index.js */
 
