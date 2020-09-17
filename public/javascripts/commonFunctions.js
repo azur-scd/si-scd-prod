@@ -72,6 +72,10 @@ function groupBy(data,groupKey){
 }
 
 function budgetSuiviSumAndCount(data){
+	 var prevInitial = data.reduce(
+    (acc, v) => acc+ v["1-prev"]
+    , 0
+    );
     var budgeteInitial = data.reduce(
         (acc, v) => acc+ v["2-budgete"]
         , 0
@@ -80,6 +84,15 @@ function budgetSuiviSumAndCount(data){
     var totalReliquat = data.reduce(
         (acc, v) => acc+ v["reliquat"]
         , 0
+    );
+	
+	 var prevOnly = data.filter(function(d){
+      return d["1-prev"] && !d["2-budgete"] && !d["3-estime"] && !d["4-facture"]
+    })
+    var prevOnlyCount = prevOnly.length
+    var prevOnlySum = prevOnly.reduce(
+      (acc, v) => acc+ v["1-prev"]
+      , 0
     );
   
     var budgeteOnly = data.filter(function(d){
@@ -120,6 +133,7 @@ function budgetSuiviSumAndCount(data){
     , 0
   );
   return {budgeteInitial, totalReliquat,
+          prevInitial,prevOnlySum,prevOnlyCount,
           budgeteOnlySum,budgeteOnlyCount, budgeteOnlyReliquat,
           estimeOnlySum,estimeOnlyCount, estimeOnlyReliquat,
           factureOnlySum,factureOnlyCount, factureOnlyReliquat}
