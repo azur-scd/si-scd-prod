@@ -28,6 +28,9 @@ $(function(){
     var isNextEstime2Facture = function(etat) {
         return etat && ["1-prev", "4-facture","2-budgete"].indexOf(etat.trim()) >= 0;
        };
+	 var isNextPrev = function(etat) {
+        return etat && ["1-prev", "2-budgete","3-estime"].indexOf(etat.trim()) >= 0;
+       };   
 
        $("#selectbox").dxSelectBox({
         dataSource: years,
@@ -199,8 +202,8 @@ $(function(){
                 width: 250,
                 buttons: [{
                     hint: "Etape suivante : créer Budgété",
-                    icon: "./img/button_budgete.png",
-                    //text: "Créer Budgété",
+                    //icon: "./img/button_budgete.png",
+                    text: "Créer Budgété",
                     visible: function(e) {
                         return !e.row.isEditing && !isNextBudgete(e.row.data.etat);
                     },
@@ -214,8 +217,8 @@ $(function(){
                 },
                 {
                     hint: "Etape suivante : créer Estimé",
-                    icon: "./img/button_estime.png",
-                    //text: "Créer Estimé",
+                    //icon: "./img/button_estime.png",
+                    text: "Créer Estimé",
                     visible: function(e) {
                         return !e.row.isEditing && !isNextEstime(e.row.data.etat);
                     },
@@ -229,8 +232,8 @@ $(function(){
                 },
                 {
                     hint: "Etape suivante : créer Facturé",
-                    icon: "./img/button_facture.png",
-                    //text: "Créer Facturé",
+                    //icon: "./img/button_facture.png",
+                    text: "Créer Facturé",
                     visible: function(e) {
                         return !e.row.isEditing && !isNextFacture(e.row.data.etat);
                     },
@@ -244,8 +247,8 @@ $(function(){
                 },
                 {
                     hint: "Etape suivante : créer Facturé",
-                    icon: "./img/button_facture.png",
-                    //text: "Créer Facturé",
+                    //icon: "./img/button_facture.png",
+                    text: "Créer Facturé",
                     visible: function(e) {
                         return !e.row.isEditing && !isNextEstime2Facture(e.row.data.etat);
                     },
@@ -257,7 +260,30 @@ $(function(){
                         deleteItems(urlGestion,e.row.data.id)
                         e.component.refresh(true);
                     }
-                }
+                },
+				  {
+                    hint: "Etape suivante : créer Prévisionnel N+1",
+                    //icon: "/img/button_estime.png",
+                    text: "Créer Prévisionnel +"+$("#prevRate").val()+"%",
+                    visible: function(e) {
+                        return !e.row.isEditing && !isNextPrev(e.row.data.etat);
+                    },
+                    onClick: function(e) {
+                        var rate = $("#prevRate").val()
+                        var clonedItem =  $.extend({}, e.row.data, {etat: "1-prev"},{id:""},
+                                                                   {"annee": parseInt(e.row.data.annee) + 1},
+                                                                   {"montant_initial": e.row.data.montant_initial + (e.row.data.montant_initial*rate/100)},
+                                                                   {"montant_ht": e.row.data.montant_ht + (e.row.data.montant_ht*rate/100)},
+                                                                   {"part_tva1": e.row.data.part_tva1 + (e.row.data.part_tva1*rate/100)},
+                                                                   {"part_tva2": e.row.data.part_tva2 + (e.row.data.part_tva2*rate/100)},
+                                                                   {"montant_ttc": e.row.data.montant_ttc + (e.row.data.montant_ttc*rate/100)},
+                                                                   {"reliquat": 0});
+                        var filtered = _.pick(clonedItem, function (v) { return v !== '' && v !== null; });
+                        console.log(filtered)
+                        createItems(urlGestion,filtered)
+                        e.component.refresh(true);
+                    }
+                },
                ]
             },
             {
