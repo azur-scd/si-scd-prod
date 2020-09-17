@@ -52,7 +52,9 @@ function dataDisplay(year,step) {
       { valueField: "3-estime", name: "Estimé" },
       { valueField: "4-facture", name: "Facturé" }
   ]
-  var seriesP = [{ valueField: "1-prev", name: "Prévisionnel" }]
+  var seriesP = [{ valueField: "1-prev-SCD", name: "Prévisionnel SCD" },
+                 { valueField: "1-prev-STM", name: "Prévisionnel STM" },
+                 { valueField: "1-prev-SHS", name: "Prévisionnel SHS" }]
 
 //data pour visus montants consolidés   
 if (step == "exec") {
@@ -68,8 +70,8 @@ getStackedBar("dxStackedBar"+d.cle,window["storeMontant"+d.cle],"state",seriesB,
 else if (step == "prev") {
 window["storeMontantSCD"] = []  
 window["storeMontantSCD"]   
-  .push({"state":"SCD","1-prev":budgetSuiviSumAndCount(window["dataSCD"]).prevInitial},
-        {"state":"Poles","1-prev":budgetSuiviSumAndCount(window["dataSTM"]).prevOnlySum,"1-prev":budgetSuiviSumAndCount(window["dataSHS"]).prevOnlySum})
+  .push({"state":"SCD","1-prev-SCD":budgetSuiviSumAndCount(window["dataSCD"]).prevInitial},
+        {"state":"Poles","1-prev-STM":budgetSuiviSumAndCount(window["dataSTM"]).prevOnlySum,"1-prev-SHS":budgetSuiviSumAndCount(window["dataSHS"]).prevOnlySum})
 $("#generalSCD").append("<div id='dxStackedBarSCD' style='height: 340px;width: 340px;'></div>")
 getStackedBar("dxStackedBarSCD",window["storeMontantSCD"],"state",seriesP,`Prévisions SCD (montants TTC)`)          
 }
