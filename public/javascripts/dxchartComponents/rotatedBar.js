@@ -21,7 +21,9 @@ function getRotatedBar(div,store,argument,valueField1,nameField1,valueField2,nam
             enabled: true,
             customizeTooltip: function () {
                 return {
-                    text: this.argumentText + " : " + this.valueText
+                    text: this.argumentText + " : " + this.valueText,
+					color: "#050404",
+                    fontColor: "#FEFBFB"
                 };
             }
         },

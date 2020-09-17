@@ -3,7 +3,19 @@ function getStackedBar(div,store,argument,series,titleString){
         dataSource: store,
         commonSeriesSettings: {
             argumentField: argument,
-            type: "stackedBar"
+            type: "stackedBar",
+            "label": {
+                "connector": {
+                    "visible": false,
+                    "width": 0
+                },
+                "font": {
+                    "color": "#000000"
+                },
+                "alignment": "center",
+                "rotationAngle": 0,
+                "visible": true
+            }
         },
         series: series,
         legend: {
