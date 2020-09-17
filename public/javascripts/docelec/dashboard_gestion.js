@@ -91,7 +91,7 @@ return d.cle != "SCD"
 })
 .map(function(d){
 $("#generalRes"+d.cle).append("<div id='dxGroupedBar"+d.cle+"' style='height: 440px;'></div>")
-getGroupedBar("dxGroupedBar"+d.cle,window["data"+d.cle],"bdd",seriesB,`Détails par ressource ${d.cle}`) 
+getGroupedBar("dxGroupedBar"+d.cle,_.sortBy(window["data"+d.cle], function(o) { return - o["2-budgete"]; }),"bdd",seriesB,`Détails par ressource ${d.cle}`) 
 })
 }
 else if (step == "prev") {
@@ -100,7 +100,7 @@ poleState.filter(function(d){
 })
 .map(function(d){
   $("#generalRes"+d.cle).append("<div id='dxGroupedBar"+d.cle+"' style='height: 440px;'></div>")
-  getGroupedBar("dxGroupedBar"+d.cle,window["data"+d.cle],"bdd",seriesP,`Détails par ressource ${d.cle}`) 
+  getGroupedBar("dxGroupedBar"+d.cle,_.sortBy(window["data"+d.cle], function(o) { return - o["1-prev"]; }),"bdd",seriesP,`Détails par ressource ${d.cle}`) 
 })
 }
 //data pour visus reliquat
