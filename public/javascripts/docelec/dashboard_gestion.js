@@ -68,12 +68,13 @@ getStackedBar("dxStackedBar"+d.cle,window["storeMontant"+d.cle],"state",seriesB,
 })   
 }
 else if (step == "prev") {
-window["storeMontantSCD"] = []  
-window["storeMontantSCD"]   
-  .push({"state":"SCD","1-prev-SCD":budgetSuiviSumAndCount(window["dataSCD"]).prevInitial},
-        {"state":"Poles","1-prev-STM":budgetSuiviSumAndCount(window["dataSTM"]).prevOnlySum,"1-prev-SHS":budgetSuiviSumAndCount(window["dataSHS"]).prevOnlySum})
-$("#generalSCD").append("<div id='dxStackedBarSCD' style='height: 340px;width: 340px;'></div>")
-getStackedBar("dxStackedBarSCD",window["storeMontantSCD"],"state",seriesP,`Prévisions SCD (montants TTC)`)          
+ window["storeMontantSCD"] = []  
+  window["storeMontantSCD"]   
+    .push({"state":"SCD","1-prev-SCD":budgetSuiviSumAndCount(window["dataSCD"]).prevInitial},
+          {"state":"Poles","1-prev-STM":budgetSuiviSumAndCount(window["dataSTM"]).prevOnlySum,"1-prev-SHS":budgetSuiviSumAndCount(window["dataSHS"]).prevOnlySum})
+		  console.log(window["storeMontantSCD"])
+  $("#generalSCD").append("<div id='dxStackedBarSCD' style='height: 340px;width: 340px;'></div>")
+  getStackedBar("dxStackedBarSCD",window["storeMontantSCD"],"state",seriesP,`Prévisions SCD (montants TTC)`)        
 }
 //data pour visus comptage des ressources 
 if (step == "exec") {
