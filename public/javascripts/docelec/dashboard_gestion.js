@@ -52,9 +52,11 @@ function dataDisplay(year,step) {
       { valueField: "3-estime", name: "Estimé" },
       { valueField: "4-facture", name: "Facturé" }
   ]
-  var seriesP = [{ valueField: "1-prev-SCD", name: "Prévisionnel SCD" },
+  var seriesP1 = [{ valueField: "1-prev-SCD", name: "Prévisionnel SCD" },
                  { valueField: "1-prev-STM", name: "Prévisionnel STM" },
                  { valueField: "1-prev-SHS", name: "Prévisionnel SHS" }]
+				 
+  var seriesP2 = [{ valueField: "1-prev", name: "Prévisionnel" }]			 
 
 //data pour visus montants consolidés   
 if (step == "exec") {
@@ -74,7 +76,7 @@ else if (step == "prev") {
           {"state":"Poles","1-prev-STM":budgetSuiviSumAndCount(window["dataSTM"]).prevOnlySum,"1-prev-SHS":budgetSuiviSumAndCount(window["dataSHS"]).prevOnlySum})
 		  console.log(window["storeMontantSCD"])
   $("#generalSCD").append("<div id='dxStackedBarSCD' style='height: 340px;width: 340px;'></div>")
-  getStackedBar("dxStackedBarSCD",window["storeMontantSCD"],"state",seriesP,`Prévisions SCD (montants TTC)`)        
+  getStackedBar("dxStackedBarSCD",window["storeMontantSCD"],"state",seriesP1,`Prévisions SCD (montants TTC)`)        
 }
 //data pour visus comptage des ressources 
 if (step == "exec") {
@@ -103,7 +105,7 @@ poleState.filter(function(d){
 })
 .map(function(d){
   $("#generalRes"+d.cle).append("<div id='dxGroupedBar"+d.cle+"' style='height: 440px;'></div>")
-  getGroupedBar("dxGroupedBar"+d.cle,_.sortBy(window["data"+d.cle], function(o) { return - o["1-prev"]; }),"bdd",seriesP,`Détails par ressource ${d.cle}`) 
+  getGroupedBar("dxGroupedBar"+d.cle,_.sortBy(window["data"+d.cle], function(o) { return - o["1-prev"]; }),"bdd",seriesP2,`Détails par ressource ${d.cle}`) 
 })
 }
 //data pour visus reliquat

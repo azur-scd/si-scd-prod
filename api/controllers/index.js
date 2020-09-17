@@ -7,6 +7,7 @@ const bddStat = require("./bddStat");
 const gc = require("./gc");
 const statReport = require("./statReport");
 const disc = require("./disc");
+const bddDiscipline = require("./bddDiscipline");
 module.exports = {bu,
                   user,
                   bdd,
@@ -15,4 +16,5 @@ module.exports = {bu,
                   bddStat,
                   gc,
                   statReport,
-                  disc};
+                  disc,
+				  bddDiscipline};

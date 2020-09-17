@@ -7,6 +7,7 @@ const bddGestionController = require("../controllers").bddGestion;
 const bddStatController = require("../controllers").bddStat;
 const gcController = require("../controllers").gc;
 const discController = require("../controllers").disc;
+const bddDisciplineController = require("../controllers").bddDiscipline;
 
 /*IMPORTANT : penser à déclarer les exports de controller dans controllers/index.js */
 
@@ -136,6 +137,29 @@ app.route('/api/gestion/create')
  //delete
  app.route('/api/gestion/:id/delete')
  .delete(bddGestionController.delete);
+ 
+ /*----- BDDS DISCIPLINE-----*/
+ //get all
+app.route('/api/bdd2disc')
+.get(bddDisciplineController.list) 
+//get by id  
+app.route('/api/bdd2disc/:id')
+.get(bddDisciplineController.findById);
+//get by disc id  
+app.route('/api/bdd2disc/discid/:discId')
+.get(bddDisciplineController.findByDiscId);
+//get by bdd id  
+app.route('/api/bdd2disc/bddid/:bddId')
+.get(bddDisciplineController.findByBddId);
+//update
+app.route('/api/bdd2disc/:id/update')
+.put(bddDisciplineController.update);
+//create  
+app.route('/api/bdd2disc/create')
+.post(bddDisciplineController.create);
+ //delete
+ app.route('/api/bdd2disc/:id/delete')
+ .delete(bddDisciplineController.delete);
 
   /*----- GC-----*/
   //get all

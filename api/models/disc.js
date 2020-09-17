@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     );
   
     Disc.associate = (models) => {
-     //not sure Disc.hasMany(models.Bdd,{foreignKey: 'disc_id'});
+     Disc.hasMany(models.BddDiscipline,{foreignKey: 'disc_id'});
     };
   
     return Disc;
