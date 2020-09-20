@@ -342,6 +342,14 @@ $(function(){
     } 
     })
 	
+	$("#autoExpand").dxCheckBox({
+        value: true,
+        text: "Plier/Déplier tout",
+        onValueChanged: function(data) {
+            $("#containerBdd2Disc").dxDataGrid("instance").option("grouping.autoExpandAll", data.value);
+        }
+    });
+	
 	
     $("#containerBdd2Disc").dxDataGrid({
         dataSource: storeBdd2Disc,
@@ -416,11 +424,7 @@ $(function(){
                         key: "id",
                         loadMode: "raw",
                         load: function () {
-                            return getItems(urlBdd).done(function(results){
-                                //console.log(results.filter(function(d){return d.gestion == 1}))
-                                return results.filter(function(d){return d.gestion == 1})
-                            })
-                            //return arr
+                            return getItems(urlBdd + "?gestion=1")
                         },
                     }),
                     valueExpr: "id",

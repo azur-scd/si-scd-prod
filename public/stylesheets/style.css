@@ -25,6 +25,18 @@ width: 80%;
 #pieChart * {
     margin: 0 auto;
 }
+/*dx component charts tooltips*/
+.state-tooltip {
+    height: 90px;
+    background-color:black;
+}
+.state-tooltip .caption {
+    font-weight: 500;
+    color: white;
+    line-height: 40px;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
 /*keshif visu*/
 .demoHeader {
     display:none;

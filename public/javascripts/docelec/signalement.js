@@ -3,7 +3,7 @@ $(function(){
    var store = new DevExpress.data.CustomStore({
         key: "id",
         load: function () {
-           return getItems(urlSignalementCustom)					
+           return getItems(urlSignalement)					
                 },
         update: function(key, values) {
 			console.log(values);
@@ -89,7 +89,7 @@ $(function(){
                 key: "id",
                 loadMode: "raw",
         load: function() {
-            return getItems(urlBdd)
+            return getItems(urlBdd +"?signalement=1")
         }
     })		,
             valueExpr: "id",

@@ -19,12 +19,13 @@ function getRotatedBar(div,store,argument,valueField1,nameField1,valueField2,nam
         }],
         tooltip: {
             enabled: true,
-            customizeTooltip: function () {
-                return {
-                    text: this.argumentText + " : " + this.valueText,
-					color: "#050404",
-                    fontColor: "#FEFBFB"
-                };
+            contentTemplate: function(arg) {
+                return "<div class='state-tooltip'>" +
+                "<div><span class='caption'>Série</span>: " +
+                arg.argumentText +
+                "</div><div><span class='caption'>Valeur</span>: " +
+                arg.valueText +
+                "</div>" + "</div>";
             }
         },
         valueAxis: {

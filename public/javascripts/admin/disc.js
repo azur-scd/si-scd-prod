@@ -78,18 +78,6 @@ $(function(){
         scrolling: {
             mode: "standard"
         },
-        paging: {
-            pageSize: 100
-        },
-        pager: {
-            showPageSizeSelector: true,
-            allowedPageSizes: [10, 20, 50, 100],
-            showInfo: true
-        },
-        "export": {
-            enabled: true,
-            fileName: "disciplines"
-          },
           headerFilter: {
             visible: true
         },

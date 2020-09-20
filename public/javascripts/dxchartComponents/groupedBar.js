@@ -27,10 +27,13 @@ function getGroupedBar(div,store,argument,series,titleString){
         tooltip: {
             enabled: true,
             location: "edge",
-            customizeTooltip: function (arg) {
-                return {
-                    text: arg.argumentText + "/" + arg.seriesName + " : " + arg.valueText
-                };
+            contentTemplate: function(arg) {
+                return "<div class='state-tooltip'>" +
+                "<div><span class='caption'>Série</span>: " +
+                arg.argumentText + "/" + arg.seriesName +
+                "</div><div><span class='caption'>Valeur</span>: " +
+                arg.valueText +
+                "</div>" + "</div>";
             }
         },
         onPointClick: function(e) {

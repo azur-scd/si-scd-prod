@@ -296,7 +296,7 @@ $(function(){
                      key: "id",
                      loadMode: "raw",
                      load: function() {
-                        return getItems(urlBdd)
+                        return getItems(urlBdd + "?gestion=1")
                      }
                  }),
                 valueExpr: "id",

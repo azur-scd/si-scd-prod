@@ -64,17 +64,11 @@ exports.listForGestion = function(req, res) {
   var q;
   if(req.query) {q = {where : req.query, include: [{
     model: Bdd,
-    attributes: ['id', 'bdd', 'pole_gestion','perimetre','soutien_oa'],
-    where: {
-    gestion: 1
-  }
+    attributes: ['id', 'bdd', 'pole_gestion','perimetre','soutien_oa']
 }]}}
 else {q={include: [{
   model: Bdd,
-  attributes: ['id', 'bdd', 'pole_gestion','perimetre','soutien_oa'],
-  where: {
-  gestion: 1
-}
+  attributes: ['id', 'bdd', 'pole_gestion','perimetre','soutien_oa']
 }]}}
     BddGestion.findAll(
       q

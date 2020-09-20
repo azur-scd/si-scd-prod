@@ -3,19 +3,7 @@ function getStackedBar(div,store,argument,series,titleString){
         dataSource: store,
         commonSeriesSettings: {
             argumentField: argument,
-            type: "stackedBar",
-            "label": {
-                "connector": {
-                    "visible": false,
-                    "width": 0
-                },
-                "font": {
-                    "color": "#000000"
-                },
-                "alignment": "center",
-                "rotationAngle": 0,
-                "visible": true
-            }
+            type: "stackedBar"
         },
         series: series,
         legend: {
@@ -42,10 +30,13 @@ function getStackedBar(div,store,argument,series,titleString){
         tooltip: {
             enabled: true,
             location: "edge",
-            customizeTooltip: function (arg) {
-                return {
-                    text: arg.seriesName + " : " + Math.round(arg.valueText).toLocaleString() + " (" + arg.percentText + ")"
-                };
+            contentTemplate: function(arg) {
+                return "<div class='state-tooltip'>" +
+                "<div><span class='caption'>Série</span>: " +
+                arg.seriesName +
+                "</div><div><span class='caption'>Valeur</span>: " +
+                Math.round(arg.valueText).toLocaleString() + " (" + arg.percentText + ")" +
+                "</div>" + "</div>";
             }
         },
 		onPointClick: function(e) {
