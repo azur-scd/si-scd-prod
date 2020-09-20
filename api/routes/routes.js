@@ -148,6 +148,9 @@ app.route('/api/bdd2disc/:id')
 //get by disc id  
 app.route('/api/bdd2disc/discid/:discId')
 .get(bddDisciplineController.findByDiscId);
+//get by disc id + harvest bdd cost by year 
+app.route('/api/bdd2disc/amount/:year')
+.get(bddDisciplineController.findDiscWithBddCost);
 //get by bdd id  
 app.route('/api/bdd2disc/bddid/:bddId')
 .get(bddDisciplineController.findByBddId);
