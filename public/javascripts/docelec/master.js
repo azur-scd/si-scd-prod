@@ -15,6 +15,23 @@ $(function(){
             return deleteItems(urlBdd,key);
         }      
     });
+	
+	 var storeBdd2Disc = new DevExpress.data.CustomStore({
+        key: "id",
+        load: function () {
+            return getItems(urlBdd2Disc)
+        },
+        update: function (key, values) {
+            return updateItems(urlBdd2Disc, key, values);
+        },
+        insert: function (values) {
+            return createItems(urlBdd2Disc, values);
+        },
+        remove: function (key) {
+            return deleteItems(urlBdd2Disc, key);
+        }
+    });
+
 
     var storeGC = new DevExpress.data.CustomStore({
         key: "id",
@@ -324,6 +341,137 @@ $(function(){
         }
     } 
     })
+	
+	
+    $("#containerBdd2Disc").dxDataGrid({
+        dataSource: storeBdd2Disc,
+        editing: {
+            mode: "popup",
+            allowUpdating: true,
+            allowDeleting: true,
+            allowAdding: true,
+            useIcons: true
+        },
+        showBorders: true,
+        columnAutoWidth: true,
+        allowColumnResizing: true,
+        allowColumnReordering: true,
+        paging: {
+            pageSize: 20
+        },
+        pager: {
+            showPageSizeSelector: true,
+            allowedPageSizes: [10, 20, 50, 100, 150],
+            showInfo: true
+        },
+        "export": {
+            enabled: true,
+            fileName: "Bdd_disciplines"
+        },
+        groupPanel: {
+            emptyPanelText: "Drag & Drop colonnes pour effectuer des regroupements",
+            visible: true
+        },
+        headerFilter: {
+            visible: true
+        },
+        filterRow: {
+            visible: true,
+            applyFilter: "auto"
+        },
+        filterPanel: { visible: true },
+        searchPanel: {
+            visible: true
+        },
+        columns: [
+            {
+                type: "buttons",
+                caption: "Editer",
+                buttons: ["edit", "delete", {
+                    hint: "Clone",
+                    icon: "repeat",
+                    onClick: function(e) {
+                        var clonedItem = $.extend({}, e.row.data, { id:""});
+                        createItems(urlBdd2Disc, clonedItem)
+                        e.component.refresh(true);
+                    }
+                }],
+                width: 80
+            },
+            {
+                dataField: "bdd_id",
+                caption: "Ressource",
+                groupIndex: 0,
+                lookup:
+                /*{
+                    dataSource: {
+                        store: storeBdd,
+                        sort: "bdd"
+                    },
+                    valueExpr: "id",
+                    displayExpr: "bdd"
+                }*/
+                {
+                    dataSource: new DevExpress.data.CustomStore({
+                        key: "id",
+                        loadMode: "raw",
+                        load: function () {
+                            return getItems(urlBdd).done(function(results){
+                                //console.log(results.filter(function(d){return d.gestion == 1}))
+                                return results.filter(function(d){return d.gestion == 1})
+                            })
+                            //return arr
+                        },
+                    }),
+                    valueExpr: "id",
+                    displayExpr: "bdd"
+                }
+            },
+            {
+                dataField: "disc_id",
+                caption: "Discipline",
+                lookup:
+                {
+                    dataSource: new DevExpress.data.CustomStore({
+                        key: "id",
+                        loadMode: "raw",
+                        load: function () {
+                            return getItems(urlDisc)
+                        }
+                    }),
+                    valueExpr: "id",
+                    displayExpr: "disc"
+                }
+            }, {
+                dataField: "quotite",
+                caption: "Pourcentage du contenu",
+                dataType: "number",
+                width: 250
+            },
+            {
+                dataField: "commentaire",
+                caption: "Commentaire",
+            },
+            {
+                dataField: "createdAt",
+                caption: "Créé",
+                dataType: "date"
+            },
+            {
+                dataField: "updatedAt",
+                caption: "Mise à jour le",
+                dataType: "date"
+            }
+        ],
+        summary: {
+            groupItems: [{
+                column: "bdd_id",
+                summaryType: "count",
+                displayFormat: "{0} item(s) associé(s)",
+            }]
+        }
+    })
+	
  //function GCEditorTemplate(cellElement, cellInfo) { } : https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/CustomEditors/jQuery/Light/
     $("#gridContainerGC").dxDataGrid({
                 dataSource: storeGC,

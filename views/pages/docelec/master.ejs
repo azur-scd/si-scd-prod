@@ -25,22 +25,6 @@
         <% } else {%> 
       <div class="row">
         <!-- start panel info -->
-         <div class="col-md-3 panel-group accordion accordion-dc">
-                               <div class="panel panel-info">
-                                   <div class="panel-heading">
-                                       <h4 class="panel-title">
-                                           <a href="#panelTextInfo">
-                                               Consignes de saisie (cliquer pour déplier)
-                                           </a>
-                                       </h4>
-                                   </div>                                
-                                   <div class="panel-body" id="panelTextInfo">
-                                       <ul>
-                                       <li><strong>[En cours]</strong> : ...</li>
-                                   </ul>
-                                   </div>                                
-                               </div>
-                 </div>
           <!-- end panel info -->
         </div>
         <div class="row"> 
@@ -48,6 +32,7 @@
            <div class="panel panel-default tabs">                            
                <ul class="nav nav-tabs" role="tablist">
                    <li class="active"><a href="#tab-bdd" role="tab" data-toggle="tab">Ressources</a></li>
+				    <li><a href="#tab-disc" role="tab" data-toggle="tab">Indexation disciplinaire</a></li>
                    <li><a href="#tab-gc" role="tab" data-toggle="tab">Groupements de commandes</a></li>
                    <li><a href="#tab-reports" role="tab" data-toggle="tab">Rapports statistiques</a></li>
                </ul>
@@ -60,6 +45,12 @@
                  </div>
                </div>
                </div>
+			   <div class="tab-pane" id="tab-disc">
+                <div class="row">
+                <h4>Indexation disciplinaire</h4>
+                <div id="containerBdd2Disc"></div>
+              </div>
+              </div>
                <div class="tab-pane" id="tab-gc">
                 <div class="row">
                 <h4>Groupements de commandes</h4>

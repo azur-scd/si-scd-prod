@@ -42,6 +42,9 @@ module.exports = (sequelize, DataTypes) => {
   
     BddGestion.associate = (models) => {
      BddGestion.belongsTo(models.Bdd,{foreignKey: 'bdd_id'});
+	 BddGestion.belongsTo(models.BddDiscipline,
+      {through: "bdds",
+      foreignKey: 'bdd_id'});
     };
   
     return BddGestion;

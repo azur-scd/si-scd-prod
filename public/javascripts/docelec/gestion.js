@@ -607,7 +607,7 @@ $(function(){
             },
             {
                 dataField: "montant_ttc",
-                caption: "Montant TTC",
+                caption: "Montant TTC avec récup",
                 dataType: 'number',
                 width: 150,
                 setCellValue: function(currentRowData,newData, value) {      
