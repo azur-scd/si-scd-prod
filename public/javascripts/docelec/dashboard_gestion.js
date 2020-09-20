@@ -7,8 +7,8 @@ $(function(){
     displayExpr: "valeur",
     value: 2020,
     onValueChanged: function(data) {
-       // return $("#year").val(data.value)
-       return dataDisplay(data.value,$("#selectStep").dxSelectBox('instance').option('value'))
+       return dataDisplay(data.value,$("#selectStep").dxSelectBox('instance').option('value')),
+         treeDiscDisplay(data.value,$("#selectStep").dxSelectBox('instance').option('value'))
     }
 })
 
@@ -19,12 +19,13 @@ $("#selectStep").dxSelectBox({
   displayExpr: "valeur",
   value: "exec",
   onValueChanged: function(data) {
-     // return $("#year").val(data.value)
-     return dataDisplay($("#selectYear").dxSelectBox('instance').option('value'),data.value)
+     return dataDisplay($("#selectYear").dxSelectBox('instance').option('value'),data.value),
+       treeDiscDisplay($("#selectYear").dxSelectBox('instance').option('value'),data.value)
   }
 })
 
 dataDisplay($("#selectYear").dxSelectBox('instance').option('value'),$("#selectStep").dxSelectBox('instance').option('value'));
+treeDiscDisplay($("#selectYear").dxSelectBox('instance').option('value'),$("#selectStep").dxSelectBox('instance').option('value'));
 
 function dataDisplay(year,step) {
 
@@ -140,5 +141,90 @@ window["oa"+d.cle] = window["data"+d.cle].filter(function(d){
 })
   
 })
-}     
+} 
+
+  function treeDiscDisplay(year,step) {
+    getItems(urlBdd2Disc + "/amount/"+year).done(function(results){
+      var filtered = results.filter(function(d){
+        if (step == "prev") {
+          return d.etat == "1-prev"
+        }
+        if (step == "exec") {
+          return d.etat == "4-facture" || d.etat == "3-estime" || d.etat == "2-budgete"
+        } 
+      })
+      var grouped = getGroupSum(filtered,"disc_id","montant_part")
+  
+  var storeDiscs = new DevExpress.data.CustomStore({
+          key: "id",
+          byKey: function (key) {  
+              return $.get(urlDisc + "/" + key.toString());  
+          },
+          load: function () {
+             return getItems(urlDisc).done(function(res){
+                console.log(res.map(x => Object.assign(x, grouped.find(y => y.key == x.id))))
+                  return res.map(x => Object.assign(x, grouped.find(y => y.key == x.id)));
+             })
+                     
+           }      
+      });
+      $("#containerDisc").dxTreeList({
+          dataSource: storeDiscs,
+          rootValue: -1,
+          keyExpr: "id",
+          parentIdExpr: "parent_id",
+          columns: [
+              {
+              dataField: "disc",
+              caption: "Discipline",
+          }, 
+         /* {
+              dataField: "parent_id",
+              caption: "Discipline parente",
+              lookup: {
+                  dataSource: {
+                      store: storeDiscs,
+                      sort: "code"
+                  },
+                  valueExpr: "id",
+                  displayExpr: "disc"
+              }
+          },*/
+          {
+              dataField: "value",
+              caption: "Montant TTC",
+              alignment: "left",
+          }],
+          expandedRowKeys: [1,2,3,4,5],
+          showRowLines: true,
+          showBorders: true,
+          columnAutoWidth: true,
+          scrolling: {
+              mode: "standard"
+          },
+          paging: {
+              pageSize: 100
+          },
+          pager: {
+              showPageSizeSelector: true,
+              allowedPageSizes: [10, 20, 50, 100],
+              showInfo: true
+          },
+          "export": {
+              enabled: true,
+              fileName: "Budget_disciplines"
+            },
+            headerFilter: {
+              visible: true
+          },
+          filterRow: {
+              visible: true
+          },
+          filterPanel: { visible: true },
+          searchPanel: {
+              visible: true
+          }
+      });
+      })
+  }    
 })

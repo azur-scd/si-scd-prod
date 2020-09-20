@@ -468,7 +468,11 @@ $(function(){
                 column: "bdd_id",
                 summaryType: "count",
                 displayFormat: "{0} item(s) associé(s)",
-            }]
+            },
+			{column: "quotite",
+            summaryType: "sum",
+            displayFormat: "Total {0} %",
+        }]
         }
     })
 	
