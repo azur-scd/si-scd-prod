@@ -213,6 +213,19 @@ $(function(){
         caption: "Modifié le"
     }]
     })
+	
+	$("#file-uploader").dxFileUploader({
+        name: "file",
+        selectButtonText: "Importer un fichier",
+        labelText: "",
+        accept: "*",
+        uploadMode: "useButtons",
+        uploadUrl: urlSignalement + "_import"
+    });
+
+    getItems(urlSignalement + "_readdir").done(function(result){
+        return result.map(function(d){$("#files-dirread").append("<li>"+d.file+"</li>")})
+    })
    
 });
     

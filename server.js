@@ -3,6 +3,7 @@ const passport = require('passport')
 const session    = require('express-session')
 const cookieParser = require('cookie-parser')
 const bodyParser     = require('body-parser');
+const busboy = require('connect-busboy');
 const cors = require('cors');
 const path = require('path');
 
@@ -12,6 +13,7 @@ const port = process.env.PORT || 7200;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(busboy());
 app.use(cors());
 
 //For Passport

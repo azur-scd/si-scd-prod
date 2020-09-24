@@ -25,27 +25,36 @@
         <% } else {%>  
       <div class="row">
         <!-- start panel info -->
-         <div class="col-md-3 panel-group accordion accordion-dc">
-                               <div class="panel panel-info">
-                                   <div class="panel-heading">
-                                       <h4 class="panel-title">
-                                           <a href="#panelTextInfo">
-                                               Consignes de saisie (cliquer pour déplier)
-                                           </a>
-                                       </h4>
-                                   </div>                                
-                                   <div class="panel-body" id="panelTextInfo">
-                                       <ul>
-                                       <li><strong>[En cours]</strong> : ...</li>
-                                   </ul>
-                                   </div>                                
-                               </div>
-                 </div>
           <!-- end panel info -->
         </div>
-      <div class="row">
-        <div id="gridContainerSignalement"></div>
-      </div>
+     <div class="form-horizontal validate">
+          <div class="panel panel-default tabs">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="active"><a href="#tab-bdd" role="tab" data-toggle="tab">Bases de données</a></li>
+              <li><a href="#tab-ebook" role="tab" data-toggle="tab">Ebooks</a></li>
+            </ul>
+            <div class="panel-body tab-content">
+              <div class="tab-pane active" id="tab-bdd">
+                <div class="row">
+                  <h4>Bases de données</h4>
+                  <div id="gridContainerSignalement"></div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-ebook">
+                <div class="row">
+                  <h4>Ebooks</h4>
+                  <div id="fileuploader-container">
+                    <div id="file-uploader"></div>
+                </div>
+                </div>
+                <div class="row">
+                  <h3>Fichiers archivés</h3>
+                  <ul id="files-dirread"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
     <% } %>
 </div>

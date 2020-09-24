@@ -111,6 +111,10 @@ app.route('/api/signalement/bddid/:bddId')
 //update
 app.route('/api/signalement/:id/update')
 .put(bddSignalementController.update);
+app.route('/api/signalement_import')
+.post(bddSignalementController.import);
+app.route('/api/signalement_readdir')
+.get(bddSignalementController.read);
 
  /*----- BDDS GESTION-----*/
  //get all
