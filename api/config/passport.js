@@ -2,7 +2,7 @@ const User = require("../models").User;
 var passport = require("passport")
 const Strategy = require('passport-local').Strategy; 
 const CasStrategy = require('passport-cas').Strategy;   
-const bcrypt = require('bcrypt-nodejs'');
+const bcrypt = require('bcrypt-nodejs');
 const saltRounds = 10;
 
 
