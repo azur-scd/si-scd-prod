@@ -1,6 +1,6 @@
 const BddSignalement = require("../models").BddSignalement;
 var fs = require('fs');
-//var busboy = require('connect-busboy');
+var busboy = require('connect-busboy');
 
 //simple
 exports.list = function(req, res) {
@@ -38,7 +38,7 @@ exports.findById = function(req, res) {
       }).then( (result) => res.json(result) )
  }; 
  
-  /*exports.import = function(req, res) {
+  exports.import = function(req, res) {
   var fstream;
     req.pipe(req.busboy);
     req.busboy.on('file', function (fieldname, file, filename) {
@@ -63,4 +63,4 @@ exports.read = function(req, res) {
   });
   res.json(arr)
 })
-};*/
+};
