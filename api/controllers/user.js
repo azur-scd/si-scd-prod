@@ -1,14 +1,14 @@
 const User = require("../models").User;
-//const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-/*async function hashPassword(password) {
+async function hashPassword(password) {
   return await bcrypt.hash(password, 10);
  }
   
 function validatePassword(plainPassword, hashedPassword) {
   return bcrypt.compare(plainPassword, hashedPassword);
- }*/
+ }
 
 exports.list = function(req, res) {
   if(req.query){
