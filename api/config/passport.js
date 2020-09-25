@@ -2,14 +2,14 @@ const User = require("../models").User;
 var passport = require("passport")
 const Strategy = require('passport-local').Strategy; 
 const CasStrategy = require('passport-cas').Strategy;   
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+var bcryptjs = require('bcryptjs');
+var salt = bcryptjs.genSaltSync(10);
 
 
 passport.use('local-signin',new Strategy(
     function(username, password, done) {
         var isValidPassword = function(userpass, password) {
-            return bcrypt.compareSync(password, userpass); 
+            return bcryptjs.compareSync(password, userpass); 
         }
         User.findOne({
             where: {
