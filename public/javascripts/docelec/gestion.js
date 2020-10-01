@@ -157,7 +157,7 @@ $(function(){
                 caption: "Périmètre",
                 colCount: 2,
                 colSpan: 2,
-                items: ["perimetre","surcout_uca"]
+                items: ["perimetre","surcout_uca","refacturation"]
             },
         ]
         },
@@ -647,7 +647,12 @@ $(function(){
                 dataField: "surcout_uca",
                 caption: "Surcoût UCA-EC",
                 visible: false
-            },		
+            },	
+            {
+                dataField: "refacturation",
+                caption: "Refacturation (montant)",
+                visible: false
+            },	
             {
                dataField: "createdAt",
                caption: "Crée le",

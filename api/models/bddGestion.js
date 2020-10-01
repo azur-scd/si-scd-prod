@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         last_estime: DataTypes.FLOAT,
         reliquat: DataTypes.FLOAT,
         surcout_uca: DataTypes.FLOAT,
+        refacturation: DataTypes.FLOAT,
         commentaire: DataTypes.TEXT,
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE,

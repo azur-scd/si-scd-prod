@@ -102,6 +102,7 @@ else {q={include: [{
                                               "last_estime":row.last_estime,
                                               "reliquat": row.reliquat,
                                               "surcout_uca": row.surcout_uca,
+                                              "refacturation": row.refacturation,
                                               "commentaire":row.commentaire,
                                               "createdAt":row.createdAt,
                                               "updatedAt":row.updatedAt}});
