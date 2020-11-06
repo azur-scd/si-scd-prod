@@ -114,6 +114,9 @@ app.route('/api/signalement/bddid/:bddId')
 //update
 app.route('/api/signalement/:id/update')
 .put(bddSignalementController.update);
+//create  
+app.route('/api/signalement/create')
+.post(bddSignalementController.create);
 app.route('/api/signalement_import')
 .post(bddSignalementController.import);
 app.route('/api/signalement_readdir')

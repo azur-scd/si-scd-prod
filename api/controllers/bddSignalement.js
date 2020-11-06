@@ -39,6 +39,10 @@ exports.findById = function(req, res) {
       }).then( (result) => res.json(result) )
  }; 
  
+ exports.create = function(req, res) {
+  BddSignalement.create(req.body).then( (result) => res.json(result) )
+};
+
   exports.import = function(req, res) {
   var fstream;
     req.pipe(req.busboy);
