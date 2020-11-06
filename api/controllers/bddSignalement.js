@@ -1,4 +1,5 @@
 const BddSignalement = require("../models").BddSignalement;
+const Bdd = require("../models").Bdd;
 var fs = require('fs');
 var busboy = require('connect-busboy');
 
@@ -63,4 +64,64 @@ exports.read = function(req, res) {
   });
   res.json(arr)
 })
+};
+
+//join pour gestion
+exports.listForSignalement = function (req, res) {
+  var q;
+  if (req.query) {
+    q = {
+      where: req.query, include: [{
+        model: Bdd,
+        attributes: ['id', 'bdd'],
+        where: {
+          signalement: 1
+        }
+      }]
+    }
+  }
+  else {
+    q = {
+      include: [{
+        model: Bdd,
+        attributes: ['id', 'bdd'],
+        where: {
+          signalement: 1
+        }
+      }]
+    }
+  }
+  BddSignalement.findAll(
+    q
+  ).then(rows => {
+    //res.json(rows)
+    const resObj = rows.map(row => {
+      return {
+        "id": row.id,
+        "bdd_id": row.bdd_id,
+        "bdd": row.Bdd.bdd,
+        "nom_court": row.nom_court,
+        "source": row.source,
+        "editeur": row.editeur,
+        "url": row.url,
+        "proxified_url": row.proxified_url,
+        "disc": row.disc,
+        "langue": row.langue,
+        "type_contenu": row.type_contenu,
+        "type_base": row.type_base,
+        "type_acces": row.type_acces,
+        "note_acces": row.note_acces,
+        "description": row.description,
+        "tuto": row.tuto,
+        "icone": row.icone,
+        "new": row.new,
+        "alltitles": row.alltitles,
+        "uca": row.uca,
+        "commentaire": row.commentaire,
+        "createdAt": row.createdAt,
+        "updatedAt": row.updatedAt
+      }
+    });
+    res.json(resObj)
+  })
 };

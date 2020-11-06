@@ -102,6 +102,9 @@ app.route('/api/bdds/:bddId/delete')
 //get all
 app.route('/api/signalement')
 .get(bddSignalementController.list) 
+//join for list
+app.route('/api/signalement_custom')
+.get(bddSignalementController.listForSignalement);
 //get by id  
 app.route('/api/signalement/:id')
 .get(bddSignalementController.findById);
