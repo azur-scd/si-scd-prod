@@ -43,6 +43,14 @@ exports.findById = function(req, res) {
   BddSignalement.create(req.body).then( (result) => res.json(result) )
 };
 
+exports.delete = function(req, res) {
+  BddSignalement.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then( (result) => res.json(result) )
+};
+
   exports.import = function(req, res) {
   var fstream;
     req.pipe(req.busboy);

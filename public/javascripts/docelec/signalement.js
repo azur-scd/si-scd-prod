@@ -78,7 +78,17 @@ $(function(){
             type: "buttons",
             caption: "Editer",
             width: 110,
-            buttons: ["edit", "delete"]
+            buttons: ["edit", "delete", {
+                hint: "Clone",
+                icon: "repeat",
+                onClick: function(e) {
+                    var clonedItem = $.extend({}, e.row.data, { id: "" });
+                    var filtered = _.pick(clonedItem, function (v) { return v !== '' && v !== null; });
+                    createItems(urlSignalement, filtered)
+                    e.component.refresh(true);
+                    e.event.preventDefault();
+                }
+            }]
             },
     {
         dataField: "bdd_id",
@@ -165,6 +175,17 @@ $(function(){
         }
     },
     {
+        dataField: "description",
+        caption: "Description",
+        formItem: {
+            colSpan: 2,
+            editorType: "dxTextArea",
+            editorOptions: {
+                height: 100
+            }
+        }
+    },
+    {
         dataField: "type_base",
         caption: "Type de base",
         lookup: {
@@ -176,6 +197,10 @@ $(function(){
     {
         dataField: "tuto",
         caption: "Tutoriel",
+    },
+    {
+        dataField: "new",
+        caption: "Nouveauté ([Obsolète] ne plus remplir)",
     },
     {
         dataField: "alltitles",

@@ -117,6 +117,9 @@ app.route('/api/signalement/:id/update')
 //create  
 app.route('/api/signalement/create')
 .post(bddSignalementController.create);
+//delete
+app.route('/api/signalement/:id/delete')
+.delete(bddSignalementController.delete);
 app.route('/api/signalement_import')
 .post(bddSignalementController.import);
 app.route('/api/signalement_readdir')
