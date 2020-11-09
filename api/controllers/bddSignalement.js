@@ -2,6 +2,7 @@ const BddSignalement = require("../models").BddSignalement;
 const Bdd = require("../models").Bdd;
 var fs = require('fs');
 var busboy = require('connect-busboy');
+var o2x = require('object-to-xml');
 
 //simple
 exports.list = function(req, res) {
@@ -137,3 +138,117 @@ exports.listForSignalement = function (req, res) {
     res.json(resObj)
   })
 };
+
+//join pour signalement
+exports.listForSignalement = function (req, res) {
+  var q;
+  if (req.query) {
+    q = {
+      where: req.query, include: [{
+        model: Bdd,
+        attributes: ['id', 'bdd'],
+        where: {
+          signalement: 1
+        }
+      }]
+    }
+  }
+  else {
+    q = {
+      include: [{
+        model: Bdd,
+        attributes: ['id', 'bdd'],
+        where: {
+          signalement: 1
+        }
+      }]
+    }
+  }
+  BddSignalement.findAll(
+    q
+  ).then(rows => {
+    //res.json(rows)
+    const resObj = rows.map(row => {
+      return {
+        "id": row.id,
+        "bdd_id": row.bdd_id,
+        "bdd": row.Bdd.bdd,
+        "nom_court": row.nom_court,
+        "source": row.source,
+        "editeur": row.editeur,
+        "url": row.url,
+        "proxified_url": row.proxified_url,
+        "disc": row.disc,
+        "langue": row.langue,
+        "type_contenu": row.type_contenu,
+        "type_base": row.type_base,
+        "type_acces": row.type_acces,
+        "note_acces": row.note_acces,
+        "description": row.description,
+        "tuto": row.tuto,
+        "icone": row.icone,
+        "new": row.new,
+        "alltitles": row.alltitles,
+        "uca": row.uca,
+        "commentaire": row.commentaire,
+        "createdAt": row.createdAt,
+        "updatedAt": row.updatedAt
+      }
+    });
+    res.json(resObj)
+  })
+};
+
+exports.listForPrimo = function (req, res) {
+  BddSignalement.findAll(
+    {
+      include: [{
+        model: Bdd,
+        attributes: ['id', 'bdd'],
+        where: {
+          signalement: 1
+        }
+      }]
+    }
+  ).then(rows => {
+    //res.json(rows)
+    const Resource =   
+      rows.map(row => {
+      return {
+        LinkId : row.bdd_id,
+        ResourceId: row.bdd_id,
+        Title: row.Bdd.bdd,
+        ShortTitle: row.nom_court,
+        TitleSort: row.nom_court,
+        Source: row.source,
+				ProxiedURL: row.proxified_url,
+				Publisher: row.editeur,
+				Type: "plateforme",
+				SubjectName: row.disc,
+				Language: row.langue,
+				ContentType: row.type_contenu,
+				AccessType: row.type_acces,
+				AccessNote: row.note_acces,
+				BaseType: row.type_base,
+				Note: row.description,
+				Tutorial: row.tuto,
+				Display: "Y",
+				Icone: row.icone,
+				allTitles: row.alltitles
+            }          
+    })
+    var obj = { 
+      '?xml version=\"1.0\" encoding=\"iso-8859-1\"?' : null,
+      Resources : {
+        '#' : {
+         Resource
+        }
+      }
+    };
+  
+   // res.setHeader('Content-disposition', 'attachment; filename= myFile.xml');
+    //res.setHeader('Content-type', 'text/xml');
+    res.set('Content-Type', 'text/xml; charset=utf-8');
+    res.send(o2x(obj))
+  })
+}

@@ -105,6 +105,9 @@ app.route('/api/signalement')
 //join for list
 app.route('/api/signalement_custom')
 .get(bddSignalementController.listForSignalement);
+//list for primo
+app.route('/api/signalement_primo')
+.get(bddSignalementController.listForPrimo);
 //get by id  
 app.route('/api/signalement/:id')
 .get(bddSignalementController.findById);
