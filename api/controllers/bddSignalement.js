@@ -238,7 +238,7 @@ exports.listForPrimo = function (req, res) {
             }          
     })
     var obj = { 
-      '?xml version=\"1.0\" encoding=\"iso-8859-1\"?' : null,
+      '?xml version=\"1.0\" encoding=\"UTF-8\"?' : null,
       Resources : {
         '#' : {
          Resource
