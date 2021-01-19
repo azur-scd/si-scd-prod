@@ -33,12 +33,19 @@ google.charts.setOnLoadCallback( function(){
          }
         },
         {
+          "name": "Bibliothèque",
+          "panel": "middle",
+          "value": function () {
+            return this.bib
+         }
+        },
+       /* {
           "name": "Temps de réponse",
           "panel": "middle",
           "value": function () {
             return this["temps de reponse"]
          }
-        },
+        },*/
         {
           "name": "Type de question",
           "panel": "right",

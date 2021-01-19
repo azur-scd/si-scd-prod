@@ -116,7 +116,8 @@ $(function(){
             $("<div>")
                 .append($("<img>", { "src": "http://catalogue.unice.fr/primo_library/libweb/images/icones_bdd/"+options.value }))
                 .appendTo(container);
-        }
+        },
+		validationRules: [{ type: "required" }]
     },
     {
         dataField: "nom_court",
@@ -125,7 +126,8 @@ $(function(){
     }, 
     {
         dataField: "source",
-        caption: "Source"
+        caption: "Source (diffuseur)",
+		validationRules: [{ type: "required" }]
     },
     {
         dataField: "url",
@@ -133,11 +135,13 @@ $(function(){
     },
     {
         dataField: "proxified_url",
-        caption: "URL proxifiée"
+        caption: "URL proxifiée",
+		validationRules: [{ type: "required" }]
     },
     {
         dataField: "editeur",
-        caption: "Editeur"
+        caption: "Editeur",
+		validationRules: [{ type: "required" }]
     },
     {
         dataField: "disc",
