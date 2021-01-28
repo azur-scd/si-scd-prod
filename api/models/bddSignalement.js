@@ -27,6 +27,8 @@ module.exports = (sequelize, DataTypes) => {
         new: DataTypes.STRING,
         alltitles: DataTypes.STRING,
         uca: DataTypes.STRING,
+        mode_consultation: DataTypes.STRING,
+        description_long: DataTypes.TEXT,
         commentaire: DataTypes.TEXT,
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE,

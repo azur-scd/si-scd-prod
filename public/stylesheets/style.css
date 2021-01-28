@@ -8,6 +8,12 @@ width: 80%;
 [id^="gridContainer"] {
     margin-left: 10px;
   }
+/*master detail dans datagrids*/
+.master-detail-caption {
+    padding: 0 0 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
 /*temporaire selectbox year in dashboard docelec*/
 #selectbox {
     float: right;

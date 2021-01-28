@@ -138,8 +138,16 @@ $(function(){
                 caption: "Gestion",
                 colCount: 2,
                 colSpan: 2,
-                items: ["pole_gestion", "type_marche", "gc_id", "soutien_oa","perimetre","achat_perenne"]
-            }, {
+                items: ["pole_gestion", "type_marche", "gc_id", "soutien_oa","perimetre","type_achat","achat_perenne"]
+            }, 
+            {
+                itemType: "group",
+                caption: "Signalement",
+                colCount: 2,
+                colSpan: 2,
+                items: ["type_signalement", "mode_signalement"]
+            },
+            {
                 itemType: "group",
                 caption: "Statistiques",
                 colCount: 2,
@@ -254,14 +262,59 @@ $(function(){
     }
     },
     {
+        dataField: "type_achat",
+        caption: "Type d'achat",
+        lookup: {
+            dataSource: typeAchatState,
+            displayExpr: "valeur",
+            valueExpr: "cle"
+        }
+    },
+    {
         dataField: "achat_perenne",
         caption: "Achat pérenne",
         lookup: {
-            dataSource: binaryState,
+            dataSource: achatperenneState,
             displayExpr: "valeur",
             valueExpr: "cle"
         }
     }, 
+    {
+        dataField: "type_signalement",
+        caption: "Type de signalement",
+        lookup: {
+            dataSource: typeSignalement,
+            displayExpr: "valeur",
+            valueExpr: "cle"
+        }
+    },
+    {
+        dataField: "mode_signalement",
+        caption: "Modalité de signalement (du titre à titre)",
+        lookup: {
+            dataSource: modeSignalement,
+            displayExpr: "valeur",
+            valueExpr: "cle"
+        }
+    },
+    {
+        dataField: "type_signalement",
+        caption: "Type de signalement",
+        lookup: {
+            dataSource: typeSignalement,
+            displayExpr: "valeur",
+            valueExpr: "cle"
+        }
+    },
+    {
+        dataField: "mode_signalement",
+        caption: "Modalité de signalement",
+        lookup: {
+            dataSource: modeSignalement,
+            displayExpr: "valeur",
+            valueExpr: "cle"
+        }
+    },
     {
         dataField: "pref_stats_reports_id",
         caption: "Rapport stat (visu par défaut)",

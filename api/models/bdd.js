@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         soutien_oa: DataTypes.STRING,
         pole_gestion: DataTypes.STRING,
         type_marche: DataTypes.STRING,
+        type_achat: DataTypes.STRING,
         gc_id: {
           type: DataTypes.INTEGER,
           references: 'gcs',
@@ -19,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         perimetre: DataTypes.STRING,
         achat_perenne: DataTypes.INTEGER,
+        type_signalement: DataTypes.INTEGER,
+        mode_signalement: DataTypes.STRING,
         pref_stats_reports_id:{
           type: DataTypes.INTEGER,
           references: 'stats_reports',

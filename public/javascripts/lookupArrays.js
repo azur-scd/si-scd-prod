@@ -7,6 +7,16 @@ var marcheState = [
     { "cle": "hors_marche", "valeur": "Hors marché" },
     { "cle": "autre", "valeur": "Autre" }
 ]
+var achatperenneState = [
+    { "cle": 0, "valeur": "Non" }, 
+    { "cle": 1, "valeur": "Oui" },
+    { "cle": 2, "valeur": "Licence nationale" }
+]
+var typeAchatState = [
+    { "cle": "", "valeur": "" },
+    { "cle": "bouquet", "valeur": "Bouquet" },
+    { "cle": "titre", "valeur": "Titre à titre" }
+]
 var typeBddState = [{ "cle": "", "valeur": "" },
 { "cle": "bdd", "valeur": "Base de données" },
 { "cle": "perios", "valeur": "Bouquet de périodiques" },
@@ -33,6 +43,18 @@ var accessState = [
     { "cle": 1, "valeur": "Open Access" },
     { "cle": 2, "valeur": "Accès CHU" },
     { "cle": 3, "valeur": "Pas d'accès distant" }
+]
+var typeSignalement = [
+    { "cle": "", "valeur": "" },
+    { "cle": 0, "valeur": "Plateforme" },
+    { "cle": 1, "valeur": "Titre à titre" },
+    { "cle": 2, "valeur": "Plateforme + Titre à titre" }
+]
+var modeSignalement = [
+    { "cle": "", "valeur": "" },
+    { "cle": "ebsco", "valeur": "FTF (Ebsco)" },
+    { "cle": "sudoc", "valeur": "Sudoc-Aleph" },
+    { "cle": "editeur", "valeur": "Métadonnées éditeurs" }
 ]
 var getStatState = [{ "cle": "", "valeur": "" },
 { "cle": "sushi", "valeur": "Moissonnage Sushi" },
