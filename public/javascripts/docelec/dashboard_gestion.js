@@ -5,7 +5,7 @@ $(function(){
     dataSource: years,
     valueExpr: "cle",
     displayExpr: "valeur",
-    value: 2021,
+    value: 2020,
     onValueChanged: function(data) {
        return dataDisplay(data.value,$("#selectStep").dxSelectBox('instance').option('value')),
          treeDiscDisplay(data.value,$("#selectStep").dxSelectBox('instance').option('value'))
