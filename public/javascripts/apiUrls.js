@@ -6,6 +6,8 @@ var urlSignalementCustom = "./api/signalement_custom"
 var urlSignalementPrimo = "./api/signalement_primo"
 var urlGC = "./api/gcs"
 var urlStatsReports = "./api/stats_reports"
+var urlFormStats = "./api/bdds_form_stats"
+var urlStats = "./api/bdds_stats"
 
 var urlUser = "./api/users"
 var urlBU = "./api/bus"
