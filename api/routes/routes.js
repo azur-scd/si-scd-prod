@@ -213,7 +213,7 @@ app.route('/api/stats_reports/:statReportId/delete')
 
  /*----- BDDS STATS -----*/
  //get all
-app.route('/api/bdds_all_stats')
+app.route('/api/bdds_stats')
 .get(bddStatController.list) 
 //route for query display form
 app.route('/api/bdds_form_stats')
@@ -231,7 +231,7 @@ app.route('/api/bdds_stats/:id/update')
 app.route('/api/bdds_stats/create')
 .post(bddStatController.create);
  //delete
- app.route('/api/bdds_stats/:id/delete')
- .delete(bddStatController.delete);
+app.route('/api/bdds_stats/:id/delete')
+.delete(bddStatController.delete);
 
   }
