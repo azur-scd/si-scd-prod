@@ -107,6 +107,19 @@ var years = [{ "cle": 2021, "valeur": 2021 },
 { "cle": 2018, "valeur": 2018 }]
 var steps = [{ "cle": "prev", "valeur": "Prévisions" },
 { "cle": "exec", "valeur": "Exécution" }]
+var months = [{ "cle": "janvier", "valeur": "Janvier", "start": "-01-01", "end": "-01-31" },
+{ "cle": "fevrier", "valeur": "Février", "start": "-02-01", "end": "-02-28" },
+{ "cle": "mars", "valeur": "Mars", "start": "-03-01", "end": "-03-31" },
+{ "cle": "avril", "valeur": "Avril", "start": "-04-01", "end": "-04-30" },
+{ "cle": "mai", "valeur": "Mai", "start": "-05-01", "end": "-05-31" },
+{ "cle": "juin", "valeur": "Juin", "start": "-06-01", "end": "-06-30" },
+{ "cle": "juillet", "valeur": "Juillet", "start": "-07-01", "end": "-07-30" },
+{ "cle": "aout", "valeur": "Août", "start": "-08-01", "end": "-08-31" },
+{ "cle": "septembre", "valeur": "Septembre", "start": "-09-01", "end": "-09-30" },
+{ "cle": "octobre", "valeur": "Octobre", "start": "-10-01", "end": "-10-31" },
+{ "cle": "novembre", "valeur": "Novembre", "start": "-11-01", "end": "-11-30" },
+{ "cle": "decembre", "valeur": "Décembre", "start": "-12-01", "end": "-12-31" },
+{ "cle": "total", "valeur": "Total", "start": "-01-01", "end": "-12-31" }];
 var userGroups = [{ "cle": "admin", "valeur": "Admin" },
 { "cle": "docelec", "valeur": "Docelec" },
 { "cle": "horaires", "valeur": "Horaires" }]            
