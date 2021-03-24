@@ -329,7 +329,7 @@ $(function(){
         }
        }),
             valueExpr: "id",
-            displayExpr: "display"
+            displayExpr: "mesure"
         }
         },
        {
