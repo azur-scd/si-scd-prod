@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
           references: 'bdds',
           referencesKey: 'id'
         },
-		id_type_report: DataTypes.INTEGER,
 		 stats_reports_id:{
             type: DataTypes.INTEGER,
             references: 'stats_reports_basic',
