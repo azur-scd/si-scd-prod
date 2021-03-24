@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
          periodeFin: DataTypes.DATE,
          count: DataTypes.INTEGER,
          dimension: DataTypes.STRING,
-         mesure: DataTypes.STRING,
         commentaire: DataTypes.TEXT,
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE,
