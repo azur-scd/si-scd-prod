@@ -677,31 +677,24 @@ $(function(){
                     caption: "Actions",
                     buttons: ["edit","delete"]
                 },
-                {
-                    dataField: "report",
-                    caption: "Rapport",
-                }, 
-                {
-                    dataField: "counter",
-                    caption: "Type de rapport",
-                    lookup: {
-                        dataSource: typeRapportState,
-                        displayExpr: "valeur",
-                        valueExpr: "cle"
-                    }
-                },  
-                {
-                    dataField: "mesure",
-                    caption: "Statistiques mesurées",
-                    lookup: {
-                        dataSource: mesureRapportState,
-                        displayExpr: "valeur",
-                        valueExpr: "cle"
-                    }
-                },
-                {
-                    dataField: "display",
-                    caption: "Libellé",
-                }]   
+                 {
+                dataField: "mesure",
+                caption: "Statistiques mesurées"
+            },
+            {
+                dataField: "commentaire",
+                caption: "Commentaire",
+                width: 125
+            },
+            {
+                dataField: "createdAt",
+                caption: "Créé",
+                dataType: "date"
+            },
+            {
+                dataField: "updatedAt",
+                caption: "Mise à jour le",
+                dataType: "date"
+            }]   
     })
 });
