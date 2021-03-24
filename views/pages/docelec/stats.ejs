@@ -13,60 +13,82 @@
       <div class="page-content-wrap">   
         <div class="page-title">                    
           <h2><%= page %></h2>	
-          <span class="label label-info label-form pull-right">Utilisateur <strong><%= user.username %></strong> (connecté en <strong><%= user.groupe %>)</strong></span>       														
+       				
       </div>  
-      <%- include ('../../partials/navbar_admin' && user.groupe != 'admin') -%>
-      <div class="page-content-wrap">
-        <div class="page-title">
-          <h2><%= page %></h2>
-          <span class="label label-info label-form pull-right">Utilisateur <strong><%= user.username %></strong>
-            (connecté en <strong><%= user.groupe %>)</strong></span>
-        </div>
-        <% if (user.groupe != 'docelec') { %>
       <div class="row">
-        <!-- start panel info -->
-         <div class="col-md-3 panel-group accordion accordion-dc">
-                               <div class="panel panel-info">
-                                   <div class="panel-heading">
-                                       <h4 class="panel-title">
-                                           <a href="#panelTextInfo">
-                                               Consignes de saisie (cliquer pour déplier)
-                                           </a>
-                                       </h4>
-                                   </div>                                
-                                   <div class="panel-body" id="panelTextInfo">
-                                       <ul>
-                                       <li><strong>[En cours]</strong> : ...</li>
-                                   </ul>
+                               <div class="panel panel-info">                               
+                                   <div class="panel-body" id="panelGetParams">
+                                    <div class="col-md-3">
+                                      <div class="form-group">
+                                      <label class="col-md-4 control-label">Année</label>
+                                        <div class="col-md-8" id="selectbox-years">
+                                      </div>
+                                      <input type="hidden" id="selected_year" />
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <div class="form-group">
+                                      <label class="col-md-4 control-label">Ressource</label>
+                                        <div class="col-md-8" id="selectbox-bdd">
+                                      </div>
+                                      <input type="hidden" id="selected_bdd" />
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <div class="form-group">
+                                      <label class="col-md-4 control-label">Statistiques</label>
+                                        <div class="col-md-8" id="selectbox-reports">
+                                      </div>
+                                      <input type="hidden" id="selected_report" />
+                                      </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <button class="btn btn-info" id='submitSelected'>Valider</button>
+                                    </div>
                                    </div>                                
                                </div>
-                 </div>
-          <!-- end panel info -->
         </div>
-        <div class="row">
-          <div class="col-md-4">
-          <div class="action">
-            <div id="selectbox-years"></div>
+<div class="row">
+  <div class="col-md-4">
+    <div id="alertData" class="alert alert-danger" role="alert" style="display:none;text-align:center;">
+      <strong>Pas de données pour cette sélection !</strong>
+  </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>Données mensuelles</h4>
+      </div>
+      <div class="panel-body">
+        <div class="panel-body form-horizontal" id="form">  
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="action">
-          <div id="selectbox-bdd"></div>
+      <div class="panel-footer">
+       <!--<button class="btn btn-info" id="updateFormData" style="display:none;">Mettre à jour</button>-->
+        <button class="btn btn-info" id="insertFormData">Mettre à jour</button>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="action">
-        <div id="selectbox-reports"></div>
+</div>
+<div class="col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Evolution annuelle</h4>
+    </div>
+    <div class="panel-body">
+      <div class="panel-body" id="totalBarChart"></div>
     </div>
   </div>
-        </div>
-      <div class="row">
-        <div clas="col-md-6">
-          <h4>Données mensuelles</h4>
-        <div id="form"></div>
-        </div>
-      </div>
-      <% } %>
+</div>
+<div class="col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Détail par mois</h4>
+    </div>
+    <div class="panel-body">
+      <div class="panel-body" id="monthLineChart"></div>
+    </div>
+  </div>
+</div>
+</div>
+
     </div>
 </div>
 </div>
@@ -76,4 +98,6 @@
 <%- include ('../../partials/script_admin') -%>
 <%- include ('../../partials/script_devextreme') -%>
 <script src="./javascripts/docelec/stats.js"></script>
+<script src="./javascripts/dxchartComponents/simpleBar.js"></script>
+<script src="./javascripts/dxchartComponents/simpleLine.js"></script>
 </html>

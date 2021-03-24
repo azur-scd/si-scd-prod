@@ -215,9 +215,9 @@ app.route('/api/stats_reports/:statReportId/delete')
  //get all
 app.route('/api/bdds_all_stats')
 .get(bddStatController.list) 
-//join for list
-app.route('/api/bdds_stats')
-.get(bddStatController.listForStat);
+//route for query display form
+app.route('/api/bdds_form_stats')
+.get(bddStatController.formForStat);
 //get by id  
 app.route('/api/bdds_stats/:id')
 .get(bddStatController.findById);

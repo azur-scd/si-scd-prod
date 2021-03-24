@@ -51,8 +51,8 @@ exports.delete = function(req, res) {
     }).then( (result) => res.json(result) )
 };
 
- //join pour stats
- exports.listForStat = function(req, res) {
+//formdata pour stats
+ exports.formForStat = function(req, res) {
    console.log(req.query)
   BddStat.findAll({
     where:{
@@ -70,7 +70,7 @@ exports.delete = function(req, res) {
     const resObj = rows.map(row => {return {
                                             "id":row.id,
                                             "bdd_id":row.bdd_id,
-                                            //"bdd":row.Bdd.bdd,
+                                            "bdd":row.Bdd.bdd,
                                             "pref_stats_reports_id":row.Bdd.pref_stats_reports_id,
                                             "perimetre":row.Bdd.perimetre,
                                             "stats_reports_id":row.stats_reports_id,
@@ -78,7 +78,6 @@ exports.delete = function(req, res) {
                                             "periodeFin":row.periodeFin,
                                             "count":row.count,
                                             "dimension":row.dimension,
-                                            "mesure":row.mesure,
                                             "commentaire":row.commentaire,
                                             "createdAt":row.createdAt,
                                             "updatedAt":row.updatedAt}});
