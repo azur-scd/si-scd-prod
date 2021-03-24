@@ -10,9 +10,10 @@ module.exports = (sequelize, DataTypes) => {
           references: 'bdds',
           referencesKey: 'id'
         },
-        stats_reports_id:{
+		id_type_report: DataTypes.INTEGER,
+		 stats_reports_id:{
             type: DataTypes.INTEGER,
-            references: 'stats_reports',
+            references: 'stats_reports_basic',
             referencesKey: 'id'
           },
          periodeDebut: DataTypes.DATE,
@@ -25,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         updatedAt: DataTypes.DATE,
       },
       { freezeTableName: true,
-        tableName: "bdds_stats"
+        tableName: "bdds_stats_copy"
       }
     );
   
