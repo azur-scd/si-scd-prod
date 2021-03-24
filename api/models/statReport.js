@@ -5,10 +5,8 @@ module.exports = (sequelize, DataTypes) => {
           primaryKey: true,
           autoIncrement: true
         },
-        counter: DataTypes.STRING,
-        report: DataTypes.STRING,
         mesure: DataTypes.STRING,
-        display: DataTypes.STRING,
+        commentaire: DataTypes.TEXT,
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE
       },
