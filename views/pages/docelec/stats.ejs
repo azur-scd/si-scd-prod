@@ -11,17 +11,18 @@
     <div class="page-content">
       <%- include ('../../partials/navbar_admin') -%>
       <div class="page-content-wrap">   
-        <div class="page-title">                    
+       <div class="page-title">                    
           <h2><%= page %></h2>	
-          <span class="label label-info label-form pull-right">Utilisateur <strong><%= user.username %></strong> (connecté en <strong><%= user.groupe %>)</strong></span>		
-      </div>  
-      <div class="row">
-        <div class="alert alert-danger text-center" role="alert">
-            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-            Vous n'avez pas les droits nécessaires pour accéder à cette partie du SI
-        </div>
-        </div>	
-      <% } else {%> 
+          <span class="label label-info label-form pull-right">Utilisateur <strong><%= user.username %></strong> (connecté en <strong><%= user.groupe %>)</strong></span>       														
+      </div> 
+      <% if (user.groupe != 'docelec' && user.groupe != 'admin') { %>
+        <div class="row">
+          <div class="alert alert-danger text-center" role="alert">
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              Vous n'avez pas les droits nécessaires pour accéder à cette partie du SI
+          </div>
+          </div>	
+        <% } else {%>  
       <div class="row">
                                <div class="panel panel-info">                               
                                    <div class="panel-body" id="panelGetParams">
