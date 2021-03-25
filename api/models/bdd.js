@@ -29,6 +29,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         stats_get_mode: DataTypes.STRING,
         stats_url_sushi: DataTypes.STRING,
+		sushi_requestor_id: DataTypes.STRING,
+        sushi_customer_id: DataTypes.STRING,
         stats_url_admin: DataTypes.STRING,
         stats_login: DataTypes.STRING,
         stats_mdp: DataTypes.STRING,

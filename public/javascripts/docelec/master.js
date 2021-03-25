@@ -152,7 +152,7 @@ $(function(){
                 caption: "Statistiques",
                 colCount: 2,
                 colSpan: 2,
-                items: ["stats_get_mode", "stats_url_sushi","pref_stats_reports_id","stats_url_admin","stats_login","stats_mdp","stats_mail"]
+                items: ["stats_get_mode", "stats_url_sushi","sushi_requestor_id","sushi_customer_id","pref_stats_reports_id","stats_url_admin","stats_login","stats_mdp","stats_mail"]
             },
             {
                 itemType: "group",
@@ -351,6 +351,14 @@ $(function(){
     {
         dataField: "stats_url_sushi",
         caption: "Url racine SUSHI"
+    },
+	{
+        dataField: "sushi_requestor_id",
+        caption: "SUSHI Requestor Id"
+    },
+    {
+        dataField: "sushi_customer_id",
+        caption: "SUSHI Customer Id"
     },
     {
         dataField: "stats_login",
