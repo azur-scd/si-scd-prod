@@ -78,7 +78,8 @@ exports.delete = function(req, res) {
                                             "dimension":row.dimension,
                                             //"commentaire":row.commentaire,
                                             //"createdAt":row.createdAt,
-                                            //"updatedAt":row.updatedAt}});
+                                            //"updatedAt":row.updatedAt
+											}});
     res.json(resObj)
   })
 };
