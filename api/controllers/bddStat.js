@@ -55,15 +55,13 @@ exports.delete = function(req, res) {
  exports.formForStat = function(req, res) {
    console.log(req.query)
   BddStat.findAll({
+	attributes: ['id', 'bdd_id','stats_reports_id','periodeDebut','count','dimension'],
     where:{
       [Op.and]: [{stats_reports_id: req.query.reportId}, {bdd_id: req.query.bddId}, { periodeDebut: {[Op.startsWith]: req.query.year}}]
     },
     include: [{
       model: Bdd,
       attributes: ['id', 'bdd', 'pref_stats_reports_id','perimetre'],
-      where: {
-      gestion: 1
-    }
   }]
   }).then(rows => {
     //res.json(rows)
@@ -75,12 +73,12 @@ exports.delete = function(req, res) {
                                             "perimetre":row.Bdd.perimetre,
                                             "stats_reports_id":row.stats_reports_id,
                                             "periodeDebut":row.periodeDebut,
-                                            "periodeFin":row.periodeFin,
+                                            //"periodeFin":row.periodeFin,
                                             "count":row.count,
                                             "dimension":row.dimension,
-                                            "commentaire":row.commentaire,
-                                            "createdAt":row.createdAt,
-                                            "updatedAt":row.updatedAt}});
+                                            //"commentaire":row.commentaire,
+                                            //"createdAt":row.createdAt,
+                                            //"updatedAt":row.updatedAt}});
     res.json(resObj)
   })
 };
