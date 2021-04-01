@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         stats_url_sushi: DataTypes.STRING,
 		sushi_requestor_id: DataTypes.STRING,
         sushi_customer_id: DataTypes.STRING,
+		sushi_api_key: DataTypes.STRING,
         stats_url_admin: DataTypes.STRING,
         stats_login: DataTypes.STRING,
         stats_mdp: DataTypes.STRING,
