@@ -8,6 +8,8 @@ var urlGC = "./api/gcs"
 var urlStatsReports = "./api/stats_reports"
 var urlFormStats = "./api/bdds_form_stats"
 var urlStats = "./api/bdds_stats"
+var urlProxySushiTest = "./api/sushi_harvest_test"
+var urlProxySushi = "./api/sushi_harvest/"
 
 var urlUser = "./api/users"
 var urlBU = "./api/bus"

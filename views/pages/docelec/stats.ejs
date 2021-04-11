@@ -11,18 +11,18 @@
     <div class="page-content">
       <%- include ('../../partials/navbar_admin') -%>
       <div class="page-content-wrap">   
-       <div class="page-title">                    
+        <div class="page-title">                    
           <h2><%= page %></h2>	
-          <span class="label label-info label-form pull-right">Utilisateur <strong><%= user.username %></strong> (connecté en <strong><%= user.groupe %>)</strong></span>       														
+       	<span class="label label-info label-form pull-right">Utilisateur <strong><%= user.username %></strong> (connecté en <strong><%= user.groupe %>)</strong></span>  		
       </div> 
-      <% if (user.groupe != 'docelec' && user.groupe != 'admin') { %>
+       <% if (user.groupe != 'docelec' && user.groupe != 'admin') { %>
         <div class="row">
           <div class="alert alert-danger text-center" role="alert">
               <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
               Vous n'avez pas les droits nécessaires pour accéder à cette partie du SI
           </div>
           </div>	
-        <% } else {%>  
+        <% } else {%> 	  
       <div class="row">
                                <div class="panel panel-info">                               
                                    <div class="panel-body" id="panelGetParams">
@@ -53,9 +53,92 @@
                                    </div>                                
                                </div>
         </div>
-<div class="row">
+    <div class="row" id="sushiPanel" style="display:none;">
+        <div class="panel panel-danger" id="grid_block_9" style="position: relative; left: 0px; top: 0px;">
+          <div class="panel-headingui-sortable-handle">                                        
+              <h3 class="panel-title">Sushi Panel</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+            <div class="col-md-3">
+            <div class="form-group">
+              <label class="col-md-2 control-label">Url</label>
+              <div class="col-md-10">
+                  <input type="text" id="resourceSushiUrl" class="form-control" readonly=""/>
+              </div>
+          </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="col-md-2 control-label">Requestor Id</label>
+                <div class="col-md-10">
+                    <input type="text" id="resourceRequestorId" class="form-control" readonly=""/>
+                </div>
+            </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="col-md-2 control-label">Customer Id</label>
+                  <div class="col-md-10">
+                      <input type="text" id="resourceCustomerId" class="form-control" readonly=""/>
+                  </div>
+              </div>
+                </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="col-md-2 control-label">API Key</label>
+                    <div class="col-md-10">
+                        <input type="text" id="resourceApiKey" class="form-control" readonly=""/>
+                    </div>
+                </div>
+              </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2">
+                   <!--<div class="form-group">
+                      <label class="col-md-2 control-label">Date de début</label>
+                    <div id="sushi-start"></div>
+                    </div>-->
+                    <div class="dx-field">
+                      <div class="dx-field-label">Date de début</div>
+                      <div class="dx-field-value">
+                          <div id="sushi-start"></div>
+                      </div>
+                  </div> 
+                  <input type="hidden" id="beginSushiDate" />
+                  </div>
+                  <div class="col-md-2">
+                    <div class="dx-field">
+                      <div class="dx-field-label">Date de fin</div>
+                      <div class="dx-field-value">
+                          <div id="sushi-end"></div>
+                      </div>
+                  </div>
+                  <input type="hidden" id="endSushiDate" />
+                  </div>
+                  <div class="col-md-4">
+                    <div class="dx-field">
+                      <div class="dx-field-label">Sushi Report (segment url)</div>
+                      <div class="dx-field-value">
+                          <div id="selectbox-sushi-reports"></div>
+                      </div>
+                  </div>
+                      <input type="hidden" id="selected_sushi_report" />
+                  </div>
+                  <div class="col-md-4">
+                    <input type="hidden" id="completeSushiUrl" />
+                    <button class="btn btn-rounded btn-primary" id='testSushi'>Tester l'accès au rapport</button>
+                    <button class="btn btn-info" id='getSushi'><i class="fa fa-download"></i> Moissonner les données Counter</button>
+                  </div>
+                </div>
+          </div>
+      </div>
+  </div>
+
+<div id="loaderDiv" style="display:none;"></div>
+<div class="row" id="resultsDiv" style="display:block;">
   <div class="col-md-4">
-    <div id="alertData" class="alert alert-danger" role="alert" style="display:none;text-align:center;">
+    <div id="alertData" class="alert alert-warning" role="alert" style="display:none;text-align:center;">
       <strong>Pas de données pour cette sélection !</strong>
   </div>
     <div class="panel panel-default">
@@ -67,8 +150,8 @@
         </div>
       </div>
       <div class="panel-footer">
-       <!--<button class="btn btn-info" id="updateFormData" style="display:none;">Mettre à jour</button>-->
-        <button class="btn btn-info" id="insertFormData">Mettre à jour</button>
+        <button class="btn btn-lg btn-primary" id="calculateTotal">Calculer total</button>
+        <button class="btn btn-info" id="insertFormData"><i class="fa fa-save"></i> Enregistrer</button>
       </div>
     </div>
 </div>
@@ -93,8 +176,9 @@
   </div>
 </div>
 </div>
-<% } %> 
+
     </div>
+	 <% } %>
 </div>
 </div>
 

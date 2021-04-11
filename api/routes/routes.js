@@ -8,6 +8,7 @@ const bddStatController = require("../controllers").bddStat;
 const gcController = require("../controllers").gc;
 const discController = require("../controllers").disc;
 const bddDisciplineController = require("../controllers").bddDiscipline;
+const sushiHarvestController = require("../controllers").sushiHarvest;
 
 /*IMPORTANT : penser à déclarer les exports de controller dans controllers/index.js */
 
@@ -233,5 +234,12 @@ app.route('/api/bdds_stats/create')
  //delete
 app.route('/api/bdds_stats/:id/delete')
 .delete(bddStatController.delete);
+
+/*----- Harvest Counter and populate db----*/  
+
+app.route('/api/sushi_harvest_test')
+.post(sushiHarvestController.testHarvest);
+app.route('/api/sushi_harvest/:view')
+.post(sushiHarvestController.harvest);
 
   }

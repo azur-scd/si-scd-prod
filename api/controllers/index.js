@@ -8,6 +8,7 @@ const gc = require("./gc");
 const statReport = require("./statReport");
 const disc = require("./disc");
 const bddDiscipline = require("./bddDiscipline");
+const sushiHarvest = require("./sushiHarvest")
 module.exports = {bu,
                   user,
                   bdd,
@@ -17,4 +18,5 @@ module.exports = {bu,
                   gc,
                   statReport,
                   disc,
-				  bddDiscipline};
+				  bddDiscipline,
+				  sushiHarvest};

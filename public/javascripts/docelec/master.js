@@ -696,7 +696,7 @@ $(function(){
             {
                 dataField: "commentaire",
                 caption: "Commentaire",
-                width: 125
+                width: 350
             },
             {
                 dataField: "createdAt",
