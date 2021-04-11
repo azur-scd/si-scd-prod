@@ -242,4 +242,9 @@ app.route('/api/sushi_harvest_test')
 app.route('/api/sushi_harvest/:view')
 .post(sushiHarvestController.harvest);
 
+/*----- INDICATORS -----*/
+//cost by usage
+app.route('/api/bdds_indicators')
+.get(bddStatController.indicators);
+
   }

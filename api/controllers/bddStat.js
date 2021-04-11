@@ -1,5 +1,6 @@
 const BddStat = require("../models").BddStat;
 const Bdd = require("../models").Bdd;
+const BddGestion = require("../models").BddGestion;
 const Op = require('sequelize').Op;
 
 //simple
@@ -83,3 +84,56 @@ exports.delete = function(req, res) {
     res.json(resObj)
   })
 };
+
+//triple join for indicators
+exports.indicators = function(req, res) {
+ if(Object.keys(req.query).length === 0) {
+  BddStat.findAll({
+    attributes: ['id', 'bdd_id', 'stats_reports_id','count','periodeDebut'],
+    where:{
+      dimension : "total",
+    },
+    include: [{
+      model: Bdd,
+      attributes: ['id', 'bdd', 'type','soutien_oa','pole_gestion','type_marche','type_achat','perimetre'],
+      include: [{
+        model: BddGestion,
+        attributes: ['annee','montant_ttc'],
+        where: {
+          //bdd_id: req.query.bddId,
+          etat:"4-facture"
+        }
+    }]
+  }]   
+  }).then(rows => {
+    res.json(rows)
+  })
+}
+else {
+  req.query["dimension"]="total"
+  include_gestion_conditions = {etat:"4-facture"}
+  if(req.query["year"]) {
+    req.query["periodeDebut"] =  {[Op.startsWith]: req.query.year}
+    include_gestion_conditions["annee"] = req.query.year
+    delete req.query['year'];
+  }
+  console.log(req.query)
+  BddStat.findAll({
+    attributes: ['id', 'bdd_id', 'stats_reports_id','count','periodeDebut'],
+    where:req.query
+      //[Op.and]: [{stats_reports_id: req.query.reportId}, {bdd_id: req.query.bddId}, { periodeDebut: {[Op.startsWith]: req.query.year}}, {dimension : "total"}],
+    ,
+    include: [{
+      model: Bdd,
+      attributes: ['id', 'bdd', 'type','soutien_oa','pole_gestion','type_marche','type_achat','perimetre'],
+      include: [{
+        model: BddGestion,
+        attributes: ['annee','montant_ttc'],
+        where: include_gestion_conditions
+    }]
+  }]   
+  }).then(rows => {
+    res.json(rows)
+  })
+}
+}
