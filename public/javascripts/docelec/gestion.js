@@ -34,7 +34,7 @@ $(function(){
 
        $("#selectbox").dxSelectBox({
         dataSource: years,
-        value: 2020,
+        value: 2021,
         valueExpr: "cle",
         displayExpr: "valeur",
         onValueChanged: function(data) {

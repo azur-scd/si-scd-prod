@@ -1,5 +1,5 @@
 $(function () {
-
+    getAvalaibleReports($("#selected_bdd").val())
     getFormData($("#selected_year").val(), $("#selected_bdd").val(), $("#selected_report").val())
     getSushiParam($("#selected_bdd").val())
     annualTotalBar($("#selected_bdd").val(), $("#selected_report").val())
@@ -59,7 +59,8 @@ $(function () {
         isRequired: true,
         onValueChanged: function (data) {
             $("#selected_bdd").val(data.value)
-            return getFormData($("#selected_year").val(), $("#selected_bdd").val(), $("#selected_report").val()),
+            return getAvalaibleReports($("#selected_bdd").val()),
+			    getFormData($("#selected_year").val(), $("#selected_bdd").val(), $("#selected_report").val()),
                 annualTotalBar($("#selected_bdd").val(), $("#selected_report").val()),
                 monthTotalLine($("#selected_year").val(), $("#selected_bdd").val(), $("#selected_report").val()),
                 getSushiParam($("#selected_bdd").val())
@@ -110,6 +111,16 @@ $(function () {
     $("#calculateTotal").click(function () {
         return calculateSum()
     })
+	
+	 function getAvalaibleReports(bdd){
+        $("#avalaibleReports").empty()
+        return getItems(urlBddUniqueStatsReports + "/bddid/" + bdd)
+        .done(function (result) {
+            console.log(result)
+            $("#avalaibleReports").append("Statistiques disponibles (déjà collectées) pour cette ressource : ")
+            result.map(function(d){return $("#avalaibleReports").append("<span class='label label-danger label-form' style='margin-right:5px;'>"+d.StatReport.mesure+"</span>")})
+        })
+    }
 
     function getFormData(year, bdd, report) {
         //cleanIds();

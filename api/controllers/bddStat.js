@@ -1,6 +1,7 @@
 const BddStat = require("../models").BddStat;
 const Bdd = require("../models").Bdd;
 const BddGestion = require("../models").BddGestion;
+const StatReport = require("../models").StatReport;
 const Op = require('sequelize').Op;
 
 //simple
@@ -84,6 +85,23 @@ exports.delete = function(req, res) {
     res.json(resObj)
   })
 };
+
+//unique stat report available in bdd by database
+exports.uniqueReportByBddId = function(req, res) {
+  BddStat.findAll({
+    where: {
+      bdd_id: req.params.bddId
+    },
+    distinct: ['stats_reports_id'],
+    attributes : ['stats_reports_id'],
+    group : ['stats_reports_id'],
+    include: [{model: StatReport, 
+              attributes: ['mesure']}],
+  })
+  .then(rows => {
+    res.json(rows)
+  })
+}
 
 //triple join for indicators
 exports.indicators = function(req, res) {

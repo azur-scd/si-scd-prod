@@ -219,6 +219,9 @@ app.route('/api/bdds_stats')
 //route for query display form
 app.route('/api/bdds_form_stats')
 .get(bddStatController.formForStat);
+//route to get distinct stats_reports_id saved for a db
+app.route('/api/unique_stats_reports/bddid/:bddId')
+.get(bddStatController.uniqueReportByBddId);
 //get by id  
 app.route('/api/bdds_stats/:id')
 .get(bddStatController.findById);

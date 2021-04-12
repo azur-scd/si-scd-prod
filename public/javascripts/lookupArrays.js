@@ -101,7 +101,8 @@ var etatState = [
     { "cle": "3-estime", "valeur": "Estimé" },
     { "cle": "4-facture", "valeur": "Facturé" }
 ]
-var years = [{ "cle": 2021, "valeur": 2021 },
+var years = [{ "cle": 2022, "valeur": 2022 },
+{ "cle": 2021, "valeur": 2021 },
 { "cle": 2020, "valeur": 2020 },
 { "cle": 2019, "valeur": 2019 },
 { "cle": 2018, "valeur": 2018 }]
