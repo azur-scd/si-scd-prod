@@ -10,7 +10,7 @@ $(function () {
         loadMode: "raw",
         load: function () {
             //return $.getJSON(urlBdd);
-            return getItems(urlBdd)
+            return getItems(urlBdd + "?stats_collecte=1")
         }
     });
 
