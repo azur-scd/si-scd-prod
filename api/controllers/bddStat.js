@@ -113,6 +113,9 @@ exports.indicators = function(req, res) {
     },
     include: [{
       model: Bdd,
+      where: {
+        stats_collecte:1
+      },
       attributes: ['id', 'bdd', 'type','soutien_oa','pole_gestion','type_marche','type_achat','perimetre'],
       include: [{
         model: BddGestion,
@@ -124,7 +127,34 @@ exports.indicators = function(req, res) {
     }]
   }]   
   }).then(rows => {
-    res.json(rows)
+    const resObj = rows.map(function(d) {
+      var obj = {}
+      obj["id"]=d.id
+      obj["bdd_id"]=d.bdd_id
+      obj["stats_reports_id"]=d.stats_reports_id
+      obj["count"]=d.count
+      obj["periodeDebut"]=d.periodeDebut
+        if (d.Bdd) {
+      obj["bdd"]=d.Bdd.bdd
+      obj["type"]=d.Bdd.type
+      obj["oa"]=d.Bdd.soutien_oa
+      obj["pole"]=d.Bdd.pole
+      obj["marche"]=d.Bdd.type_marche
+      obj["achat"]=d.Bdd.type_achat
+      obj["perimetre"]=d.Bdd.perimetre
+      if(d.Bdd.BddGestions) {
+      d.Bdd.BddGestions
+      .filter(function(dbis) {
+         return dbis.annee == d.periodeDebut.substring(0, 4)
+      })
+      .map(function(dter) {
+        return obj["montant"]=dter.montant_ttc;
+      })
+    }
+    }
+      return obj
+    })
+    res.json(resObj)
   })
 }
 else {
@@ -132,7 +162,7 @@ else {
   include_gestion_conditions = {etat:"4-facture"}
   if(req.query["year"]) {
     req.query["periodeDebut"] =  {[Op.startsWith]: req.query.year}
-    include_gestion_conditions["annee"] = req.query.year
+    //include_gestion_conditions["annee"] = req.query.year
     delete req.query['year'];
   }
   console.log(req.query)
@@ -143,15 +173,46 @@ else {
     ,
     include: [{
       model: Bdd,
+      where: {
+        stats_collecte:1
+      },
       attributes: ['id', 'bdd', 'type','soutien_oa','pole_gestion','type_marche','type_achat','perimetre'],
       include: [{
         model: BddGestion,
         attributes: ['annee','montant_ttc'],
-        where: include_gestion_conditions
+        //where: include_gestion_conditions
     }]
   }]   
   }).then(rows => {
-    res.json(rows)
+    const resObj = rows.map(function(d) {
+      var obj = {}
+      obj["id"]=d.id
+      obj["bdd_id"]=d.bdd_id
+      obj["stats_reports_id"]=d.stats_reports_id
+      obj["count"]=d.count
+      obj["periodeDebut"]=d.periodeDebut
+      if(d.Bdd) {
+      obj["bdd"]=d.Bdd.bdd
+      obj["type"]=d.Bdd.type
+      obj["oa"]=d.Bdd.soutien_oa
+      obj["pole"]=d.Bdd.pole
+      obj["marche"]=d.Bdd.type_marche
+      obj["achat"]=d.Bdd.type_achat
+      obj["perimetre"]=d.Bdd.perimetre
+      if(d.Bdd.BddGestions) {
+      d.Bdd.BddGestions
+      .filter(function(dbis) {
+         return dbis.annee == d.periodeDebut.substring(0, 4)
+      })
+      .map(function(dter) {
+        return obj["montant"]=dter.montant_ttc;
+      })
+    }
+    }
+      return obj
+    })
+    res.json(resObj)
   })
 }
 }
+

@@ -96,6 +96,9 @@ app.get('/admin-docelec-dashboardgestion', isLoggedIn,function(req, res, next) {
  app.get('/public-iub-explore', function(req, res, next) {
     res.render('pages/iub/explore', {page:'IUB : Exploration', menuId:'iub explore'});
 });
+app.get('/public-docelec-dashboard', function(req, res, next) {
+    res.render('pages/docelec/public_dashboard', {page:'Docelec : Dashboard', menuId:'docelec dashboard'});
+  });
 app.get('/public-apps-app', function(req, res, next) {
     res.render('pages/apps/app', {page:'Applications', menuId:'applications'});
   });

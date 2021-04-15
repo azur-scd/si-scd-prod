@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
           references: 'stats_reports',
           referencesKey: 'id'
         },
+		stats_collecte: DataTypes.INTEGER,
         stats_get_mode: DataTypes.STRING,
         stats_url_sushi: DataTypes.STRING,
 		sushi_requestor_id: DataTypes.STRING,

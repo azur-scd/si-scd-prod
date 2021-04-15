@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>    
+  <title>SI-SCD | <%= page %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="/stylesheets/bootstrap/bootstrap.min.css">
+  <!-- Joli Theme CSS -->
+  <link rel="stylesheet" href="/stylesheets/theme-black.css">
+  <!-- Our Custom CSS -->
+  <link rel="stylesheet" href="/stylesheets/style.css">
+    <%- include ('../../partials/script') -%>     
+    <%- include ('../../partials/head_devextreme'); -%>                          
+</head>
+<body>
+
+  <div class="page-container">
+    <%- include ('../../partials/sidebar') -%>
+      <div class="page-content">
+        <%- include ('../../partials/navbar') -%>
+          <div class="page-content-wrap">
+            <div class="page-title">                    
+              <h2><%= page %></h2>
+            </div>
+            <div class="row">
+                <div class="panel panel-info">  
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Statistiques de consultation</h3>
+                    </div>                             
+                    <div class="panel-body" id="panelGetParams">
+                     <div class="col-md-3">
+                       <div class="form-group">
+                       <label class="col-md-4 control-label">Année</label>
+                         <div class="col-md-8" id="selectbox-years">
+                       </div>
+                       <input type="hidden" id="selected_year" />
+                       </div>
+                     </div>
+
+                     <div class="col-md-4">
+                       <div class="form-group">
+                       <label class="col-md-4 control-label">Statistiques</label>
+                         <div class="col-md-8" id="selectbox-reports">
+                       </div>
+                       <input type="hidden" id="selected_report" />
+                       </div>
+                     </div>
+                    </div> 
+                        <div class="panel-body" id="totalBarChart"></div>                             
+                </div>
+</div>	
+<div class="row">
+  <div class="panel panel-info">  
+    <div class="panel-heading">
+      <h3 class="panel-title">Données ESGBU</h3>
+      </div>                             
+      <div class="panel-body"></div>
+      </div>
+   </div>
+    </div>
+  </div>
+  </div>
+  <%- include ('../../partials/script') -%>
+  <%- include ('../../partials/script_admin') -%>
+  <%- include ('../../partials/script_devextreme') -%>
+  <script src="./javascripts/docelec/public_dashboard.js"></script>
+  <script src="./javascripts/dxchartComponents/simpleBar.js"></script>
+  <script src="./javascripts/dxchartComponents/barLine.js"></script>
+</body>
+</html>
