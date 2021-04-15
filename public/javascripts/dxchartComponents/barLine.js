@@ -2,6 +2,9 @@ function getBarLine(div,store,barArgument,barValueField,barSerieName,lineValueFi
     return  $("#"+div).dxChart({
         palette: "vintage",
         dataSource: store,
+		size: {
+            height: 600
+        },
         commonSeriesSettings:{
             argumentField: barArgument,
             valueField: barValueField,
