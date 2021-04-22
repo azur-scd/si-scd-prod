@@ -33,12 +33,12 @@ width: 80%;
 }
 /*dx component charts tooltips*/
 .state-tooltip {
-    height: 90px;
-    background-color:black;
+    background-color:rgb(241, 248, 247);
+    color: black;
 }
 .state-tooltip .caption {
     font-weight: 500;
-    color: white;
+    color: black;
     line-height: 40px;
     font-size: 14px;
     margin-bottom: 5px;

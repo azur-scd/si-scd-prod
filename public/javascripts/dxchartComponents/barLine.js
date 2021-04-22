@@ -42,40 +42,23 @@ function getBarLine(div,store,barArgument,barValueField,barSerieName,lineValueFi
                 indentFromAxis: 2
             }
         },
-        tooltip: {
+         tooltip: {
             enabled: true,
             shared: true,
             format: {
                 type: "largeNumber",
                 precision: 1
             },
-            customizeTooltip: function (arg) {
+            contentTemplate: function(arg) {
                 var items = arg.valueText.split("\n"),
-                    color = arg.point.getColor();
-                $.each(items, function(index, item) {
-                    if(item.indexOf(arg.seriesName) === 0) {
-                        items[index] = $("<span>")
-                                        .text(item)
-                                        .addClass("active")
-                                        .css("color", color)
-                                        .prop("outerHTML");
-                    }
-                });
-                return { text: items.join("\n") };
+                    series = arg.argumentText.split("\n");
+                return "<div class='state-tooltip'>" +
+                "<div><span class='caption'>"+series[0]+"</span>: " +
+                "</div><div>" +
+                items.join("\n") +
+                "</div></div>";
             }
         },
-       /* tooltip: {
-            enabled: true,
-            location: "edge",
-            contentTemplate: function(arg) {
-                return "<div class='state-tooltip'>" +
-                "<div>" +
-                arg.argumentText + 
-                "</div><div><span class='caption'>Valeur</span>: " +
-                arg.valueText +
-                "</div>" + "</div>";
-            }
-        },*/
         legend: {
             verticalAlignment: "bottom",
             horizontalAlignment: "center"
