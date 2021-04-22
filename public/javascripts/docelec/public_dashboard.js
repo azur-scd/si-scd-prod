@@ -7,7 +7,9 @@ $(function () {
         load: function () {
             var d = new $.Deferred();
             $.get(urlStatsIndicators).done(function(results){
-              var data = results.map(function(d){
+              var data = results
+			  .filter(function(d){return d.type != "autre"}) //on ne veut pas les ressources fictives type BSC+Econlit pour ne pas compter 2 fois les stats
+			  .map(function(d){
                 return {"count":d.count,
                         "date":d.periodeDebut.substring(0, 4),
                         "type":d.type,
@@ -25,7 +27,7 @@ $(function () {
         items: years,
         valueExpr: "cle",
         displayExpr: "valeur",
-        value: years[1].cle,
+        value: years[2].cle,
         //value: parseInt($("#selected_year").val()),
         onValueChanged: function (data) {
             $("#selected_year").val(data.value)
