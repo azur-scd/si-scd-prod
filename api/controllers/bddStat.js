@@ -110,6 +110,10 @@ exports.indicators = function(req, res) {
     attributes: ['id', 'bdd_id', 'stats_reports_id','count','periodeDebut'],
     where:{
       dimension : "total",
+	  //on ne veut pas les refus d'accès
+	   stats_reports_id: {
+        [Op.not]: 3
+      }
     },
     include: [{
       model: Bdd,

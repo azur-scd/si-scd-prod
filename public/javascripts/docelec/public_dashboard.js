@@ -1,6 +1,6 @@
 $(function () {
 
-    annualTotalBar(years[1].cle,esgbuDisplayReport[0].cle)
+    annualTotalBar(years[2].cle,esgbuDisplayReport[0].cle)
 
     var storeStatsEsgbu = new DevExpress.data.CustomStore({
         //loadMode: "raw",
