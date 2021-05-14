@@ -152,7 +152,7 @@ $(function(){
                 caption: "Statistiques",
                 colCount: 2,
                 colSpan: 2,
-                items: ["stats_collecte","stats_get_mode", "stats_url_sushi","sushi_requestor_id","sushi_customer_id","sushi_api_key","stats_url_admin","stats_login","stats_mdp","stats_mail"]
+                items: ["stats_collecte","calcul_esgbu","stats_get_mode", "stats_url_sushi","sushi_requestor_id","sushi_customer_id","sushi_api_key","stats_url_admin","stats_login","stats_mdp","stats_mail"]
             },
             {
                 itemType: "group",
@@ -178,16 +178,25 @@ $(function(){
         dataField: "bdd",
         caption: "Ressource"
          },  
-         {
+        {
         dataField: "gestion",
-        caption: "Gestion SCD",
-        lookup: {
-            dataSource: binaryState,
-            displayExpr: "valeur",
-            valueExpr: "cle"
+        caption: "Gestion",
+        showEditorAlways: true,
+        editCellTemplate: function(cellElement, cellInfo) {
+        if(cellInfo.value) {
+          Object.keys(cellInfo.value).forEach(function(key) {
+            $("<div />").dxCheckBox({
+                text: key,
+                value: cellInfo.value[key],
+                onValueChanged: function(e) {
+                  cellInfo.value[key] = e.value
+                  cellInfo.setValue(cellInfo.value)  
+                         }
+             }).appendTo(cellElement);
+            })
+           }
+          },
         },
-        validationRules: [{ type: "required" }]
-    }, 
     {
         dataField: "signalement",
         caption: "Signalement",
@@ -332,15 +341,44 @@ $(function(){
             displayExpr: "mesure"
         }
         },*/
-		{
-            dataField: "stats_collecte",
-            caption: "Collecte des statistiques de consultation",
-            lookup: {
-                dataSource: binaryState,
-                displayExpr: "valeur",
-                valueExpr: "cle"
+		 {
+                dataField: "stats_collecte",
+                caption: "Collecte des statistiques de consultation",
+                showEditorAlways: true,
+                editCellTemplate: function(cellElement, cellInfo) {
+                    if(cellInfo.value) {
+                    Object.keys(cellInfo.value).forEach(function(key) {
+                    $("<div />").dxCheckBox({
+                        text: key,
+                        value: cellInfo.value[key],
+                        onValueChanged: function(e) {
+                            cellInfo.value[key] = e.value
+                            cellInfo.setValue(cellInfo.value)  
+                         }
+                    }).appendTo(cellElement);
+                })
+            }
+                },
             },
-        },
+            {
+                dataField: "calcul_esgbu",
+                caption: "Prise en compte des stats dans l'ESGBU",
+                showEditorAlways: true,
+                editCellTemplate: function(cellElement, cellInfo) {
+                    if(cellInfo.value) {
+                    Object.keys(cellInfo.value).forEach(function(key) {
+                    $("<div />").dxCheckBox({
+                        text: key,
+                        value: cellInfo.value[key],
+                        onValueChanged: function(e) {
+                            cellInfo.value[key] = e.value
+                            cellInfo.setValue(cellInfo.value)  
+                         }
+                    }).appendTo(cellElement);
+                })
+            }
+                },
+            },
        {
         caption: "Stats collecte : configuration",
         columns: [
@@ -402,18 +440,25 @@ $(function(){
     }] ,
     onCellPrepared: function(e) {
         if(e.rowType === "data") {
-            if(e.column.dataField === "gestion") {
-                if(e.data.gestion === 1){
-                e.cellElement.css({ "background-color": "#C9ECD7", "font-weight": "bold" });
-                }
-            }
             if(e.column.dataField === "signalement") {
                 if(e.data.signalement === 1){
                 e.cellElement.css({ "background-color": "#C9ECD7", "font-weight": "bold" });
                 }
             }
         }
-    } 
+    },
+	 onRowUpdating: function(e) {
+             for (x in e.newData) {
+                    if(e.newData[x] !== undefined && e.newData[x] !== null && e.newData[x].constructor == Object) {
+                        e.newData[x] = JSON.stringify(e.newData[x])
+                    }
+                }
+                for (x in e.oldData) {
+                    if(e.oldData[x] !== undefined && e.oldData[x] !== null && e.oldData[x].constructor == Object) {
+                        e.newData[x] = JSON.stringify(e.oldData[x])
+                    }
+                }
+        },
     })
 	
 	$("#autoExpand").dxCheckBox({
@@ -498,7 +543,7 @@ $(function(){
                         key: "id",
                         loadMode: "raw",
                         load: function () {
-                            return getItems(urlBdd + "?gestion=1")
+                            return getItems(urlBdd)
                         },
                     }),
                     valueExpr: "id",

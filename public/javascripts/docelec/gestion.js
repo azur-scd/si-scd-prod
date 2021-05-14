@@ -306,6 +306,9 @@ $(function(){
             {
                 dataField: "annee",
                 caption: "Année",
+				editorOptions: {  
+                    step: 0  
+                },
                 visible: false
             },	
             {
@@ -332,6 +335,9 @@ $(function(){
                 dataField: "montant_initial",
                 caption: "Montant initial",
                 dataType: 'number',
+				editorOptions: {  
+                    step: 0  
+                },
                 visible: false,
                 setCellValue: function(newData, value, currentRowData) {
                     newData.montant_initial = value;
@@ -343,6 +349,9 @@ $(function(){
                 dataField: "taux_change",
                 caption: "Taux de change",
                 dataType: 'number',
+				editorOptions: {  
+                    step: 0  
+                },
                 visible: false,
                 setCellValue: function(newData, value, currentRowData) {
                     newData.taux_change = value;
@@ -354,6 +363,9 @@ $(function(){
                 dataField: "montant_ht",
                 caption: "Montant HT",
                 dataType: 'number',
+				editorOptions: {  
+                    step: 0  
+                },
                 width: 150,
                 setCellValue: function(newData, value) {
                     this.defaultSetCellValue(newData, value);
@@ -363,6 +375,9 @@ $(function(){
                 dataField: "part_tva1",
                 caption: "Montant HT au taux TVA 1",
                 dataType: 'number',
+				editorOptions: {  
+                    step: 0  
+                },
                 visible: false,
                  setCellValue: function(newData, value, currentRowData) {
                     newData.part_tva1 = value;
@@ -393,6 +408,9 @@ $(function(){
                 dataField: "taux_tva1",
                 caption: "Taux de TVA 1",
                 dataType: 'number',
+				editorOptions: {  
+                    step: 0  
+                },
                 visible: false,
                 setCellValue: function(newData, value, currentRowData) {
                     newData.taux_tva1 = value;
@@ -423,6 +441,9 @@ $(function(){
                 dataField: "part_tva2",
                 caption: "Montant HT au taux TVA 2",
                 dataType: 'number',
+				editorOptions: {  
+                    step: 0  
+                },
                 visible: false,
                 setCellValue: function(newData, value, currentRowData) {
                     newData.part_tva2 = value;
@@ -453,6 +474,9 @@ $(function(){
                 dataField: "taux_tva2",
                 caption: "Taux de TVA 2",
                 dataType: 'number',
+				editorOptions: {  
+                    step: 0  
+                },
                 visible: false,
                 setCellValue: function(newData, value, currentRowData) {
                     newData.taux_tva2 = value;
@@ -483,6 +507,9 @@ $(function(){
                 dataField: "montant_frais_gestion",
                 caption: "Frais de gestion (montant)",
                 dataType: 'number',
+				editorOptions: {  
+                    step: 0  
+                },
                 visible: false,
                 setCellValue: function(newData, value, currentRowData) {
                     newData.montant_frais_gestion = value;
@@ -513,6 +540,9 @@ $(function(){
                 dataField: "taux_tva_frais_gestion",
                 caption: "Taux de TVA sur les frais de gestion",
                 dataType: 'number',
+				editorOptions: {  
+                    step: 0  
+                },
                 visible: false,
                 setCellValue: function(newData, value, currentRowData) {
                     newData.taux_tva_frais_gestion = value;
@@ -543,6 +573,9 @@ $(function(){
                 dataField: "taux_recup_tva",
                 caption: "Taux de Récup TVA",
                 dataType: 'number',
+				editorOptions: {  
+                    step: 0  
+                },
                 visible: false,
                 setCellValue: function(newData, value, currentRowData) {
                     newData.taux_recup_tva = value;
@@ -609,6 +642,9 @@ $(function(){
                 dataField: "montant_ttc",
                 caption: "Montant TTC avec récup",
                 dataType: 'number',
+				editorOptions: {  
+                    step: 0  
+                },
                 width: 150,
                 setCellValue: function(currentRowData,newData, value) {      
                     this.defaultSetCellValue(newData, value);                 
@@ -618,6 +654,9 @@ $(function(){
                 dataField: "reliquat",
                 caption: "Reliquat",
                 dataType: 'number',
+				editorOptions: {  
+                    step: 0  
+                },
                 setCellValue: function(newData, value) {
                     this.defaultSetCellValue(newData, value);
                 }
@@ -646,11 +685,17 @@ $(function(){
             {
                 dataField: "surcout_uca",
                 caption: "Surcoût UCA-EC",
+				editorOptions: {  
+                    step: 0  
+                },
                 visible: false
             },	
             {
                 dataField: "refacturation",
                 caption: "Refacturation (montant)",
+				editorOptions: {  
+                    step: 0  
+                },
                 visible: false
             },	
             {

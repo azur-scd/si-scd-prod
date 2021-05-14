@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         updatedAt: DataTypes.DATE
       },
       { freezeTableName: true,
-        tableName: "stats_reports_basic",
+        tableName: "stats_reports",
       }
     );
   

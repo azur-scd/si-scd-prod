@@ -9,8 +9,16 @@ $(function () {
     var storeBdd = new DevExpress.data.CustomStore({
         loadMode: "raw",
         load: function () {
-            //return $.getJSON(urlBdd);
-            return getItems(urlBdd + "?stats_collecte=1")
+            var d = new $.Deferred();
+            $.get(urlBdd).done(function(results){
+              var data = results
+                        .filter(function(d){
+                            return d.stats_collecte[$("#selectbox-years").dxSelectBox('instance').option('value')]
+                        }) // affiche les bdds du menu déroulant si la adte sélectionnée est cochée dans le json stats_collecte
+                       
+            d.resolve(data)
+           })
+           return d.promise();
         }
     });
 

@@ -1,6 +1,8 @@
 $(function () {
 
-    annualTotalBar(years[2].cle,esgbuDisplayReport[0].cle)
+  $("#selected_year").val(years[5].cle)
+    $("#selected_report").val(esgbuDisplayReport[0].cle)
+    annualTotalBar($("#selected_year").val(),$("#selected_report").val())
 
     var storeStatsEsgbu = new DevExpress.data.CustomStore({
         //loadMode: "raw",
@@ -8,12 +10,13 @@ $(function () {
             var d = new $.Deferred();
             $.get(urlStatsIndicators).done(function(results){
               var data = results
-			  .filter(function(d){return d.type != "autre"}) //on ne veut pas les ressources fictives type BSC+Econlit pour ne pas compter 2 fois les stats
-			  .map(function(d){
-                return {"count":d.count,
-                        "date":d.periodeDebut.substring(0, 4),
-                        "type":d.type,
-                         "stats_reports":esgbuDisplayReport.filter(function(dbis){return dbis.cle.includes(d.stats_reports_id)})[0].valeur
+                        .filter(function(d){return d.calcul_esgbu})
+                        .filter(function(d){return d.calcul_esgbu[d.periodeDebut.substring(0, 4)]}) //on ne veut pas les stats annuelles des ressources pour lesquelles la case calcul_esgbu n'est pas cochée (ressource fictive type BSC+Econlit à pas compter 2 fois)
+                        .map(function(d){
+                           return {"count":d.count,
+                                   "date":d.periodeDebut.substring(0, 4),
+                                   "type":d.type,
+                                   "stats_reports":esgbuDisplayReport.filter(function(dbis){return dbis.cle.includes(d.stats_reports_id)})[0].valeur
                         }
             })
             d.resolve(data)
@@ -27,11 +30,10 @@ $(function () {
         items: years,
         valueExpr: "cle",
         displayExpr: "valeur",
-        value: years[2].cle,
-        //value: parseInt($("#selected_year").val()),
+        value: parseInt($("#selected_year").val()),
         onValueChanged: function (data) {
             $("#selected_year").val(data.value)
-            return annualTotalBar($("#selected_year").val(), $("#selected_report").val())
+            return annualTotalBar(data.value, $("#selected_report").val())
         }
     });
 
@@ -39,15 +41,14 @@ $(function () {
         dataSource: esgbuDisplayReport,
         valueExpr: "cle",
         displayExpr: "valeur",
-        value: esgbuDisplayReport[0].cle,
-        //value: $("#selected_report").val(),
+        value: $("#selected_report").val(),
         validationRules: [{
             type: "required",
             message: "Name is required"
         }],
         onValueChanged: function (data) {
             $("#selected_report").val(data.value)
-            return annualTotalBar($("#selected_year").val(), $("#selected_report").val())
+            return annualTotalBar($("#selected_year").val(), data.value)
         }
     });
 

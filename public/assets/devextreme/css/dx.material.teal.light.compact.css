@@ -7835,7 +7835,8 @@
   display: block;
 }
 .dx-form-group-caption {
-  font-size: 16px;
+  /*font-size: 16px;*/
+  font-size: 26px;
 }
 .dx-form-group-with-caption > .dx-form-group-content {
   border-top: 1px solid #e0e0e0;
@@ -7881,7 +7882,8 @@
   padding: 4px 0 2px;
 }
 .dx-field-item-label-text {
-  color: rgba(117,117,117,.87);
+  /*color: rgba(117,117,117,.87);*/
+  color: rgb(60, 15, 15)
 }
 .dx-field-item-help-text {
   color: rgba(117,117,117,.87);

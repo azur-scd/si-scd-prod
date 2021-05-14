@@ -105,22 +105,18 @@ exports.uniqueReportByBddId = function(req, res) {
 
 //triple join for indicators
 exports.indicators = function(req, res) {
- if(Object.keys(req.query).length === 0) {
+ if(Object.keys(req.query).length === 0) { //si pas de params de requête
   BddStat.findAll({
-    attributes: ['id', 'bdd_id', 'stats_reports_id','count','periodeDebut'],
+    attributes: ['id', 'bdd_id', 'stats_reports_id','count','periodeDebut'], // on récupère les lignes de stats dans la table
     where:{
-      dimension : "total",
-	  //on ne veut pas les refus d'accès
-	   stats_reports_id: {
-        [Op.not]: 3
+      dimension : "total", // filtrées sur les totaux uniquement
+      stats_reports_id: {
+        [Op.not]: 3  //on ne veut pas les refus d'accès (inutile pour ratios cost per use)
       }
     },
     include: [{
-      model: Bdd,
-      where: {
-        stats_collecte:1
-      },
-      attributes: ['id', 'bdd', 'type','soutien_oa','pole_gestion','type_marche','type_achat','perimetre'],
+      model: Bdd, // jointure table bdd
+      attributes: ['id', 'bdd', 'type','soutien_oa','pole_gestion','type_marche','type_achat','perimetre','calcul_esgbu'],
       include: [{
         model: BddGestion,
         attributes: ['annee','montant_ttc'],
@@ -146,6 +142,7 @@ exports.indicators = function(req, res) {
       obj["marche"]=d.Bdd.type_marche
       obj["achat"]=d.Bdd.type_achat
       obj["perimetre"]=d.Bdd.perimetre
+      obj["calcul_esgbu"]=d.Bdd.calcul_esgbu
       if(d.Bdd.BddGestions) {
       d.Bdd.BddGestions
       .filter(function(dbis) {
@@ -169,6 +166,9 @@ else {
     //include_gestion_conditions["annee"] = req.query.year
     delete req.query['year'];
   }
+  if(req.query["stats_reports_id"]) {
+    req.query["stats_reports_id"] = {[Op.or]: [req.query.stats_reports_id]}
+  }
   console.log(req.query)
   BddStat.findAll({
     attributes: ['id', 'bdd_id', 'stats_reports_id','count','periodeDebut'],
@@ -177,10 +177,7 @@ else {
     ,
     include: [{
       model: Bdd,
-      where: {
-        stats_collecte:1
-      },
-      attributes: ['id', 'bdd', 'type','soutien_oa','pole_gestion','type_marche','type_achat','perimetre'],
+      attributes: ['id', 'bdd', 'type','soutien_oa','pole_gestion','type_marche','type_achat','perimetre','calcul_esgbu'],
       include: [{
         model: BddGestion,
         attributes: ['annee','montant_ttc'],
@@ -203,6 +200,7 @@ else {
       obj["marche"]=d.Bdd.type_marche
       obj["achat"]=d.Bdd.type_achat
       obj["perimetre"]=d.Bdd.perimetre
+      obj["calcul_esgbu"]=d.Bdd.calcul_esgbu
       if(d.Bdd.BddGestions) {
       d.Bdd.BddGestions
       .filter(function(dbis) {
