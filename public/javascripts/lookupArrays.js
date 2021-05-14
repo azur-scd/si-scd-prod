@@ -60,19 +60,6 @@ var getStatState = [{ "cle": "", "valeur": "" },
 { "cle": "sushi", "valeur": "Moissonnage Sushi" },
 { "cle": "manuel", "valeur": "Manuelle" },
 { "cle": "nostats", "valeur": "Pas de stats" }]
-var typeRapportState = [{ "cle": "", "valeur": "" },
-{ "cle": "Counter5", "valeur": "Counter5" },
-{ "cle": "Counter4", "valeur": "Counter4" },
-{ "cle": "Non Counter", "valeur": "Non Counter" }]
-var mesureRapportState = [{ "cle": "", "valeur": "" },
-{ "cle": "ydt", "valeur": "Téléchargements (ou assimilés)" },
-{ "cle": "access_denied", "valeur": "Refus d'accès" },
-{ "cle": "search", "valeur": "Recherches (ou assimilés)" },
-{ "cle": "session", "valeur": "Sessions (ou assimilés)" },
-{ "cle": "result_click", "valeur": "Clics de résultats" },
-{ "cle": "record_view", "valeur": "Notices vues" },
-{ "cle": "page_view", "valeur": "Pages vues" },
-{ "cle": "visit", "valeur": "Visites" }]
 var disciplines = [{ "cle": "", "valeur": "" },
 { "cle": "Anglais", "valeur": "Anglais" },
 { "cle": "Chimie", "valeur": "Chimie" },
@@ -101,11 +88,13 @@ var etatState = [
     { "cle": "3-estime", "valeur": "Estimé" },
     { "cle": "4-facture", "valeur": "Facturé" }
 ]
-var years = [{ "cle": 2022, "valeur": 2022 },
+var years = [{ "cle": 2025, "valeur": 2025 },
+{ "cle": 2024, "valeur": 2024 },
+{ "cle": 2023, "valeur": 2023 },
+{ "cle": 2022, "valeur": 2022 },
 { "cle": 2021, "valeur": 2021 },
 { "cle": 2020, "valeur": 2020 },
-{ "cle": 2019, "valeur": 2019 },
-{ "cle": 2018, "valeur": 2018 }]
+{ "cle": 2019, "valeur": 2019 }]
 var steps = [{ "cle": "prev", "valeur": "Prévisions" },
 { "cle": "exec", "valeur": "Exécution" }]
 var months = [{ "cle": "janvier", "valeur": "Janvier", "start": "-01-01", "end": "-01-31","code":"01" },
