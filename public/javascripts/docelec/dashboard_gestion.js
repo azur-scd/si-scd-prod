@@ -5,7 +5,7 @@ $(function(){
     dataSource: years,
     valueExpr: "cle",
     displayExpr: "valeur",
-    value: 2020,
+    value:years[4].cle,
     onValueChanged: function(data) {
        return dataDisplay(data.value,$("#selectStep").dxSelectBox('instance').option('value')),
          treeDiscDisplay(data.value,$("#selectStep").dxSelectBox('instance').option('value'))
@@ -129,7 +129,7 @@ return d["3-estime"] || d["4-facture"]
 if(d["3-estime"]){ return {"bdd":d.bdd,"reliquat-estime":d["reliquat"],"reliquat-facture":0}}
 else if(d["4-facture"]) { return {"bdd":d.bdd,"reliquat-facture":d["reliquat"],"reliquat-estime":0}}
 })
-$("#reliquatRotatedBar"+d.cle).append("<div id='dxReliquatRotatedBar"+d.cle+"' style='height: 440px;'></div>")
+$("#reliquatRotatedBar"+d.cle).append("<div id='dxReliquatRotatedBar"+d.cle+"'></div>")
 getRotatedBar("dxReliquatRotatedBar"+d.cle,window["tseries"+d.cle] ,"bdd","reliquat-estime","Reliquat estimé","reliquat-facture","Reliquat facturé",`Reliquats par ressource ${d.cle}`)
   })
 

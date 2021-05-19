@@ -1,65 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
- <%- include ('../../partials/head'); -%> 
- <%- include ('../../partials/head_devextreme'); -%> 
+  <%- include ('../../partials/head'); -%>
+    <%- include ('../../partials/head_devextreme'); -%>
 </head>
+
 <body>
 
   <div class="page-container">
     <%- include ('../../partials/sidebar_admin') -%>
-    <div class="page-content">
-      <%- include ('../../partials/navbar_admin') -%>
-      <div class="page-content-wrap">    
-        <div class="page-title">                    
-          <h2><%= page %></h2>	
-          <span class="label label-info label-form pull-right">Utilisateur <strong><%= user.username %></strong> (connecté en <strong><%= user.groupe %>)</strong></span>       														
-      </div>  
-      <% if (user.groupe != 'docelec' && user.groupe != 'admin') { %>
-        <div class="row">
-          <div class="alert alert-danger text-center" role="alert">
-              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-              Vous n'avez pas les droits nécessaires pour accéder à cette partie du SI
-          </div>
-          </div>	
-        <% } else {%> 
-          <!-- start date select -->
-        <div class="row">
-          <div class="col-md-4">
-            <div class="dx-fieldset">
-              <div class="dx-field">
-                  <div class="dx-field-label">Année d'exercice</div>
-                  <div class="dx-field-value">
-            <div id="selectYear"></div>
-          </div>
-          </div>
+      <div class="page-content">
+        <%- include ('../../partials/navbar_admin') -%>
+          <div class="page-content-wrap">
+            <div class="page-title">
+              <h2>
+                <%= page %>
+              </h2>
+              <span class="label label-info label-form pull-right">Utilisateur <strong>
+                  <%= user.username %>
+                </strong> (connecté en <strong>
+                  <%= user.groupe %>)
+                </strong></span>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="dx-fieldset">
-              <div class="dx-field">
-                  <div class="dx-field-label">Choisir</div>
-                  <div class="dx-field-value">
-            <div id="selectStep"></div>
-          </div>
-          </div>
-            </div>
-          </div>
-          <div class="col-md-4" id="noData">
-          </div>
-        </div>
-         <!-- end date select -->
-          <!-- start tabs -->
-        <div class="row">                            
-              <div class="panel panel-default tabs">                            
-                  <ul class="nav nav-tabs" role="tablist">
+            <% if (user.groupe !='docelec' && user.groupe !='admin' ) { %>
+              <div class="row">
+                <div class="alert alert-danger text-center" role="alert">
+                  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span
+                      class="sr-only">Close</span></button>
+                  Vous n'avez pas les droits nécessaires pour accéder à cette partie du SI
+                </div>
+              </div>
+              <% } else {%>
+                <!-- start date select -->
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="dx-fieldset">
+                      <div class="dx-field">
+                        <div class="dx-field-label">Année d'exercice</div>
+                        <div class="dx-field-value">
+                          <div id="selectYear"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="dx-fieldset">
+                      <div class="dx-field">
+                        <div class="dx-field-label">Choisir</div>
+                        <div class="dx-field-value">
+                          <div id="selectStep"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4" id="noData">
+                  </div>
+                </div>
+                <!-- end date select -->
+                <!-- start tabs -->
+                <div class="row">
+                  <div class="panel panel-default tabs">
+                    <ul class="nav nav-tabs" role="tablist">
                       <li class="active"><a href="#tab-general" role="tab" data-toggle="tab">Général</a></li>
                       <li><a href="#tab-reliquat" role="tab" data-toggle="tab">Reliquat</a></li>
                       <li><a href="#tab-disc" role="tab" data-toggle="tab">Par discipline</a></li>
                       <li><a href="#tab-oa" role="tab" data-toggle="tab">OA</a></li>
                       <li><a href="#tab-uca" role="tab" data-toggle="tab">Extension périmètre</a></li>
-                  </ul>                            
-                  <div class="panel-body tab-content">
+                    </ul>
+                    <div class="panel-body tab-content">
                       <div class="tab-pane active" id="tab-general">
                         <div class="row">
                           <div class="col-md-12">
@@ -88,63 +97,77 @@
                         <div class="row">
                           <div class="col-md-3">
                             <div class="widget widget-danger">
-                                <div class="widget-title">Reliquat SCD</div>
-                                <div class="widget-int" id="reliquatTotalSCD"></div>
+                              <div class="widget-title">Reliquat SCD</div>
+                              <div class="widget-int" id="reliquatTotalSCD"></div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="widget widget-danger">
+                          </div>
+                          <div class="col-md-3">
+                            <div class="widget widget-danger">
                               <div class="widget-title">Reliquat STM</div>
                               <div class="widget-int" id="reliquatTotalSTM"></div>
+                            </div>
                           </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="widget widget-danger">
-                            <div class="widget-title">Reliquat SHS</div>
-                            <div class="widget-int" id="reliquatTotalSHS"></div>
-                        </div>
-                    </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12" id="reliquatStackedBar">
+                          <div class="col-md-3">
+                            <div class="widget widget-danger">
+                              <div class="widget-title">Reliquat SHS</div>
+                              <div class="widget-int" id="reliquatTotalSHS"></div>
+                            </div>
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-md-6" id="reliquatRotatedBarSTM"></div>
-                          <div class="col-md-6" id="reliquatRotatedBarSHS"></div>
-                          </div>                 
+                          <div class="col-md-12">
+                            <div id="reliquatRotatedBarSTM"></div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div id="reliquatRotatedBarSHS"></div>
+                          </div>
+                        </div>
                       </div>
                       <div class="tab-pane" id="tab-disc">
-                       <div class="row">
+                        <div class="row">
                           <div id="containerDisc"></div>
-                      </div>
+                        </div>
                       </div>
                       <div class="tab-pane" id="tab-oa">
                         <div class="row">
-                          <p>Vestibulum cursus augue sed leo tempor, at aliquam orci dictum. Sed mattis metus id velit aliquet, et interdum nulla porta. Etiam euismod pellentesque purus, in fermentum eros venenatis ut. Praesent vitae nibh ac augue gravida lacinia non a ipsum. Aenean vestibulum eu turpis eu posuere. Sed eget lacus lacinia, mollis urna et, interdum dui. Donec sed diam ut metus imperdiet malesuada. Maecenas tincidunt ultricies ipsum, lobortis pretium dolor sodales ut. Donec nec fringilla nulla. In mattis sapien lorem, nec tincidunt elit scelerisque tempus.</p>
-                      </div>
+                          <p>Vestibulum cursus augue sed leo tempor, at aliquam orci dictum. Sed mattis metus id velit
+                            aliquet, et interdum nulla porta. Etiam euismod pellentesque purus, in fermentum eros
+                            venenatis ut. Praesent vitae nibh ac augue gravida lacinia non a ipsum. Aenean vestibulum eu
+                            turpis eu posuere. Sed eget lacus lacinia, mollis urna et, interdum dui. Donec sed diam ut
+                            metus imperdiet malesuada. Maecenas tincidunt ultricies ipsum, lobortis pretium dolor
+                            sodales ut. Donec nec fringilla nulla. In mattis sapien lorem, nec tincidunt elit
+                            scelerisque tempus.</p>
+                        </div>
                       </div>
                       <div class="tab-pane" id="tab-uca">
-                          <p>In mattis sapien lorem, nec tincidunt elit scelerisque tempus. Quisque nisl nisl, venenatis eget dignissim et, adipiscing eu tellus. Sed nulla massa, luctus id orci sed, elementum consequat est. Proin dictum odio quis diam gravida facilisis. Sed pharetra dolor a tempor tristique. Sed semper sed urna ac dignissim. Aenean fermentum leo at posuere mattis. Etiam vitae quam in magna viverra dictum. Curabitur feugiat ligula in dui luctus, sed aliquet neque posuere.</p>
+                        <p>In mattis sapien lorem, nec tincidunt elit scelerisque tempus. Quisque nisl nisl, venenatis
+                          eget dignissim et, adipiscing eu tellus. Sed nulla massa, luctus id orci sed, elementum
+                          consequat est. Proin dictum odio quis diam gravida facilisis. Sed pharetra dolor a tempor
+                          tristique. Sed semper sed urna ac dignissim. Aenean fermentum leo at posuere mattis. Etiam
+                          vitae quam in magna viverra dictum. Curabitur feugiat ligula in dui luctus, sed aliquet neque
+                          posuere.</p>
                       </div>
+                    </div>
                   </div>
-              </div>                                                                          
-         
-        </div>
-         <!-- end tabs -->
-         <% } %>
-            </div>
+
+                </div>
+                <!-- end tabs -->
+                <% } %>
           </div>
       </div>
+  </div>
 
 </body>
 <%- include ('../../partials/script') -%>
-<%- include ('../../partials/script_admin') -%>
-<%- include ('../../partials/script_devextreme') -%>
-<%- include ('../../partials/script_amcharts') -%>
-<script src="./javascripts/docelec/dashboard_gestion.js"></script>
-<script src="./javascripts/dxchartComponents/stackedBar.js"></script>
-<script src="./javascripts/dxchartComponents/groupedBar.js"></script>
-<script src="./javascripts/dxchartComponents/pie.js"></script>
-<script src="./javascripts/dxchartComponents/rotatedBar.js"></script>
+  <%- include ('../../partials/script_admin') -%>
+    <%- include ('../../partials/script_devextreme') -%>
+      <%- include ('../../partials/script_amcharts') -%>
+        <script src="./javascripts/docelec/dashboard_gestion.js"></script>
+        <script src="./javascripts/dxchartComponents/stackedBar.js"></script>
+        <script src="./javascripts/dxchartComponents/groupedBar.js"></script>
+        <script src="./javascripts/dxchartComponents/pie.js"></script>
+        <script src="./javascripts/dxchartComponents/rotatedBar.js"></script>
+
 </html>

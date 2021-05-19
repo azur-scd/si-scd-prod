@@ -43,6 +43,15 @@ width: 80%;
     font-size: 14px;
     margin-bottom: 5px;
 }
+/*dx charts size*/
+#dxReliquatRotatedBarSTM {
+    width: 1000px;
+    height: 440px;
+}
+#dxReliquatRotatedBarSHS {
+    width: 1000px;
+    height: 440px;
+}
 /*keshif visu*/
 .demoHeader {
     display:none;
