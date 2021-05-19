@@ -1,5 +1,23 @@
 $(function(){
 
+    var storeBdds = new DevExpress.data.CustomStore({  
+        key: "id",
+        loadMode: "raw",
+        cacheRawData: false,
+        load: function () {
+            var d = new $.Deferred();
+            $.get(urlBdd).done(function(results){
+              var data = results
+                        .filter(function(d){
+                            return d.gestion[$("#selectbox").dxSelectBox('instance').option('value')] // on 'affiche que les ressources qui ont l'année selectionnée cochée en gestion
+                        }) 
+                       
+            d.resolve(data)
+           })
+           return d.promise();
+        } 
+      })  
+   
     var storeGestion = new DevExpress.data.CustomStore({
         key: "id",
         load: function () {
@@ -290,19 +308,13 @@ $(function(){
                 dataField: "bdd_id",
                 caption: "Ressource",
                 groupIndex: 2,
-                lookup: 
-                   {
-                     dataSource: new DevExpress.data.CustomStore({
-                     key: "id",
-                     loadMode: "raw",
-                     load: function() {
-                        return getItems(urlBdd + "?gestion=1")
-                     }
-                 }),
-                valueExpr: "id",
-                displayExpr: "bdd"
-            }
-            }, 	
+                lookup:
+                {
+                    dataSource: storeBdds,
+                    valueExpr: "id",
+                    displayExpr: "bdd"
+                }
+            },	
             {
                 dataField: "annee",
                 caption: "Année",
