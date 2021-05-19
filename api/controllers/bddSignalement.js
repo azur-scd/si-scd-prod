@@ -237,7 +237,7 @@ exports.listForPrimo = function (req, res) {
 				allTitles: row.alltitles
             }          
     })
-    var obj = { 
+   /* var obj = { 
       '?xml version=\"1.0\" encoding=\"UTF-8\"?' : null,
       Resources : {
         '#' : {
@@ -249,6 +249,7 @@ exports.listForPrimo = function (req, res) {
    // res.setHeader('Content-disposition', 'attachment; filename= myFile.xml');
     //res.setHeader('Content-type', 'text/xml');
     res.set('Content-Type', 'text/xml; charset=utf-8');
-    res.send(o2x(obj))
+    res.send(o2x(obj))*/
+    res.send(Resource)
   })
 }
