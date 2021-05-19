@@ -215,8 +215,8 @@ exports.listForPrimo = function (req, res) {
     const Resource =   
       rows.map(row => {
       return {
-        LinkId : row.bdd_id,
-        ResourceId: row.bdd_id,
+        LinkId : row.Bdd.id,
+        ResourceId: row.Bdd.id,
         Title: row.Bdd.bdd,
         ShortTitle: row.nom_court,
         TitleSort: row.nom_court,
