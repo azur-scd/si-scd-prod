@@ -53,6 +53,7 @@ $(function () {
         value: parseInt($("#selected_year").val()),
         onValueChanged: function (data) {
             $("#selected_year").val(data.value)
+            $("#selectbox-bdd").dxSelectBox("getDataSource").reload(); // reload du select bdds en fonction de l'année sélectionnée
             return getFormData($("#selected_year").val(), $("#selected_bdd").val(), $("#selected_report").val()),
                 monthTotalLine($("#selected_year").val(), $("#selected_bdd").val(), $("#selected_report").val())
         }
