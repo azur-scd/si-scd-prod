@@ -6,7 +6,6 @@ $(function(){
            return getItems(urlSignalementCustom)					
                 },
         update: function(key, values) {
-			console.log(values);
 			return updateItems(urlSignalement,key,values);
         }  ,
         insert: function(values) {

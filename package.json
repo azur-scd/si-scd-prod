@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js"
   },
-  "author": "Géraldine Geoffroy",
+  "author": "GÃ©raldine Geoffroy",
   "dependencies": {
     "accesscontrol": "^2.2.1",
 	"bcryptjs": "^2.4.3",
@@ -29,4 +29,3 @@
     "nodemon": "^2.0.3"
   }
 }
-
