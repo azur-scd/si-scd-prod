@@ -248,7 +248,7 @@ exports.listForPrimo = function (req, res) {
     res.setHeader('Content-Type', 'text/xml; charset=utf-8');
     res.send(o2x(obj))*/
     var obj = {};
-    obj.Resources = Resource;
+    obj.Resource = Resource;
     res.send(obj)
   })
 }
