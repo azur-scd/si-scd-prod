@@ -9,8 +9,7 @@
   "author": "Géraldine Geoffroy",
   "dependencies": {
     "accesscontrol": "^2.2.1",
-	"bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
+  	"bcryptjs": "^2.4.3",
     "connect-busboy": "0.0.2",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
