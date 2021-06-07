@@ -166,8 +166,8 @@ else {
     //include_gestion_conditions["annee"] = req.query.year
     delete req.query['year'];
   }
-  if(req.query["stats_reports_id"]) {
-    req.query["stats_reports_id"] = {[Op.or]: [req.query.stats_reports_id]}
+  if(req.query["stats_reports_id"] && req.query["stats_reports_id"].includes(",")) {
+    req.query["stats_reports_id"] = {[Op.or]:req.query.stats_reports_id.split(",").map(function(d){return d})}
   }
   console.log(req.query)
   BddStat.findAll({
