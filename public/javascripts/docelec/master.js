@@ -176,7 +176,8 @@ $(function(){
          },
          {
         dataField: "bdd",
-        caption: "Ressource"
+        caption: "Ressource",
+        validationRules: [{ type: "required" }]
          },  
         {
         dataField: "gestion",
@@ -459,6 +460,19 @@ $(function(){
                     }
                 }
         },
+        onInitNewRow: function(e) {
+            e.data.gestion =  {"2019":true,"2020":false,"2021":false,"2022":false,"2023":false,"2024":false,"2025":false}
+            e.data.stats_collecte =  {"2019":true,"2020":false,"2021":false,"2022":false,"2023":false,"2024":false,"2025":false}
+            e.data.calcul_esgbu =  {"2019":true,"2020":false,"2021":false,"2022":false,"2023":false,"2024":false,"2025":false}
+        },
+        onRowInserting: function(e) {
+            for (x in e.data) {
+                if(e.data[x] !== undefined && e.data[x] !== null && e.data[x].constructor == Object) {
+                    e.data[x] = JSON.stringify(e.data[x])
+                }
+            }
+            console.log(e.data)
+    },
     })
 	
 	$("#autoExpand").dxCheckBox({
