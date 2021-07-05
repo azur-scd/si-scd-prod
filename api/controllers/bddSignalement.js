@@ -2,7 +2,7 @@ const BddSignalement = require("../models").BddSignalement;
 const Bdd = require("../models").Bdd;
 var fs = require('fs');
 var busboy = require('connect-busboy');
-var o2x = require('object-to-xml');
+//var o2x = require('object-to-xml');
 
 //simple
 exports.list = function(req, res) {
