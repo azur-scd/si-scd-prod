@@ -84,7 +84,7 @@ function groupBy(data,groupKey){
 }
 
 function budgetSuiviSumAndCount(data){
-	 var prevInitial = data.reduce(
+	 var prevInitial = data.filter(item => (item.hasOwnProperty('1-prev'))).reduce(
     (acc, v) => acc+ v["1-prev"]
     , 0
     );
@@ -99,7 +99,7 @@ function budgetSuiviSumAndCount(data){
     );
 	
 	 var prevOnly = data.filter(function(d){
-      return d["1-prev"] && !d["2-budgete"] && !d["3-estime"] && !d["4-facture"]
+      return d["1-prev"]
     })
     var prevOnlyCount = prevOnly.length
     var prevOnlySum = prevOnly.reduce(
