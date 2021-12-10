@@ -6,8 +6,14 @@ module.exports = (sequelize, DataTypes) => {
           autoIncrement: true
         },
         nom: DataTypes.STRING,
-        debut: DataTypes.DATE,
-        fin: DataTypes.DATE,
+        bdd_id: {
+          type: DataTypes.INTEGER,
+          references: 'bdds',
+          referencesKey: 'id'
+        },
+        debut: DataTypes.STRING,
+        fin: DataTypes.STRING,
+        montant_ttc: DataTypes.FLOAT,
         porteur: DataTypes.STRING,
         contact: DataTypes.STRING,
         num_bon_commande: DataTypes.STRING,
@@ -22,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
   
     Gc.associate = (models) => {
         Gc.hasOne(models.Bdd,{foreignKey: 'gc_id'});
+        Gc.belongsTo(models.Bdd,{foreignKey: 'bdd_id'});
     };
   
     return Gc;

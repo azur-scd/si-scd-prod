@@ -73,9 +73,10 @@ module.exports = (sequelize, DataTypes) => {
   
     Bdd.associate = (models) => {
      Bdd.hasOne(models.BddSignalement,{foreignKey: 'bdd_id'});
-	 Bdd.hasOne(models.BddDiscipline,{foreignKey: 'bdd_id'});
+	   Bdd.hasMany(models.BddDiscipline,{foreignKey: 'bdd_id'});
      Bdd.hasMany(models.BddGestion,{foreignKey: 'bdd_id'});
      Bdd.hasMany(models.BddStat,{foreignKey: 'bdd_id'});
+     Bdd.hasMany(models.Gc,{foreignKey: 'bdd_id'});
      Bdd.belongsTo(models.StatReport,{foreignKey: 'pref_stats_reports_id'});
      Bdd.belongsTo(models.Gc,{foreignKey: 'gc_id'});
     };

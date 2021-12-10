@@ -668,14 +668,28 @@ $(function(){
                         width: 125
                     },
                     {
+                        dataField: "bdd_id",
+                        caption: "Ressource",
+                        //groupIndex: 0,
+                        lookup:{
+                            dataSource: new DevExpress.data.CustomStore({
+                                key: "id",
+                                loadMode: "raw",
+                                load: function () {
+                                    return getItems(urlBdd)
+                                },
+                            }),
+                            valueExpr: "id",
+                            displayExpr: "bdd"
+                        }
+                    },
+                    {
                         dataField: "debut",
-                        caption: "Date de début",
-                        dataType: "date"
+                        caption: "Date de début"
                     } ,  
                     {
                         dataField: "fin",
-                        caption: "Date de fin",
-                        dataType: "date"
+                        caption: "Date de fin"
                     } ,
                     {
                         dataField: "porteur",
