@@ -482,6 +482,119 @@ $(function(){
             $("#containerBdd2Disc").dxDataGrid("instance").option("grouping.autoExpandAll", data.value);
         }
     });
+
+    //function GCEditorTemplate(cellElement, cellInfo) { } : https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/CustomEditors/jQuery/Light/
+    $("#gridContainerGC").dxDataGrid({
+        dataSource: storeGC,
+        repaintChangesOnly: true,
+        showBorders: true,
+        columnAutoWidth: true,
+        rowAlternationEnabled: true,
+        allowColumnResizing: true,
+        allowColumnReordering: true,
+        paging: {
+            pageSize: 5
+        },
+        pager: {
+            showPageSizeSelector: true,
+            allowedPageSizes: [5, 10, 20, 50,100],
+            showInfo: true
+        },
+        "export": {
+          enabled: true,
+         fileName: "GC"
+         },
+         headerFilter: {
+            visible: true
+        },
+        filterRow: {
+            visible: true,
+            applyFilter: "auto"
+        },
+        filterPanel: { visible: true },
+        searchPanel: {
+            visible: true
+        },
+        columnChooser: {
+            enabled: true,
+           mode: "select"
+          },
+       editing: {
+        mode: "popup",
+        allowAdding: true,
+        allowUpdating: true,
+        allowDeleting: true,
+        useIcons: true
+        },
+         columns: [
+            {
+                type: "buttons",
+                caption: "Editer",
+                buttons: ["edit", "delete"]
+            },
+            {
+                dataField: "nom",
+                caption: "Nom du GC",
+                width: 125
+            },
+            {
+                dataField: "bdd_id",
+                caption: "Ressource",
+                //groupIndex: 0,
+                lookup:{
+                    dataSource: new DevExpress.data.CustomStore({
+                        key: "id",
+                        loadMode: "raw",
+                        load: function () {
+                            return getItems(urlBdd)
+                        },
+                    }),
+                    valueExpr: "id",
+                    displayExpr: "bdd"
+                }
+            },
+            {
+                dataField: "debut",
+                caption: "Date de début"
+            } ,  
+            {
+                dataField: "fin",
+                caption: "Date de fin"
+            } ,
+            {
+                dataField: "montant_ttc",
+                caption: "Montant",
+                dataType: 'number',
+            },
+            {
+                dataField: "porteur",
+                caption: "Etablissement porteur"
+            },
+            {
+                dataField: "contact",
+                caption: "Contact"
+            },
+            {
+                dataField: "num_bon_commande",
+                caption: "Numéro de bon de commande"
+            },
+            {
+                dataField: "commentaire",
+                caption: "Commentaire",
+                width: 125
+            },
+            {
+                dataField: "createdAt",
+                caption: "Créé",
+                dataType: "date"
+            } ,  
+            {
+                dataField: "updatedAt",
+                caption: "Mise à jour le",
+                dataType: "date"
+            } 
+         ]
+})
 	
 	
     $("#containerBdd2Disc").dxDataGrid({
@@ -613,113 +726,6 @@ $(function(){
         }
     })
 	
- //function GCEditorTemplate(cellElement, cellInfo) { } : https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/CustomEditors/jQuery/Light/
-    $("#gridContainerGC").dxDataGrid({
-                dataSource: storeGC,
-                repaintChangesOnly: true,
-                showBorders: true,
-                columnAutoWidth: true,
-                rowAlternationEnabled: true,
-                allowColumnResizing: true,
-                allowColumnReordering: true,
-				paging: {
-					pageSize: 5
-				},
-				pager: {
-					showPageSizeSelector: true,
-					allowedPageSizes: [5, 10, 20, 50,100],
-					showInfo: true
-                },
-                "export": {
-                  enabled: true,
-                 fileName: "GC"
-                 },
-                 headerFilter: {
-					visible: true
-                },
-                filterRow: {
-                    visible: true,
-                    applyFilter: "auto"
-                },
-                filterPanel: { visible: true },
-				searchPanel: {
-					visible: true
-                },
-                columnChooser: {
-                    enabled: true,
-                   mode: "select"
-                  },
-               editing: {
-                mode: "popup",
-                allowAdding: true,
-                allowUpdating: true,
-				allowDeleting: true,
-				useIcons: true
-		        },
-                 columns: [
-                    {
-                        type: "buttons",
-                        caption: "Editer",
-                        buttons: ["edit", "delete"]
-                    },
-                    {
-                        dataField: "nom",
-                        caption: "Nom du GC",
-                        width: 125
-                    },
-                    {
-                        dataField: "bdd_id",
-                        caption: "Ressource",
-                        //groupIndex: 0,
-                        lookup:{
-                            dataSource: new DevExpress.data.CustomStore({
-                                key: "id",
-                                loadMode: "raw",
-                                load: function () {
-                                    return getItems(urlBdd)
-                                },
-                            }),
-                            valueExpr: "id",
-                            displayExpr: "bdd"
-                        }
-                    },
-                    {
-                        dataField: "debut",
-                        caption: "Date de début"
-                    } ,  
-                    {
-                        dataField: "fin",
-                        caption: "Date de fin"
-                    } ,
-                    {
-                        dataField: "porteur",
-                        caption: "Etablissement porteur"
-                    },
-                    {
-                        dataField: "contact",
-                        caption: "Contact"
-                    },
-                    {
-                        dataField: "num_bon_commande",
-                        caption: "Numéro de bon de commande"
-                    },
-                    {
-                        dataField: "commentaire",
-                        caption: "Commentaire",
-                        width: 125
-                    },
-                    {
-                        dataField: "createdAt",
-                        caption: "Créé",
-                        dataType: "date"
-                    } ,  
-                    {
-                        dataField: "updatedAt",
-                        caption: "Mise à jour le",
-                        dataType: "date"
-                    } 
-                 ]
-    })
     $("#gridContainerReports").dxDataGrid({
                 dataSource: storeStatsReports,
                 repaintChangesOnly: true,
