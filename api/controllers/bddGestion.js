@@ -109,3 +109,34 @@ else {q={include: [{
       res.json(resObj)
     })
   };
+
+   //join pour gc dashboard
+exports.listForGc = function(req, res) {
+  var q;
+  if(req.query) {q = {where : req.query, include: [{
+    model: Bdd,
+    attributes: ['id', 'bdd', 'pole_gestion'],
+}]}}
+else {q={include: [{
+  model: Bdd,
+  attributes: ['id', 'bdd', 'pole_gestion'],
+}]}}
+    BddGestion.findAll(
+      q
+    ).then(rows => {
+      //res.json(rows)
+      const resObj = rows.map(row => {return {
+                                              "id":row.id,
+                                              "bdd_id":row.bdd_id,
+                                              "bdd":row.Bdd.bdd,
+                                              "pole":row.Bdd.pole_gestion,
+                                              "etat":row.etat,
+                                              "annee":row.annee,
+                                              "montant_ttc_avant_recup": row.montant_ttc_avant_recup,
+                                              "montant_ttc":row.montant_ttc,
+                                              "createdAt":row.createdAt,
+                                              "updatedAt":row.updatedAt}});
+      res.json(resObj)
+    })
+  };
+

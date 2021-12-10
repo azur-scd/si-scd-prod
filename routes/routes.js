@@ -80,6 +80,9 @@ app.get('/admin-docelec-stats', function(req, res, next) {
 app.get('/admin-docelec-dashboardgestion', isLoggedIn,function(req, res, next) {
     res.render('pages/docelec/dashboard_gestion', {page:'Docelec : Dashboard Suivi Gestion', menuId:'dashboard gestion',user: req.user});
   }); 
+  app.get('/admin-docelec-dashboardgc', isLoggedIn,function(req, res, next) {
+    res.render('pages/docelec/dashboard_gc', {page:'Docelec : Dashboard Suivi GC', menuId:'dashboard gc',user: req.user});
+  }); 
   app.get('/admin-config', isLoggedIn,function(req, res, next) {
     res.render('pages/admin/config', {page:'Admin : Configuration des utilisateurs et des sites', menuId:'admin config',user: req.user});
   });

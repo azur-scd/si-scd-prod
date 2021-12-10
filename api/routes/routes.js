@@ -133,9 +133,12 @@ app.route('/api/signalement_readdir')
  //get all
 app.route('/api/gestion')
 .get(bddGestionController.list) 
-//join for list
+//join for list gestion
  app.route('/api/gestion_custom')
  .get(bddGestionController.listForGestion);
+//join for dashboard gc
+app.route('/api/gcs_custom')
+.get(bddGestionController.listForGc);
 //get by id  
 app.route('/api/gestion/:id')
 .get(bddGestionController.findById);
@@ -185,6 +188,9 @@ app.route('/api/bdd2disc/create')
 //get by id  
  app.route('/api/gcs/:gcId')
   .get(gcController.findById);
+//get by bdd id  
+app.route('/api/gcs/bddid/:bddId')
+.get(gcController.findByBddId);
 //create  
   app.route('/api/gcs/create')
   .post(gcController.create);

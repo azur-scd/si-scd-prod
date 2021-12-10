@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <%- include ('../../partials/head'); -%> 
+ <%- include ('../../partials/head_devextreme'); -%> 
+</head>
+<body>
+
+  <div class="page-container">
+    <%- include ('../../partials/sidebar_admin') -%>
+    <div class="page-content">
+      <%- include ('../../partials/navbar_admin') -%>
+      <div class="page-content-wrap">    
+        <div class="page-title">                    
+          <h2><%= page %></h2>	
+          <span class="label label-info label-form pull-right">Utilisateur <strong>
+            <%= user.username %>
+          </strong> (connecté en <strong>
+            <%= user.groupe %>)
+          </strong></span>
+      </div> 
+      <% if (user.groupe !='docelec' && user.groupe !='admin' ) { %>
+        <div class="row">
+          <div class="alert alert-danger text-center" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span
+                class="sr-only">Close</span></button>
+            Vous n'avez pas les droits nécessaires pour accéder à cette partie du SI
+          </div>
+        </div>
+        <% } else {%> 
+          <!-- start date select -->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="dx-fieldset">
+              <div class="dx-field">
+                  <div class="dx-field-label">Année d'exercice</div>
+                  <div class="dx-field-value">
+            <div id="selectYear"></div>
+          </div>
+          </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="dx-fieldset">
+              <div class="dx-field">
+                  <div class="dx-field-label">Choisir</div>
+                  <div class="dx-field-value">
+            <div id="selectStep"></div>
+          </div>
+          </div>
+            </div>
+          </div>
+          <div class="col-md-4" id="noData">
+          </div>
+        </div>
+         <!-- end date select -->
+          <!-- start tabs -->
+        <div class="row">                            
+          <div class="col-md-6">
+            <div id="containerListBdd"></div>
+            </div>
+            <div class="col-md-6">
+              <div id="containerListGc"></div>
+              </div>
+        </div>
+         <!-- end tabs -->
+         <% } %>
+            </div>
+          </div>
+      </div>
+
+</body>
+<%- include ('../../partials/script') -%>
+<%- include ('../../partials/script_admin') -%>
+<%- include ('../../partials/script_devextreme') -%>
+<script src="./javascripts/docelec/dashboard_gc.js"></script>
+</html>

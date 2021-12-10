@@ -18,7 +18,15 @@ exports.findById = function(req, res) {
     Gc.findByPk(req.params.gcId).then(rows => {
         res.json(rows)
       })
- };  
+ };
+ 
+ exports.findByBddId = function(req, res) {
+  Gc.findAll({
+    where: {
+      bdd_id: req.params.bddId
+    }
+  }).then( (result) => res.json(result) )
+};
 
  exports.create = function(req, res) {
     Gc.create(req.body).then( (result) => res.json(result) )
