@@ -152,7 +152,7 @@ $(function(){
                 caption: "Statistiques",
                 colCount: 2,
                 colSpan: 2,
-                items: ["stats_collecte","calcul_esgbu","stats_get_mode", "stats_url_sushi","sushi_requestor_id","sushi_customer_id","sushi_api_key","stats_url_admin","stats_login","stats_mdp","stats_mail"]
+                items: ["stats_collecte","calcul_esgbu","stats_counter", "stats_get_mode", "stats_url_sushi","sushi_requestor_id","sushi_customer_id","sushi_api_key","stats_url_admin","stats_login","stats_mdp","stats_mail"]
             },
             {
                 itemType: "group",
@@ -383,6 +383,15 @@ $(function(){
        {
         caption: "Stats collecte : configuration",
         columns: [
+		 {
+                        dataField: "stats_counter",
+                        caption: "Conforme Counter",
+                        lookup: {
+                            dataSource: statsCounter,
+                            displayExpr: "valeur",
+                            valueExpr: "cle"
+                        }
+                    },
        {
         dataField: "stats_get_mode",
         caption: "Modalité",

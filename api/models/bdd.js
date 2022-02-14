@@ -53,7 +53,8 @@ module.exports = (sequelize, DataTypes) => {
               this.setDataValue('calcul_esgbu', calcul_esgbu);
           }
         },
-        stats_get_mode: DataTypes.STRING,
+        stats_counter: DataTypes.STRING,  
+		stats_get_mode: DataTypes.STRING,
         stats_url_sushi: DataTypes.STRING,
 		sushi_requestor_id: DataTypes.STRING,
         sushi_customer_id: DataTypes.STRING,

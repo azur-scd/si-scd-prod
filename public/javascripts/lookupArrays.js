@@ -121,4 +121,7 @@ var esgbuDisplayReport = [{"cle":"1,2,6","valeur":"Téléchargements"},
 {"cle":"5,7","valeur":"Sessions"}]
 var userGroups = [{ "cle": "admin", "valeur": "Admin" },
 { "cle": "docelec", "valeur": "Docelec" },
-{ "cle": "horaires", "valeur": "Horaires" }]            
+{ "cle": "horaires", "valeur": "Horaires" }]        
+var statsCounter = [{ "cle": "counter_5", "valeur": "Counter 5" },
+{ "cle": "counter_4", "valeur": "Counter 4" },
+{ "cle": "no_counter", "valeur": "Non Counter" }]    
