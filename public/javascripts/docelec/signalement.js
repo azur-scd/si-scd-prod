@@ -141,11 +141,13 @@ $(function(){
                 hint: "Clone",
                 icon: "repeat",
                 onClick: function(e) {
+					 if ($('#usergroup').val() != "guest") {
                     var clonedItem = $.extend({}, e.row.data, { id: "" });
                     var filtered = _.pick(clonedItem, function (v) { return v !== '' && v !== null; });
                     createItems(urlSignalement, filtered)
                     e.component.refresh(true);
                     e.event.preventDefault();
+					 }
                 }
             }]
             },
@@ -280,7 +282,7 @@ $(function(){
         caption: "Modifié le"
       }],
       masterDetail: {
-          enabled: true,
+          enabled: editMode,
           template: function(container, options) { 
               var currentBdd = options.data;
               $("<div>")
