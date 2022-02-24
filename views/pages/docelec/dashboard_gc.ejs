@@ -9,11 +9,7 @@
     <script> document.location.href = '/error' </script>
     <% } else {%>
   <div class="page-container">
-   <% if (user.groupe ='admin' ) { %>
-    <%- include ('../../partials/sidebar_admin') -%>
-	<% } else {%>
-	<%- include ('../../partials/sidebar_docelec') -%>
-	 <% } %>
+  <%- include ('../../partials/sidebar_admin') -%>
     <div class="page-content">
       <%- include ('../../partials/navbar_admin') -%>
       <div class="page-content-wrap">    
