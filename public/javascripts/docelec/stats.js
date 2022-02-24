@@ -1,4 +1,9 @@
 $(function () {
+	
+    if ($('#usergroup').val() == "guest") {
+      $(".panel-footer").hide()
+    }
+	
     getAvalaibleReports($("#selected_bdd").val())
     getFormData($("#selected_year").val(), $("#selected_bdd").val(), $("#selected_report").val())
     getSushiParam($("#selected_bdd").val())

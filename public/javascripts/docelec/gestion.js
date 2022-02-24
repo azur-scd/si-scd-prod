@@ -1,4 +1,9 @@
 $(function(){
+	
+	let editMode = true;
+    if ($('#usergroup').val() == "guest") {
+    editMode = false
+}
 
     var storeBdds = new DevExpress.data.CustomStore({  
         key: "id",
@@ -179,9 +184,9 @@ $(function(){
             },
         ]
         },
-        allowUpdating: true,
-        allowDeleting: true,
-        allowAdding: true,
+        allowUpdating: editMode,
+        allowDeleting: editMode,
+        allowAdding: editMode,
         useIcons: true
          },
         columns: [

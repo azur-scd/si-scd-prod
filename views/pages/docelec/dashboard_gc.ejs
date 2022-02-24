@@ -5,11 +5,11 @@
  <%- include ('../../partials/head_devextreme'); -%> 
 </head>
 <body>
- <% if (user.groupe !='docelec' && user.groupe !='admin' ) { %>
+ <% if (user.groupe !='docelec' && user.groupe !='admin' && user.groupe !='guest') { %>
     <script> document.location.href = './error' </script>
     <% } else {%>
   <div class="page-container">
-  <%- include ('../../partials/sidebar_docelec') -%>
+  <%- include ('../../partials/sidebar_admin') -%>
     <div class="page-content">
       <%- include ('../../partials/navbar_admin') -%>
       <div class="page-content-wrap">    
@@ -20,6 +20,7 @@
           </strong> (connecté en <strong>
             <%= user.groupe %>)
           </strong></span>
+		  <input type="hidden" id="usergroup" value="<%= user.groupe %>" />
       </div> 
           <!-- start date select -->
         <div class="row">
