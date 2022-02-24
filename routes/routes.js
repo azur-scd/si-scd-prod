@@ -29,8 +29,11 @@ module.exports = function(app) {
       case 'docelec':
         res.redirect('./admin-docelec-master');
         break;
-	  case 'sp_horaires':
-	    res.status(301).redirect("http://si-scd.unice.fr/si-scd/modules/horaires/admin/index.html");
+	  case 'horaires':
+	    res.redirect("http://si-scd.unice.fr/si-scd/modules/horaires/admin/index.html");
+        break;
+	  case 'guest':
+	    res.redirect('./admin-docelec-master');
         break;
       default:
         console.log("no default page yet");

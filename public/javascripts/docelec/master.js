@@ -1,4 +1,9 @@
 $(function(){
+	
+	let editMode = true;
+    if ($('#usergroup').val() == "guest") {
+      editMode = false
+    }
 
    var storeBdd = new DevExpress.data.CustomStore({
         key: "id",
@@ -111,8 +116,8 @@ $(function(){
         },
        editing: {
         mode: "popup",
-        allowAdding: true,
-        allowUpdating: true,
+        allowAdding: editMode,
+        allowUpdating: editMode,
         //allowDeleting: true,
         useIcons: true,
         popup: {
@@ -530,9 +535,9 @@ $(function(){
           },
        editing: {
         mode: "popup",
-        allowAdding: true,
-        allowUpdating: true,
-        allowDeleting: true,
+        allowAdding: editMode,
+        allowUpdating: editMode,
+        allowDeleting: editMode,
         useIcons: true
         },
          columns: [
@@ -610,9 +615,9 @@ $(function(){
         dataSource: storeBdd2Disc,
         editing: {
             mode: "popup",
-            allowUpdating: true,
-            allowDeleting: true,
-            allowAdding: true,
+            allowUpdating: editMode,
+            allowDeleting: editMode,
+            allowAdding: editMode,
             useIcons: true
         },
         showBorders: true,
@@ -775,9 +780,9 @@ $(function(){
                   },
                editing: {
                 mode: "popup",
-                allowAdding: true,
-                allowUpdating: true,
-				allowDeleting: true,
+                allowAdding: editMode,
+                allowUpdating: editMode,
+				allowDeleting: editMode,
                 useIcons: true,
                },
                columns: [
