@@ -6,7 +6,7 @@
 </head>
 <body>
  <% if (user.groupe != 'admin') { %>
-    <script> document.location.href = '/error' </script>
+    <script> document.location.href = './error' </script>
     <% } else {%>
   <div class="page-container">
     <%- include ('../../partials/sidebar_admin') -%>
