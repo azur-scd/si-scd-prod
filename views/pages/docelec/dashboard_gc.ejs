@@ -6,10 +6,10 @@
 </head>
 <body>
  <% if (user.groupe !='docelec' && user.groupe !='admin' ) { %>
-    <script> document.location.href = '/error' </script>
+    <script> document.location.href = './error' </script>
     <% } else {%>
   <div class="page-container">
-  <%- include ('../../partials/sidebar_admin') -%>
+  <%- include ('../../partials/sidebar_docelec') -%>
     <div class="page-content">
       <%- include ('../../partials/navbar_admin') -%>
       <div class="page-content-wrap">    
