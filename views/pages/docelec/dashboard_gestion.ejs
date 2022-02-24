@@ -7,7 +7,9 @@
 </head>
 
 <body>
-
+ <% if (user.groupe !='docelec' && user.groupe !='admin' ) { %>
+    <script> document.location.href = '/error' </script>
+    <% } else {%>
   <div class="page-container">
     <%- include ('../../partials/sidebar_admin') -%>
       <div class="page-content">
@@ -23,15 +25,6 @@
                   <%= user.groupe %>)
                 </strong></span>
             </div>
-            <% if (user.groupe !='docelec' && user.groupe !='admin' ) { %>
-              <div class="row">
-                <div class="alert alert-danger text-center" role="alert">
-                  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span
-                      class="sr-only">Close</span></button>
-                  Vous n'avez pas les droits nécessaires pour accéder à cette partie du SI
-                </div>
-              </div>
-              <% } else {%>
                 <!-- start date select -->
                 <div class="row">
                   <div class="col-md-4">
@@ -154,11 +147,10 @@
 
                 </div>
                 <!-- end tabs -->
-                <% } %>
           </div>
       </div>
   </div>
-
+<% } %>
 </body>
 <%- include ('../../partials/script') -%>
   <%- include ('../../partials/script_admin') -%>

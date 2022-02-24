@@ -7,7 +7,9 @@
 </head>
 
 <body>
-
+ <% if (user.groupe != 'admin') { %>
+    <script> document.location.href = '/error' </script>
+    <% } else {%>
   <div class="page-container">
     <%- include ('../../partials/sidebar_admin') -%>
     <div class="page-content">
@@ -17,15 +19,7 @@
           <h2><%= page %></h2>
           <span class="label label-info label-form pull-right">Utilisateur <strong><%= user.username %></strong>
             (connecté en <strong><%= user.groupe %>)</strong></span>
-        </div>
-        <% if (user.groupe != 'admin') { %>
-          <div class="row">
-            <div class="alert alert-danger text-center" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                Vous n'avez pas les droits nécessaires pour accéder à cette partie du SI
-            </div>
-            </div>	
-          <% } else {%> 
+        </div> 
         <div class="row">
           <div class="form-horizontal validate">
             <div class="panel panel-default tabs">
@@ -51,11 +45,10 @@
             </div>
           </div>
         </div>
-        <% } %> 
       </div>
     </div>
   </div>
-
+<% } %> 
 </body>
 <%- include ('../../partials/script') -%>
 <%- include ('../../partials/script_admin') -%>
