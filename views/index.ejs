@@ -4,106 +4,97 @@
  <%- include ('partials/head'); -%> 
 </head>
 <body>
-  <div class="page-container">
+   <div class="page-container">
     <div class="row text-center">
       <h1 style="color:#bec4ca">SI-SCD</h1>
-      <p><a href="./login" target="_blanck" type="button" class="btn btn-info">Accéder à l'interface d'administration</a></p>
+      <!--<p><a href="/login" target="_blanck" type="button" class="btn btn-info">Accéder à l'interface d'administration</a></p>-->
      </div>
   <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <div class="panel panel-warning push-up-20">
+          <div class="panel-body panel-body-pricing">
+              <h2><small>Horaires des BU</small></h2>                                
+              <p><span class="fa fa-caret-right"></span> <a href="./public-apps-app">Totaux par BU</a></p>
+          </div>
+          <div class="panel-footer">                                 
+              <a href="./login" target="_blanck" type="button" class="btn btn-info btn-block">Administration</a>
+          </div>
+      </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-warning push-up-20">
+        <div class="panel-body panel-body-pricing">
+            <h2><small>Documentation électronique</small></h2>                                
+            <p><span class="fa fa-caret-right"></span> <a href="./public/docelec/dashboard">Statistiques : dashboard</a></p>
+        </div>
+        <div class="panel-footer">                                 
+          <a href="./login" target="_blanck" type="button" class="btn btn-info btn-block">Administration</a>
+        </div>
+    </div>
+</div>
+        <div class="col-md-1"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+   
+  <div class="col-md-4">
+   <div class="row">
+    <div class="panel panel-warning push-up-20">
+        <div class="panel-body panel-body-pricing">
+            <h2><small>IUB</small></h2>                                
+            <p><span class="fa fa-caret-right"></span> <a href="./public/iub/explore">Exploration interactive</a></p>
+        </div>
+    </div>
+ </div>
+ <div class="row">
+  <div class="panel panel-warning push-up-20">
+      <div class="panel-body panel-body-pricing">
+          <h2><small>Utilitaires</small></h2>                                
+          <p><span class="fa fa-caret-right"></span> <a href="./public/apps/utils">Vérifier les urls d'accès Numilog</a></p>
+          <p><span class="fa fa-caret-right"></span> <a href="./public/apps/utils">Vérifier la présence d'ISBN dans le Sudoc</a></p>
+          <p><span class="fa fa-caret-right"></span> <a href="https://ggeoffroy.com/apps/data-explorer/" target="_blanck">Data-Explorer</a><span class="text-muted"> Explorer graphiquement des jeux de dnnées</span></p>
+          <p><span class="fa fa-caret-right"></span> <a href="https://github.com/abes-esr/sudoc-toolkit" target="_blanck">SudocToolkit</a><span class="text-muted"> Interface graphique d'interrogation des web services de l'Abes</span></p>
+      </div>
+  </div>
+</div>
+</div>
+
+<div class="col-md-4">
+  <div class="panel panel-warning push-up-20">
+      <div class="panel-body panel-body-pricing">
+          <h2><small>Publications et Open Access</small></h2>                                
+          <p><span class="fa fa-caret-right"></span><a href="http://dev-scd.unice.fr/uca-oa-barometre/" target="_blanck">Baromètre Science Ouverte (version complète)</a></p>
+          <p><span class="fa fa-caret-right"></span><a href="http://dev-scd.unice.fr/uca-oa-barometre-minimalist/" target="_blanck">Baromètre Science Ouverte (version light one-page)</a></p>
+          <p><span class="fa fa-caret-right"></span><a href="http://dev-scd.unice.fr/barometre-demonstrateur/" target="_blanck">Baromètre Science Ouverte : démonstrateur</a> <span class="text-muted"> Générer un baromètre OA à partir d'un fichier e DOI</span></p>
+          <p><span class="fa fa-caret-right"></span><a href="http://dev-scd.unice.fr/uca-oa-barometre/" target="_blanck">Aurehal Network</a> <span class="text-muted"> Visualisation en graphe des structures dans Aurehal</span></p>
+      </div>
+  </div>
+</div>
+
     <div class="col-md-1"></div>
-    <div class="col-md-3">
-      <div class="panel panel-primary">
-        <div class="panel-heading ui-draggable-handle">
-            <h3 class="panel-title">Horaires des BU</h3>
+  </div>
+<hr> 
+  <div class="row">
+    <div class="col-md-1"></div>
+
+    <!--<div class="col-md-3">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title">Kanboard</h3>
         </div>
         <div class="panel-body">
-            <p><a href="#">[A venir] Données consolidées et graphiques</a></p>
-            <p><a href="#">[A venir] Données ESGBU</a></p>
-        </div>                       
-    </div>
-    </div>
+            <p>Application de gestion de projet.</p>
+        </div>     
+        <div class="panel-footer">
+          <a href="http://si-scd.unice.fr/kanboard/" target="_blanck" type="button" class="btn btn-warning btn-block">Accès</a>
+        </div>                            
+    </div>  
+    </div>-->
 
-      <div class="col-md-3">
-        <div class="panel panel-primary">
-            <div class="panel-heading ui-draggable-handle">
-                <h3 class="panel-title">IUB</h3>
-            </div>
-            <div class="panel-body">
-                <p><a href="./public-iub-explore">Exploration interactive</a></p>
-            </div>                           
-        </div>
-        </div>
 
-        <div class="col-md-3">
-          <div class="panel panel-primary">
-              <div class="panel-heading ui-draggable-handle">
-                  <h3 class="panel-title">Fréquentation des BU</h3>
-              </div>
-              <div class="panel-body">
-                  <p>[A venir]</p>
-              </div>
-              <div class="panel-footer">
-              </div>                            
-          </div>
-          </div>
-        <div class="col-md-1"></div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-3">
-      <div class="panel panel-primary">
-          <div class="panel-heading ui-draggable-handle">
-              <h3 class="panel-title">Documentation électronique</h3>
-          </div>
-          <div class="panel-body">
-              <p><a href="./public-docelec-dashboard">Tableau de bord : statistiques de consultation et données ESGBU</a></p>
-          </div>                       
-      </div>
-    </div>
-
-      <div class="col-md-3">
-        <div class="panel panel-primary">
-            <div class="panel-heading ui-draggable-handle">
-                <h3 class="panel-title">Web (site et catalogue)</h3>
-            </div>
-            <div class="panel-body">
-              <p><a href="#">Statistiques (GA)</a></p>
-            </div>                           
-        </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="panel panel-primary">
-              <div class="panel-heading ui-draggable-handle text-center">
-                  <h3 class="panel-title">Publications</h3>
-              </div>
-              <div class="panel-body">
-                  <p><a href="https://ggeoffroy.com/apps/uca.barometre-oa" target="_blanck">Baromètre Science Ouverte</a></p>
-              </div>
-              <div class="panel-footer">
-              </div>                            
-          </div>
-          </div>
-        <div class="col-md-1"></div>
-  </div>
-  
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-3">
-      <div class="panel panel-primary">
-          <div class="panel-heading ui-draggable-handle">
-              <h3 class="panel-title">Divers</h3>
-          </div>
-          <div class="panel-body">
-            <p><a href="./public-apps-utils">Utilitaires</a></p>
-            <p><a href="./public-apps-app">Applications développées au Sidoc</a></p>
-        </div> 
-        <!-- <div class="panel-footer">
-              <a href="./public-apps-app" button class="btn btn-primary">Voir</a>
-          </div> -->                        
-      </div>
-    </div>
       <div class="col-md-1"></div>
   </div>
 </div>

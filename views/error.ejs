@@ -6,14 +6,32 @@
 <body>
 
   <div class="page-container">
-  <%- include ('partials/sidebar') -%>
   <div class="page-content">
-    <%- include ('partials/navbar') -%>
     <div class="page-content-wrap">
       <div class="page-title">                    
         <h2><%= page %></h2>
       </div>
-		<h1><%= message %></h1>
+	
+      <div class="row">
+        <div class="col-md-12">
+
+            <div class="error-container">
+                <div class="error-text">Accès non autorisé</div>
+                <div class="error-actions">                                
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-info btn-block btn-lg" onClick="document.location.href = '/';">Retour au SI</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-primary btn-block btn-lg" onClick="history.back();">Page précédente</button>
+                        </div>
+                    </div>                                
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     </div>
 </div>
 </div>
