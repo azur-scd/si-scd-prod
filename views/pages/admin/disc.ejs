@@ -5,7 +5,7 @@
  <%- include ('../../partials/head_devextreme'); -%> 
 </head>
 <body>
- <% if (user.groupe !='docelec' && user.groupe !='admin' ) { %>
+ <% if (user.groupe !='admin' ) { %>
     <script> document.location.href = './error' </script>
     <% } else {%>
   <div class="page-container">
@@ -22,7 +22,6 @@
       <div class="row">
         <div id="gridContainerDisc"></div>
       </div>
-	 <% } %>
     </div>
 </div>
 </div>
