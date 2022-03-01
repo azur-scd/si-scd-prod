@@ -659,9 +659,11 @@ $(function(){
                     hint: "Clone",
                     icon: "repeat",
                     onClick: function(e) {
+						 if ($('#usergroup').val() != "guest") {
                         var clonedItem = $.extend({}, e.row.data, { id:""});
                         createItems(urlBdd2Disc, clonedItem)
                         e.component.refresh(true);
+						 }
                     }
                 }],
                 width: 80
