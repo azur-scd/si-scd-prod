@@ -69,6 +69,26 @@ $(function(){
             return deleteItems(urlStatsReports,key);
         }         
     });
+	
+	  function tagBoxEditorTemplate(cellElement, cellInfo) {
+        return $('<div>').dxTagBox({
+          dataSource: typePerimetre,
+          value: cellInfo.value,
+          valueExpr: 'cle',
+          displayExpr: 'valeur',
+          showSelectionControls: true,
+          maxDisplayedTags: 3,
+          showMultiTagOnly: false,
+          applyValueMode: 'useButtons',
+          searchEnabled: true,
+          onValueChanged(e) {
+            cellInfo.setValue(e.value);
+          },
+          onSelectionChanged() {
+            cellInfo.component.updateDimensions();
+          },
+        });
+      }
 
     $("#gridContainerBdd").dxDataGrid({
         dataSource: storeBdd,
@@ -267,15 +287,30 @@ $(function(){
          valueExpr: "cle"
     }
     },
-    {
-        dataField: "perimetre",
-        caption: "Périmètre abonnement",
-        lookup: {
-         dataSource: typePerimetre,
-         displayExpr: "valeur",
-         valueExpr: "cle"
-    }
-    },
+       {
+                dataField: "perimetre",
+                caption: "Périmètre abonnement",
+                allowSorting: false,
+                editCellTemplate: tagBoxEditorTemplate,
+                lookup: {
+                    dataSource: typePerimetre,
+                    displayExpr: "valeur",
+                    valueExpr: "cle"
+                },
+                cellTemplate(container, options) {
+                    const noBreakSpace = '\u00A0';
+                    const text = (options.value || []).map((element) => options.column.lookup.calculateCellValue(element)).join(', ');
+                    container.text(text || noBreakSpace).attr('title', text);
+                  },
+                  calculateFilterExpression(filterValue, selectedFilterOperation, target) {
+                    if (target === 'search' && typeof (filterValue) === 'string') {
+                      return [this.dataField, 'contains', filterValue];
+                    }
+                    return function (data) {
+                      return (data.perimetre || []).indexOf(filterValue) !== -1;
+                    };
+                  },
+            },
     {
         dataField: "type_achat",
         caption: "Type d'achat",
