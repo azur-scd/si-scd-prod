@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <%- include ('../../partials/head'); -%> 
+ <%- include ('../../partials/head_devextreme'); -%> 
+</head>
+<body>
+  <% if (user.groupe !='docelec' && user.groupe !='admin' && user.groupe !='guest') { %>
+    <script> document.location.href = './error' </script>
+    <% } else {%>
+  <div class="page-container">
+    <%- include ('../../partials/sidebar_admin') -%>
+    <div class="page-content">
+      <%- include ('../../partials/navbar_admin') -%>
+      <div class="page-content-wrap">   
+        <div class="page-title">                    
+          <h2><%= page %></h2>	
+       	  <span class="label label-info label-form pull-right">Utilisateur <strong><%= user.username %></strong> (connecté en <strong><%= user.groupe %>)</strong></span> 
+          <input type="hidden" id="usergroup" value="<%= user.groupe %>" />			
+      </div> 
+      <div class="row">
+        <div class="panel panel-info">                               
+            <div class="panel-body" id="panelGetParams">
+             <div class="col-md-3">
+               <div class="form-group">
+               <label class="col-md-4 control-label">Année</label>
+                 <div class="col-md-8" id="selectYear">
+               </div>
+               </div>
+             </div>
+             <div class="col-md-3">  
+              <div id="newDataButton"></div>                                               
+             </div>
+            </div>                                
+        </div>
+</div>
+<div class="row">
+    <div id="gridContainerSuiviStats"></div>
+  </div>
+</div>
+</div>
+</div>
+ <% } %>
+</body>
+<%- include ('../../partials/script') -%>
+<%- include ('../../partials/script_admin') -%>
+<%- include ('../../partials/script_devextreme') -%>
+<script src="./javascripts/docelec/suivi_stats.js"></script>
+
+</html>

@@ -5,6 +5,7 @@ const statReportController = require("../controllers").statReport;
 const bddSignalementController = require("../controllers").bddSignalement;
 const bddGestionController = require("../controllers").bddGestion;
 const bddStatController = require("../controllers").bddStat;
+const statSuiviController = require("../controllers").statSuivi;
 const gcController = require("../controllers").gc;
 const discController = require("../controllers").disc;
 const bddDisciplineController = require("../controllers").bddDiscipline;
@@ -243,6 +244,26 @@ app.route('/api/bdds_stats/create')
  //delete
 app.route('/api/bdds_stats/:id/delete')
 .delete(bddStatController.delete);
+
+ /*----- STATS SUIVI-----*/
+  //get all
+  app.route('/api/stats_suivi')
+  .get(statSuiviController.list) 
+//get by id  
+ app.route('/api/stats_suivi/:id')
+  .get(statSuiviController.findById);
+//get by bdd id  
+app.route('/api/stats_suivi/bddid/:bddId')
+.get(statSuiviController.findByBddId);
+//create  
+  app.route('/api/stats_suivi/create')
+  .post(statSuiviController.create);
+  //update
+  app.route('/api/stats_suivi/:id/update')
+  .put(statSuiviController.update); 
+  //delete
+app.route('/api/stats_suivi/:id/delete')
+ .delete(statSuiviController.delete);
 
 /*----- Harvest Counter and populate db----*/  
 

@@ -83,6 +83,9 @@ app.get('/admin-docelec-gestion', isLoggedIn, function(req, res, next) {
 app.get('/admin-docelec-stats', function(req, res, next) {
     res.render('pages/docelec/stats', {page:"Docelec : Statistiques d'usage", menuId:'statistiques',user: req.user});
   }); 
+app.get('/admin-docelec-suivistats', function(req, res, next) {
+    res.render('pages/docelec/suivi_stats', {page:"Docelec : Suivi de la saisie des statistiques", menuId:'statistiques suivi saisie',user: req.user});
+  }); 
 app.get('/admin-docelec-dashboardgestion', isLoggedIn,function(req, res, next) {
     res.render('pages/docelec/dashboard_gestion', {page:'Docelec : Dashboard Suivi Gestion', menuId:'dashboard gestion',user: req.user});
   }); 

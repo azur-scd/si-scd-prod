@@ -88,6 +88,11 @@ var etatState = [
     { "cle": "3-estime", "valeur": "Estimé" },
     { "cle": "4-facture", "valeur": "Facturé" }
 ]
+var etatStatSaisie = [
+    { "cle": "1-vide", "valeur": "Non commencé" },
+    { "cle": "2-encours", "valeur": "En cours" },
+    { "cle": "3-fait", "valeur": "Fait" }
+]
 var years = [{ "cle": 2030, "valeur": 2030 },
 { "cle": 2029, "valeur": 2029 },
 { "cle": 2028, "valeur": 2028 },
