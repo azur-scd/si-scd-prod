@@ -33,9 +33,13 @@ var typeOA = [
     { "cle": "oar", "valeur": "OAR" }
 ]
 var typePerimetre = [
-    { "cle": "", "valeur": "" },
-    { "cle": "UCA", "valeur": "UCA" },
-    { "cle": "UCA-EC", "valeur": "UCA-EC" }
+    { "cle": "uca_epe", "valeur": "UCA-EPE" },
+    { "cle": "uca_ex_uns", "valeur": "UCA - Ex UNS" },
+    { "cle": "chu", "valeur": "CHU" },
+    { "cle": "sds", "valeur": "SDS" },
+    { "cle": "skema", "valeur": "Skema" },
+    { "cle": "esra", "valeur": "ESRA" },
+    { "cle": "pnds", "valeur": "PNDS" }
 ]
 var accessState = [
     { "cle": "", "valeur": "" },
