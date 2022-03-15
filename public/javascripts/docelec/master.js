@@ -287,11 +287,30 @@ $(function(){
          valueExpr: "cle"
     }
     },
-       {
+            {
                 dataField: "perimetre",
                 caption: "Périmètre abonnement",
-                allowSorting: false,
-                editCellTemplate: tagBoxEditorTemplate,
+                editCellTemplate: function(cellElement, cellInfo) {
+                   return $('<div>').dxTagBox({
+                    dataSource: typePerimetre,
+                    value: cellInfo.value.split(','),
+                    valueExpr: 'cle',
+                    displayExpr: 'valeur',
+                    showSelectionControls: true,
+                    maxDisplayedTags: 3,
+                    showMultiTagOnly: false,
+                    applyValueMode: 'useButtons',
+                    searchEnabled: true,
+                    onValueChanged(e) {
+                        console.log(e.value)
+                        cellInfo.setValue(e.value.join(','));
+                      },
+                     /* onSelectionChanged() {
+                        info.component.updateDimensions();
+                      },*/
+                   })
+                    
+                },
                 lookup: {
                     dataSource: typePerimetre,
                     displayExpr: "valeur",
@@ -299,17 +318,10 @@ $(function(){
                 },
                 cellTemplate(container, options) {
                     const noBreakSpace = '\u00A0';
-                    const text = (options.value || []).map((element) => options.column.lookup.calculateCellValue(element)).join(', ');
-                    container.text(text || noBreakSpace).attr('title', text);
+                    const text = (options.value).split(',').map((element) => typePerimetre.filter((el) => el.cle == element)[0].valeur).join(',')
+                    container.text(text || noBreakSpace);                   
                   },
-                  calculateFilterExpression(filterValue, selectedFilterOperation, target) {
-                    if (target === 'search' && typeof (filterValue) === 'string') {
-                      return [this.dataField, 'contains', filterValue];
-                    }
-                    return function (data) {
-                      return (data.perimetre || []).indexOf(filterValue) !== -1;
-                    };
-                  },
+
             },
     {
         dataField: "type_achat",
