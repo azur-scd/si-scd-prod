@@ -321,7 +321,15 @@ $(function(){
                     const text = (options.value).split(',').map((element) => typePerimetre.filter((el) => el.cle == element)[0].valeur).join(',')
                     container.text(text || noBreakSpace);                   
                   },
-
+                 calculateFilterExpression(filterValue, selectedFilterOperation, target) {
+                    if (target === 'search' && typeof (filterValue) === 'string') {
+                        console.log(filterValue)
+                      return [this.dataField, 'contains', filterValue];
+                    }
+                    return function (data) {
+                      return (data.perimetre || []).indexOf(filterValue) !== -1;
+                    };
+                  },
             },
     {
         dataField: "type_achat",
