@@ -475,9 +475,9 @@ $(function(){
                 }
         },
         onInitNewRow: function(e) {
-            e.data.gestion =  {"2019":true,"2020":false,"2021":false,"2022":false,"2023":false,"2024":false,"2025":false}
-            e.data.stats_collecte =  {"2019":true,"2020":false,"2021":false,"2022":false,"2023":false,"2024":false,"2025":false}
-            e.data.calcul_esgbu =  {"2019":true,"2020":false,"2021":false,"2022":false,"2023":false,"2024":false,"2025":false}
+            e.data.gestion =  {"2019":true,"2020":false,"2021":false,"2022":false,"2023":false,"2024":false,"2025":false,"2026":false,"2027":false,"2028":false}
+            e.data.stats_collecte =  {"2019":true,"2020":false,"2021":false,"2022":false,"2023":false,"2024":false,"2025":false,"2026":false,"2027":false,"2028":false}
+            e.data.calcul_esgbu =  {"2019":true,"2020":false,"2021":false,"2022":false,"2023":false,"2024":false,"2025":false,"2026":false,"2027":false,"2028":false}
         },
         onRowInserting: function(e) {
             for (x in e.data) {
