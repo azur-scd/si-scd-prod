@@ -134,6 +134,28 @@ $(function () {
                     displayExpr: "bdd"
                 }
             },
+			 {
+                dataField: "bdd_id",
+                caption: "Conforme Counter",
+                lookup:
+                {
+                    dataSource: storeBdds,
+                    valueExpr: "id",
+                    displayExpr: "stats_counter"
+                },
+                allowEditing: false
+            },
+            {
+                dataField: "bdd_id",
+                caption: "Modalité de collecte",
+                lookup:
+                {
+                    dataSource: storeBdds,
+                    valueExpr: "id",
+                    displayExpr: "stats_get_mode"
+                },
+                allowEditing: false
+            },
             {
                 dataField: "annee",
                 caption: "Année",
