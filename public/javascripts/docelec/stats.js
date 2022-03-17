@@ -308,7 +308,7 @@ $(function () {
         return $.ajax({
             method: 'POST',
             url: urlProxySushi + $("#selected_sushi_report").val(),
-            data: { "url": completeUrl, , "metric" : $("#selected_metric").val() },
+            data: { "url": completeUrl, "metric" : $("#selected_metric").val() },
             beforeSend: function() {
                 $("#loaderDiv").show();
             },
