@@ -187,12 +187,18 @@ $(function () {
         return getItems(urlBdd + "/" + id)
             .done(function (result) {
                 /* on remet ici les valeurs de l'array sushiReportUrlSegment car blocage dans l'UI sinon ?*/
-                var sushiReportUrlSegment = [{ "cle": "tr_j3", "valeur": "Revues - Téléchargements (tr_j3)", "mapReportId": 1 },
-                { "cle": "tr_j2", "valeur": "Revues - Refus d'accès (tr_j2)", "mapReportId": 3 },
-                { "cle": "tr_b3", "valeur": "Ebooks - Téléchargements (tr_b3)", "mapReportId": 1 },
-                { "cle": "tr_b2", "valeur": "Ebooks - Refus d'accès (tr_b2)", "mapReportId": 3 },
-                { "cle": "dr_d1", "valeur": "Base de données - Recherches (dr_d1)", "mapReportId": 4 },
-                { "cle": "pr_p1", "valeur": "Plateforme - Recherches (pr_p1)", "mapReportId": 4 }]
+                 var sushiReportUrlSegment = [
+                { "cle": "0-tr_j1", "metric":"Total_Item_Requests","valeur": "Revues - Téléchargements (tr_j1) - Total Item Requests", "mapReportId": 1 },
+                { "cle": "1-tr_j1",  "metric":"Unique_Item_Requests", "valeur": "Revues - Téléchargements (tr_j1) - Unique Item Requests", "mapReportId": 8 },
+                { "cle": "2-tr_b1",  "metric":"Total_Item_Requests", "valeur": "Ebooks - Téléchargements (tr_b1)  - Total Item Requests", "mapReportId": 1 },
+                { "cle": "3-tr_b1",  "metric":"Unique_Item_Requests", "valeur": "Ebooks - Téléchargements (tr_b1)  - Unique Item Requests", "mapReportId": 8 },
+                { "cle": "4-pr_p1",  "metric":"Searches_Platform","valeur": "Plateformes - Recherches (pr_p1)", "mapReportId": 4 },
+                { "cle": "5-pr_p1", "metric":"Total_Item_Requests","valeur": "Plateformes - Téléchargements (pr_j1) - Total Item Requests", "mapReportId": 1 },
+                { "cle": "6-pr_p1",  "metric":"Unique_Item_Requests", "valeur": "Plateformes - Téléchargements (pr_p1) - Unique Item Requests", "mapReportId": 8 },
+                { "cle": "7-tr_j2",  "metric":"Total_Item_Requests", "valeur": "Revues - Refus d'accès (tr_j2)", "mapReportId": 3 },       
+                { "cle": "8-tr_b2",  "metric":"Total_Item_Requests", "valeur": "Ebooks - Refus d'accès (tr_b2)", "mapReportId": 3 },
+                { "cle": "9-dr_d1", "valeur": "Base de données - Recherches (dr_d1)", "mapReportId": 4 },
+                ]
                 if (result.stats_get_mode == "sushi") {
                     $("#sushiPanel").show()
                     $("#resourceSushiUrl").val(result.stats_url_sushi);
@@ -206,7 +212,8 @@ $(function () {
                         displayExpr: "valeur",
                         value: $("#selected_sushi_report").val(),
                         onValueChanged: function (data) {
-                            $("#selected_sushi_report").val(data.value)
+                            $("#selected_sushi_report").val(data.value.split("-")[1])
+                            $("#selected_metric").val(sushiReportUrlSegment.filter(function (d) { return d.cle == data.value })[0].metric)
                             createSushiUrl($("#beginSushiDate").val(), $("#endSushiDate").val(), $("#selected_sushi_report").val())
                             var reportId = sushiReportUrlSegment.filter(function (d) { return d.cle == data.value })[0].mapReportId
                             $("#selectbox-reports")  
@@ -281,7 +288,7 @@ $(function () {
             method: 'POST',
             url: urlProxySushiTest,
             //headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            data: { "url": completeUrl },
+            data: { "url": completeUrl, , "metric" : $("#selected_metric").val() },
             beforeSend: function() {
                 $("#loaderDiv").show();
             },
@@ -301,7 +308,7 @@ $(function () {
         return $.ajax({
             method: 'POST',
             url: urlProxySushi + $("#selected_sushi_report").val(),
-            data: { "url": completeUrl },
+            data: { "url": completeUrl, , "metric" : $("#selected_metric").val() },
             beforeSend: function() {
                 $("#loaderDiv").show();
             },
