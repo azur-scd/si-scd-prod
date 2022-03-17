@@ -288,7 +288,7 @@ $(function () {
             method: 'POST',
             url: urlProxySushiTest,
             //headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            data: { "url": completeUrl, , "metric" : $("#selected_metric").val() },
+            data: { "url": completeUrl, "metric" : $("#selected_metric").val() },
             beforeSend: function() {
                 $("#loaderDiv").show();
             },
