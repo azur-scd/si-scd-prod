@@ -53,6 +53,8 @@ else {
 }
 
 function test_get_sushi(req,res){
+	console.log(req.body.url)
+    console.log(req.body.metric)
     request({"url":req.body.url,
             "rejectUnauthorized": false},
         function(error, response, body) {
@@ -68,19 +70,9 @@ function test_get_sushi(req,res){
 }
 
 function get_sushi(req,res){
-    var report_filter;
-    switch (req.params.view) {
-        case 'tr_j3':
-          report_filter = "Total_Item_Requests"
-          break;
-        case 'tr_b3':
-          report_filter = "Total_Item_Requests"
-          break;
-        case 'pr_p1':
-          report_filter = "Searches_Platform"
-          break;
-      }
-  console.log(req.body.url)
+    console.log(req.body.metric)
+    var report_filter = req.body.metric
+    console.log(req.body.url)
     request({"url":req.body.url,
              "rejectUnauthorized": false},
         function(error, response, body) {
