@@ -56,7 +56,7 @@ $(function () {
             data = results.filter(function (d) { return d.etat == "1-prev" })
           }
           else {
-              var groupResults = (_.groupBy(results,"bdd"))
+              var groupResults = (_.groupBy(results,"bdd_id"))
             var arr = []
             for (let key in groupResults) {
               if (groupResults[key].some(item => item.etat === '4-facture')) {
