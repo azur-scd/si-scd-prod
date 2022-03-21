@@ -56,17 +56,20 @@ $(function () {
             data = results.filter(function (d) { return d.etat == "1-prev" })
           }
           else {
-              data = results.filter(function (d) {
-              if (JSON.stringify(d).includes("4-facture")) {
-                return d.etat == "4-facture"
+              var groupResults = (_.groupBy(results,"bdd"))
+            var arr = []
+            for (let key in groupResults) {
+              if (groupResults[key].some(item => item.etat === '4-facture')) {
+                arr.push(groupResults[key].filter(function (du) { return du.etat == "4-facture" })[0])            
               }
-              if (!JSON.stringify(d).includes("4-facture") && JSON.stringify(d).includes("3-estime")) {
-                return d.etat == "3-estime"
+              else if (!groupResults[key].some(item => item.etat === '4-facture') && groupResults[key].some(item => item.etat === '3-estime')) {
+                arr.push(groupResults[key].filter(function (du) { return du.etat == "3-estime" })[0])            
               }
-              if (!JSON.stringify(d).includes("4-facture") && !JSON.stringify(d).includes("3-estime")) {
-                return d.etat == "2-budgete"
+              else {
+                arr.push(groupResults[key].filter(function (du) { return du.etat == "2-budgete" })[0])
               }
-            })
+            }
+            data = arr
           }
           d.resolve(data)
         })
