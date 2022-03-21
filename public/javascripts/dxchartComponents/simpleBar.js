@@ -1,14 +1,13 @@
 function getSimpleBar(div,store,argument,valueField,colorField,titleString){
     return  $("#"+div).dxChart({
-        dataSource: store, 
-        series: {
-            argumentField: argument,
+         dataSource: store, 
+        commonSeriesSettings: {
+            argumentField: argumentField,
             valueField: valueField,
-            name: "Totaux",
             type: "bar",
-            color: '#ffaa66',
+            ignoreEmptyPoints: true,
         },
-		  seriesTemplate: {
+        seriesTemplate: {
             nameField: colorField,
           },
         title: titleString,
