@@ -56,14 +56,14 @@ $(function () {
             data = results.filter(function (d) { return d.etat == "1-prev" })
           }
           else {
-            data = results.filter(function (d) {
+              data = results.filter(function (d) {
               if (JSON.stringify(d).includes("4-facture")) {
                 return d.etat == "4-facture"
               }
-              else if (!JSON.stringify(d).includes("4-facture") && JSON.stringify(d).includes("3-estime")) {
+              if (!JSON.stringify(d).includes("4-facture") && JSON.stringify(d).includes("3-estime")) {
                 return d.etat == "3-estime"
               }
-              else {
+              if (!JSON.stringify(d).includes("4-facture") && !JSON.stringify(d).includes("3-estime")) {
                 return d.etat == "2-budgete"
               }
             })
