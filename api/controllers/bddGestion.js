@@ -1,5 +1,6 @@
 const BddGestion = require("../models").BddGestion;
 const Bdd = require("../models").Bdd;
+const Gc = require("../models").Gc;
 
 //simple
 exports.list = function(req, res) {
