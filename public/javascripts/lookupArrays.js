@@ -131,6 +131,7 @@ var sushiReportUrlSegment = [{"cle":"tr_j3","valeur":"Revues - Téléchargements
 {"cle":"dr_d1","valeur":"Base de données - Recherches (dr_d1)","mapReportId":4},
 {"cle":"pr_p1","valeur":"Plateforme - Recherches (pr_p1)","mapReportId":4}]
 var esgbuDisplayReport = [{"cle":"1,2,6","valeur":"Téléchargements"},
+{"cle":"8","valeur":"Téléchargements uniques"},
 {"cle":"4","valeur":"Recherches"},
 {"cle":"5,7","valeur":"Sessions"}]
 var userGroups = [{ "cle": "admin", "valeur": "Admin" },

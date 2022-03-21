@@ -28,7 +28,7 @@ function getPie(div,store,argument,value,titleString){
                 },
                 position: "columns",
                 customizeText: function(arg) {
-                    return arg.argumentText + " : " + arg.valueText + " (" + arg.percentText + ")";
+                    return arg.argumentText + " : " + Math.round(arg.valueText).toLocaleString() + " (" + arg.percentText + ")";
                 }
             }
         }],

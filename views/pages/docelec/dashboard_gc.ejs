@@ -48,12 +48,24 @@
           </div>
         </div>
          <!-- end date select -->
+		   <!-- start charts row -->
+          <div class="row">                            
+            <div class="col-md-9">
+              <div id="annualSuivi"></div>
+              </div>
+              <div class="col-md-3">
+                <div id="poleSuivi"></div>
+              </div>  
+              </div>
+          <!-- end charts row-->
           <!-- start tabs -->
         <div class="row">                            
-          <div class="col-md-6">
+           <div class="col-md-8">
+            <h3>Tableau du suivi budgétaire annuel</h3>
             <div id="containerListBdd"></div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+              <h3>Tableau des GC (montants globaux) commencant à l'année sélectionnée</h3>
               <div id="containerListGc"></div>
               </div>
         </div>
@@ -67,4 +79,6 @@
 <%- include ('../../partials/script_admin') -%>
 <%- include ('../../partials/script_devextreme') -%>
 <script src="./javascripts/docelec/dashboard_gc.js"></script>
+<script src="./javascripts/dxchartComponents/simpleBar.js"></script>
+<script src="./javascripts/dxchartComponents/pie.js"></script>
 </html>
