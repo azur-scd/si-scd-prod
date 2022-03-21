@@ -287,7 +287,7 @@ $(function () {
         return $.ajax({
             method: 'POST',
             url: urlProxySushiTest,
-            //headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             data: { "url": completeUrl, "metric" : $("#selected_metric").val() },
             beforeSend: function() {
                 $("#loaderDiv").show();
@@ -308,6 +308,7 @@ $(function () {
         return $.ajax({
             method: 'POST',
             url: urlProxySushi + $("#selected_sushi_report").val(),
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             data: { "url": completeUrl, "metric" : $("#selected_metric").val() },
             beforeSend: function() {
                 $("#loaderDiv").show();

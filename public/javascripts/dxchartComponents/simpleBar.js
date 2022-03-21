@@ -1,4 +1,4 @@
-function getSimpleBar(div,store,argument,valueField,titleString){
+function getSimpleBar(div,store,argument,valueField,colorField,titleString){
     return  $("#"+div).dxChart({
         dataSource: store, 
         series: {
@@ -8,6 +8,9 @@ function getSimpleBar(div,store,argument,valueField,titleString){
             type: "bar",
             color: '#ffaa66',
         },
+		  seriesTemplate: {
+            nameField: colorField,
+          },
         title: titleString,
         "export": {
             enabled: true

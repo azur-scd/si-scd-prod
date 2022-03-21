@@ -1,6 +1,6 @@
 $(function () {
 
-  $("#selected_year").val(years[5].cle)
+  $("#selected_year").val(years[9].cle)
     $("#selected_report").val(esgbuDisplayReport[0].cle)
     annualTotalBar($("#selected_year").val(),$("#selected_report").val())
 

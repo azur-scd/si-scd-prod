@@ -110,33 +110,60 @@ else {q={include: [{
     })
   };
 
-   //join pour gc dashboard
+  //join pour gc dashboard, need a year and a etat param
 exports.listForGc = function(req, res) {
   var q;
-  if(req.query) {q = {where : req.query, include: [{
+  if(req.query) {q = {where : req.query, 
+    include: [
+    {
     model: Bdd,
     attributes: ['id', 'bdd', 'pole_gestion'],
-}]}}
-else {q={include: [{
+    include: [{
+      model: Gc,
+      attributes: ['id', 'debut', 'fin','montant_ttc']
+    }]
+}
+]}}
+else {q={include: [
+  {
   model: Bdd,
   attributes: ['id', 'bdd', 'pole_gestion'],
+  include: [{
+    model: Gc,
+    attributes: ['id', 'debut', 'fin','montant_ttc']
+  }]
 }]}}
     BddGestion.findAll(
       q
     ).then(rows => {
       //res.json(rows)
-      const resObj = rows.map(row => {return {
-                                              "id":row.id,
-                                              "bdd_id":row.bdd_id,
-                                              "bdd":row.Bdd.bdd,
-                                              "pole":row.Bdd.pole_gestion,
-                                              "etat":row.etat,
-                                              "annee":row.annee,
-                                              "montant_ttc_avant_recup": row.montant_ttc_avant_recup,
-                                              "montant_ttc":row.montant_ttc,
-                                              "createdAt":row.createdAt,
-                                              "updatedAt":row.updatedAt}});
+      const resObj = rows.map(row => {
+        var obj = {}
+        obj["id"] = row.id
+        obj["bdd_id"] = row.bdd_id
+        obj["bdd"]=row.Bdd.bdd
+        obj["pole"] = row.Bdd.pole_gestion
+        obj["etat"] = row.etat
+        obj["annee"] = row.annee
+        obj["montant_ttc_avant_recup"] = row.montant_ttc_avant_recup
+        obj["montant_ttc"] = row.montant_ttc
+        if(row.Bdd.Gcs) {
+          console.log(row.Bdd.Gcs)
+          row.Bdd.Gcs.filter(function(d) {
+              return (parseInt(d.debut) <= parseInt(row.annee)) & (parseInt(d.fin) >= parseInt(row.annee))
+          })
+          .map(function(d) {
+            obj["debut_gc"]=d.debut;
+            obj["fin_gc"]=d.fin;
+            obj["montant_ttc_gc"] = d.montant_ttc
+          })
+        }
+        obj["createdAt"] = row.createdAt
+        obj["updatedAt"] = row.updatedAt
+       return obj
+});
       res.json(resObj)
     })
   };
+
 

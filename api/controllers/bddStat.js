@@ -116,7 +116,7 @@ exports.indicators = function(req, res) {
     },
     include: [{
       model: Bdd, // jointure table bdd
-      attributes: ['id', 'bdd', 'type','soutien_oa','pole_gestion','type_marche','type_achat','perimetre','calcul_esgbu'],
+      attributes: ['id', 'bdd', 'type','soutien_oa','pole_gestion','perimetre','stats_counter','calcul_esgbu'],
       include: [{
         model: BddGestion,
         attributes: ['annee','montant_ttc'],
@@ -138,10 +138,9 @@ exports.indicators = function(req, res) {
       obj["bdd"]=d.Bdd.bdd
       obj["type"]=d.Bdd.type
       obj["oa"]=d.Bdd.soutien_oa
-      obj["pole"]=d.Bdd.pole
-      obj["marche"]=d.Bdd.type_marche
       obj["achat"]=d.Bdd.type_achat
       obj["perimetre"]=d.Bdd.perimetre
+	  obj["counter"]=d.Bdd.stats_counter
       obj["calcul_esgbu"]=d.Bdd.calcul_esgbu
       if(d.Bdd.BddGestions) {
       d.Bdd.BddGestions
@@ -177,7 +176,7 @@ else {
     ,
     include: [{
       model: Bdd,
-      attributes: ['id', 'bdd', 'type','soutien_oa','pole_gestion','type_marche','type_achat','perimetre','calcul_esgbu'],
+      attributes: ['id', 'bdd', 'type','soutien_oa','pole_gestion','perimetre','stats_counter','calcul_esgbu'],
       include: [{
         model: BddGestion,
         attributes: ['annee','montant_ttc'],
@@ -196,10 +195,9 @@ else {
       obj["bdd"]=d.Bdd.bdd
       obj["type"]=d.Bdd.type
       obj["oa"]=d.Bdd.soutien_oa
-      obj["pole"]=d.Bdd.pole
-      obj["marche"]=d.Bdd.type_marche
       obj["achat"]=d.Bdd.type_achat
       obj["perimetre"]=d.Bdd.perimetre
+	  obj["counter"]=d.Bdd.stats_counter
       obj["calcul_esgbu"]=d.Bdd.calcul_esgbu
       if(d.Bdd.BddGestions) {
       d.Bdd.BddGestions
