@@ -39,6 +39,7 @@ $(function () {
 
   function poleSuiviChartDisplay() {
     var data = $("#containerListBdd").dxDataGrid("instance").getSelectedRowsData()
+	console.log(data)
     var aggData = getGroupSum(data, "pole", "montant_ttc")
     console.log(aggData)
     getPie("poleSuivi", aggData, "key", "value", "Montants TTC agrégés par pôle")
@@ -57,7 +58,7 @@ $(function () {
           }
           else {
               var groupResults = (_.groupBy(results,"bdd_id"))
-			  console.log(groupResults)
+			  //console.log(groupResults)
             var arr = []
             for (let key in groupResults) {
               if (groupResults[key].some(item => item.etat === '4-facture')) {
