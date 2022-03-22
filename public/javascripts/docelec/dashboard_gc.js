@@ -53,9 +53,6 @@ $(function () {
         var d = new $.Deferred();
         $.get(urlGestionGc + "?annee=" + year).done(function (results) {
           let data;
-		   results = results.filter(function(elt){
-            return elt != null;
-           })
           if (step == "prev") {
             data = results.filter(function (d) { return d.etat == "1-prev" })
           }
@@ -74,7 +71,9 @@ $(function () {
                 arr.push(groupResults[key].filter(function (du) { return du.etat == "2-budgete" })[0])
               }
             }
-            data = arr
+            data = arr.filter(function(elt){
+      return elt != null;
+     })
           }
           d.resolve(data)
         })
@@ -237,10 +236,6 @@ $(function () {
       load: function () {
         var d = new $.Deferred();
         $.get(urlGC + "?debut=" + year).done(function (results) {
-			 results = results.filter(function(elt){
-            return elt != null;
-           })
-          //var data = results
           d.resolve(results)
         })
         return d.promise();
