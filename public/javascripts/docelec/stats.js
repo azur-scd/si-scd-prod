@@ -392,7 +392,7 @@ $(function () {
     }
 
     function annualTotalBar(bdd, report) {
-        return getSimpleBar("totalBarChart", annualTotalStore(bdd, report), "date", "total", "")
+        return getSimpleBar("totalBarChart", annualTotalStore(bdd, report), "date", "total", "date", "")
     }
 
     function monthTotalLine(year, bdd, report) {
