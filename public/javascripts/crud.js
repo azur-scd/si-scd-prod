@@ -2,9 +2,7 @@ function getItems(url){
     return $.ajax({
         method: 'GET',
         url: url,
-        success: function (response) { return response.data.filter(function(elt){
-  return elt != null;
- })},
+        success: function (response) { return response.data},
         error : function(response) {console.log(response.statusText);}
     })
 }
