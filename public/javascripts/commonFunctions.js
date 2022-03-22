@@ -39,7 +39,9 @@ function object2array (obj){
 }
 
 function getGroupSum(data,labelField,aggField) {
-    var agg = _.reduce(data, function(memo,item) {
+    var agg = _.reduce(datatest.filter(function(elt){
+  return elt != null;
+ }), function(memo,item) {
         memo[item[labelField]] = (memo[item[labelField]] || 0) + item[aggField];
         return memo;
     }, {})
