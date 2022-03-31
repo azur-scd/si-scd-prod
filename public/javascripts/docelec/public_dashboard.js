@@ -13,10 +13,15 @@ $(function () {
                         .filter(function(d){return d.calcul_esgbu})
                         .filter(function(d){return d.calcul_esgbu[d.periodeDebut.substring(0, 4)]}) //on ne veut pas les stats annuelles des ressources pour lesquelles la case calcul_esgbu n'est pas cochée (ressource fictive type BSC+Econlit à pas compter 2 fois)
                         .map(function(d){
-                           return {"count":d.count,
-                                   "date":d.periodeDebut.substring(0, 4),
-                                   "type":d.type,
-                                   "stats_reports":esgbuDisplayReport.filter(function(dbis){return dbis.cle.includes(d.stats_reports_id)})[0].valeur
+                           return {
+							"id": d.id,
+                            "count": d.count,
+                            "date": d.periodeDebut.substring(0, 4),
+                            "type": d.type,
+                            "counter": d.counter,
+                            "stats_reports": esgbuDisplayReport.filter(function (dbis) { return dbis.cle.includes(d.stats_reports_id) })[0].valeur,
+                            "bdd_id": d.bdd_id,
+                            "bdd": d.bdd
                         }
             })
             d.resolve(data)
@@ -49,6 +54,19 @@ $(function () {
         onValueChanged: function (data) {
             $("#selected_report").val(data.value)
             return annualTotalBar($("#selected_year").val(), data.value)
+        }
+    });
+	
+	 $("#selectbox-datagrid-years").dxSelectBox({
+        width: 150,
+        items: years,
+        valueExpr: "cle",
+        displayExpr: "valeur",
+        value: parseInt($("#selected_year").val()),
+        onValueChanged: function (data) {
+            dataGrid.refresh();
+            dataGrid.clearFilter();
+            dataGrid.filter(["date", "=", data.value]);
         }
     });
 
@@ -119,7 +137,14 @@ $(function () {
                 dataField: "stats_reports",
                 dataType: "string",
                 area: "row",
-            }, {
+            },
+            {
+                caption: "Counter",
+                dataField: "counter",
+                dataType: "string",
+                area: "row",
+            }, 
+			{
                 caption: "Année",
                 dataField: "date",
                 dataType: "string",
@@ -146,4 +171,71 @@ $(function () {
         dataFieldsDisplayMode: "splitPanes",
         alternateDataFields: false
     });
+	
+	   var dataGrid = $("#esgbuDatagridGrid").dxDataGrid({
+        dataSource: storeStatsEsgbu,
+        keyExpr: 'id',
+        repaintChangesOnly: true,
+        showBorders: true,
+        columnMaxWidth: 200,
+        allowColumnResizing: true,
+        columnHidingEnabled: true,
+        allowColumnReordering: true,
+        headerFilter: {
+            visible: true
+          },
+          filterRow: {
+            visible: true,
+            applyFilter: "auto"
+          },
+          filterPanel: { visible: true },
+        filterValue: ["date", "=", $("#selectbox-datagrid-years").dxSelectBox('instance').option('value')],
+        sorting: {
+            mode: "multiple"
+          },
+          paging: {
+            pageSize: 10
+          },
+          pager: {
+            showPageSizeSelector: true,
+            allowedPageSizes: [5, 10, 20, 50, 100],
+            showInfo: true
+          },
+          searchPanel: {
+            visible: true
+        },
+        groupPanel: { visible: true },
+        grouping: {
+            autoExpandAll: false
+        },
+        columns: [
+            {
+                dataField: "bdd",
+                caption: "Ressource",
+            },
+            {
+                dataField: "date",
+                caption: "Année",
+                visible: false
+            },
+            {
+                dataField: "type",
+                caption: "Type de ressource",
+            },
+            {
+                dataField: "counter",
+                caption: "Counter",
+            },
+            {
+                dataField: "stats_reports",
+                caption: "Type de statistiques",
+            },
+            {
+                dataField: "count",
+                caption: "Total usage",
+                dataType: 'number',
+                alignment: 'left'
+            },
+        ]
+    }).dxDataGrid("instance")
 })
