@@ -57,7 +57,7 @@ $(function () {
       for (let s of rowData) {
         ttc_avant_recup_total += s["montant_ttc_avant_recup"];
       }
-      $("#widgetBdd").append("<div class='col-md-2'><a href='#' class='tile tile-info'><p>Total TTC</p>"+Math.round(ttc_total || 0)+"</a></div><div class='col-md-2'><a href='#' class='tile tile-info'><p>Total TTC avant récup</p>"+Math.round(ttc_avant_recup_total || 0)+"</a></div>")
+      $("#widgetBdd").append("<div class='col-md-3'><a href='#' class='tile tile-info'><p>Total TTC</p>"+Math.round(ttc_total || 0)+"</a></div><div class='col-md-3'><a href='#' class='tile tile-info'><p>Total TTC avant récup</p>"+Math.round(ttc_avant_recup_total || 0)+"</a></div>")
     })
   }
   
@@ -68,7 +68,7 @@ $(function () {
       for (let s of rowData) {
         ttc_total += s["montant_ttc"];
       }
-      $("#widgetGc").append("<div class='col-md-2'><a href='#' class='tile tile-info'><p>Total TTC</p>"+Math.round(ttc_total || 0)+"</a></div>")
+      $("#widgetGc").append("<div class='col-md-3'><a href='#' class='tile tile-info'><p>Total TTC</p>"+Math.round(ttc_total || 0)+"</a></div>")
     })
   }
 
