@@ -57,62 +57,67 @@
                   <div class="panel panel-default tabs">
                     <ul class="nav nav-tabs" role="tablist">
                       <li class="active"><a href="#tab-general" role="tab" data-toggle="tab">Général</a></li>
+                      <li><a href="#tab-reliquat" role="tab" data-toggle="tab">Reliquat</a></li>
                       <li><a href="#tab-disc" role="tab" data-toggle="tab">Par discipline</a></li>
                       <li><a href="#tab-oa" role="tab" data-toggle="tab">OA</a></li>
                       <li><a href="#tab-uca" role="tab" data-toggle="tab">Extension périmètre</a></li>
                     </ul>
                     <div class="panel-body tab-content">
                       <div class="tab-pane active" id="tab-general">
-                       <div class="row">
-                          <div class="col-md-12">
-                            <div class="col-md-4" id="widgetCostSCD"></div>
-                            <div class="col-md-4" id="widgetCostSTM"></div>
-                            <div class="col-md-4" id="widgetCostSHS"></div>
-                          </div>
-                        </div>
                         <div class="row">
                           <div class="col-md-12">
-                            <div class="col-md-4" id="widgetCountSCD"></div>
-                            <div class="col-md-4" id="widgetCountSTM"></div>
-                            <div class="col-md-4" id="widgetCountSHS"></div>
+                            <div class="col-md-4" id="generalSCD"></div>
+                            <div class="col-md-4" id="generalSTM"></div>
+                            <div class="col-md-4" id="generalSHS"></div>
                           </div>
                         </div>
-                        <hr>
                         <div class="row">
-                          <h2>Tableau de bord pôle STM</h2>
-                          <div class="row">
-                            <div id="abstractSTM"></id>
+                          <div class="col-md-12">
+                            <div class="col-md-4" id="generalCountSCD"></div>
+                            <div class="col-md-4" id="generalCountSTM"></div>
+                            <div class="col-md-4" id="generalCountSHS"></div>
                           </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12" id="generalResSTM">
                           </div>
-                          <div class="col-md-7">
-                           <div id="generalResGridSTM"></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12" id="generalResSHS">
                           </div>
-                          <div class="col-md-5">
-                            <div class="row">
-                              <div id="generalResChartSTM"></div>
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="tab-reliquat">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <div class="widget widget-danger">
+                              <div class="widget-title">Reliquat SCD</div>
+                              <div class="widget-int" id="reliquatTotalSCD"></div>
                             </div>
-                            <div class="row">
-                              <div id="reliquatRotatedBarSTM"></div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="widget widget-danger">
+                              <div class="widget-title">Reliquat STM</div>
+                              <div class="widget-int" id="reliquatTotalSTM"></div>
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="widget widget-danger">
+                              <div class="widget-title">Reliquat SHS</div>
+                              <div class="widget-int" id="reliquatTotalSHS"></div>
                             </div>
                           </div>
                         </div>
-                        <hr>
                         <div class="row">
-                          <h2>Tableau de bord pôle SHS</h2>
-                          <div class="row" id="abstractSHS">
+                          <div class="col-md-12">
+                            <div id="reliquatRotatedBarSTM"></div>
                           </div>
-                          <div class="col-md-7">
-                             <div id="generalResGridSHS"></div>
-                            </div>                       
-                          <div class="col-md-5">
-                             <div class="row">
-                               <div id="generalResChartSHS"></div>
-                             </div>
-                            <div class="row">
-                              <div id="reliquatRotatedBarSHS"></div>
-                            </div>
-                             </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div id="reliquatRotatedBarSHS"></div>
                           </div>
+                        </div>
                       </div>
                       <div class="tab-pane" id="tab-disc">
                         <div class="row">

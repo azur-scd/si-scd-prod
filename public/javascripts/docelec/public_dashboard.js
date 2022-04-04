@@ -221,10 +221,20 @@ $(function () {
             {
                 dataField: "type",
                 caption: "Type de ressource",
+				lookup: {
+                    dataSource: typeBddState,
+                    displayExpr: "valeur",
+                    valueExpr: "cle"
+                }
             },
             {
                 dataField: "counter",
                 caption: "Counter",
+				 lookup: {
+                    dataSource: statsCounter,
+                    displayExpr: "valeur",
+                    valueExpr: "cle"
+                }
             },
             {
                 dataField: "stats_reports",

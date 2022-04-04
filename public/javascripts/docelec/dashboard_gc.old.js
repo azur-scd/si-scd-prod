@@ -28,53 +28,26 @@ $(function () {
 
   bddDisplay($("#selectYear").dxSelectBox('instance').option('value'), $("#selectStep").dxSelectBox('instance').option('value'));
   gcDisplay($("#selectYear").dxSelectBox('instance').option('value'), $("#selectStep").dxSelectBox('instance').option('value'))
+  annualSuiviChartDisplay()
+  poleSuiviChartDisplay()
 
- function annualSuiviChartDisplay() {
-    $("#containerListBdd").dxDataGrid("instance").getSelectedRowsData().then((rowData) => {
-      if (rowData.length != 0) {
-        getSimpleBar("annualSuivi", rowData, "bdd", "montant_ttc", "etat", "Montant TTC par ressource")
-        }
-    })
+  function annualSuiviChartDisplay() {
+    var data = $("#containerListBdd").dxDataGrid("instance").getSelectedRowsData()
+    console.log(data)
+    getSimpleBar("annualSuivi", data, "bdd", "montant_ttc", "etat", "Montant TTC par ressource")
   }
 
   function poleSuiviChartDisplay() {
-    $("#containerListBdd").dxDataGrid("instance").getSelectedRowsData().then((rowData) => {
-      if (rowData.length != 0) {
-        var aggData = getGroupSum(rowData, "pole", "montant_ttc")
-        getPie("poleSuivi", aggData, "key", "value", "Montants TTC agrégés par pôle")
-        }
-    })
-  }
-
-  function calculateBddStatistics(){
-    $("#widgetBdd").empty()
-    $('#containerListBdd').dxDataGrid("instance").getSelectedRowsData().then((rowData) => {
-      var ttc_total = 0
-      for (let s of rowData) {
-        ttc_total += s["montant_ttc"];
-      }
-      var ttc_avant_recup_total = 0
-      for (let s of rowData) {
-        ttc_avant_recup_total += s["montant_ttc_avant_recup"];
-      }
-      $("#widgetBdd").append("<div class='col-md-2'><a href='#' class='tile tile-info'><p>Total TTC</p>"+Math.round(ttc_total || 0)+"</a></div><div class='col-md-2'><a href='#' class='tile tile-info'><p>Total TTC avant récup</p>"+Math.round(ttc_avant_recup_total || 0)+"</a></div>")
-    })
-  }
-  
-    function calculateGcStatistics(){
-    $("#widgetGc").empty()
-    $('#containerListGc').dxDataGrid("instance").getSelectedRowsData().then((rowData) => {
-      var ttc_total = 0
-      for (let s of rowData) {
-        ttc_total += s["montant_ttc"];
-      }
-      $("#widgetGc").append("<div class='col-md-2'><a href='#' class='tile tile-info'><p>Total TTC</p>"+Math.round(ttc_total || 0)+"</a></div>")
-    })
+    var data = $("#containerListBdd").dxDataGrid("instance").getSelectedRowsData()
+	console.log(data)
+    var aggData = getGroupSum(data, "pole", "montant_ttc")
+    console.log(aggData)
+    getPie("poleSuivi", aggData, "key", "value", "Montants TTC agrégés par pôle")
   }
 
   function bddDisplay(year, step) {
     var storeBdd = new DevExpress.data.CustomStore({
-      loadMode: "raw",
+      //loadMode: "raw",
       key: "id",
       load: function () {
         var d = new $.Deferred();
@@ -154,15 +127,13 @@ $(function () {
       searchPanel: {
         visible: true
       },
-        selection: {
+      selection: {
         mode: 'multiple',
         selectAllMode: 'allPages',
-        showCheckBoxesMode: 'onClick',
-        deferred: true,
+        allowSelectAll: true
       },
       onSelectionChanged(e) {
         e.component.refresh(true);
-		calculateBddStatistics();
         annualSuiviChartDisplay();
         poleSuiviChartDisplay();
       },
@@ -207,16 +178,60 @@ $(function () {
           visible: false
         }
       ],
-      /*onInitialized: function (e) {
+      onInitialized: function (e) {
         e.component.selectAll();
-      },*/
+      },
+      summary: {
+        recalculateWhileEditing: true,
+        totalItems: [{
+          name: 'SelectedRowsTotalTTC',
+          column: 'montant_ttc',
+          summaryType: 'custom',
+          valueFormat: 'fixedPoint thousands',
+          displayFormat: 'Total TTC : {0}'
+        },
+        {
+          name: 'SelectedRowsTotalTTCSansRecup',
+          column: 'montant_ttc_avant_recup',
+          summaryType: 'custom',
+          valueFormat: 'fixedPoint thousands',
+          displayFormat: 'Total TTC avant récup : {0}'
+        }
+        ],
+        calculateCustomSummary(options) {
+          if (options.name === 'SelectedRowsTotalTTC') {
+            if (options.summaryProcess === 'start' && options.component.getSelectedRowsData()) {
+              options.totalValue = options.component.getSelectedRowsData().reduce(function (_this, val) {
+                return _this + val.montant_ttc
+              }, 0)
+            }
+            if (options.summaryProcess === 'calculate') {
+              if (options.component.isRowSelected(options.value.id)) {
+                options.totalValue -= options.montant_ttc;
+              }
+            }
+          }
+          if (options.name === 'SelectedRowsTotalTTCSansRecup') {
+            if (options.summaryProcess === 'start' && options.component.getSelectedRowsData()) {
+              options.totalValue = options.component.getSelectedRowsData().reduce(function (_this, val) {
+                return _this + val.montant_ttc_avant_recup
+              }, 0)
+            }
+            if (options.summaryProcess === 'calculate') {
+              if (options.component.isRowSelected(options.value.id)) {
+                options.totalValue -= options.montant_ttc_avant_recup;
+              }
+            }
+          }
+        },
+      }
     })
 
   }
 
   function gcDisplay(year) {
     var storeFilteredGc = new DevExpress.data.CustomStore({
-      loadMode: "raw",
+      //loadMode: "raw",
       key: "id",
       load: function () {
         var d = new $.Deferred();
@@ -264,15 +279,13 @@ $(function () {
         enabled: true,
         mode: "select"
       },
-         selection: {
+      selection: {
         mode: 'multiple',
         selectAllMode: 'allPages',
-        showCheckBoxesMode: 'onClick',
-        deferred: true,
+        allowSelectAll: true
       },
       onSelectionChanged(e) {
         e.component.refresh(true);
-		calculateGcStatistics()
       },
       columns: [
         {
@@ -303,6 +316,32 @@ $(function () {
       /* onInitialized: function(e) {  
          e.component.selectAll();  
        } ,*/
+      summary: {
+        recalculateWhileEditing: true,
+        totalItems: [{
+          name: 'SelectedRowsMontantTTC',
+          column: 'montant_ttc',
+          summaryType: 'custom',
+          valueFormat: 'fixedPoint thousands',
+          displayFormat: 'Total TTC : {0}'
+        }
+        ],
+        calculateCustomSummary(options) {
+          if (options.name === 'SelectedRowsMontantTTC') {
+            if (options.summaryProcess === 'start') {
+              /* options.totalValue = options.component.getSelectedRowsData().reduce(function(_this, val) {
+                   return _this + val.montant_ttc
+               }, 0)*/
+              options.totalValue = 0
+            }
+            if (options.summaryProcess === 'calculate') {
+              if (options.component.isRowSelected(options.value.id)) {
+                options.totalValue += options.montant_ttc;
+              }
+            }
+          }
+        },
+      }
     })
   }
 })
