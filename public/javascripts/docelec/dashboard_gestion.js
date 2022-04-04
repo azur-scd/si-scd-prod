@@ -55,7 +55,7 @@ function calculateStatistics(pole) {
       $("#abstract"+pole).append("<div class='col-md-2'><a href='#' class='tile tile-info'><p>Total "+d.valeur+"</p>"+Math.round(this[d.cle+'_total'] || 0)+"</a></div>")
      })
      this['reliquat_total'] = 0
-   for (let s of srowData) {
+   for (let s of rowData) {
     if(s["reliquat"] === undefined) {s["reliquat"] = 0}
     this['reliquat_total'] += s["reliquat"];
   }
