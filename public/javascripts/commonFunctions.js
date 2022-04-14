@@ -77,6 +77,9 @@ function groupBy(data,groupKey){
             memo["pole"] = item.pole;
             memo["soutien_oa"] = item.soutien_oa;
             memo["surcout_uca"] = item.surcout_uca;
+			memo["debut_gc"] = item.debut_gc;
+            memo["fin_gc"] = item.fin_gc;
+            if(item.debut_gc) {memo["period_gc"] = item.debut_gc + "-" + item.fin_gc}
             return memo;
         }, {})
          arr.push(value)

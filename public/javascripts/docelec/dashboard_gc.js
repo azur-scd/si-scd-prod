@@ -182,13 +182,13 @@ $(function () {
         },
         {
           dataField: "montant_ttc_avant_recup",
-          caption: "Montant TTC avant récup",
+          caption: "Montant TTC",
           dataType: 'number',
           alignment: 'left'
         },
         {
           dataField: "montant_ttc",
-          caption: "Montant TTC",
+          caption: "Montant TTC avec récup",
           dataType: 'number',
           alignment: 'left'
         },
