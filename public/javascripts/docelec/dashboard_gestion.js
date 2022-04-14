@@ -69,7 +69,7 @@ function calculateStatistics(pole) {
       key: "bdd_id",
       load: function () {
         var d = new $.Deferred();
-        getItems(urlGestionCustom + "/?annee=" + year).done(function(results){
+        getItems(urlGestionGc + "/?annee=" + year).done(function(results){
           let data ;
         if (results.length == 0) {
           $("#noData").append("<div class='alert alert-danger' role='alert'><strong>Pas de données pour cette année</strong></div>")
@@ -179,6 +179,12 @@ function calculateStatistics(pole) {
             dataType: 'number',
             alignment: 'left',
             width: 100
+          },
+		   {
+            dataField: "period_gc",
+            caption: "GC courant",
+            dataType: 'string',
+            width: 100,
           },
           {
             caption: 'Dynamics',

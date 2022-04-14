@@ -120,4 +120,20 @@ $(function () {
     $('textarea#areaMultiwhere').val("");
     $("#resultsMultiwhere").empty();
   })
+  
+   /*---ppn to Sudoc Unimarc records---*/
+  $("#submitUnimarcxmlPpn").click(function () {
+    $("#resultsUnimarcxml").empty();
+    var lines = $('textarea#areaUnimarcxml').val().split('\n');
+    for (let line of lines) {
+    $.getJSON(getSudocRecordFields, { "ppn":  line.trim() }).then(function (data) {
+      $("#resultsUnimarcxml").append("<tr><td>"+data[0].ppn+"</td><td>"+data[0].return_code+"</td><td>"+data[0].type_doc+"</td><td>"+data[0].nnt+"</td><td>"+data[0].titre+"</td></tr>")
+    })
+  }
+  })
+  //clear
+  $("#clearUnimarcxml").click(function () {
+    $('textarea#areaUnimarcxml').val("");
+    $("#resultsUnimarcxml").empty();
+  })
 })

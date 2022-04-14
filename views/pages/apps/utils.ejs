@@ -13,12 +13,125 @@
                                 <%= page %>
                             </h2>
                         </div>
-                          <!-- Multiwhere check-->
-                          <div class="row" id="aleph_ppn">
+                          <!--Unimarc Sudoc records-->
+                        <div class="row" id="unimarcxml">
                             <div class="col-md-12">
-                                <h3>Vérifier les localisations dans le Sudoc</h3>
+                                <h3>Vérifier les données bibliographiques des notices Sudoc (qualité des données)</h3>
                             </div>
-                            <div class="col-md-3 panel-group accordion accordion-dc">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="block">
+                                        <button class="btn btn-success" id="submitUnimarcxmlPpn"> Valider</button>
+                                        <button type="button" class="btn btn-danger btn-rounded"
+                                            id="clearUnimarcxml">Effacer tout</button>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <span>Copier-coller une liste de PPN papier ou élec (1 par ligne). Exemple :
+                                        </span>
+                                        <textarea id="areaUnimarcxml" class="form-control" rows="15">
+000244589
+000265500
+248688944
+070940401
+219834857
+220078173
+226477045
+</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-right">
+                                <button class="btn btn-danger toggle" data-toggle="exportUnimarcxmlTable"><i
+                                        class="fa fa-bars"></i> Export Data</button>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="panel-body panel-body-table">
+                                    <div class="panel-body" id="exportUnimarcxmlTable" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="list-group border-bottom">
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#unimarcxml').tableExport({type:'json',escape:'false'});"><img
+                                                            src='/img/icons/json.png' width="24" /> JSON</a>
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#unimarcxml').tableExport({type:'json',escape:'false',ignoreColumn:'[2,3]'});"><img
+                                                            src='/img/icons/json.png' width="24" /> JSON
+                                                        (ignoreColumn)</a>
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#unimarcxml').tableExport({type:'json',escape:'true'});"><img
+                                                            src='/img/icons/json.png' width="24" /> JSON (with
+                                                        Escape)</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="list-group border-bottom">
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#unimarcxml').tableExport({type:'xml',escape:'false'});"><img
+                                                            src='/img/icons/xml.png' width="24" /> XML</a>
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#unimarcxml').tableExport({type:'sql'});"><img
+                                                            src='/img/icons/sql.png' width="24" /> SQL</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="list-group border-bottom">
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#unimarcxml').tableExport({type:'csv',escape:'false'});"><img
+                                                            src='/img/icons/csv.png' width="24" /> CSV</a>
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#unimarcxml').tableExport({type:'txt',escape:'false'});"><img
+                                                            src='/img/icons/txt.png' width="24" /> TXT</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="list-group border-bottom">
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#unimarcxml').tableExport({type:'excel',escape:'false'});"><img
+                                                            src='/img/icons/xls.png' width="24" /> XLS</a>
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#unimarcxml').tableExport({type:'doc',escape:'false'});"><img
+                                                            src='/img/icons/word.png' width="24" /> Word</a>
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#unimarcxml').tableExport({type:'powerpoint',escape:'false'});"><img
+                                                            src='/img/icons/ppt.png' width="24" /> PowerPoint</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="list-group border-bottom">
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#unimarcxml').tableExport({type:'png',escape:'false'});"><img
+                                                            src='/img/icons/png.png' width="24" /> PNG</a>
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#unimarcxml').tableExport({type:'pdf',escape:'false'});"><img
+                                                            src='/img/icons/pdf.png' width="24" /> PDF</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive" id="ws_unimarcxml">
+                                        <table class="table table-bordered table-striped table-actions">
+                                            <thead>
+                                                <tr>
+                                                    <th width="50">PPN</th>
+                                                    <th width="50">Erreur</th>
+                                                    <th width="50">Type de doc (008)</th>
+                                                    <th width="50">NNT (029$b)</th>
+                                                    <th width="50">Titre (200$a</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="resultsUnimarcxml"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end Unimarc Sudoc records-->
+                            <hr>
+                            <!-- Multiwhere check-->
+                            <div class="row" id="multiwhere">
+                                <div class="col-md-12">
+                                    <h3>Vérifier les localisations Sudoc</h3>
+                                </div>
+                                <!--<div class="col-md-3 panel-group accordion accordion-dc">
                                 <div class="panel panel-info">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
@@ -31,18 +144,18 @@
 
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <div class="block">
-                                        <button class="btn btn-success" id="submitMultiwherePpn"> Valider</button>
-                                        <button type="button" class="btn btn-danger btn-rounded"
-                                            id="clearMultiwhere">Effacer tout</button>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <span>Copier-coller une liste de PPN papier ou élec (1 par ligne). Exemple :
-                                        </span>
-                                        <textarea id="areaMultiwhere" class="form-control" rows="15">
+                            </div>-->
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <div class="block">
+                                            <button class="btn btn-success" id="submitMultiwherePpn"> Valider</button>
+                                            <button type="button" class="btn btn-danger btn-rounded"
+                                                id="clearMultiwhere">Effacer tout</button>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <span>Copier-coller une liste de PPN papier ou élec (1 par ligne). Exemple :
+                                            </span>
+                                            <textarea id="areaMultiwhere" class="form-control" rows="15">
     000244589
     000265500
     248688944
@@ -51,256 +164,259 @@
     220078173
     226477045
 </textarea>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-							<div class="pull-right">
-                                <button class="btn btn-danger toggle" data-toggle="exportTable"><i class="fa fa-bars"></i> Export Data</button>
-                             </div>
-                            <div class="col-md-9">
-                                <div class="panel-body panel-body-table">
-								             <div class="panel-body" id="exportTable" style="display: none;">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="list-group border-bottom">
-                                                    <a href="#" class="list-group-item"
-                                                        onClick="$('#ws_multiwhere').tableExport({type:'json',escape:'false'});"><img
-                                                            src='./img/icons/json.png' width="24" /> JSON</a>
-                                                    <a href="#" class="list-group-item"
-                                                        onClick="$('#ws_multiwhere').tableExport({type:'json',escape:'false',ignoreColumn:'[2,3]'});"><img
-                                                            src='./img/icons/json.png' width="24" /> JSON
-                                                        (ignoreColumn)</a>
-                                                    <a href="#" class="list-group-item"
-                                                        onClick="$('#ws_multiwhere').tableExport({type:'json',escape:'true'});"><img
-                                                            src='./img/icons/json.png' width="24" /> JSON (with
-                                                        Escape)</a>
+                                <div class="pull-right">
+                                    <button class="btn btn-danger toggle" data-toggle="exportMultiwhereTable"><i
+                                            class="fa fa-bars"></i> Export Data</button>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="panel-body panel-body-table">
+                                        <div class="panel-body" id="exportMultiwhereTable" style="display: none;">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="list-group border-bottom">
+                                                        <a href="#" class="list-group-item"
+                                                            onClick="$('#ws_multiwhere').tableExport({type:'json',escape:'false'});"><img
+                                                                src='/img/icons/json.png' width="24" /> JSON</a>
+                                                        <a href="#" class="list-group-item"
+                                                            onClick="$('#ws_multiwhere').tableExport({type:'json',escape:'false',ignoreColumn:'[2,3]'});"><img
+                                                                src='/img/icons/json.png' width="24" /> JSON
+                                                            (ignoreColumn)</a>
+                                                        <a href="#" class="list-group-item"
+                                                            onClick="$('#ws_multiwhere').tableExport({type:'json',escape:'true'});"><img
+                                                                src='/img/icons/json.png' width="24" /> JSON (with
+                                                            Escape)</a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="list-group border-bottom">
-                                                    <a href="#" class="list-group-item"
-                                                        onClick="$('#ws_multiwhere').tableExport({type:'xml',escape:'false'});"><img
-                                                            src='./img/icons/xml.png' width="24" /> XML</a>
-                                                    <a href="#" class="list-group-item"
-                                                        onClick="$('#ws_multiwhere').tableExport({type:'sql'});"><img
-                                                            src='./img/icons/sql.png' width="24" /> SQL</a>
+                                                <div class="col-md-2">
+                                                    <div class="list-group border-bottom">
+                                                        <a href="#" class="list-group-item"
+                                                            onClick="$('#ws_multiwhere').tableExport({type:'xml',escape:'false'});"><img
+                                                                src='/img/icons/xml.png' width="24" /> XML</a>
+                                                        <a href="#" class="list-group-item"
+                                                            onClick="$('#ws_multiwhere').tableExport({type:'sql'});"><img
+                                                                src='/img/icons/sql.png' width="24" /> SQL</a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="list-group border-bottom">
-                                                    <a href="#" class="list-group-item"
-                                                        onClick="$('#ws_multiwhere').tableExport({type:'csv',escape:'false'});"><img
-                                                            src='./img/icons/csv.png' width="24" /> CSV</a>
-                                                    <a href="#" class="list-group-item"
-                                                        onClick="$('#ws_multiwhere').tableExport({type:'txt',escape:'false'});"><img
-                                                            src='./img/icons/txt.png' width="24" /> TXT</a>
+                                                <div class="col-md-2">
+                                                    <div class="list-group border-bottom">
+                                                        <a href="#" class="list-group-item"
+                                                            onClick="$('#ws_multiwhere').tableExport({type:'csv',escape:'false'});"><img
+                                                                src='/img/icons/csv.png' width="24" /> CSV</a>
+                                                        <a href="#" class="list-group-item"
+                                                            onClick="$('#ws_multiwhere').tableExport({type:'txt',escape:'false'});"><img
+                                                                src='/img/icons/txt.png' width="24" /> TXT</a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="list-group border-bottom">
-                                                    <a href="#" class="list-group-item"
-                                                        onClick="$('#ws_multiwhere').tableExport({type:'excel',escape:'false'});"><img
-                                                            src='./img/icons/xls.png' width="24" /> XLS</a>
-                                                    <a href="#" class="list-group-item"
-                                                        onClick="$('#ws_multiwhere').tableExport({type:'doc',escape:'false'});"><img
-                                                            src='./img/icons/word.png' width="24" /> Word</a>
-                                                    <a href="#" class="list-group-item"
-                                                        onClick="$('#ws_multiwhere').tableExport({type:'powerpoint',escape:'false'});"><img
-                                                            src='./img/icons/ppt.png' width="24" /> PowerPoint</a>
+                                                <div class="col-md-3">
+                                                    <div class="list-group border-bottom">
+                                                        <a href="#" class="list-group-item"
+                                                            onClick="$('#ws_multiwhere').tableExport({type:'excel',escape:'false'});"><img
+                                                                src='/img/icons/xls.png' width="24" /> XLS</a>
+                                                        <a href="#" class="list-group-item"
+                                                            onClick="$('#ws_multiwhere').tableExport({type:'doc',escape:'false'});"><img
+                                                                src='/img/icons/word.png' width="24" /> Word</a>
+                                                        <a href="#" class="list-group-item"
+                                                            onClick="$('#ws_multiwhere').tableExport({type:'powerpoint',escape:'false'});"><img
+                                                                src='/img/icons/ppt.png' width="24" /> PowerPoint</a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="list-group border-bottom">
-                                                    <a href="#" class="list-group-item"
-                                                        onClick="$('#ws_multiwhere').tableExport({type:'png',escape:'false'});"><img
-                                                            src='./img/icons/png.png' width="24" /> PNG</a>
-                                                    <a href="#" class="list-group-item"
-                                                        onClick="$('#ws_multiwhere').tableExport({type:'pdf',escape:'false'});"><img
-                                                            src='./img/icons/pdf.png' width="24" /> PDF</a>
+                                                <div class="col-md-2">
+                                                    <div class="list-group border-bottom">
+                                                        <a href="#" class="list-group-item"
+                                                            onClick="$('#ws_multiwhere').tableExport({type:'png',escape:'false'});"><img
+                                                                src='/img/icons/png.png' width="24" /> PNG</a>
+                                                        <a href="#" class="list-group-item"
+                                                            onClick="$('#ws_multiwhere').tableExport({type:'pdf',escape:'false'});"><img
+                                                                src='/img/icons/pdf.png' width="24" /> PDF</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                   <div class="table-responsive" id="ws_multiwhere">
-                                        <table class="table table-bordered table-striped table-actions">
-                                            <thead>
-                                                <tr>
-                                                    <th width="50">PPN</th>
-                                                    <th width="50">Erreur</th>
-                                                    <th width="50">Lettres</th>
-                                                    <th width="50">Droit</th>
-                                                    <th width="50">Sciences</th>
-                                                    <th width="50">Médecine</th>
-                                                    <th width="50">SJA</th>
-                                                    <th width="50">STAPS</th>
-                                                    <th width="50">LC</th>
-                                                    <th width="50">BIBEL</th>
-                                                    <th width="50">IUT</th>
-                                                    <th width="50">OCA</th>
-                                                    <th width="50">Villa Arson</th>
-                                                    <th width="50">LJAD</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="resultsMultiwhere"></tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end Multiwhere check-->
-                        <hr>
-                        <!-- isbn in Sudoc check-->
-                        <div class="row" id="sudoc_isbn">
-                            <div class="col-md-12">
-                                <h3> Vérifier la présence d'ISBN dans le Sudoc</h3>
-                            </div>
-                            <div class="col-md-3 panel-group accordion accordion-dc">
-                                <div class="panel panel-info">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a href="#panelIsbn2SudocInfo">
-                                                Consignes d'utilisation
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div class="panel-body" id="panelIsbn2SudocInfo">
-                                        <p>Pour chaque ISBN, le web service isbn2ppn est interrogé et les résultats sont
-                                            classés dans les 3 tableaux ci-dessous selon le nombre de ppn renvoyé par
-                                            l'API (aucun, un, deux ou plus)
-
+                                        <div class="table-responsive" id="ws_multiwhere">
+                                            <table class="table table-bordered table-striped table-actions">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="50">PPN</th>
+                                                        <th width="50">Erreur</th>
+                                                        <th width="50">Lettres</th>
+                                                        <th width="50">Droit</th>
+                                                        <th width="50">Sciences</th>
+                                                        <th width="50">Médecine</th>
+                                                        <th width="50">SJA</th>
+                                                        <th width="50">STAPS</th>
+                                                        <th width="50">LC</th>
+                                                        <th width="50">BIBEL</th>
+                                                        <th width="50">IUT</th>
+                                                        <th width="50">OCA</th>
+                                                        <th width="50">Villa Arson</th>
+                                                        <th width="50">LJAD</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="resultsMultiwhere"></tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <!--end Multiwhere check-->
+                            <hr>
+                            <!-- isbn in Sudoc check-->
+                            <div class="row" id="isbn2ppn">
+                                <div class="col-md-12">
+                                    <h3> Vérifier la présence d'ISBN dans le Sudoc</h3>
+                                </div>
+                                <div class="col-md-3 panel-group accordion accordion-dc">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a href="#panelIsbn2SudocInfo">
+                                                    Consignes d'utilisation
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-body" id="panelIsbn2SudocInfo">
+                                            <p>Pour chaque ISBN, le web service isbn2ppn est interrogé et les résultats
+                                                sont
+                                                classés dans les 3 tableaux ci-dessous selon le nombre de ppn renvoyé
+                                                par
+                                                l'API (aucun, un, deux ou plus)
 
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <div class="block">
-                                        <button class="btn btn-success" id="submitIsbn2SudocIsbn"> Valider</button>
-                                        <button type="button" class="btn btn-danger btn-rounded"
-                                            id="clearIsbn2Sudoc">Effacer tout</button>
+                                        </div>
                                     </div>
-                                    <div class="col-md-9">
-                                        <span>Copier-coller une liste d'ISBN papier (1 par ligne). Exemple : </span>
-                                        <textarea id="areaIsbn2Sudoc" class="form-control" rows="15">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <div class="block">
+                                            <button class="btn btn-success" id="submitIsbn2SudocIsbn"> Valider</button>
+                                            <button type="button" class="btn btn-danger btn-rounded"
+                                                id="clearIsbn2Sudoc">Effacer tout</button>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <span>Copier-coller une liste d'ISBN papier (1 par ligne). Exemple : </span>
+                                            <textarea id="areaIsbn2Sudoc" class="form-control" rows="15">
   9782806264619
   9782806260376
   9782806264053
 </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-danger">
+                                        Réponse : O ppn <span id="count0Isbn" class="badge badge-light">0</span>
+                                    </button>
+                                    <div class="panel-body panel-body-table">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-actions">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="50">ISBN</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="results0Isbn"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-primary">
+                                        Réponse : 1 ppn <span id="count1Isbn" class="badge badge-light">0</span>
+                                    </button>
+                                    <div class="panel-body panel-body-table">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-actions">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="50">ISBN</th>
+                                                        <th width="50">PPN unique</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="results1Isbn"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-warning">
+                                        Réponse : 2 ppn ou plus <span id="count2Isbn" class="badge badge-light">0</span>
+                                    </button>
+                                    <div class="panel-body panel-body-table">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-actions">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="50">ISBN</th>
+                                                        <th width="50">PPNs</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="results2Isbn"></tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <button type="button" class="btn btn-danger">
-                                    Réponse : O ppn <span id="count0Isbn" class="badge badge-light">0</span>
-                                </button>
-                                <div class="panel-body panel-body-table">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped table-actions">
-                                            <thead>
-                                                <tr>
-                                                    <th width="50">ISBN</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="results0Isbn"></tbody>
-                                        </table>
-                                    </div>
+                            <!-- end isbn in Sudoc check-->
+                            <hr>
+                            <!-- Numilog check-->
+                            <div class="row" id="numilog">
+                                <div class="col-md-12">
+                                    <h3>Vérifier les urls d'accès Numilog</h3>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <button type="button" class="btn btn-primary">
-                                    Réponse : 1 ppn <span id="count1Isbn" class="badge badge-light">0</span>
-                                </button>
-                                <div class="panel-body panel-body-table">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped table-actions">
-                                            <thead>
-                                                <tr>
-                                                    <th width="50">ISBN</th>
-                                                    <th width="50">PPN unique</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="results1Isbn"></tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <button type="button" class="btn btn-warning">
-                                    Réponse : 2 ppn ou plus <span id="count2Isbn" class="badge badge-light">0</span>
-                                </button>
-                                <div class="panel-body panel-body-table">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped table-actions">
-                                            <thead>
-                                                <tr>
-                                                    <th width="50">ISBN</th>
-                                                    <th width="50">PPNs</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="results2Isbn"></tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end isbn in Sudoc check-->
-                        <hr>
-                        <!-- Numilog check-->
-                        <div class="row" id="numilog_urls">
-                            <div class="col-md-12">
-                                <h3>Vérifier les urls d'accès Numilog</h3>
-                            </div>
-                            <div class="col-md-3 panel-group accordion accordion-dc">
-                                <div class="panel panel-info">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a href="#panelNumilogInfo">
-                                                Consignes d'utilisation
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div class="panel-body" id="panelNumilogInfo">
+                                <div class="col-md-3 panel-group accordion accordion-dc">
+                                    <div class="panel panel-info">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a href="#panelNumilogInfo">
+                                                    Consignes d'utilisation
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-body" id="panelNumilogInfo">
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <div class="block">
-                                        <button class="btn btn-success" id="submitNumilogIsbn"> Valider</button>
-                                        <button type="button" class="btn btn-danger btn-rounded"
-                                            id="clearNumilog">Effacer tout</button>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <span>Copier-coller une liste d'ISBN papier (1 par ligne). Exemple : </span>
-                                        <textarea id="areaNumilog" class="form-control" rows="15">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <div class="block">
+                                            <button class="btn btn-success" id="submitNumilogIsbn"> Valider</button>
+                                            <button type="button" class="btn btn-danger btn-rounded"
+                                                id="clearNumilog">Effacer tout</button>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <span>Copier-coller une liste d'ISBN papier (1 par ligne). Exemple : </span>
+                                            <textarea id="areaNumilog" class="form-control" rows="15">
 9782806264619
 9782806260376
 9782806264053
 </textarea>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="panel-body panel-body-table">
+                                <div class="col-md-9">
+                                    <div class="panel-body panel-body-table">
 
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped table-actions">
-                                            <thead>
-                                                <tr>
-                                                    <th width="50">ISBN</th>
-                                                    <th width="100">Titre</th>
-                                                    <th width="100">Disponibilté</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="resultsNumilog"></tbody>
-                                        </table>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-actions">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="50">ISBN</th>
+                                                        <th width="100">Titre</th>
+                                                        <th width="100">Disponibilté</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="resultsNumilog"></tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--end Numilog check-->
-                        <hr>
+                            <!--end Numilog check-->
+                            <hr>
 <%- include ('../../partials/script') -%>
 <script src="./javascripts/externalPhpCurl.js"></script>
 <script src="./javascripts/apps/utils.js"></script>

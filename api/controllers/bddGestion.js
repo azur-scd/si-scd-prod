@@ -148,6 +148,7 @@ else {q={include: [
         obj["annee"] = row.annee
         obj["montant_ttc_avant_recup"] = row.montant_ttc_avant_recup
         obj["montant_ttc"] = row.montant_ttc
+		obj["reliquat"] = row.reliquat
         if(row.Bdd.Gcs) {
           console.log(row.Bdd.Gcs)
           row.Bdd.Gcs.filter(function(d) {
