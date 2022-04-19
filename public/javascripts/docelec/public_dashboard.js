@@ -246,6 +246,12 @@ $(function () {
                 dataType: 'number',
                 alignment: 'left'
             },
-        ]
+        ],
+		 summary: {
+            totalItems: [ {
+              column: 'count',
+              summaryType: 'sum',
+            }],
+          },
     }).dxDataGrid("instance")
 })
