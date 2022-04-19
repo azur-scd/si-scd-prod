@@ -8,7 +8,7 @@ $(function () {
         //loadMode: "raw",
         load: function () {
             var d = new $.Deferred();
-            $.get(urlStatsIndicators).done(function(results){
+            $.get(urlStatsEsgbu).done(function(results){
               var data = results
                         .filter(function(d){return d.calcul_esgbu})
                         .filter(function(d){return d.calcul_esgbu[d.periodeDebut.substring(0, 4)]}) //on ne veut pas les stats annuelles des ressources pour lesquelles la case calcul_esgbu n'est pas cochée (ressource fictive type BSC+Econlit à pas compter 2 fois)

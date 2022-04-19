@@ -11,6 +11,7 @@ var urlFormStats = "./api/bdds_form_stats"
 var urlStats = "./api/bdds_stats"
 var urlStatsSuivi = "./api/stats_suivi"
 var urlStatsIndicators = "./api/bdds_indicators"
+var urlStatsEsgbu = "./api/bdds_esgbu"
 var urlBddUniqueStatsReports = "./api/unique_stats_reports" //unique stats reports collected by database -> display badges by report on admin stats view
 var urlProxySushiTest = "./api/sushi_harvest_test"
 var urlProxySushi = "./api/sushi_harvest/"

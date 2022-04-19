@@ -216,3 +216,84 @@ else {
 }
 }
 
+//double join for esgbu stats synthese
+exports.esgbu = function(req, res) {
+  if(Object.keys(req.query).length === 0) { //si pas de params de requête
+   BddStat.findAll({
+     attributes: ['id', 'bdd_id', 'stats_reports_id','count','periodeDebut'], // on récupère les lignes de stats dans la table
+     where:{
+       dimension : "total", // filtrées sur les totaux uniquement
+       stats_reports_id: {
+         [Op.not]: 3  //on ne veut pas les refus d'accès (inutile pour ratios cost per use)
+       }
+     },
+     include: [{
+       model: Bdd, // jointure table bdd
+       attributes: ['id', 'bdd', 'type','soutien_oa','pole_gestion','perimetre','stats_counter','calcul_esgbu'],
+   }]   
+   }).then(rows => {
+     const resObj = rows.map(function(d) {
+       var obj = {}
+       obj["id"]=d.id
+       obj["bdd_id"]=d.bdd_id
+       obj["stats_reports_id"]=d.stats_reports_id
+       obj["count"]=d.count
+       obj["periodeDebut"]=d.periodeDebut
+         if (d.Bdd){ 
+           obj["bdd"]=d.Bdd.bdd
+           obj["type"]=d.Bdd.type
+           obj["oa"]=d.Bdd.soutien_oa
+           obj["achat"]=d.Bdd.type_achat
+           obj["perimetre"]=d.Bdd.perimetre
+           obj["counter"]=d.Bdd.stats_counter
+           obj["calcul_esgbu"]=d.Bdd.calcul_esgbu
+     }
+       return obj
+     })
+     res.json(resObj)
+   })
+ }
+ else {
+   req.query["dimension"]="total"
+   include_gestion_conditions = {etat:"4-facture"}
+   if(req.query["year"]) {
+     req.query["periodeDebut"] =  {[Op.startsWith]: req.query.year}
+     //include_gestion_conditions["annee"] = req.query.year
+     delete req.query['year'];
+   }
+   if(req.query["stats_reports_id"] && req.query["stats_reports_id"].includes(",")) {
+     req.query["stats_reports_id"] = {[Op.or]:req.query.stats_reports_id.split(",").map(function(d){return d})}
+   }
+   console.log(req.query)
+   BddStat.findAll({
+     attributes: ['id', 'bdd_id', 'stats_reports_id','count','periodeDebut'],
+     where:req.query
+       //[Op.and]: [{stats_reports_id: req.query.reportId}, {bdd_id: req.query.bddId}, { periodeDebut: {[Op.startsWith]: req.query.year}}, {dimension : "total"}],
+     ,
+     include: [{
+       model: Bdd,
+       attributes: ['id', 'bdd', 'type','soutien_oa','pole_gestion','perimetre','stats_counter','calcul_esgbu'],
+   }]   
+   }).then(rows => {
+     const resObj = rows.map(function(d) {
+       var obj = {}
+       obj["id"]=d.id
+       obj["bdd_id"]=d.bdd_id
+       obj["stats_reports_id"]=d.stats_reports_id
+       obj["count"]=d.count
+       obj["periodeDebut"]=d.periodeDebut
+       if(d.Bdd) {
+       obj["bdd"]=d.Bdd.bdd
+       obj["type"]=d.Bdd.type
+       obj["oa"]=d.Bdd.soutien_oa
+       obj["achat"]=d.Bdd.type_achat
+       obj["perimetre"]=d.Bdd.perimetre
+       obj["counter"]=d.Bdd.stats_counter
+       obj["calcul_esgbu"]=d.Bdd.calcul_esgbu
+     }
+       return obj
+     })
+     res.json(resObj)
+   })
+ }
+ } 

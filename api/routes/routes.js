@@ -276,5 +276,6 @@ app.route('/api/sushi_harvest/:view')
 //cost by usage
 app.route('/api/bdds_indicators')
 .get(bddStatController.indicators);
-
+app.route('/api/bdds_esgbu')
+.get(bddStatController.esgbu);
   }
