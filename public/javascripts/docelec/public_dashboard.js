@@ -212,6 +212,7 @@ $(function () {
             {
                 dataField: "bdd",
                 caption: "Ressource",
+				width: 300,
             },
             {
                 dataField: "date",
@@ -221,6 +222,7 @@ $(function () {
             {
                 dataField: "type",
                 caption: "Type de ressource",
+				width: 200,
 				lookup: {
                     dataSource: typeBddState,
                     displayExpr: "valeur",
@@ -230,6 +232,7 @@ $(function () {
             {
                 dataField: "counter",
                 caption: "Counter",
+				width: 200,
 				 lookup: {
                     dataSource: statsCounter,
                     displayExpr: "valeur",
@@ -239,12 +242,14 @@ $(function () {
             {
                 dataField: "stats_reports",
                 caption: "Type de statistiques",
+				width: 200,
             },
             {
                 dataField: "count",
                 caption: "Total usage",
                 dataType: 'number',
-                alignment: 'left'
+                alignment: 'left',
+				width: 200,
             },
         ],
 		 summary: {
