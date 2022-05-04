@@ -1,5 +1,6 @@
 $(function () {
   /*--Numilog--*/
+  /*---data middleware in php si-scd instance, see javascripts/externalPhpCurl.js---*/
   $("#submitNumilogIsbn").click(function () {
     $("#resultsNumilog").empty();
     var lines = $('textarea#areaNumilog').val().split('\n');
@@ -122,13 +123,14 @@ $(function () {
   })
   
    /*---ppn to Sudoc Unimarc records---*/
+   /*---data middleware in php si-scd instance, see javascripts/externalPhpCurl.js---*/
   $("#submitUnimarcxmlPpn").click(function () {
     $("#resultsUnimarcxml").empty();
     var lines = $('textarea#areaUnimarcxml').val().split('\n');
     for (let line of lines) {
 		 if (line !== "") {
     $.getJSON(getSudocRecordFields, { "ppn":  line.trim() }).then(function (data) {
-      $("#resultsUnimarcxml").append("<tr><td>"+data[0].ppn+"</td><td>"+data[0].return_code+"</td><td>"+data[0].type_doc+"</td><td>"+data[0].nnt+"</td><td>"+data[0].titre+"</td></tr>")
+      $("#resultsUnimarcxml").append("<tr><td>"+data[0].ppn+"</td><td>"+data[0].return_code+"</td><td>"+data[0].type_doc_008+"</td><td>"+data[0].type_doc_105+"</td><td>"+data[0].nnt+"</td><td>"+data[0].titre+"</td></tr>")
     })
 		 }
   }
