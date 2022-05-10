@@ -46,14 +46,26 @@ function calculateStatistics(pole) {
   $("#abstract"+pole).empty()
   $('#generalResGrid'+pole).dxDataGrid("instance").getSelectedRowsData().then((rowData) => {
     $("#abstract"+pole).append("<div class='col-md-2'><a href='#' class='tile tile-default'><p>Nombre de ressources selectionnées</p>"+rowData.length+"</a></div>")
-    etatState.map(function(d){
-      this[d.cle+'_total'] = 0
-      for (let s of rowData) {
-        if(s[d.cle] === undefined) {s[d.cle] = 0}
-        this[d.cle+'_total'] += s[d.cle];
-      }
-      $("#abstract"+pole).append("<div class='col-md-2'><a href='#' class='tile tile-info'><p>Total "+d.valeur+"</p>"+Math.round(this[d.cle+'_total'] || 0)+"</a></div>")
-     })
+   this['1-prev_total'] = 0
+    for (let s of rowData) {
+     if(s["1-prev"] === undefined) {s["1-prev"] = 0}
+     this['1-prev_total'] += s["1-prev"];
+   }
+   $("#abstract"+pole).append("<div class='col-md-2'><a href='#' class='tile tile-info'><p>Total Prévisionnel</p>"+Math.round(this['1-prev_total'] || 0)+"</a></div>")
+   this['2-budgete_total'] = 0
+   for (let s of rowData) {
+    if(s["2-budgete"] === undefined) {s["2-budgete"] = 0}
+    this['2-budgete_total'] += s["2-budgete"];
+  }
+   $("#abstract"+pole).append("<div class='col-md-2'><a href='#' class='tile tile-info'><p>Total Budgété</p>"+Math.round(this['2-budgete_total'] || 0)+"</a></div>")
+   this['diff_3_4_total'] = 0
+   for (let s of rowData) {
+    if(s["4-facture"] !== undefined) {this['diff_3_4_total'] += s["4-facture"];}
+    else {
+      if(s["3-estime"] !== undefined) {this['diff_3_4_total'] += s["3-estime"];}
+    }
+  }
+  $("#abstract"+pole).append("<div class='col-md-2'><a href='#' class='tile tile-info'><p>Total Facturé ou Estimé</p>"+Math.round(this['diff_3_4_total'] || 0)+"</a></div>")
      this['reliquat_total'] = 0
    for (let s of rowData) {
     if(s["reliquat"] === undefined) {s["reliquat"] = 0}
@@ -202,7 +214,7 @@ function calculateStatistics(pole) {
                 maxColor: '#2ab71b',
                 pointSize: 6,
                 size: {
-                  width: 180,
+                  width: 150,
                   height: 40,
                 },
                 tooltip: {
@@ -306,14 +318,16 @@ function calculateStatistics(pole) {
       return d.cle != "SCD"
     })
       .map(function (d1) {
+        $("#reliquatRotatedBar" + d1.cle).append("<div id='dxReliquatRotatedBar" + d1.cle + "' style='height: 440px;'></div>")   
         data["tseries" + d1.cle] = data["data" + d1.cle].filter(function (d2) {
           return d2["3-estime"] || d2["4-facture"]
         })
-      .map(function (d3) {
-        if (d3["3-estime"]) { return { "bdd": d3.bdd, "reliquat-estime": d3["reliquat"], "reliquat-facture": 0 } }
+      .map(function (d3) {      
+        if (d3["3-estime"]) { console.log({ "bdd": d3.bdd, "reliquat-estime": d3["reliquat"], "reliquat-facture": 0 });return { "bdd": d3.bdd, "reliquat-estime": d3["reliquat"], "reliquat-facture": 0 } }
         else if (d3["4-facture"]) { return { "bdd": d3.bdd, "reliquat-facture": d3["reliquat"], "reliquat-estime": 0 } }
           })
-        getRotatedBar("dxReliquatRotatedBar" + d3.cle, data["tseries" + d3.cle], "bdd", "reliquat-estime", "Reliquat estimé", "reliquat-facture", "Reliquat facturé", `Reliquats par ressource ${d3.cle}`)
+          console.log(d1.cle,data["tseries" + d1.cle])
+        getRotatedBar("dxReliquatRotatedBar" + d1.cle, data["tseries" + d1.cle], "bdd", "reliquat-estime", "Reliquat estimé", "reliquat-facture", "Reliquat facturé", `Reliquats par ressource ${d1.cle}`)
       })
   }
 })
