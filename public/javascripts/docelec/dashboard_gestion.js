@@ -21,7 +21,8 @@ $("#selectYear").dxSelectBox({
   onValueChanged: function (data) {
     $("div[id^='widget']").empty()
     $("div[id^='abstract']").empty()
-    poleState.map(function(d){return $("#abstract"+d.cle).empty()})
+    $("div[id^='generalResChart']").empty()
+    $("div[id^='reliquatRotated']").empty()
     dataDatagrid(data.value)
     getWidgetsData(data.value).done(function(results){displayWidgets(results,$("#selectStep").dxSelectBox('instance').option('value')) })
   }
