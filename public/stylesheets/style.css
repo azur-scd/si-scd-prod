@@ -52,6 +52,27 @@ width: 80%;
     width: 650px;
     height: 440px;
 }
+/*docelec ressource config checkbox*/
+.dx-checkbox {
+    margin-right: 10px;
+}
+/*docelec gestion popup form*/
+label[for$="montant_ttc"] {
+    background-color: rgb(230, 96, 96);
+  }
+label[for$="reliquat"] {
+background-color: rgb(230, 96, 96);
+}
+label[for$="last_estime"] {
+    background-color: rgb(230, 96, 96);
+    }
+label[for$="montant_tva_apres_recup"] {
+    background-color:grey;
+}
+/*apache superset iframe*/
+iframe {
+    border: 0px;
+}
 /*keshif visu*/
 .demoHeader {
     display:none;
