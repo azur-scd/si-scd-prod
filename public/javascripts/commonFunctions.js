@@ -54,7 +54,7 @@ function getGroupCount(data,aggField) {
 	return object2array(agg)
 }
 
-function groupBy(data,groupKey){
+function groupBy(data,groupKey,metric){
     var agg = _.groupBy(data,groupKey);
    /* var agg = _(data).groupBy(function (o) { 
         return o.bdd_id;
@@ -70,7 +70,7 @@ function groupBy(data,groupKey){
             obj["soutien_oa"] = result.soutien_oa;
           });*/
         var value = _.reduce(agg[key], function(memo,item) {
-            memo[item.etat] = (memo[item.etat] || 0) + item.montant_ttc;
+            memo[item.etat] = (memo[item.etat] || 0) + item[metric];
             memo["reliquat"] = item.reliquat;
             memo["bdd_id"] = item.bdd_id;
             memo["bdd"] = item.bdd;
