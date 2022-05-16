@@ -637,34 +637,62 @@ onCellPrepared: function(e) {
 
 //create prev N+1
  $("#submitPrev").click(function(){
-    createNewPrev($("#prevRate").val(),$("#refYear").val(),$("input[name='prevBaseField']:checked").val())
+    //createNewPrev($("#prevRate").val(),$("#refYear").val(),$("input[name='prevBaseField']:checked").val())
+	createNewPrev($("#prevRate").val(), $("#refYear").val())
 })
-function createNewPrev(rate,year){
-    //console.log(rate + ":" + field + ":" + $("#selectbox").dxSelectBox('instance').option('value'))
-     getItems(urlGestion+"?annee="+$("#selectbox").dxSelectBox('instance').option('value')+"&etat=4-facture")
-        .done(function(results) {
-            results.map(function(d) {
-                var obj = {
-                    "bdd_id":d.bdd_id,
-                    "etat": "1-prev",
-                    "annee": parseInt(year) + 1,
-                    "compte_recherche": 0,
-                    "montant_initial" : d.montant_initial + (d.montant_initial*rate/100),
-                    "devise": d.devise,
-                    "taux_change": d.taux_change,
-                    "montant_ht": d.montant_ht + (d.montant_ht*rate/100),
-                    "part_tva1": d.part_tva1 + (d.part_tva1*rate/100),
-                    "taux_tva1": d.taux_tva1,
-                    "part_tva2": d.part_tva2 + (d.part_tva2*rate/100),
-                    "taux_tva2": d.taux_tva2,
-                    "taux_recup_tva": d.taux_recup_tva,
-                    "taux_tva_frais_gestion": d.taux_tva_frais_gestion,
-                    "montant_frais_gestion": d.montant_frais_gestion,
-                    "montant_ttc": d.montant_ttc + (d.montant_ttc*rate/100),
-                }               
-                return createItems(urlGestion,obj)})
-        })
-}
+
+  function generateNewPrevData(data,year,rate){      
+            var obj = {
+                "bdd_id": data.bdd_id,
+                "etat": "1-prev",
+                "annee": parseInt(year) + 1,
+                "compte_recherche": 0,
+                "montant_initial": data.montant_initial + (data.montant_initial * rate / 100),
+                "devise": data.devise,
+                "taux_change": data.taux_change,
+                "montant_ht": data.montant_ht + (data.montant_ht * rate / 100),
+                "part_tva1": data.part_tva1 + (data.part_tva1 * rate / 100),
+                "taux_tva1": data.taux_tva1,
+                "part_tva2": data.part_tva2 + (data.part_tva2 * rate / 100),
+                "taux_tva2": data.taux_tva2,
+                "taux_recup_tva": data.taux_recup_tva,
+                "taux_tva_frais_gestion": data.taux_tva_frais_gestion,
+                "montant_frais_gestion": data.montant_frais_gestion,
+                "montant_ttc": data.montant_ttc + (data.montant_ttc * rate / 100)
+            }   
+            return createItems(urlGestion, obj)
+    }
+	
+    function createNewPrev(rate, year) {
+        //getItems(urlGestion + "?annee=" + $("#selectbox").dxSelectBox('instance').option('value') + "&etat=4-facture")
+        getItems(urlGestion + "?annee=" + $("#selectbox").dxSelectBox('instance').option('value'))
+            .done(function (results) {
+              var arr = groupBy(results,"bdd_id")
+               arr.map(function(d){
+                   //on vérifie qu'il n'y ait pas déjà de prévisionnel rentré en N+1 (auquel cas on ne fait rien)
+                   getItems(urlGestion + "?annee=" + ($("#selectbox").dxSelectBox('instance').option('value')+1) + "&bdd_id="+d.bdd_id+"&etat=1-prev").done(function(result) {
+                       if (result.length ==0) {
+                       //s'il y a un facturé en N on le prend
+                   if(d["4-facture"]) {
+                   results
+                    .filter(function(d1){return (d1.bdd_id == d.bdd_id) & (d1.etat == "4-facture")})
+                    .map(function(d2){
+                       return generateNewPrevData(d2,year,rate)
+                    })
+                   }
+                   //s'il n'y a pas de facturé on prend l'estimé
+                   else {
+                       results
+                       .filter(function(d1){return (d1.bdd_id == d.bdd_id) & (d1.etat == "3-estime")})
+                       .map(function(d2){
+                        return generateNewPrevData(d2,year,rate)
+                     })
+                   }
+                }
+                })
+                })
+            })
+    }
 function cancelFormData() {
     $("#gridContainerGestion").dxDataGrid("cancelEditData"); 
 }
