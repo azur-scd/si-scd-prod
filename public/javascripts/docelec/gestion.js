@@ -276,7 +276,8 @@ $(function(){
                  displayExpr: "valeur",
                  valueExpr: "cle"
                 },
-                sortOrder: "asc"
+                sortOrder: "asc",
+				width: 100
             },
               {
                 type: "buttons",
@@ -501,28 +502,20 @@ $(function(){
                 dataField: "montant_ttc_avant_recup",
                 caption: "Info : Montant TTC avant récup",
                 dataType: 'number',
-                visible: false,
-                editorOptions: {
-                    disabled: true
-                },
+                visible: true,
+                width: 200
             },
             {
                 dataField: "montant_tva_avant_recup",
                 caption: "Info : Montant TVA avant récup",
                 dataType: 'number',
                 visible: false,
-                editorOptions: {
-                    disabled: true
-                },
             },
             {
                 dataField: "montant_tva_apres_recup",
                 caption: "Info : Montant TVA après récup",
                 dataType: 'number',
                 visible: false,
-                editorOptions: {
-                    disabled: true
-                },
             },
             {
                 dataField: "montant_ttc",
@@ -531,7 +524,7 @@ $(function(){
 				editorOptions: {  
                     step: 0  
                 },
-                width: 150,
+                width: 200,
             },
             {
                 dataField: "reliquat",
@@ -540,6 +533,7 @@ $(function(){
 				editorOptions: {  
                     step: 0  
                 },
+				width: 200
             },
             {
                 dataField: "last_estime",
@@ -667,7 +661,7 @@ onCellPrepared: function(e) {
         //getItems(urlGestion + "?annee=" + $("#selectbox").dxSelectBox('instance').option('value') + "&etat=4-facture")
         getItems(urlGestion + "?annee=" + $("#selectbox").dxSelectBox('instance').option('value'))
             .done(function (results) {
-              var arr = groupBy(results,"bdd_id")
+              var arr = groupBy(results,"bdd_id","montant_ttc")
                arr.map(function(d){
                    //on vérifie qu'il n'y ait pas déjà de prévisionnel rentré en N+1 (auquel cas on ne fait rien)
                    getItems(urlGestion + "?annee=" + ($("#selectbox").dxSelectBox('instance').option('value')+1) + "&bdd_id="+d.bdd_id+"&etat=1-prev").done(function(result) {

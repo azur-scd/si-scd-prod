@@ -23,8 +23,9 @@ $("#selectYear").dxSelectBox({
     $("div[id^='abstract']").empty()
     $("div[id^='generalResChart']").empty()
     $("div[id^='reliquatRotated']").empty()
-    dataDatagrid(data.value)
-    getWidgetsData(data.value).done(function(results){displayWidgets(results,$("#selectStep").dxSelectBox('instance').option('value')) })
+    //poleState.map(function(d){return $("#abstract"+d.cle).empty()})
+    dataDatagrid(data.value,$("#selectMetric").dxSelectBox('instance').option('value'))
+    getWidgetsData(data.value,$("#selectMetric").dxSelectBox('instance').option('value')).done(function(results){displayWidgets(results,$("#selectStep").dxSelectBox('instance').option('value')) })
   }
 })
 
@@ -36,12 +37,28 @@ $("#selectStep").dxSelectBox({
   value: "exec",
   onValueChanged: function (item) {
     $("div[id^='widget']").empty()
-    getWidgetsData($("#selectYear").dxSelectBox('instance').option('value')).done(function(results){displayWidgets(results,item.value) })
+    getWidgetsData($("#selectYear").dxSelectBox('instance').option('value'),$("#selectMetric").dxSelectBox('instance').option('value')).done(function(results){displayWidgets(results,item.value) })
   }
 })
 
-dataDatagrid($("#selectYear").dxSelectBox('instance').option('value'))
-getWidgetsData($("#selectYear").dxSelectBox('instance').option('value')).done(function(results){displayWidgets(results,$("#selectStep").dxSelectBox('instance').option('value')) })
+$("#selectMetric").dxSelectBox({
+  width: 250,
+  dataSource: metrics,
+  valueExpr: "cle",
+  displayExpr: "valeur",
+  value: "montant_ttc",
+  onValueChanged: function (item) {
+    $("div[id^='widget']").empty()
+    $("div[id^='abstract']").empty()
+    $("div[id^='generalResChart']").empty()
+    $("div[id^='reliquatRotated']").empty()
+    dataDatagrid($("#selectYear").dxSelectBox('instance').option('value'),item.value)
+    getWidgetsData($("#selectYear").dxSelectBox('instance').option('value'),item.value).done(function(results){displayWidgets(results,$("#selectStep").dxSelectBox('instance').option('value')) })
+  }
+})
+
+dataDatagrid($("#selectYear").dxSelectBox('instance').option('value'),$("#selectMetric").dxSelectBox('instance').option('value'))
+getWidgetsData($("#selectYear").dxSelectBox('instance').option('value'),$("#selectMetric").dxSelectBox('instance').option('value')).done(function(results){displayWidgets(results,$("#selectStep").dxSelectBox('instance').option('value')) })
 
 function calculateStatistics(pole) {
   $("#abstract"+pole).empty()
@@ -76,7 +93,7 @@ function calculateStatistics(pole) {
   })
 }
   //main data
-  function dataDatagrid(year) {
+  function dataDatagrid(year,metric) {
     var store = new DevExpress.data.CustomStore({
       //loadMode: "raw",
       key: "bdd_id",
@@ -87,7 +104,7 @@ function calculateStatistics(pole) {
         if (results.length == 0) {
           $("#noData").append("<div class='alert alert-danger' role='alert'><strong>Pas de données pour cette année</strong></div>")
         }
-        data = groupBy(results, "bdd_id")
+        data = groupBy(results, "bdd_id",metric)
         d.resolve(data)
        })
        return d.promise();
@@ -229,7 +246,7 @@ function calculateStatistics(pole) {
 
     })
   }
-  function getWidgetsData(year) {   
+  function getWidgetsData(year,metric) {   
     var d = new $.Deferred();
     $.get(urlGestionCustom + "/?annee=" + year).done(function (results) {
       let data= {}
@@ -237,7 +254,7 @@ function calculateStatistics(pole) {
         $("#noData").append("<div class='alert alert-danger' role='alert'><strong>Pas de données pour cette année</strong></div>")
       }
       //data general et par pole
-      data["dataSCD"] = groupBy(results, "bdd_id")
+      data["dataSCD"] = groupBy(results, "bdd_id",metric)
       data["dataSTM"] = data["dataSCD"].filter(function (d) {
         return d.pole == "STM"
       })

@@ -111,6 +111,8 @@ var years = [{ "cle": 2030, "valeur": 2030 },
 { "cle": 2019, "valeur": 2019 }]
 var steps = [{ "cle": "prev", "valeur": "Prévisions" },
 { "cle": "exec", "valeur": "Exécution" }]
+var metrics = [{ "cle": "montant_ttc", "valeur": "Montants TTC après récup" },
+{ "cle": "montant_ttc_avant_recup", "valeur": "Montants TTC avant récup" }]
 var months = [{ "cle": "janvier", "valeur": "Janvier", "start": "-01-01", "end": "-01-31","code":"01" },
 { "cle": "fevrier", "valeur": "Février", "start": "-02-01", "end": "-02-28","code":"02" },
 { "cle": "mars", "valeur": "Mars", "start": "-03-01", "end": "-03-31","code":"03" },
