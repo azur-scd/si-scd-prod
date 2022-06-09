@@ -117,6 +117,9 @@ app.get('/public-apps-app', function(req, res, next) {
   app.get('/public-apps-utils', function(req, res, next) {
     res.render('pages/apps/utils', {page:'Utilitaires en ligne', menuId:'utilitaires'});
   });
+   app.get('/public-apps-utilebooks', function(req, res, next) {
+    res.render('pages/apps/utilebooks', {page:'Utilitaires Ebooks', menuId:'utilitaires ebooks'});
+  });
 
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())

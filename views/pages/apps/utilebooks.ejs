@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<head>
+    <%- include ('../../partials/head'); -%>
+</head>
+<body>
+    <div class="page-container">
+        <%- include ('../../partials/sidebar') -%>
+            <div class="page-content">
+                <%- include ('../../partials/navbar') -%>
+                    <div class="page-content-wrap">
+                        <div class="page-title">
+                            <h2>
+                                <%= page %>
+                            </h2>
+                        </div>
+                        <!--isbn to ebooks in Primo--->
+                        <div class="row" id="isbn2ebooks">
+                            <div class="col-md-12">
+                                <h3>Voir tous les ebooks (signalés dans Primo) associées à un ISBN</h3>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="block">
+                                        <button class="btn btn-success" id="submitIsbn2ebooks"> Valider</button>
+                                        <button type="button" class="btn btn-danger btn-rounded"
+                                            id="clearIsbn2ebooks">Effacer tout</button>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <span>Copier-coller une liste d'ISBN papier (1 par ligne). Exemple :
+                                        </span>
+                                        <textarea id="areaIsbn2ebooks" class="form-control" rows="15">
+978-2-297-13413-2
+978-2-200-62790-4
+978-2-247-19817-7
+978-2-275-07594-5
+978-2-84934-536-8
+978-2-297-09971-4
+978-2-8027-6547-9
+978-2-297-09218-0
+978-2-343-20139-9
+978-2-501-14944-0
+978-2-7013-2048-9
+978-2-7495-3972-0
+                                       </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-right">
+                                <button class="btn btn-danger toggle" data-toggle="exportIsbn2ebooksTable"><i
+                                        class="fa fa-bars"></i> Export Data</button>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="panel-body panel-body-table">
+                                    <div class="panel-body" id="exportIsbn2ebooksTable" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="list-group border-bottom">
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#isbn2ebooks').tableExport({type:'json',escape:'false'});"><img
+                                                            src='/img/icons/json.png' width="24" /> JSON</a>
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#isbn2ebooks').tableExport({type:'json',escape:'false',ignoreColumn:'[2,3]'});"><img
+                                                            src='/img/icons/json.png' width="24" /> JSON
+                                                        (ignoreColumn)</a>
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#isbn2ebooks').tableExport({type:'json',escape:'true'});"><img
+                                                            src='/img/icons/json.png' width="24" /> JSON (with
+                                                        Escape)</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="list-group border-bottom">
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#isbn2ebooks').tableExport({type:'xml',escape:'false'});"><img
+                                                            src='/img/icons/xml.png' width="24" /> XML</a>
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#isbn2ebooks').tableExport({type:'sql'});"><img
+                                                            src='/img/icons/sql.png' width="24" /> SQL</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="list-group border-bottom">
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#isbn2ebooks').tableExport({type:'csv',escape:'false'});"><img
+                                                            src='/img/icons/csv.png' width="24" /> CSV</a>
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#isbn2ebooks').tableExport({type:'txt',escape:'false'});"><img
+                                                            src='/img/icons/txt.png' width="24" /> TXT</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="list-group border-bottom">
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#isbn2ebooks').tableExport({type:'excel',escape:'false'});"><img
+                                                            src='/img/icons/xls.png' width="24" /> XLS</a>
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#isbn2ebooks').tableExport({type:'doc',escape:'false'});"><img
+                                                            src='/img/icons/word.png' width="24" /> Word</a>
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#isbn2ebooks').tableExport({type:'powerpoint',escape:'false'});"><img
+                                                            src='/img/icons/ppt.png' width="24" /> PowerPoint</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="list-group border-bottom">
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#isbn2ebooks').tableExport({type:'png',escape:'false'});"><img
+                                                            src='/img/icons/png.png' width="24" /> PNG</a>
+                                                    <a href="#" class="list-group-item"
+                                                        onClick="$('#isbn2ebooks').tableExport({type:'pdf',escape:'false'});"><img
+                                                            src='/img/icons/pdf.png' width="24" /> PDF</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive" id="ws_isbn2ebooks">
+                                        <table class="table table-bordered table-striped table-actions">
+                                            <thead>
+                                                <tr>
+                                                    <th width="50">ISBN</th>
+                                                    <th width="80">Titre</th>
+                                                    <th width="50">Nombre de résultats (notices) Primo</th>
+                                                    <th width="50">Dont nombre d'ebooks</th>
+													<th width="50">Regroupement FRBR</th>
+                                                    <th width="50">Lien Primo regroupement FRBR</th>
+                                                    <th width="50">Nombre de notices dans le regroupement FRBR</th>
+                                                    <th width="50">dont nombre de notices d'ebooks dans le regroupement FRBR</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="resultsIsbn2ebooks"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>                         
+                            <!-- end isbn to ebooks in Primo-->
+                            <hr>
+                            <%- include ('../../partials/script') -%>
+                                <script src="./javascripts/externalPhpCurl.js"></script>
+                                <script src="./javascripts/apps/utilebooks.js"></script>
+</body>
+
+</html>
