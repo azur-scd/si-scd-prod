@@ -1,27 +1,6 @@
 $(function () {
-  /*--Numilog--*/
-  /*---data middleware in php si-scd instance, see javascripts/externalPhpCurl.js---*/
-  $("#submitNumilogIsbn").click(function () {
-    $("#resultsNumilog").empty();
-    var lines = $('textarea#areaNumilog').val().split('\n');
-    for (let line of lines) {
-      $.getJSON(parseNumilogHtml, { "isbn": line.trim() }).then(function (data) {
-        console.log(data);
-        if (data.title) {
-          $("#resultsNumilog").append("<tr><td>" + data.isbn + "</td><td><strong>" + data.title + "</strong></td><td>" + data.dispo + "</td></tr>")
-        }
-        else {
-          $("#resultsNumilog").append("<tr><td>" + data.isbn + "</td><td><span class='label label-danger'>Erreur</span></td><td><span class='label label-danger'>Erreur</span></td></tr>")
-        }
-      })
-    }
-  })
-  //clear   
-  $("#clearNumilog").click(function () {
-    $('textarea#areaNumilog').val("");
-    $("#resultsNumilog").empty();
-  })
-
+	/*---data middleware in php si-scd instance, see javascripts/externalPhpCurl.js---*/
+	
   /*-- Isbn to Sudoc--*/
   $("#submitIsbn2SudocIsbn").click(function () {
     $("#results0Isbn,#results1Isbn,#results2Isbn").empty();

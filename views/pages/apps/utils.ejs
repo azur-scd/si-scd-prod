@@ -362,62 +362,6 @@
                             </div>
                             <!-- end isbn in Sudoc check-->
                             <hr>
-                            <!-- Numilog check-->
-                            <div class="row" id="numilog">
-                                <div class="col-md-12">
-                                    <h3>Vérifier les urls d'accès Numilog</h3>
-                                </div>
-                                <div class="col-md-3 panel-group accordion accordion-dc">
-                                    <div class="panel panel-info">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a href="#panelNumilogInfo">
-                                                    Consignes d'utilisation
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div class="panel-body" id="panelNumilogInfo">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <div class="block">
-                                            <button class="btn btn-success" id="submitNumilogIsbn"> Valider</button>
-                                            <button type="button" class="btn btn-danger btn-rounded"
-                                                id="clearNumilog">Effacer tout</button>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <span>Copier-coller une liste d'ISBN papier (1 par ligne). Exemple : </span>
-                                            <textarea id="areaNumilog" class="form-control" rows="15">
-9782806264619
-9782806260376
-9782806264053
-</textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="panel-body panel-body-table">
-
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped table-actions">
-                                                <thead>
-                                                    <tr>
-                                                        <th width="50">ISBN</th>
-                                                        <th width="100">Titre</th>
-                                                        <th width="100">Disponibilté</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="resultsNumilog"></tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end Numilog check-->
-                            <hr>
 <%- include ('../../partials/script') -%>
 <script src="./javascripts/externalPhpCurl.js"></script>
 <script src="./javascripts/apps/utils.js"></script>
