@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<head>
+    <%- include ('../../partials/head'); -%>
+</head>
+
+<body>
+    <div class="page-container">
+        <%- include ('../../partials/sidebar') -%>
+            <div class="page-content">
+                <%- include ('../../partials/navbar') -%>
+                    <div class="page-content-wrap">
+                        <div class="page-title">
+                            <h2>
+                                <%= page %>
+                            </h2>
+                        </div>
+                        <!--isbn to ebooks in Primo--->
+                        <div class="row" id="congescalcul">
+                            <div class="col-md-12">
+                                <h3>Calculer des droits aux congés</h3>
+                            </div>
+                            <div class="list_wrapper">
+                                <div class="row fieldsrow">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-md-8 control-label">Période (durée en mois)</label>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" name="list[0][]"
+                                                    placeholder="ex : 1, 2, 3...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-md-6 control-label">Quotité de temps de travail</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control select" name="list[0][]"
+                                                    data-style="btn-success">
+                                                    <option value="100">100%</option>
+                                                    <option value="80">80%</option>
+                                                    <option value="50">50%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="list_add_button" type="button" class="btn btn-primary">Ajouter
+                                            une ligne</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2">
+                                <button class="btn btn-block btn-success" id="submitlists"> Valider</button>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3">Calcul du nombre d'heures de congés</div>
+                            <div class="col-md-3">
+                                <div class="tile tile-default">
+                                    <span id="result_conges_hours"></span>
+                                    <p id="result_conges_dec"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    </div>
+    <%- include ('../../partials/script') -%>
+        <script src="./javascripts/apps/utiladmingen.js"></script>
+</body>
+
+</html>
