@@ -23,6 +23,7 @@ $(function () {
                 '<select class="form-control select" name="list[' + x + '][]" data-style="btn-success">' +
                 '<option value="100">100%</option>' +
                 '<option value="80">80%</option>' +
+				'<option value="70">70%</option>' +
                 '<option value="50">50%</option>' +
                 '</select>' +
                 '</div>' +
