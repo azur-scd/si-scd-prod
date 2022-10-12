@@ -48,7 +48,7 @@ app.route('/api/bus/:buId/delete')
  
        /*----- HORAIRES-----*/
 
-  app.route('/api/horaires')
+  /*app.route('/api/horaires')
     .get(horairesController.list) 
 
   app.route('/api/horaires/:id')
@@ -58,7 +58,7 @@ app.route('/api/bus/:buId/delete')
     .get(horairesController.findByBuId);
 
     app.route('/api/v1/horaires/custom/9')
-    .get(horairesController.list_for_lc);
+    .get(horairesController.list_for_lc);*/
 
    /*----- USERS-----*/
   //get all
