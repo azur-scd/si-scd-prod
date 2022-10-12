@@ -1,4 +1,5 @@
 const buController = require("../controllers").bu;
+const horairesController = require("../controllers").horaires;
 const userController = require("../controllers").user;
 const bddController = require("../controllers").bdd;
 const statReportController = require("../controllers").statReport;
@@ -51,14 +52,14 @@ app.route('/api/bus/:buId/delete')
   app.route('/api/horaires')
     .get(horairesController.list) 
 
-  /*app.route('/api/horaires/:id')
+  app.route('/api/horaires/:id')
     .get(horairesController.findById);
 
   app.route('/api/horaires/buid/:buId')
     .get(horairesController.findByBuId);
 
     app.route('/api/v1/horaires/custom/9')
-    .get(horairesController.list_for_lc);*/
+    .get(horairesController.list_for_lc);
 
    /*----- USERS-----*/
   //get all
