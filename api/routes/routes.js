@@ -45,6 +45,20 @@ module.exports = function(app) {
   //delete
 app.route('/api/bus/:buId/delete')
  .delete(buController.delete);
+ 
+       /*----- HORAIRES-----*/
+
+  app.route('/api/horaires')
+    .get(horairesController.list) 
+
+  app.route('/api/horaires/:id')
+    .get(horairesController.findById);
+
+  app.route('/api/horaires/buid/:buId')
+    .get(horairesController.findByBuId);
+
+    app.route('/api/v1/horaires/custom/9')
+    .get(horairesController.list_for_lc);
 
    /*----- USERS-----*/
   //get all
