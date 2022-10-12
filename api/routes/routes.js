@@ -48,10 +48,10 @@ app.route('/api/bus/:buId/delete')
  
        /*----- HORAIRES-----*/
 
-  /*app.route('/api/horaires')
+  app.route('/api/horaires')
     .get(horairesController.list) 
 
-  app.route('/api/horaires/:id')
+  /*app.route('/api/horaires/:id')
     .get(horairesController.findById);
 
   app.route('/api/horaires/buid/:buId')
