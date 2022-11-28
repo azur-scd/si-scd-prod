@@ -233,7 +233,8 @@ $(function(){
       },
       {
         dataField: "description",
-        caption: "Description"
+        caption: "Description",
+		validationRules: [{ type: "required" }]
       },
       {
         dataField: "type_base",

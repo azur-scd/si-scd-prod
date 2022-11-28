@@ -291,6 +291,8 @@ $(function(){
                 dataField: "perimetre",
                 caption: "Périmètre abonnement",
                 editCellTemplate: function(cellElement, cellInfo) {
+                       if(typeof cellInfo.value !== "undefined")
+                   {
                    return $('<div>').dxTagBox({
                     dataSource: typePerimetre,
                     value: cellInfo.value.split(','),
@@ -309,6 +311,27 @@ $(function(){
                         info.component.updateDimensions();
                       },*/
                    })
+                }
+                else {
+                    return $('<div>').dxTagBox({
+                        dataSource: typePerimetre,
+                        value: cellInfo.value,
+                        valueExpr: 'cle',
+                        displayExpr: 'valeur',
+                        showSelectionControls: true,
+                        maxDisplayedTags: 3,
+                        showMultiTagOnly: false,
+                        applyValueMode: 'useButtons',
+                        searchEnabled: true,
+                        onValueChanged(e) {
+                            console.log(e.value)
+                            cellInfo.setValue(e.value.join(','));
+                          },
+                         /* onSelectionChanged() {
+                            info.component.updateDimensions();
+                          },*/
+                       })
+                }
                     
                 },
                 lookup: {
@@ -330,6 +353,7 @@ $(function(){
                       return (data.perimetre || []).indexOf(filterValue) !== -1;
                     };
                   },
+				  validationRules: [{ type: "required" }]
             },
     {
         dataField: "type_achat",
