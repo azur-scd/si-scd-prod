@@ -96,7 +96,11 @@ $(function(){
                     colCount: 2,
                     colSpan: 2,
                     caption: "Données Primo",
-                    items: ["bdd_id", "icone", "nom_court", "source", "url", "proxified_url", "editeur", "disc", "langue", "type_contenu", "type_acces", "note_acces",{
+                    items: ["bdd_id", "icone", "nom_court", "source", "url", "proxified_url", "editeur", 
+					    { dataField: "disc", helpText: "Exemple: Arts$Sciences humaines$Littérature" }, 
+                        { dataField: "langue", helpText: "Exemple: fre ; Exemple: eng" },
+                        { dataField: "type_contenu", helpText: "Exemple: Revues$Données scientifiques" }, 
+					 "type_acces", "note_acces",{
                         dataField: "description",
                         editorType: "dxTextArea",
                         colSpan: 2,
