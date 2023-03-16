@@ -17,7 +17,7 @@ $("#selectYear").dxSelectBox({
   dataSource: years,
   valueExpr: "cle",
   displayExpr: "valeur",
-  value: years[8].cle,
+  value: years[7].cle,
   onValueChanged: function (data) {
     $("div[id^='widget']").empty()
     $("div[id^='abstract']").empty()

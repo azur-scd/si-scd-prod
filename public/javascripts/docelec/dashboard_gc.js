@@ -5,7 +5,7 @@ $(function () {
     dataSource: years,
     valueExpr: "cle",
     displayExpr: "valeur",
-    value: years[9].cle,
+    value: years[7].cle,
     onValueChanged: function (data) {
       // return $("#year").val(data.value)
       return bddDisplay(data.value, $("#selectStep").dxSelectBox('instance').option('value')),
