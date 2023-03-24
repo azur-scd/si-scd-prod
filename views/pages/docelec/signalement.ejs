@@ -22,40 +22,15 @@
         <!-- start panel info -->
           <!-- end panel info -->
         </div>
-     <div class="form-horizontal validate">
-          <div class="panel panel-default tabs">
-            <ul class="nav nav-tabs" role="tablist">
-              <li class="active"><a href="#tab-bdd" role="tab" data-toggle="tab">Bases de données</a></li>
-              <li><a href="#tab-ebook" role="tab" data-toggle="tab">Ebook</a></li>
-            </ul>
-            <div class="panel-body tab-content">
-              <div class="tab-pane active" id="tab-bdd">
-                <div class="row">
-                  <h4>Bases de données</h4>
-                  <div class="pull-left">                                         
-                    <a class="btn btn-warning" href="./api/signalement_primo" target="_blanck"> Export xml Primo</a>            
-                  </div>
-                </div>
-                <div class="row">
-                  <div id="gridContainerSignalement"></div>
-                </div>
-              </div>
-              <div class="tab-pane" id="tab-ebook">
-                <div class="row">
-                  <h4>Ebooks</h4>
-                  <p>Cet espace sert à déposer des fichiers éditeurs de notices Marc destinés à être chargés dans Primo (par ex : acquisitions Cairn au titre à titre)</p>
-                  <p><b>Proposition de convention de nommage des fichiers</b> : Initiales_EDITEUR_aaaa-mm-jj, par ex GG_CAIRN_2020-11-09</p>
-                  <p><b>Remarque</b> : cet archivage est temporaire et destiné au suivi partagé du signalement de lots d'ebooks, une fois Primo mis à jour le fichier de notices correspondant est supprimé de ce serveur.</p>
-                  <div id="fileuploader-container">
-                    <div id="file-uploader"></div>
-                </div>
-                </div>
-                <div class="row">
-                  <h3>Fichiers archivés</h3>
-                  <ul id="files-dirread"></ul>
-                </div>
-              </div>
+  <div class="form-horizontal validate">
+          <div class="row">
+            <h4>Bases de données</h4>
+            <div class="pull-left">                                         
+              <a class="btn btn-warning" href="/api/signalement_primo" target="_blanck"> Export xml Primo</a>            
             </div>
+          </div>
+          <div class="row">
+            <div id="gridContainerSignalement"></div>
           </div>
         </div>
     </div>

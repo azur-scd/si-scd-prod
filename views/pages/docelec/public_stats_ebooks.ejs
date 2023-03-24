@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>    
+  <title>SI-SCD | <%= page %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="/stylesheets/bootstrap/bootstrap.min.css">
+  <!-- Joli Theme CSS -->
+  <link rel="stylesheet" href="/stylesheets/theme-black.css">
+  <!-- Our Custom CSS -->
+  <link rel="stylesheet" href="/stylesheets/style.css">
+    <%- include ('../../partials/script') -%>     
+    <%- include ('../../partials/head_devextreme'); -%>                          
+</head>
+<body>
+
+  <div class="page-container">
+    <%- include ('../../partials/sidebar') -%>
+      <div class="page-content">
+        <%- include ('../../partials/navbar') -%>
+          <div class="page-content-wrap">
+            <div class="page-title">                    
+              <h2><%= page %></h2>
+            </div>
+            <div class="row">
+                <p><b>Cet espace est destiné au téléchargement de fichiers de statistiques de consultations d'ebooks récupérés auprès des éditeurs</b></p>
+                <h3>Fichiers archivés</h3>
+                  <ul id="files-dirread"></ul>
+              </div>	
+    </div>
+  </div>
+  </div>
+  <%- include ('../../partials/script') -%>
+  <%- include ('../../partials/script_admin') -%>
+  <%- include ('../../partials/script_devextreme') -%>
+  <script src="./javascripts/docelec/public_stats_ebooks.js"></script>
+</body>
+</html>
