@@ -66,8 +66,13 @@ exports.delete = function(req, res) {
     });
 }; 
 
+exports.export = function (req, res) {
+  let filenameWithPath = './uploads/stats_ebooks/' + req.params.filename;
+  res.download(filenameWithPath , req.params.filename)
+};
+
 exports.read = function(req, res) {
-  fs.readdir('./uploads/', function (err, files) {
+  fs.readdir('./uploads/stats_ebooks/', function (err, files) {
     var arr = []
     if (err) {
         return console.log('Unable to scan directory: ' + err);

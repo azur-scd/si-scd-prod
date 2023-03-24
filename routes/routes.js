@@ -111,6 +111,9 @@ app.get('/admin-docelec-dashboardgestion', isLoggedIn,function(req, res, next) {
 app.get('/public-docelec-dashboard', function(req, res, next) {
     res.render('pages/docelec/public_dashboard', {page:'Docelec : Dashboard', menuId:'docelec dashboard'});
   });
+ app.get('/public-docelec-stats-ebooks', function(req, res, next) {
+    res.render('pages/docelec/public_stats_ebooks', {page:'Docelec : Fichiers de statistiques d\'usage des ebooks', menuId:'docelec ebooks'});
+  });
 app.get('/public-apps-app', function(req, res, next) {
     res.render('pages/apps/app', {page:'Applications', menuId:'applications'});
   });
