@@ -144,7 +144,7 @@ app.route('/api/signalement_import')
 .post(bddSignalementController.import);
 app.route('/api/signalement_export/:filename')
 .get(bddSignalementController.export);
-app.route('/api/signalement_readdir')
+app.route('/api/signalement_readdir/:year')
 .get(bddSignalementController.read);
 
  /*----- BDDS GESTION-----*/
