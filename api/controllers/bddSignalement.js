@@ -72,7 +72,7 @@ exports.export = function (req, res) {
 };
 
 exports.read = function(req, res) {
-  fs.readdir('./uploads/stats_ebooks/', function (err, files) {
+  fs.readdir('./uploads/stats_ebooks/'+ req.params.year + '/', function (err, files) {
     var arr = []
     if (err) {
         return console.log('Unable to scan directory: ' + err);

@@ -180,7 +180,6 @@ $("#gridContainerBU").dxDataGrid({
         {
             dataField: "code_bib_aleph",
             caption: "Code Bib Aleph",
-            dataType: "date"
         } ,  
         {
             dataField: "latitude",
