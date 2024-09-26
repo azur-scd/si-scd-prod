@@ -20,7 +20,7 @@
     "passport": "^0.4.1",
     "passport-cas": "^0.1.1",
     "passport-local": "^1.0.0",
-    "sequelize": "^5.21.7"
+    "sequelize": "^6.29.0"
   },
   "devDependencies": {
     "node-gyp": "^7.0.0",
