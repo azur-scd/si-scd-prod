@@ -26,5 +26,8 @@
     "node-gyp": "^10.2.0",
     "node-pre-gyp": "^0.15.0",
     "nodemon": "^2.0.22"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }
