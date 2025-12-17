@@ -1,3 +1,42 @@
+// Le fichier routes.js joue un rôle central dans ton application Express en définissant toutes les routes de l’API REST et en les reliant aux contrôleurs correspondants. Voici une explication détaillée :
+// But principal
+// - Fournir un point central de configuration des routes pour l’application.
+// - Chaque route correspond à une URL d’API et est associée à une fonction dans un contrôleur qui gère la logique métier (lecture, création, mise à jour, suppression).
+// - Permet de séparer la logique métier (controllers) de la gestion des URL et des requêtes HTTP (routes).
+// Structure générale
+// module.exports = function(app) {
+// app.route('/api/...').get(...).post(...);
+// ...
+// }
+// La fonction exportée reçoit app (instance Express).
+// app.route('/chemin') définit la route pour une URL donnée.
+// .get(), .post(), .put(), .delete() associent la route à une méthode HTTP et à la fonction du contrôleur.
+// Exemple : BUS
+// app.route('/api/bus').get(buController.list); 
+// app.route('/api/bus/:buId').get(buController.findById);
+// GET /api/bus → récupère tous les bus
+// GET /api/bus/:buId → récupère un bus par son ID
+// Routes spéciales
+// - Import/Export / traitement des fichiers :
+// app.route('/api/signalement_import').post(...);
+// app.route('/api/signalement_export/:filename').get(...);
+// Routes avec paramètres multiples et filtres :
+// - app.route('/api/bdd2disc/amount/:year').get(...);
+// Harvest SUSHI pour les statistiques COUNTER :
+// - app.route('/api/sushi_harvest_test').post(...);
+// - app.route('/api/sushi_harvest/:view').post(...);
+// - Routes pour indicateurs et rapports synthétiques :
+// app.route('/api/bdds_indicators').get(...);
+// app.route('/api/bdds_esgbu').get(...);
+// Points clés
+// - Centralisation : Toutes les routes API sont définies ici, facile à maintenir.
+// - RESTful : On retrouve la structure CRUD classique (Create, Read, Update, Delete) pour chaque entité.
+// - Paramètres dynamiques : :id, :buId, :bddId permettent d’identifier la ressource ciblée.
+// - Séparation des responsabilités : Routes → contrôleurs → modèles.
+// - Extensible : Ajouter une nouvelle ressource ne nécessite que : un modèle, un contrôleur, une nouvelle route ici
+// En résumé : routes.js agit comme le “plan de circulation” de ton API, en connectant les URL aux fonctions du backend, permettant à l’application de répondre aux requêtes HTTP correctement.
+
+
 const buController = require("../controllers").bu;
 const horairesController = require("../controllers").horaires;
 const userController = require("../controllers").user;

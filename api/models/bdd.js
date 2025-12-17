@@ -1,3 +1,7 @@
+// Le fichier exporte une fonction qui reçoit sequelize et DataTypes pour définir le modèle Bdd.
+// Le modèle correspond à la table bdds dans la base de données.
+// freezeTableName: true empêche Sequelize de pluraliser automatiquement le nom de la table
+
 module.exports = (sequelize, DataTypes) => {
     const Bdd = sequelize.define('Bdd', {
         id: {
@@ -15,6 +19,11 @@ module.exports = (sequelize, DataTypes) => {
               this.setDataValue('gestion', gestion);
           }
         },
+// Champs JSON avec getter/setter
+// Permet de stocker des objets JS dans un champ TEXT en JSON.
+// Lors de la lecture (get), on reconvertit la chaîne JSON en objet JS.
+// Lors de l’écriture (set), l’objet JS est stocké tel quel (Sequelize le convertira en JSON si nécessaire).
+		
         signalement: DataTypes.INTEGER,
         type: DataTypes.STRING,
         soutien_oa: DataTypes.STRING,
@@ -82,6 +91,13 @@ module.exports = (sequelize, DataTypes) => {
      Bdd.belongsTo(models.StatReport,{foreignKey: 'pref_stats_reports_id'});
      Bdd.belongsTo(models.Gc,{foreignKey: 'gc_id'});
     };
-  
+
+// hasOne : une base peut avoir un seul signalement (BddSignalement).
+// hasMany : une base peut avoir plusieurs disciplines, gestions, statistiques, GC ou suivis (BddDiscipline, BddGestion, BddStat, Gc, StatSuivi).
+// belongsTo : une base peut être liée à un rapport de stats préféré (StatReport) ou à une GC (Gc).
+// Les clés étrangères (foreignKey) définissent le lien entre tables.
+
+
+	
     return Bdd;
   }

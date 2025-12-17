@@ -1,5 +1,5 @@
 const bu = require("./bu");
-const horaires = require("./horaires");
+// const horaires = require("./horaires");
 const user = require("./user");
 const bdd = require("./bdd");
 const bddSignalement = require("./bddSignalement");
@@ -12,7 +12,7 @@ const disc = require("./disc");
 const bddDiscipline = require("./bddDiscipline");
 const sushiHarvest = require("./sushiHarvest")
 module.exports = {bu,
-                  horaires,
+//                   horaires,
                   user,
                   bdd,
                   bddSignalement,

@@ -1,122 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
- <%- include ('partials/head'); -%> 
-</head>
-<body>
-   <div class="page-container">
-    <div class="row text-center">
-      <h1 style="color:#bec4ca">SI-SCD</h1>
-      <!--<p><a href="/login" target="_blanck" type="button" class="btn btn-info">Accéder à l'interface d'administration</a></p>-->
-     </div>
-  <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-4">
-      <div class="panel panel-warning push-up-20">
-          <div class="panel-body panel-body-pricing">
-              <h2><small>Horaires des BU</small></h2>                                
-              <p><span class="fa fa-caret-right"></span> <a href="http://si-scd.unice.fr/si-scd/modules/horaires/public/index.html">Totaux par BU</a></p>
-          </div>
-          <div class="panel-footer">                                 
-              <a href="./login" target="_blanck" type="button" class="btn btn-info btn-block">Administration</a>
-          </div>
+   <head>
+      <%- include ('partials/head'); -%> 
+   </head>
+   <body>
+      <div class="page-container">
+         <div class="row text-center">
+            <h1 style="color:#bec4ca">SI-SCD</h1>
+            <p><a href="/login" target="_blanck" type="button" class="btn btn-info">Accéder à l'interface d'administration</a></p>
+         </div>
+         <div class="col-md-4">
+            <div class="panel panel-warning push-up-20">
+               <div class="panel-body panel-body-pricing">
+                  <h2><small>Documentation électronique</small></h2>
+                  <p><span class="fa fa-caret-right"></span> <a href="./public-docelec-dashboard">Statistiques d'usage: dashboard</a></p>
+                  <!-- <p><span class="fa fa-caret-right"></span> <a href="./public-docelec-stats-ebooks">Statistiques d'utilisation des ebooks: fichiers à télécharger</a></p> -->
+               </div>
+               <div class="panel-footer">                                 
+                  <a href="./login" target="_blanck" type="button" class="btn btn-info btn-block">Administration</a>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-1"></div>
       </div>
-  </div>
-
-  <div class="col-md-4">
-    <div class="panel panel-warning push-up-20">
-        <div class="panel-body panel-body-pricing">
-            <h2><small>Documentation électronique</small></h2>                                
-            <p><span class="fa fa-caret-right"></span> <a href="./public-docelec-dashboard">Statistiques d'usage: dashboard</a></p>
-			<p><span class="fa fa-caret-right"></span> <a href="./public-docelec-stats-ebooks">Statistiques d'utilisation des ebooks: fichiers à télécharger</a></p>
-        </div>
-        <div class="panel-footer">                                 
-          <a href="./login" target="_blanck" type="button" class="btn btn-info btn-block">Administration</a>
-        </div>
-    </div>
-</div>
-        <div class="col-md-1"></div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-2"></div>
-   
-  <div class="col-md-4">
-   <div class="row">
-    <div class="panel panel-warning push-up-20">
-        <div class="panel-body panel-body-pricing">
-            <h2><small>IUB</small></h2>                                
-            <p><span class="fa fa-caret-right"></span> <a href="./public-iub-explore">Exploration interactive</a></p>
-        </div>
-    </div>
- </div>
- <div class="row">
-  <div class="panel panel-warning push-up-20">
-      <div class="panel-body panel-body-pricing">
-          <h2><small>Utilitaires</small></h2>
-		  <p><span class="fa fa-caret-right"></span> <a href="./public-apps-utils#unimarcxml">Vérifier les données bibliographiques des notices Sudoc</a></p>
-          <p><span class="fa fa-caret-right"></span> <a href="./public-apps-utils#multiwhere">Vérifier les localisations dans le Sudoc</a></p>		  
-          <p><span class="fa fa-caret-right"></span> <a href="./public-apps-utils#isbn2ppn">Vérifier la présence d'ISBN dans le Sudoc</a></p>		  
-          <!--<p><span class="fa fa-caret-right"></span> <a href="https://ggeoffroy.com/apps/data-explorer/" target="_blanck">Data-Explorer</a><span class="text-muted"> Explorer graphiquement des jeux de données</span></p>-->
-          <!--<p><span class="fa fa-caret-right"></span> <a href="https://github.com/abes-esr/sudoc-toolkit" target="_blanck">SudocToolkit</a><span class="text-muted"> Interface graphique d'interrogation des web services de l'Abes</span></p>-->
       </div>
-  </div>
-</div>
- <div class="row">
-    <div class="panel panel-warning push-up-20">
-      <div class="panel-body panel-body-pricing">
-          <h2><small>Utilitaires Ebooks</small></h2> 
-          <p><span class="fa fa-caret-right"></span> <a href="./public-apps-utilebooks#isbn2ebooks">Voir tous les ebooks (signalés dans Primo) associés à un ISBN</a></p>       
-      </div>
-  </div>
- </div>
-</div>
-
-<div class="col-md-4">
-<div class="row">
-  <div class="panel panel-warning push-up-20">
-      <div class="panel-body panel-body-pricing">
-          <h2><small>Publications et Open Access</small></h2>                                
-          <p><span class="fa fa-caret-right"></span><a href="https://apps-scd.univ-cotedazur.fr/barometre-science-ouverte/" target="_blanck">Baromètre Science Ouverte v2</a></p>
-		  <p><span class="fa fa-caret-right"></span><a href="http://si-scd.unice.fr/drafts/2023/apc/" target="_blanck">Note sur les dépenses APC 2016-2020</a></p>
-      </div>
-  </div>
-  </div>
-  <div class="row">
-  <div class="panel panel-warning push-up-20">
-      <div class="panel-body panel-body-pricing">
-          <h2><small>Utilitaires AdminGen</small></h2> 
-          <p><span class="fa fa-caret-right"></span> <a href="./public-apps-utiladmingen">Calculer des droits au congés</a></p>       
-      </div>
-  </div>
-</div>
-</div>
-
-    <div class="col-md-1"></div>
-  </div>
-<hr> 
-  <div class="row">
-    <div class="col-md-1"></div>
-
-    <!--<div class="col-md-3">
-      <div class="panel panel-danger">
-        <div class="panel-heading">
-            <h3 class="panel-title">Kanboard</h3>
-        </div>
-        <div class="panel-body">
-            <p>Application de gestion de projet.</p>
-        </div>     
-        <div class="panel-footer">
-          <a href="http://si-scd.unice.fr/kanboard/" target="_blanck" type="button" class="btn btn-warning btn-block">Accès</a>
-        </div>                            
-    </div>  
-    </div>-->
-
-
-      <div class="col-md-1"></div>
-  </div>
-</div>
-
-</body>
-<%- include ('partials/script') -%>
+   </body>
+   <%- include ('partials/script') -%>
 </html>
