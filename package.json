@@ -14,7 +14,7 @@
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "ejs": "^3.1.10",
-    "express": "^4.21.2",
+    "express": "^4.22.1",
     "express-session": "^1.18.2",
     "mysql2": "^3.9.8",
     "passport": "^0.7.0",
