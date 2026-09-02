@@ -16,7 +16,7 @@
     "ejs": "^3.1.10",
     "express": "^4.22.2",
     "express-session": "^1.18.2",
-    "mysql2": "^3.9.8",
+    "mysql2": "^3.22.0",
     "passport": "^0.7.0",
     "passport-cas": "^0.1.1",
     "passport-local": "^1.0.0",
